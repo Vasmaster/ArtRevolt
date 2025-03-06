@@ -80,9 +80,20 @@
     </div>
     <!-- Main Content -->
     <div class="container pt-24 md:pt-36 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+      <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+      <h1 class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400">
+          Highlight
+        </span>
+        Content
+      </h1>
+      <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
+        Welcome to the official Homepage of ArtRevolt
+      </p>
+    </div>
       <!-- Full-width Slideshow -->
       <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'Project One', image: 'project-one.gif', link: '/project-1' },
+        { id: 1, title: 'Project One', image: 'TG-logo_UE5.gif', link: '/project-1' },
         { id: 2, title: 'Project Two', image: 'project-two.gif', link: '/project-2' },
         { id: 3, title: 'Project Three', image: 'project-three.gif', link: '/project-3' }
         ], autoSlide() {
@@ -126,15 +137,6 @@
 
       <!--Left Col-->
       <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-        <h1 class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400">
-            Highlight
-          </span>
-          Content
-        </h1>
-        <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
-          Welcome to the official Homepage of ArtRevolt
-        </p>
         <!-- Slideshow Section -->
         <div x-data="{ index: 0, slides: [
           { id: 1, title: 'Project One', image: 'project-one.gif', link: '/project-1' },
