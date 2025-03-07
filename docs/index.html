@@ -71,7 +71,7 @@
           <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3" x-data="{ openStripe: null }">
             <!-- Stripe 1: Contacts -->
             <div x-data="{ open: false }" class="relative">
-              <a href="#contacts">
+              <a href="Contacts.html">
                 <div
                   class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                   :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
@@ -103,7 +103,7 @@
 
             <!-- Stripe 3: CV -->
             <div x-data="{ open: false }" class="relative">
-              <a href="#cv">
+              <a href="CV_Vasil-Grancharov.html">
                 <div
                   class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                   :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
@@ -245,17 +245,23 @@
           Signup for our newsletter
         </label>
         <input
-          class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          id="emailaddress" type="text" placeholder="you@somewhere.com" />
+        class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+        id="emailaddress" type="text" placeholder="you@somewhere.com" />
       </div>
       <div class="flex items-center justify-between pt-4">
         <button
-          class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          type="button">
-          Sign Up
-        </button>
-      </div>
+        class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+        type="button">
+        Sign Up
+      </button>
+    </div>
     </form>
+    <!-- Footer (Optional) -->
+    <footer class="bg-white border-t mt-12">
+      <div class="max-w-4xl mx-auto px-4 py-4 text-center text-sm text-gray-600">
+          &copy; 2025 Vasil Grancharov. All rights reserved.
+      </div>
+    </footer>
+  </div>
 </body>
-
 </html>

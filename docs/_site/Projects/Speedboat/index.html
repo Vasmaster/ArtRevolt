@@ -57,13 +57,13 @@
         class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
         <!-- Logo -->
         <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-          href="#">
+          href="https://vasmaster.github.io/ArtRevolt">
           Art
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
             Revolt
           </span>
         </a>
-
+      
         <!-- Menu + Social Media Container -->
         <div class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10
           ">
@@ -103,7 +103,7 @@
 
             <!-- Stripe 3: CV -->
             <div x-data="{ open: false }" class="relative">
-              <a href="#cv">
+              <a href="/CV_English_Vasil-Grancharov.html">
                 <div
                   class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                   :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
@@ -145,9 +145,9 @@
       <!-- Main Content -->
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'Project One', image: 'Speedboat-moment-top.png' },
-        { id: 2, title: 'Speedboat', image: 'Speedboat-moment-side.jpg' },
-        { id: 3, title: 'Project Three', image: 'TG-training.png' }
+        { id: 1, title: 'top', image: 'Speedboat-moment-top.jpg' },
+        { id: 2, title: 'side', image: 'Speedboat-moment-side.jpg' },
+        { id: 3, title: 'back', image: 'Speedboat-moment-back.jpg' }
       ], autoSlide() {
           setInterval(() => {
             this.index = (this.index + 1) % this.slides.length;
@@ -160,9 +160,9 @@
           :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
           <template x-for="slide in slides" :key="slide.id">
             <div class="w-full flex-shrink-0 flex items-center justify-center">
-              <a :href="slide.link" target="_blank">
+              <a>
                 <img :src="slide.image" :alt="slide.title"
-                  class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
+                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
               </a>
             </div>
           </template>
@@ -207,54 +207,55 @@
           }
         </style>
       </div>
+
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
-        { id: 1, title: 'Project One', image: 'project-one.gif', link: '/project-1' },
-        { id: 2, title: 'Project Two', image: 'project-two.gif', link: '/project-2' },
-        { id: 3, title: 'Project Three', image: 'project-three.gif', link: '/project-3' }
+        { id: 1, title: 'Boarding', image: 'Boarding.jpg' },
+        { id: 2, title: 'top-view', image: 'top-view.png' },
+        { id: 3, title: 'third-person', image: 'third-person.png' },
+        { id: 4, title: 'preview', image: 'quick-preview.gif' }
+        { id: 5, title: 'control board', image: 'Speedboat-moment-control.jpg' },
+        { id: 6, title: 'kitchen', image: 'Speedboat-moment-kitchen.png' }
       ] }">
         <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <template x-for="slide in slides" :key="slide.id">
-              <!-- Each mosaic square -->
-              <div class="relative group overflow-hidden rounded-lg shadow-lg">
+              <!-- Each mosaic square without overlay -->
+              <div class="relative overflow-hidden rounded-lg shadow-lg">
                 <img :src="slide.image" :alt="slide.title"
-                  class="w-full h-auto transition-transform duration-300 group-hover:scale-105">
-                <!-- Overlay: hidden by default and fades in on hover -->
-                <div
-                  class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h2 x-text="slide.title" class="text-2xl text-white font-bold"></h2>
-                  <a :href="slide.link" target="_blank" rel="noopener noreferrer"
-                    class="mt-2 inline-block bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded">
-                    View Project
-                  </a>
-                </div>
+                    class="w-full h-auto transition-transform duration-300 hover:scale-105">
               </div>
             </template>
           </div>
         </div>
       </div>
-    </div>
+      <p class="mt-2 text-base md:text-2xl text-white">
+        A speedboat model inspired from real-life reference of "WallyPower 80 series". 
+        Production with purpose of learning and training on hard-surface modeling and vehicle mechanics (including buoyancy).
+        The model was later used to create realistic physical behavior of the vehicle on the surface of the water.
+        The water shader is made with Unreal Engine Material Editor and Material Functions.
+        (lost archive)
+      </p>
+    </div>  
 
-    <!--Footer-->
+    <!--Footer
     <form class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
         <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
           Signup for our newsletter
         </label>
         <input
-          class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          id="emailaddress" type="text" placeholder="you@somewhere.com" />
+        class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+        id="emailaddress" type="text" placeholder="you@somewhere.com" />
       </div>
       <div class="flex items-center justify-between pt-4">
         <button
-          class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          type="button">
-          Sign Up
+        class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+        type="button">
+        Sign Up
         </button>
       </div>
-    </form>
-</body>
-
+    </form>-->
+  </body>
 </html>

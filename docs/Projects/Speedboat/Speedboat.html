@@ -103,7 +103,7 @@
 
             <!-- Stripe 3: CV -->
             <div x-data="{ open: false }" class="relative">
-              <a href="#cv">
+              <a href="/CV_English_Vasil-Grancharov.html">
                 <div
                   class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                   :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
@@ -147,7 +147,7 @@
       <div x-data="{ index: 0, slides: [
         { id: 1, title: 'top', image: 'Speedboat-moment-top.jpg' },
         { id: 2, title: 'side', image: 'Speedboat-moment-side.jpg' },
-        { id: 3, title: 'back', image: 'Speedboat-moment-back.jpg.' }
+        { id: 3, title: 'back', image: 'Speedboat-moment-back.jpg' }
       ], autoSlide() {
           setInterval(() => {
             this.index = (this.index + 1) % this.slides.length;
@@ -207,13 +207,15 @@
           }
         </style>
       </div>
-      
+
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
-        { id: 1, title: 'Boarding', image: 'boarding.jpg' },
+        { id: 1, title: 'Boarding', image: 'Boarding.jpg' },
         { id: 2, title: 'top-view', image: 'top-view.png' },
         { id: 3, title: 'third-person', image: 'third-person.png' },
         { id: 4, title: 'preview', image: 'quick-preview.gif' }
+        { id: 5, title: 'control board', image: 'Speedboat-moment-control.jpg' },
+        { id: 6, title: 'kitchen', image: 'Speedboat-moment-kitchen.png' }
       ] }">
         <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
@@ -228,26 +230,32 @@
           </div>
         </div>
       </div>
+      <p class="mt-2 text-base md:text-2xl text-white">
+        A speedboat model inspired from real-life reference of "WallyPower 80 series". 
+        Production with purpose of learning and training on hard-surface modeling and vehicle mechanics (including buoyancy).
+        The model was later used to create realistic physical behavior of the vehicle on the surface of the water.
+        The water shader is made with Unreal Engine Material Editor and Material Functions.
+        (lost archive)
+      </p>
     </div>  
 
-    <!--Footer-->
+    <!--Footer
     <form class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
         <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
           Signup for our newsletter
         </label>
         <input
-          class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          id="emailaddress" type="text" placeholder="you@somewhere.com" />
+        class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+        id="emailaddress" type="text" placeholder="you@somewhere.com" />
       </div>
       <div class="flex items-center justify-between pt-4">
         <button
-          class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          type="button">
-          Sign Up
+        class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+        type="button">
+        Sign Up
         </button>
       </div>
-    </form>
-</body>
-
+    </form>-->
+  </body>
 </html>
