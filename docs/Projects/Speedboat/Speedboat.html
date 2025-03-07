@@ -71,7 +71,7 @@
           <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3" x-data="{ openStripe: null }">
             <!-- Stripe 1: Contacts -->
             <div x-data="{ open: false }" class="relative">
-              <a href="#contacts">
+              <a href="/Contacts">
                 <div
                   class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                   :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
@@ -103,7 +103,7 @@
 
             <!-- Stripe 3: CV -->
             <div x-data="{ open: false }" class="relative">
-              <a href="/CV_English_Vasil-Grancharov.html">
+              <a href="/CV_Vasil-Grancharov.html">
                 <div
                   class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                   :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
@@ -213,9 +213,9 @@
         { id: 1, title: 'Boarding', image: 'Boarding.jpg' },
         { id: 2, title: 'top-view', image: 'top-view.png' },
         { id: 3, title: 'third-person', image: 'third-person.png' },
-        { id: 4, title: 'preview', image: 'quick-preview.gif' }
+        { id: 4, title: 'preview', image: 'quick-preview.gif' },
         { id: 5, title: 'control board', image: 'Speedboat-moment-control.jpg' },
-        { id: 6, title: 'kitchen', image: 'Speedboat-moment-kitchen.png' }
+        { id: 6, title: 'kitchen', image: 'Speedboat-moment-kitchen.png' },
       ] }">
         <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
