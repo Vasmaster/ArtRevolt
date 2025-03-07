@@ -140,8 +140,8 @@
     <!-- Full-width Slideshow with Overlay Text -->
     <div x-data="{ index: 0, slides: [
         { id: 1, title: 'Project One', image: 'TG-logo_UE5.gif', link: '/project-1' },
-        { id: 2, title: 'Project Two', image: 'project-two.gif', link: '/project-2' },
-        { id: 3, title: 'Project Three', image: 'project-three.gif', link: '/project-3' }
+        { id: 2, title: 'Project Two', image: 'Speedboat-moment-top.jpg', link: '/project-2' },
+        { id: 3, title: 'Project Three', image: 'TG-training.png', link: '/project-3' }
       ], autoSlide() {
           setInterval(() => {
             this.index = (this.index + 1) % this.slides.length;
@@ -152,7 +152,7 @@
       class="relative w-full overflow-hidden">
 
       <!-- Slideshow Images -->
-      <div class="flex w-full"
+      <div class="flex max-w-full"
           :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
         <template x-for="slide in slides" :key="slide.id">
           <div class="w-full flex-shrink-0 flex items-center justify-center">
