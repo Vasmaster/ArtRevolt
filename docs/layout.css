@@ -3,3 +3,7 @@
       /* Reset hover styles on touch devices */
     }
   }
+@media (max-width: 768px) {
+.group { position: relative; }
+.group:hover div { opacity: 1 !important; }
+}

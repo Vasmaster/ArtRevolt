@@ -53,7 +53,8 @@
   <div class="h-full">
     <!-- Navigation -->
     <div class="max-w-full container mx-auto" x-data>
-      <div class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0">
+      <div
+        class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
         <!-- Logo -->
         <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
           href="#">
@@ -63,82 +64,87 @@
           </span>
         </a>
 
-          <!-- Menu + Social Media Container -->
-          <div class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10
+        <!-- Menu + Social Media Container -->
+        <div class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10
           ">
-            <!-- Menu Triggers: Adjusted for mobile -->
-            <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3" x-data="{ openStripe: null }">
-              <!-- Stripe 1: Contacts -->
-              <div x-data="{ open: false }" class="relative">
-                <a href="#contacts">
-                  <div class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
-                    :class="{ 'w-28': open, 'w-3': !open }" 
-                    @mouseover="open = true, openStripe = 1" 
-                    @mouseleave="open = false, openStripe = null">
-                    <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                      class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
-                      Contacts
-                    </div>
+          <!-- Menu Triggers: Adjusted for mobile -->
+          <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3" x-data="{ openStripe: null }">
+            <!-- Stripe 1: Contacts -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="#contacts">
+                <div
+                  class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                  :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
+                  @mouseleave="open = false, openStripe = null">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                    class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
+                    Contacts
                   </div>
-                </a>
-              </div>
-
-          <!-- Stripe 2: Canvas -->
-          <div x-data="{ open: false }" class="relative">
-            <a href="#canvas">
-              <div class="absolute -translate-x-26 -translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer"
-                :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2" @mouseleave="open = false, openStripe = null"
-                :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
-                <div x-show="open" x-transition:enter="transition duration-300 ease-out" x-transition:enter-start="opacity-0"
-                  x-transition:enter-end="opacity-100"
-                  class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
-                  Canvas
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
+
+            <!-- Stripe 2: Canvas -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="#canvas">
+                <div
+                  class="absolute -translate-x-26 -translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
+                  @mouseleave="open = false, openStripe = null"
+                  :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
+                    Canvas
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Stripe 3: CV -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="#cv">
+                <div
+                  class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
+                  :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
+                    CV
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
 
-          <!-- Stripe 3: CV -->
-          <div x-data="{ open: false }" class="relative">
-            <a href="#cv">
-              <div class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
-                :class="{ 'w-16': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
-                :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
-                <div x-show="open" x-transition:enter="transition duration-300 ease-out" x-transition:enter-start="opacity-0"
-                  x-transition:enter-end="opacity-100"
-                  class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
-                  CV
-                </div>
-              </div>
+          <!-- Social Media Links -->
+          <div class="flex w-1/2 justify-end items-right space-x-4">
+            <!-- X (formerly Twitter) -->
+            <a class="inline-block text-indigo-100 no-underline hover:text-yellow-500 text-center h-10 p-2 md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+              href="https://x.com/Art_Revolt">
+              <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 48">
+                <!-- Example X Icon -->
+                <path
+                  d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z">
+              </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a class="inline-block text-indigo-100 no-underline hover:text-yellow-500 text-center h-10 p-2 md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+              href="https://linkedin.com/in/vasil-grancharov">
+              <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                  d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+              </svg>
             </a>
           </div>
-        </div>
-        
-        <!-- Social Media Links -->
-        <div class="flex w-1/2 justify-end items-right space-x-4">
-          <!-- X (formerly Twitter) -->
-          <a class="inline-block text-indigo-100 no-underline hover:text-yellow-500 text-center h-10 p-2 md:p-4 transform hover:scale-125 duration-300 ease-in-out"
-            href="https://x.com/Art_Revolt">
-            <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 48">
-              <!-- Example X Icon -->
-              <path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z">
-            </svg>
-          </a>
-          
-          <!-- LinkedIn -->
-          <a class="inline-block text-indigo-100 no-underline hover:text-yellow-500 text-center h-10 p-2 md:p-4 transform hover:scale-125 duration-300 ease-in-out"
-            href="https://linkedin.com/in/vasil-grancharov">
-            <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/>
-            </svg>
-          </a>
         </div>
       </div>
-    </div>
 
-    <!-- Main Content -->
-    <!-- Full-width Slideshow with Overlay Text -->
-    <div x-data="{ index: 0, slides: [
+      <!-- Main Content -->
+      <!-- Full-width Slideshow with Overlay Text -->
+      <div x-data="{ index: 0, slides: [
         { id: 1, title: 'Project One', image: 'TG-logo_UE5.gif', link: '/project-1' },
         { id: 2, title: 'Project Two', image: 'Speedboat-moment-top.jpg', link: '/project-2' },
         { id: 3, title: 'Project Three', image: 'TG-training.png', link: '/project-3' }
@@ -147,49 +153,49 @@
             this.index = (this.index + 1) % this.slides.length;
           }, 4000);
         }
-      }" 
-      x-init="autoSlide" 
-      class="relative w-full overflow-hidden">
+      }" x-init="autoSlide" class="relative w-full overflow-hidden">
 
-      <!-- Slideshow Images -->
-      <div class="flex max-w-full"
+        <!-- Slideshow Images -->
+        <div class="flex max-w-full"
           :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
-        <template x-for="slide in slides" :key="slide.id">
-          <div class="w-full flex-shrink-0 flex items-center justify-center">
-            <a :href="slide.link" target="_blank">
-              <img :src="slide.image" :alt="slide.title"
+          <template x-for="slide in slides" :key="slide.id">
+            <div class="w-full flex-shrink-0 flex items-center justify-center">
+              <a :href="slide.link" target="_blank">
+                <img :src="slide.image" :alt="slide.title"
                   class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
-            </a>
-          </div>
-        </template>
-      </div>
+              </a>
+            </div>
+          </template>
+        </div>
 
-      <!-- Overlay Text in Lower Left Corner -->
-      <div class="absolute bottom-4 left-4 p-4">
-        <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-            Highlight
-          </span>
-          Content
-        </h1>
-        <p class="mt-2 text-base md:text-2xl text-white">
-          Welcome to the official Homepage of ArtRevolt
-        </p>
-      </div>
+        <!-- Overlay Text in Lower Left Corner -->
+        <div class="absolute bottom-4 left-4 p-4">
+          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+              Highlight
+            </span>
+            Content
+          </h1>
+          <p class="mt-2 text-base md:text-2xl text-white">
+            Welcome to the official Homepage of ArtRevolt
+          </p>
+        </div>
 
-      <!-- Navigation Dots -->
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <template x-for="(slide, i) in slides" :key="i">
-          <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-                  :class="{ 'bg-green-500': index === i }"></button>
-        </template>
-      </div>
+        <!-- Navigation Dots -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <template x-for="(slide, i) in slides" :key="i">
+            <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+              :class="{ 'bg-green-500': index === i }"></button>
+          </template>
+        </div>
 
-      <style>
-        /* Optional: Custom glow effect if you want more control */
-        .glow {
-          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
+        <style>
+          /* Optional: Custom glow effect if you want more control */
+          .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+          }
+
           /* Auto-scrolling effect */
           @keyframes marquee {
             0% {
@@ -201,64 +207,68 @@
             }
           }
         </style>
-    </div>
+      </div>
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
         { id: 1, title: 'Project One', image: 'project-one.gif', link: '/project-1' },
         { id: 2, title: 'Project Two', image: 'project-two.gif', link: '/project-2' },
         { id: 3, title: 'Project Three', image: 'project-three.gif', link: '/project-3' }
-      ] }"> <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
-        <!-- Grid Container: adjust the grid-cols as needed -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <template x-for="slide in slides" :key="slide.id">
-            <!-- Each mosaic square -->
-            <div class="relative group overflow-hidden rounded-lg shadow-lg">
-              <img :src="slide.image" :alt="slide.title" class="w-full h-auto transition-transform duration-300 group-hover:scale-105">
-              <!-- Overlay: hidden by default and fades in on hover -->
-              <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h2 x-text="slide.title" class="text-2xl text-white font-bold"></h2>
-                <a :href="slide.link" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded">
-                  View Project
-                </a>
+      ] }">
+        <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
+          <!-- Grid Container: adjust the grid-cols as needed -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <template x-for="slide in slides" :key="slide.id">
+              <!-- Each mosaic square -->
+              <div class="relative group overflow-hidden rounded-lg shadow-lg">
+                <img :src="slide.image" :alt="slide.title"
+                  class="w-full h-auto transition-transform duration-300 group-hover:scale-105">
+                <!-- Overlay: hidden by default and fades in on hover -->
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <h2 x-text="slide.title" class="text-2xl text-white font-bold"></h2>
+                  <a :href="slide.link" target="_blank" rel="noopener noreferrer"
+                    class="mt-2 inline-block bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded">
+                    View Project
+                  </a>
+                </div>
               </div>
-            </div>
-          </template>
+            </template>
+          </div>
+        </div>
+
+        <!--Left Col-->
+        <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+
+
+
+        </div>
+
+        <!--Right Col-->
+        <div class="w-full xl:w-3/5 p-12 overflow-hidden">
+          <img
+            class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6"
+            src="macbook.svg" />
         </div>
       </div>
-
-      <!--Left Col-->
-      <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-
-
-
+    </div>
+    <!--Footer-->
+    <form class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+      <div class="mb-4">
+        <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
+          Signup for our newsletter
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          id="emailaddress" type="text" placeholder="you@somewhere.com" />
       </div>
-
-      <!--Right Col-->
-      <div class="w-full xl:w-3/5 p-12 overflow-hidden">
-        <img
-          class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6"
-          src="macbook.svg" />
+      <div class="flex items-center justify-between pt-4">
+        <button
+          class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          type="button">
+          Sign Up
+        </button>
       </div>
-    </div>
-  </div>
-  <!--Footer-->
-  <form class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
-    <div class="mb-4">
-      <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
-        Signup for our newsletter
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-        id="emailaddress" type="text" placeholder="you@somewhere.com" />
-    </div>
-    <div class="flex items-center justify-between pt-4">
-      <button
-        class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-        type="button">
-        Sign Up
-      </button>
-    </div>
-  </form>
+    </form>
 </body>
 
 </html>
