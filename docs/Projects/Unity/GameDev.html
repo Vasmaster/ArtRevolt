@@ -121,30 +121,21 @@
       </div>
 
       <!-- Main Content -->
-      <!-- Full-width Slideshow with Overlay Text -->
-      <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'top', image: 'agaricus_artwork-1.png' },
-      ]
-      }">
+     <!-- Single Image with Overlay Text -->
+      <div class="relative"> <!-- Add relative positioning here -->
+        <!-- Image at the Top -->
+        <img src="agaricus_artwork-1.png" alt="Top Image" class="w-full">
+
         <!-- Overlay Text in Lower Left Corner -->
         <div class="absolute bottom-4 left-4 p-4">
           <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
               Overliver
             </span>
           </h1>
-          <p class="mt-2 text-base md:text-2xl text-white">
+          <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
             Serious Game project for training habits of healthy meal-preps
           </p>
-        </div>
-
-        <!-- Navigation Dots -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <template x-for="(slide, i) in slides" :key="i">
-            <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-              :class="{ 'bg-green-500': index === i }"></button>
-          </template>
         </div>
 
         <style>
@@ -152,20 +143,14 @@
           .glow {
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
           }
-
-          /* Auto-scrolling effect */
-          @keyframes marquee {
-            0% {
-              transform: translateX(0%);
-            }
-
-            100% {
-              transform: translateX(-100%);
-            }
-          }
         </style>
       </div>
+      <pre>
 
+      </pre>
+      <br>
+
+      </br>
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
         { id: 1, title: 'RecipeBook', image: 'Recipe_Menu.gif' },
@@ -197,31 +182,33 @@
 
       </pre>
       <br>
+
       </br>
-      <!-- Full-width Slideshow with Overlay Text -->
-      <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'top', image: 'Buggy-front.png' },
-        { id: 2, title: 'side', image: 'Buggy-top-down.jpg' },
-        { id: 3, title: 'back', image: 'Buggy-side-by-side.jpg' }
-        ], autoSlide() {
-            setInterval(() => {
-              this.index = (this.index + 1) % this.slides.length;
-            }, 4000);
-          }
-        }" x-init="autoSlide" class="relative w-full overflow-hidden">
-  
-        <!-- Slideshow Images -->
-        <div class="flex max-w-full"
-          :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
-          <template x-for="slide in slides" :key="slide.id">
-            <div class="w-full flex-shrink-0 flex items-center justify-center">
-              <a>
-                <img :src="slide.image" :alt="slide.title"
-                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
-              </a>
-            </div>
-          </template>
+   
+      <!-- Single Image with Overlay Text -->
+      <div class="relative"> <!-- Add relative positioning here -->
+        <!-- Image at the Top -->
+        <img src="gameplay_overview.gif" alt="Top Image" class="w-full">
+
+        <!-- Overlay Text in Lower Left Corner -->
+        <div class="absolute bottom-4 left-4 p-4">
+          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+              Robbin' the hood
+            </span>
+          </h1>
+          <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+            Fun game dev project
+          </p>
         </div>
+
+        <style>
+          /* Optional: Custom glow effect if you want more control */
+          .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+          }
+        </style>
+      </div>
           <!-- Navigation Dots -->
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <template x-for="(slide, i) in slides" :key="i">
@@ -244,11 +231,10 @@
       </div>
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
-        { id: 1, title: 'Boarding', image: 'Buggy-raw.jpg' },
-        { id: 2, title: 'top-view', image: 'Buggy-closeup-front.jpg' },
-        { id: 3, title: 'third-person', image: 'Buggy-closeup-back.jpg' },
-        { id: 4, title: 'preview', image: 'Buggy-side-by-side_2.jpg' },
-        { id: 5, title: 'control board', image: 'Buggy-top-down_2.jpg' },
+        { id: 1, title: 'overview', image: 'map3_scene_overview.png' },
+        { id: 2, title: 'steps', image: 'steps_traces.gif' },
+        { id: 3, title: 'third-person', image: 'level_design1.png' },
+        { id: 4, title: 'preview', image: 'level_design2.png' },
         ] }">
         <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
@@ -263,9 +249,11 @@
           </div>
         </div>
       </div>
-     <h2 class="mt-2 text-base md:text-2xl text-white"> Game vehicle asset</h2>
+     <h2 class="mt-2 text-base md:text-2xl text-white"> Game development</h2>
       <p class="mt-2 text-base md:text-2xl text-white">
-       Passion project. The render is made in Unreal Engine 4.25. The game was developed for a GameJam Event using Unity 2020. (lost archive)
+      School project developed during a part of my bachelor in Game Design and Production.
+      My work on the project was team lead, scrum, level design, rigging and modeling, texturing, and more.
+      The production and the process are santimental to me so is the reason to share this old archive.
       </p>
     </div>  
 
