@@ -123,39 +123,19 @@
       <!-- Main Content -->
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'top', image: 'Speedboat-moment-top.jpg' },
-        { id: 2, title: 'side', image: 'Speedboat-moment-side.jpg' },
-        { id: 3, title: 'back', image: 'Speedboat-moment-back.jpg' }
-      ], autoSlide() {
-          setInterval(() => {
-            this.index = (this.index + 1) % this.slides.length;
-          }, 4000);
-        }
-      }" x-init="autoSlide" class="relative w-full overflow-hidden">
-
-        <!-- Slideshow Images -->
-        <div class="flex max-w-full"
-          :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
-          <template x-for="slide in slides" :key="slide.id">
-            <div class="w-full flex-shrink-0 flex items-center justify-center">
-              <a>
-                <img :src="slide.image" :alt="slide.title"
-                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
-              </a>
-            </div>
-          </template>
-        </div>
-
+        { id: 1, title: 'top', image: 'agaricus_artwork-1.png' },
+      ]
+      }">
         <!-- Overlay Text in Lower Left Corner -->
         <div class="absolute bottom-4 left-4 p-4">
           <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
             <span
               class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Highlights
+              Overliver
             </span>
           </h1>
           <p class="mt-2 text-base md:text-2xl text-white">
-            Speedboat 3D model & Unreal Engine vehicle mechanics
+            Serious Game project for training habits of healthy meal-preps
           </p>
         </div>
 
@@ -188,12 +168,9 @@
 
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
-        { id: 1, title: 'Boarding', image: 'Boarding.jpg' },
-        { id: 2, title: 'top-view', image: 'top-view.png' },
-        { id: 3, title: 'third-person', image: 'third-person.png' },
-        { id: 4, title: 'preview', image: 'quick-preview.gif' },
-        { id: 5, title: 'control board', image: 'Speedboat-moment-control.jpg' },
-        { id: 6, title: 'kitchen', image: 'Speedboat-moment-kitchen.png' },
+        { id: 1, title: 'RecipeBook', image: 'Recipe_Menu.gif' },
+        { id: 2, title: 'gameplay', image: 'Gameplay_Overliver.gif' },
+        { id: 3, title: 'Menu options', image: 'Recipe_Menu_1.gif' },
       ] }">
         <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
@@ -209,13 +186,18 @@
         </div>
       </div>
       <p class="mt-2 text-base md:text-2xl text-white">
-        A speedboat model inspired from real-life reference of "WallyPower 80 series". 
-        Production with purpose of learning and training on hard-surface modeling and vehicle mechanics (including buoyancy).
-        The model was later used to create realistic physical behavior of the vehicle on the surface of the water.
-        The water shader is made with Unreal Engine Material Editor and Material Functions.
+        A serious game project made with GameLab Oost, in Enschede. The project was produced
+        in collaboration with a faculty of MST. Intended to promote and be used by patients suffering from NAFLD
+        (Non-alcoholic fatty Liver disease). Through brainstorms and proposals with the team and stakeholders,
+        my work was to create the interactive elements(aestetics) to match the style determined by the Lead Artist.
+        Additionally I came up with a recipe book within the UI. writen functions in C# and Unity UI structure.
         (lost archive)
       </p>
+      <pre>
 
+      </pre>
+      <br>
+      </br>
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
         { id: 1, title: 'top', image: 'Buggy-front.png' },
