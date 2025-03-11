@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>TinyGiants page</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <!--Replace with your tailwind.css once created-->
+  <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+    html {
+      font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+  </style>
+  <!-- Add Alpine.js for interactivity -->
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    /* Add custom styles for the slider */
+    .slider-container {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    .slide {
+      transition: transform 0.5s ease-in-out;
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide.hidden {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  </style>
+</head>
+
+<body class="leading-normal tracking-normal text-indigo-100 m-8 bg-cover bg-fixed"
+  style="background-image: url('background.png');">
+  <div class="h-full">
+    <!-- Navigation -->
+    <div class="max-w-full container mx-auto" x-data>
+      <div
+        class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
+        <!-- Logo -->
+        <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+          href="https://vasmaster.github.io/ArtRevolt">
+          Art
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
+            Revolt
+          </span>
+        </a>
+
+        <!-- Menu + Social Media Container -->
+        <div class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10
+          ">
+          <!-- Menu Triggers: Adjusted for mobile -->
+          <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3" x-data="{ openStripe: null }">
+            <!-- Stripe 1: Contacts -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="/Contacts.html">
+                <div
+                  class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                  :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
+                  @mouseleave="open = false, openStripe = null">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                    class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
+                    Contacts
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Stripe 2: Canvas -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="#canvas">
+                <div
+                  class="absolute -translate-x-26 -translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
+                  @mouseleave="open = false, openStripe = null"
+                  :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
+                    Canvas
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Stripe 3: CV -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="/CV_Vasil-Grancharov.html">
+                <div
+                  class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
+                  :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
+                    CV
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <!-- Full-width Slideshow with Overlay Text -->
+      <div x-data="{ index: 0, slides: [
+        { id: 1, title: 'BoU', image: 'Bond Of Union_3kb.mp4' },
+        { id: 2, title: 'swans', image: 'Swans_3kb.mp4' },
+        { id: 3, title: 'keyboard', image: 'TG_logo_forest_3kb.mp4' }
+      ], autoSlide() {
+          setInterval(() => {
+            this.index = (this.index + 1) % this.slides.length;
+          }, 4000);
+        }
+      }" x-init="autoSlide" class="relative w-full overflow-hidden">
+
+        <!-- Slideshow Images -->
+        <div class="flex max-w-full"
+          :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
+          <template x-for="slide in slides" :key="slide.id">
+            <div class="w-full flex-shrink-0 flex items-center justify-center">
+              <a>
+                <img :src="slide.image" :alt="slide.title"
+                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
+              </a>
+            </div>
+          </template>
+        </div>
+
+        <!-- Overlay Text in Lower Left Corner -->
+        <div class="absolute bottom-4 left-4 p-4">
+          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+              Highlights
+            </span>
+          </h1>
+          <p class="mt-2 text-base md:text-2xl text-white">
+            TinyGiants Productions
+          </p>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <template x-for="(slide, i) in slides" :key="i">
+            <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+              :class="{ 'bg-green-500': index === i }"></button>
+          </template>
+        </div>
+
+        <style>
+          /* Optional: Custom glow effect if you want more control */
+          .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+          }
+
+          /* Auto-scrolling effect */
+          @keyframes marquee {
+            0% {
+              transform: translateX(0%);
+            }
+
+            100% {
+              transform: translateX(-100%);
+            }
+          }
+        </style>
+      </div>
+
+      <pre>
+
+      </pre>
+      <br>
+
+      </br>
+      <br>
+
+      </br>
+
+      <!-- Single Image with Overlay Text -->
+      <div class="relative"> <!-- Add relative positioning here -->
+        <!-- Image at the Top -->
+        <img src="Intro Forest_3kb.mp4" alt="Top Image" class="w-full">
+
+        <!-- Overlay Text in Lower Left Corner -->
+        <div class="absolute bottom-4 left-4 p-4">
+          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+              Hansel und Gretel Opera
+            </span>
+          </h1>
+          <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+            Nedelrandse Reisopera - production of a Fantasy-opera for all (10+)
+          </p>
+        </div>
+
+        <style>
+          /* Optional: Custom glow effect if you want more control */
+          .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+          }
+        </style>
+      </div>
+      <!-- Mosaic Slideshow Section -->
+      <div x-data="{ slides: [
+        { id: 1, title: 'forest', image: 'Intro Forest_3kb.mp4' },
+        { id: 2, title: 'stairs', image: 'Stairs Run_3kb.mp4' },
+        { id: 3, title: 'swans', image: 'Swans_3kb.mp4' },
+      ] }">
+        <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
+          <!-- Grid Container: adjust the grid-cols as needed -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <template x-for="slide in slides" :key="slide.id">
+              <!-- Each mosaic square without overlay -->
+              <div class="relative overflow-hidden rounded-lg shadow-lg">
+                <img :src="slide.image" :alt="slide.title"
+                  class="w-full h-auto transition-transform duration-300 hover:scale-105">
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+      <p class="mt-2 text-base md:text-2xl text-white">
+        This was a wonderful production carried from the team of TinyGiants and the director
+      </p>
+      <pre>
+
+      </pre>
+      <br>
+
+      </br>
+
+      <!-- Single Image with Overlay Text -->
+      <div class="relative"> <!-- Add relative positioning here -->
+        <!-- Image at the Top -->
+        <img src="Bond_Of_Union_V1.png" alt="Top Image" class="w-full">
+
+        <!-- Overlay Text in Lower Left Corner -->
+        <div class="absolute bottom-4 left-4 p-4">
+          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+              Bond of Union
+            </span>
+          </h1>
+          <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+            Illusory artistic interpretation of the artwork Bond of Union from M.C. Escher
+          </p>
+        </div>
+
+        <style>
+          /* Optional: Custom glow effect if you want more control */
+          .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+          }
+        </style>
+      </div>
+      <!-- Navigation Dots -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <template x-for="(slide, i) in slides" :key="i">
+          <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+            :class="{ 'bg-green-500': index === i }"></button>
+        </template>
+      </div>
+      <style>
+        /* Auto-scrolling effect */
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+      </style>
+    </div>
+    <!-- Mosaic Slideshow Section -->
+    <div x-data="{ slides: [
+        { id: 1, title: 'overview', image: 'Bond Of Union_3kb.mp4' },
+        { id: 2, title: 'steps', image: 'steps_traces.gif' },
+        { id: 3, title: 'third-person', image: 'level_design1.png' },
+        { id: 4, title: 'preview', image: 'level_design2.png' },
+        ] }">
+      <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
+        <!-- Grid Container: adjust the grid-cols as needed -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <template x-for="slide in slides" :key="slide.id">
+            <!-- Each mosaic square without overlay -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg">
+              <img :src="slide.image" :alt="slide.title"
+                class="w-full h-auto transition-transform duration-300 hover:scale-105">
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+    <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
+    <p class="mt-2 text-base md:text-2xl text-white">
+    During my work for TinyGiants with their guidance and open invitation to dive into something new, creative and interesting subject for me. 
+    I conceptualized, designed and rendered an animation of Escher's artwork. My spin on it was a combination of Guido Moretti style and Bond of Union.
+    This was an atempt to create a new style of an illusion with the side and front vantage points to perceive different personality of my artwork.
+    </p>
+  </div>
+  <pre>
+
+  </pre>
+  <br>
+
+  </br>
+
+  <!-- Single Image with Overlay Text -->
+  <div class="relative"> <!-- Add relative positioning here -->
+    <!-- Image at the Top -->
+    <img src="Screenshot 2025-01-13 135502.png" alt="Top Image" class="w-full">
+
+    <!-- Overlay Text in Lower Left Corner -->
+    <div class="absolute bottom-4 left-4 p-4">
+      <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+        <span
+          class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+          Mussle car
+        </span>
+      </h1>
+      <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+       Whip animation and Compositing training production
+      </p>
+    </div>
+
+    <style>
+      /* Optional: Custom glow effect if you want more control */
+      .glow {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </div>
+  <!-- Navigation Dots -->
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <template x-for="(slide, i) in slides" :key="i">
+      <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+        :class="{ 'bg-green-500': index === i }"></button>
+    </template>
+  </div>
+  <style>
+    /* Auto-scrolling effect */
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+  </div>
+  <div class="relative"> <!-- Add relative positioning here -->
+    <!-- Image at the Top -->
+    <img src="Hum3d Car Showcase_3kb.mp4" alt="Top Image" class="w-full">
+  </div>
+  <h2 class="mt-2 text-base md:text-2xl text-white"> Guided production</h2>
+  <p class="mt-2 text-base md:text-2xl text-white">
+  Provided with the scene, materials and lights, I was given the chance to create a fun driven animation 
+  and compose the render passes and shots with Adobe After Effects. Extremely educational project.
+  Got me up-to-speed working with proper color spaces and project managment in Ae.
+  </p>
+  </div>
+  <pre>
+
+  </pre>
+  <br>
+
+  </br>
+
+  <!-- Single Image with Overlay Text -->
+  <div class="relative"> <!-- Add relative positioning here -->
+    <!-- Image at the Top -->
+    <img src="TG_logo_forest_3kb.mp4" alt="Top Image" class="w-full">
+
+    <!-- Overlay Text in Lower Left Corner -->
+    <div class="absolute bottom-4 left-4 p-4">
+      <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+        <span
+          class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+          Logo transition
+        </span>
+      </h1>
+      <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+       Whip transition animation 
+      </p>
+    </div>
+
+    <style>
+      /* Optional: Custom glow effect if you want more control */
+      .glow {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </div>
+  <!-- Navigation Dots -->
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <template x-for="(slide, i) in slides" :key="i">
+      <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+        :class="{ 'bg-green-500': index === i }"></button>
+    </template>
+  </div>
+  <style>
+    /* Auto-scrolling effect */
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+  </div>
+  <div class="relative"> <!-- Add relative positioning here -->
+    <!-- Image at the Top -->
+    <img src="TG_logo_studio_3kb.mp4" alt="Top Image" class="w-full">
+  </div>
+  <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
+  <p class="mt-2 text-base md:text-2xl text-white">
+  A fun-packed day got me to explore compositing in After Effects shots 
+  rendered from Unreal Engine 5 with playfull eyecandy of the former TinyGiants logo.
+  </p>
+  </div>
+
+</body>
+
+</html>
