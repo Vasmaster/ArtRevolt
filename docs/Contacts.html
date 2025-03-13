@@ -43,11 +43,11 @@
     }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800" style="background-image: url('background.png');">
+<body class="bg-gray-100 text-gray-800" style="background-image: url('icons/background.png');">
   <!-- Header (can be reused from your main layout) -->
   <header class="bg-black shadow sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
-      <a href="/" class="text-3xl font-bold text-indigo-100">Art
+      <a href="https://vasmaster.github.io/ArtRevolt" class="text-3xl font-bold text-indigo-100">Art
         <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
         Revolt</span></a>
       <nav>
@@ -73,7 +73,7 @@
 
          <!-- Stripe 2: Canvas -->
          <div x-data="{ open: false }" class="relative">
-           <a href="#canvas">
+           <a href="Canvas.html">
              <div
                class="absolute -translate-x-26 -translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
