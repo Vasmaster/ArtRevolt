@@ -256,33 +256,35 @@
       <!-- Single Image with Overlay Text -->
       <div id="1" class="relative"> <!-- Add relative positioning here -->
         <!-- Image at the Top -->
-        <img src="Bond_Of_Union_V1.png" alt="Top Image" class="w-full">
-        
+        <video controls class="w-full rounded-lg">
+          <source src="Bond Of Union_3kb.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
         <!-- Overlay Text in Lower Left Corner -->
         <div id="1" class="absolute top-4 left-4 p-4">
           <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
             <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Bond of Union
-            </span>
-          </h1>
-          <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-            Illusory artistic interpretation of the artwork Bond of Union from M.C. Escher
-          </p>
-        </div>
-        
-        <style>
-          /* Optional: Custom glow effect if you want more control */
-          .glow {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-          }
+            class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+            Bond of Union
+          </span>
+        </h1>
+        <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+          Illusory artistic interpretation of the artwork Bond of Union from M.C. Escher
+        </p>
+      </div>
+      
+      <style>
+        /* Optional: Custom glow effect if you want more control */
+        .glow {
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
         </style>
       </div>
       <!-- Navigation Dots -->
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         <template x-for="(slide, i) in slides" :key="i">
           <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-            :class="{ 'bg-green-500': index === i }"></button>
+          :class="{ 'bg-green-500': index === i }"></button>
         </template>
       </div>
       <style>
@@ -291,30 +293,27 @@
           0% {
             transform: translateX(0%);
           }
-
+          
           100% {
             transform: translateX(-100%);
           }
         }
-      </style>
+        </style>
     </div>
     <!-- Mosaic Slideshow Section -->
     <div x-data="{ slides: [
-        { id: 1, title: 'overview', video: 'Bond Of Union_3kb.mp4' },
-        { id: 2, title: 'steps', image: 'BondOfUnion.gif' },
-        { id: 3, title: 'third-person', image: 'level_design1.png' },
-        { id: 4, title: 'preview', image: 'level_design2.png' },
-        ] }">
+      { id: 1, title: 'overview', image: 'Bond_Of_Union_V1.png' },
+      { id: 2, title: 'steps', image: 'BondOfUnion.gif' },
+      { id: 3, title: 'third-person', image: 'M.C.Escher-Bond-of-union.jpg' },
+      { id: 4, title: 'preview', image: 'Parallelepipedi.jpg' },
+      ] }">
       <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
         <!-- Grid Container: adjust the grid-cols as needed -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <template x-for="slide in slides" :key="slide.id">
             <!-- Each mosaic square without overlay -->
             <div class="relative overflow-hidden rounded-lg shadow-lg">
-              <video controls class="w-full rounded-lg">
-                <source :src="slide.video" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+              <img :src="slide.image" :alt="Top Image" class="w-full">
             </div>
           </template>
         </div>
@@ -339,7 +338,10 @@
   <!-- Single Image with Overlay Text -->
   <div id="1" class="relative"> <!-- Add relative positioning here -->
     <!-- Image at the Top -->
-    <img src="AOC Keyboard.png" alt="Top Image" class="w-full">
+    <video controls class="w-full rounded-lg">
+      <source src="Aockeyboard V2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
     
     <!-- Overlay Text in Lower Left Corner -->
     <div id="4" class="absolute top-4 left-4 p-4">
@@ -383,10 +385,11 @@
   </div>
   <!-- Mosaic Slideshow Section -->
   <div x-data="{ slides: [
-    { id: 1, title: 'overview', image: 'Bond Of Union_3kb.mp4' },
-    { id: 2, title: 'steps', image: 'steps_traces.gif' },
-    { id: 3, title: 'third-person', image: 'level_design1.png' },
-    { id: 4, title: 'preview', image: 'level_design2.png' },
+    { id: 1, title: 'overview', image: 'AOC Keyboard.png' },
+    { id: 2, title: 'steps', image: 'RockEmAOC_02_V1.png' },
+    { id: 3, title: 'third-person', image: 'close-Up.png' },
+    { id: 4, title: 'preview', image: 'Cloth_Sim_01_V2.png' },
+    { id: 5, title: 'preview', image: 'RockEmAOC_01_V1.png' },
     ] }">
     <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
       <!-- Grid Container: adjust the grid-cols as needed -->
@@ -417,10 +420,7 @@
   </br>
 
   <!-- Single Image with Overlay Text -->
-  <div id="3" class="relative"> <!-- Add relative positioning here -->
-    <!-- Image at the Top -->
-    <img src="Hum3DCar.png" alt="Top Image" class="w-full">
-    
+  <div id="3" class="relative"> <!-- Add relative positioning here --> 
     <!-- Overlay Text in Lower Left Corner -->
     <div class="absolute top-4 left-4 p-4">
       <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
@@ -433,7 +433,13 @@
         Whip animation and Compositing training production
       </p>
     </div>
-
+    
+    <div class="relative"> <!-- Add relative positioning here -->
+      <!-- Image at the Top -->
+      <video controls class="w-full rounded-lg">
+        <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
+      </video>
+    </div>
     <style>
       /* Optional: Custom glow effect if you want more control */
       .glow {
@@ -448,6 +454,25 @@
         :class="{ 'bg-green-500': index === i }"></button>
     </template>
   </div>
+  <!-- Mosaic Slideshow Section -->
+  <div x-data="{ slides: [
+    { id: 1, title: 'overview', image: 'Hum3DCar.png' },
+    { id: 2, title: 'steps', image: 'hum3DCar_back.png' },
+    { id: 3, title: 'third-person', image: 'Hum3DCarShowcase.gif' },
+    ] }">
+    <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
+      <!-- Grid Container: adjust the grid-cols as needed -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <template x-for="slide in slides" :key="slide.id">
+          <!-- Each mosaic square without overlay -->
+          <div class="relative overflow-hidden rounded-lg shadow-lg">
+            <img :src="slide.image" :alt="slide.title"
+              class="w-full h-auto transition-transform duration-300 hover:scale-105">
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
   <style>
     /* Auto-scrolling effect */
     @keyframes marquee {
@@ -460,12 +485,6 @@
       }
     }
   </style>
-  </div>
-  <div class="relative"> <!-- Add relative positioning here -->
-    <!-- Image at the Top -->
-    <video controls class="w-full rounded-lg">
-      <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
-    </video>
   </div>
   <h2 class="mt-2 text-base md:text-2xl text-white"> Guided production</h2>
   <p class="mt-2 text-base md:text-2xl text-white">
