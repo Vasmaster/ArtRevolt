@@ -10,7 +10,6 @@
     <title>Canvas – Vasil Grancharov</title>
     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
     <style>
         :root {
             --color-primary: #a9fc6e;
@@ -21,34 +20,27 @@
             --color-contrast-lower: hsl(0, 0%, 15%);
             --color-bg: hsl(0, 0%, 11%);
         }
-
+        
         body {
             background-color: var(--color-bg);
             color: var(--color-contrast-high);
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
-
+        
         .glow {
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
         }
-    </style>
-
-    <style>
+      </style>
+      
+      <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-
+        
         html {
             font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
-    </style>
-    <!-- Add Alpine.js for interactivity -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        .horizon-container {
-            position: absolute;
-            max-width: 1000px;
-            margin: auto;
-        }
-
+      </style>
+      
+      <style>
         .horizon-line {
             position: relative;
             left: 50%;
@@ -59,67 +51,46 @@
             bottom: 0;
             transform: translateX(-50%);
         }
-
-        .horizon-item {
-            position: relative;
-            color: beige;
-            margin: 0 auto;
-            transform: translateX(43%);
-        }
-
-        .horizon-box {
-            position: relative;
-            color: beige;
-            max-width: 25px;
-            margin: 0 auto;
-        }
-    </style>
-    <style>
+      </style>
+      
+      <style>
         .timeline-container {
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        /* Create three-column layout */
+        
         .timeline-skills {
             display: flex;
             align-items: flex-start;
             justify-content: center;
             gap: 20px;
-            /* space between columns and dividers */
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        .timeline-row {
-            padding: 20px 0;
-        }
-
+        
         .timeline-divider {
             width: 2px;
             background: #4194c4;
-            top: 0%;
-            bottom: 0%;
             margin: 0 10px;
         }
-
+        
         .timeline-column {
             flex: 1;
             padding: 20px;
             box-sizing: border-box;
         }
-
+        
         .timeline-line {
             position: absolute;
             left: 50%;
             width: 2px;
             background: #4194c4;
-            top: 0%;
-            bottom: 0%;
+            top: 0;
+            bottom: 0;
             transform: translateX(-50%);
         }
-
+        
         .timeline-item {
             position: relative;
             width: 46%;
@@ -129,93 +100,72 @@
             border-radius: 8px;
             transition: transform 0.3s ease;
         }
-
+        
         .timeline-item:hover {
             transform: translateY(-5px);
         }
-
+        
         .timeline-item.left {
             left: 0;
         }
-
+        
         .timeline-item.right {
             left: 54%;
         }
-        .timeline-item.center {
-            transform: translateX(-50%);
-        }
-
+        
         .left::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            top: 25px;
+            background: #ffc82f;
+            border-radius: 50%;
             right: -30px;
         }
-
+        
         .right::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            top: 25px;
+            background: #ffc82f;
+            border-radius: 50%;
             left: -30px;
         }
-
-        /* Update icon colors */
+        
         .elementor-icon svg {
             fill: #ffc82f;
             width: 24px;
             height: 24px;
         }
-
+        
         .software-mosaic {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 20px;
             padding: 40px 0;
         }
-
+        
         .software-logo {
             filter: grayscale(100%);
             transition: filter 0.3s ease;
             max-width: 100px;
         }
-
+        
         .software-logo:hover {
             filter: grayscale(0%);
         }
-
+        
         .section-header {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
-
-        .section-title {
-            margin-top: 0.5rem;
-        }
-    </style>
-    <style>
-        /* Add custom styles for the slider */
-        .slider-container {
-            overflow-x: auto;
-            scroll-behavior: smooth;
-        }
-
-        .slide {
-            transition: transform 0.5s ease-in-out;
-            min-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .slide.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide.hidden {
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-
-        /* Optional custom styles for a subtle text glow on your name */
-        .glow {
-            filter: drop-shadow(0 0 1px rgba(255, 215, 0, 0.1));
-        }
-    </style>
+      </style>
+      
 </head>
 
 <body class="leading-normal tracking-normal" data-theme="dark">
