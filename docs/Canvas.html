@@ -1,217 +1,235 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-        <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
-        <title>Canvas – Vasil Grancharov</title>
-        <style>
-            :root {
-                --color-primary: #a9fc6e;
-                --color-contrast-higher: hsl(0, 100%, 99%);
-                --color-contrast-high: hsl(0, 0%, 81%);
-                --color-contrast-medium: hsl(0, 0%, 57%);
-                --color-contrast-low: hsl(0, 0%, 22%);
-                --color-contrast-lower: hsl(0, 0%, 15%);
-                --color-bg: hsl(0, 0%, 11%);
-            }
-            body {
-                background-color: var(--color-bg);
-                color: var(--color-contrast-high);
-                font-family: 'Plus Jakarta Sans', sans-serif;
-            }
-            .glow {
-                text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-            }
-        </style><link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    
-        <style>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
+    <title>Canvas – Vasil Grancharov</title>
+    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-primary: #a9fc6e;
+            --color-contrast-higher: hsl(0, 100%, 99%);
+            --color-contrast-high: hsl(0, 0%, 81%);
+            --color-contrast-medium: hsl(0, 0%, 57%);
+            --color-contrast-low: hsl(0, 0%, 22%);
+            --color-contrast-lower: hsl(0, 0%, 15%);
+            --color-bg: hsl(0, 0%, 11%);
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-contrast-high);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+
+    <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-    
+
         html {
             font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
-        </style>
-        <!-- Add Alpine.js for interactivity -->
-        <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-        <style>
-            .horizon-container {
+    </style>
+    <!-- Add Alpine.js for interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .horizon-container {
             position: absolute;
             max-width: 1000px;
             margin: auto;
-            }
+        }
 
-            .horizon-line {
-                position: relative;
-                left: 50%;
-                width: 65%;
-                height: 2px;
-                background: #4194c4;
-                top: 0;
-                bottom: 0;
-                transform: translateX(-50%);
-            }
-            .horizon-item{
-                position: relative;
-                color:beige;
-                margin: 0 auto;
-                transform: translateX(43%);
-            }
-            .horizon-box {
+        .horizon-line {
             position: relative;
-            color:beige;
+            left: 50%;
+            width: 65%;
+            height: 2px;
+            background: #4194c4;
+            top: 0;
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+
+        .horizon-item {
+            position: relative;
+            color: beige;
+            margin: 0 auto;
+            transform: translateX(43%);
+        }
+
+        .horizon-box {
+            position: relative;
+            color: beige;
             max-width: 25px;
             margin: 0 auto;
-            }
-        </style>
-        <style>
-            .timeline-container {
-                position: relative;
-                max-width: 1200px;
-                margin: 0 auto;
-            }
+        }
+    </style>
+    <style>
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-            /* Create three-column layout */
-            .timeline-skills {
-                display: flex;
-                align-items: flex-start;
-                justify-content: center;
-                gap: 20px; /* space between columns and dividers */
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-            .timeline-row {
-                padding: 20px 0;
-            }
-            .timeline-divider {
-                width: 2px;
-                background: #4194c4;
-                top:0%;
-                bottom: 0%;
-                margin: 0 10px;
-            }
-            .timeline-column {
-                flex: 1;
-                padding: 20px;
-                box-sizing: border-box;
-            }
+        /* Create three-column layout */
+        .timeline-skills {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 20px;
+            /* space between columns and dividers */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-            .timeline-line {
-                position: absolute;
-                left: 50%;
-                width: 2px;
-                background: #4194c4;
-                top:0%;
-                bottom:0%;
-                transform: translateX(-50%);
-            }
-        
-            .timeline-item {
-                position: relative;
-                width: 46%;
-                margin: 20px 0;
-                padding: 20px;
-                background: hsl(0, 0%, 15%);
-                border-radius: 8px;
-                transition: transform 0.3s ease;
-            }
-        
-            .timeline-item:hover {
-                transform: translateY(-5px);
-            }
-        
-            .timeline-item.left {
-                left: 0;
-            }
-        
-            .timeline-item.right {
-                left: 54%;
-            }
-        
-            .timeline-item::after {
-                content: '';
-                position: absolute;
-                width: 10px;
-                height: 2px;
-                top: 25px;
-                background: #ffc82f;
-                border-radius: 50%;
-            }
-           
-            .left::after {
-                right: -30px;
-            }
-        
-            .right::after {
-                left: -30px;
-            }
+        .timeline-row {
+            padding: 20px 0;
+        }
 
-            /* Update icon colors */
-            .elementor-icon svg {
-                fill: #ffc82f;
-                width: 24px;
-                height: 24px;
-            }
+        .timeline-divider {
+            width: 2px;
+            background: #4194c4;
+            top: 0%;
+            bottom: 0%;
+            margin: 0 10px;
+        }
 
-            .software-mosaic {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 20px;
-                padding: 40px 0;
-            }
-        
-            .software-logo {
-                filter: grayscale(100%);
-                transition: filter 0.3s ease;
-                max-width: 100px;
-            }
-        
-            .software-logo:hover {
-                filter: grayscale(0%);
-            }
-            .section-header {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-                .section-title {
-                margin-top: 0.5rem;
-            }
-        </style>
-        <style>
+        .timeline-column {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            background: #4194c4;
+            top: 0%;
+            bottom: 0%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 46%;
+            margin: 20px 0;
+            padding: 20px;
+            background: hsl(0, 0%, 15%);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 54%;
+        }
+        .timeline-item.center {
+            transform: translateX(-50%);
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            top: 25px;
+            background: #ffc82f;
+            border-radius: 50%;
+        }
+
+        .left::after {
+            right: -30px;
+        }
+
+        .right::after {
+            left: -30px;
+        }
+
+        /* Update icon colors */
+        .elementor-icon svg {
+            fill: #ffc82f;
+            width: 24px;
+            height: 24px;
+        }
+
+        .software-mosaic {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .software-logo {
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+            max-width: 100px;
+        }
+
+        .software-logo:hover {
+            filter: grayscale(0%);
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-title {
+            margin-top: 0.5rem;
+        }
+    </style>
+    <style>
         /* Add custom styles for the slider */
         .slider-container {
             overflow-x: auto;
             scroll-behavior: smooth;
         }
-    
+
         .slide {
             transition: transform 0.5s ease-in-out;
             min-width: 100%;
             box-sizing: border-box;
         }
-    
+
         .slide.visible {
             opacity: 1;
             transform: translateX(0);
         }
-    
+
         .slide.hidden {
             opacity: 0;
             transform: translateX(-100%);
         }
+
         /* Optional custom styles for a subtle text glow on your name */
         .glow {
             filter: drop-shadow(0 0 1px rgba(255, 215, 0, 0.1));
         }
-        </style>
-    </head>
-    <body class="leading-normal tracking-normal" data-theme="dark">
-        <main class="ms-page-content">
-            
+    </style>
+</head>
+
+<body class="leading-normal tracking-normal" data-theme="dark">
+    <main class="ms-page-content">
+
         <div class="max-w-full container mx-auto" x-data>
             <div
                 class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
@@ -225,7 +243,8 @@
                 </a>
 
                 <!-- Menu + Social Media Container -->
-                <div class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10">
+                <div
+                    class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10">
                     <!-- Menu Triggers: Adjusted for mobile -->
                     <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3"
                         x-data="{ openStripe: null }">
@@ -303,198 +322,71 @@
                 <!-- Header Section -->
                 <header class="text-center mb-12">
                     <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 glow">
-                        Canvas art landing page
+                        Canvas Artwork
                     </h2>
                     <br>
                     </br>
-                        <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
-                            Multifunctional technically artistic mechanic 
-                        </p>
+                    <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
+                        Collection of my acrylic & oil creations
+                    </p>
                 </header>
-
-                <div class="section-header text-center">
-                    <div class="elementor-icon">
-                        <svg aria-hidden="true" class="e-font-icon-svg e-fas-briefcase" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M320 336c0 8.84-7.16 16-16 16h-96c-8.84 0-16-7.16-16-16v-48H0v144c0 25.6 22.4 48 48 48h416c25.6 0 48-22.4 48-48V288H320v48zm144-208h-80V80c0-25.6-22.4-48-48-48H176c-25.6 0-48 22.4-48 48v48H48c-25.6 0-48 22.4-48 48v80h512v-80c0-25.6-22.4-48-48-48zm-144 0H192V96h128v32z"/>
-                        </svg>
-                    </div>
-                    <h2 class="text-2x2 md:text-3x3 font-bold text-white mb-6">Work Experience</h2>
-                </div>
-                
-                <!-- Work Experience Section -->
+                <!--FIRST CANVAS-->
                 <div class="timeline-container">
                     <div class="timeline-line"></div>
-                    <!-- ArtRevolt Experience -->
-                    <div class="timeline-item right">
-                        <div class="flex items-center mb-4">
-                            <img src="ArtRevolt-logo.jpg" alt="ArtRevolt" class="w-16 h-16 mr-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Founder</h3>
-                                <p class="text-yellow-500">ArtRevolt • Apr 2022 – Present</p>
-                                <p class="text-gray-400">Enschede, Netherlands</p>
+                    <!-- Timeline Container -->
+                    <div class="mx-auto max-w-6xl space-y-8">
+                        <!-- First Canvas Row -->
+                        <div class="flex flex-col md:flex-row md:justify-between gap-4">
+                            <!-- Left Column -->
+                            <div class="w-full md:w-1/2 timeline-item p-4 rounded-lg">
+                                <img src="juxaposeclean.png" alt="Canvas Art 1" class="w-full rounded">
+                                <p class="text-white mt-2">Clear </p>
+                            </div>
+                            <!-- Right Column -->
+                            <div class="w-full md:w-1/2 timeline-item p-4 rounded-lg">
+                                <img src="juxaposeuv.png" alt="Canvas Art 2" class="w-full rounded">
+                                <p class="text-white mt-2">Description for Canvas Artwork 2</p>
                             </div>
                         </div>
-                        <ul class="list-disc pl-6 space-y-2">
-                        <li>Started B.V. / Company - ArtRevolt</li>
-                        <li>Creative content producer and distributor</li>
-                        <li>interactive Developer organization</li>
-                        <li>Freelancer(s) workflow</li>
-                        <li>Developing interactive installations and XR applications</li>
-                        </ul>
-                        </div>
-                    
-                    <!-- TinyGiants Experience -->
-                    <div class="timeline-item left">
-                        <div class="flex items-center mb-4">
-                            <img src="TG-logo.png" alt="TinyGiants" class="w-16 h-16 mr-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">3D Artist</h3>
-                                <p class="text-yellow-500">TinyGiants • Apr 2022 – Oct 2024</p>
-                                <p class="text-gray-400">Enschede, Netherlands</p>
-                            </div>
-                        </div>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Developed systems, mechanics, productions with Unreal Engine 5</li>
-                            <li>Produced photorealistic Octane renders for different clients of the company</li>
-                            <li>Optimized production pipeline</li>
-                            <li>Collaborated effectively with team members</li>
-                            <li>Animating, Rendering & compositing professional video content</li>
-                        </ul>
+                        <div class="horizon-line"></div>
                     </div>
-                    <div class="horizon-line"></div>
                 </div>
+                <!--Juxtapose Loop of Life-->
+                <div class="timeline-container section-header text-center">
+                    <div class="max-w-4xl timeline-item">
+                        <figure class="wp-block-jetpack-image-compare">
+                            <div class="juxtapose" data-mode="horizontal">
+                                <img id="203" src="https://artrevoltgallery.files.wordpress.com/2021/07/juxaposeclean.png" alt="" width="1602" height="2376" class="image-compare__image-before"/>
+                                <img id="204" src="https://artrevoltgallery.files.wordpress.com/2021/07/juxaposeuv.png" alt="" width="1602" height="2376" class="image-compare__image-after"/>
+                            </div>
+                            <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+                        </figure>
+                    </div>
+                </div>
+                <div class="horizon-line"></div>
                 <br></br>
-                <div class="section-header text-center">
-                    <div class="elementor-icon">
-                        <svg aria-hidden="true" class="e-font-icon-svg e-fas-graduation-cap" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/>
-                        </svg>
-                    </div>
-                    <h2 class="text-2x2 md:text-3x3 font-bold text-white mb-6">Education</h2>
-                </div>
-            
+                <!--SECOND CANVAS-->
                 <div class="timeline-container">
-
                     <div class="timeline-line"></div>
-                    <!-- Education Section -->
-                    <div class="timeline-item right">
-                        <div class="flex items-center mb-4">
-                            <img src="saxion-logo.jpg" alt="Saxion University" class="w-16 h-16 mr-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Bachelor's Degree</h3>
-                                <p class="text-yellow-500">Creative Media & Game Technologies</p>
-                                <p class="text-gray-400">2015 – 2021</p>
+                    <div class="mx-auto max-w-6xl space-y-8">
+                        <!-- Second Canvas Row -->
+                        <div class="flex flex-col md:flex-row md:justify-between gap-4">
+                            <!-- Left Column -->
+                            <div class="w-full md:w-1/2 bg-gray-800 p-4 rounded-lg">
+                                <img src="canvas-art-3.jpg" alt="Canvas Art 3" class="w-full rounded">
+                                <p class="text-white mt-2">Description for Canvas Artwork 3</p>
+                            </div>
+                            <!-- Right Column -->
+                            <div class="w-full md:w-1/2 bg-gray-800 p-4 rounded-lg">
+                                <img src="canvas-art-4.jpg" alt="Canvas Art 4" class="w-full rounded">
+                                <p class="text-white mt-2">Description for Canvas Artwork 4</p>
                             </div>
                         </div>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Specialized in virtual productions and game pipelines</li>
-                            <li>Graduated in collaboration with XSense on virtual reality fashion production</li>
-                            <li>Bachelor's thesis with over 9000 reads on ResearchGate</li>
-                            <li>Developed multiple collaborative virtual productions</li>
-                        </ul>
+                        <div class="horizon-line"></div>
                     </div>
-                    <div class="timeline-item left">
-                        <div class="flex items-center mb-4">
-                            <img src="PGT-LOGO.jpg" alt="Aleko Konstantinov" class="w-16 h-16 mr-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Professional Highschool Degree</h3>
-                                <p class="text-yellow-500">Tour agencies and leisure and free time organization</p>
-                                <p class="text-gray-400">Pleven, Bulgaria 2010 – 2015</p>
-                            </div>
-                        </div>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Training and internships across local restaurants and Hotels</li>
-                            <li>Specialization with English and Spanish languages</li>
-                            <li>over 40 subjects in Higher curricua education</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item right">
-                        <div class="flex items-center mb-4">
-                            <h3 class="text-xl font-bold text-white">Being Born</h3>
-                            <p class="text-yellow-500">Saw light for the first time</p>
-                            <p class="text-gray-400">1996 – Ongoing</p>
-                        </div>
-                    </div>
-                    <div class="horizon-line"></div>
                 </div>
-            </div>
-            <!-- Updated SVG Icons -->
-            <div class="section-header text-center">
-                <div class="elementor-icon text-yellow-500">
-                    <img src="brain-svgrepo-com.png" class="w-10 h-8 mr-0">
-                </img>
-                </div>
-                <h2 class="text-2x2 md:text-3x3 font-bold text-white mb-6">Skills</h2>
-            </div>
-            
-            <div class="timeline-skills">
-                <!-- Column 1 -->
-                <div class="timeline-column">
-                  <h3 class="text-xl font-bold text-white">Software Knowledge</h3>
-                  <ul class="list-disc pl-6 space-y-2">
-                    <li>Autodesk: Maya, 3DS-Max</li>
-                    <li>Maxon: C4D, ZBrush</li>
-                    <li>Blender</li>
-                    <li>OTOY: Octane Render</li>
-                    <li>Adobe: Ae,Pr,Ps,Ai</li>
-                    <li>Substance-Painter</li>
-                    <li>Marvelous Designer</li>
-                    <li>SideFX: Houdini</li>
-                    <li>Game Engines: Unreal, Unity</li>
-                    <li>Other: Cascadeur, Gaya, CC3</li>
-                  </ul>
-                </div>
-                
-                <!-- Vertical Divider -->
-                <div class="timeline-divider">
-                </div>
-              
-                <!-- Column 2 -->
-                <div class="timeline-column">
-                  <h3 class="text-xl font-bold text-white">Soft Skills</h3>
-                  <ul class="list-disc pl-6 space-y-2">
-                    <li>Adaptive and efficient teamworker to large and small teams</li>
-                    <li>Effective prioritisation with critical deadlines</li>
-                    <li>Adaptability and quick lerner skills</li>
-                    <li>Creativity within pipeline boudaries and outside of it</li>
-                  </ul>
-                </div>
-              
-                <!-- Vertical Divider -->
-                <div class="timeline-divider"></div>
-              
-                <!-- Column 3 -->
-                <div class="timeline-column">
-                  <h3 class="text-xl font-bold text-white">Languages</h3>
-                  <ul class="list-disc pl-6 space-y-2">
-                    <li>Bulgarian: Native</li>
-                    <li>English: Native</li>
-                    <li>Dutch: Intermediate</li>
-                    <li>C#: Intermediate</li>
-                    <li>C++: Beginner</li>
-                    <li>html,js,typescr: Beginner</li>
-                  </ul>
-                </div>
-            </div>
-              
-            <!-- Software Mosaic Section -->
-            <div class="software-mosaic">
-                <img src="icons/maya-logo.jpg" alt="Maya" class="software-logo">
-                <img src="icons/c4d-logo.png" alt="C4D" class="software-logo">
-                <img src="icons/blender_logo.png" alt="Blender" class="software-logo">
-                <img src="icons/Octane-logo.png" alt="Octane" class="software-logo">
-                <img src="icons/ae-logo.png" alt="After Effects" class="software-logo">
-                <img src="icons/pr-logo.png" alt="Premier Pro" class="software-logo">
-                <img src="icons/photoshop-logo.jpg" alt="Photoshop" class="software-logo">
-                <img src="icons/ue-logo.png" alt="Unreal Engine" class="software-logo">
-                <img src="icons/unity-logo.jpg" alt="Unity" class="software-logo">
-                <img src="icons/marvelous-logo.jpg" alt="Marvelous" class="software-logo">
-                <img src="icons/substance-logo.jpg" alt="Substance" class="software-logo">
-                <img src="icons/zbrush-logo.png" alt="ZBrush" class="software-logo">
-                <img src="icons/houdini-logo.png" alt="Houdini" class="software-logo">
             </div>
         </div>
-        </main>                  
-
-    </body>
+    </main>
+</body>
 </html>
