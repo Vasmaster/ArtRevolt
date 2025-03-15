@@ -11,6 +11,21 @@ html {
 .group:hover div { opacity: 1 !important; }
 }
 
+@media (max-width: 767px) {
+  .menu-stripe {
+    position: relative !important;
+    transform: none !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .menu-stripe div[aria-hidden="true"] {
+    width: 3rem !important;
+  }
+  
+  .menu-stripe:hover {
+    width: 6rem !important;
+  }
+}
  /* Add custom styles for the slider */
  .slider-container {
   overflow-x: auto;
