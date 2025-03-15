@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/output.css">
      <link rel="stylesheet" href="css/layout.css">
      <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+     <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+     <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
 
     <script  defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
       
@@ -39,7 +41,7 @@
                         x-data="{ openStripe: null }">
                         <!-- Stripe 1: Contacts -->
                         <div x-data="{ open: false }" class="relative">
-                            <a href="Canvas.html">
+                            <a href="Contacts.html">
                                 <div class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
                                     :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
                                     @mouseleave="open = false, openStripe = null">
