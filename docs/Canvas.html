@@ -1,15 +1,228 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-        <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
-        <title>Résumé – Vasil Grancharov</title>
-    
-</head>
-<body>
 
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>Canvas – Vasil Grancharov</title>
+
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+   
+    <script  defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+      
+</head>
+
+<body class="leading-normal tracking-normal" data-theme="dark">
+    <main class="ms-page-content">
+
+        <div class="max-w-full container mx-auto" x-data>
+            <div
+                class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
+                <!-- Logo -->
+                <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+                    href="https://vasmaster.github.io/ArtRevolt">
+                    Art
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
+                        Revolt
+                    </span>
+                </a>
+
+                <!-- Menu + Social Media Container -->
+                <div
+                    class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10">
+                    <!-- Menu Triggers: Adjusted for mobile -->
+                    <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3"
+                        x-data="{ openStripe: null }">
+                        <!-- Stripe 1: Contacts -->
+                        <div x-data="{ open: false }" class="relative">
+                            <a href="Canvas.html">
+                                <div class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                                    :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
+                                    @mouseleave="open = false, openStripe = null">
+                                    <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                                        class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
+                                        Contacts
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Stripe 2: Canvas -->
+                        <div x-data="{ open: false }" class="relative">
+                            <a href="Canvas.html">
+                                <div class="absolute -translate-x-26 -translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                                    :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
+                                    @mouseleave="open = false, openStripe = null"
+                                    :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
+                                    <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                        class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
+                                        Canvas
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Stripe 3: CV -->
+                        <div x-data="{ open: false }" class="relative">
+                            <a href="CV_Vasil-Grancharov.html">
+                                <div class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
+                                    :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true"
+                                    @mouseleave="open = false"
+                                    :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
+                                    <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                        class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
+                                        CV
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="flex w-1/2 justify-end items-right space-x-4">
+                        <!-- X (formerly Twitter) -->
+                        <a class="inline-block text-indigo-100 no-underline hover:text-yellow-500 text-center h-10 p-2 md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+                            href="https://x.com/Art_Revolt">
+                            <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 48">
+                                <!-- Example X Icon -->
+                                <path
+                                    d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z">
+                            </svg>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a class="inline-block text-indigo-100 no-underline hover:text-yellow-500 text-center h-10 p-2 md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+                            href="https://linkedin.com/in/vasil-grancharov">
+                            <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-6xl mx-auto px-4 py-8">
+                <!-- Header Section -->
+                <header class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 glow">
+                        Canvas Artwork
+                    </h2>
+                    <br>
+                    </br>
+                    <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
+                        Collection of my acrylic & oil creations
+                    </p>
+                </header>
+                <br></br>
+                <!--FIRST CANVAS-->
+                <header class="text-center mb-12">
+                    <h1 class="text-3xl md:text-3x3 font-bold text-white mb-4 glow">
+                        Loop of Life
+                    </h1>
+                </header>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <!-- Timeline Container -->
+                    <div class="mx-auto max-w-6xl space-y-8">
+                        <!-- First Canvas Row -->
+                        <div class="flex flex-col md:flex-row md:justify-between gap-4">
+                            <!-- Left Column -->
+                            <div class="w-full md:w-1/2 timeline-item p-4 rounded-lg">
+                                <img src="canvas/juxaposeclean.png" alt="Canvas Art 1" class="w-full rounded-lg">
+                                <p class="text-white mt-2">Clear view with natural sun light</p>
+                            </div>
+                            <!-- Right Column -->
+                            <div class="w-full md:w-1/2 timeline-item p-4 rounded-lg">
+                                <img src="canvas/juxaposeuv.png" alt="Canvas Art 2" class="w-full rounded-lg">
+                                <p class="text-white mt-2">UV view with Ultra violet light</p>
+                            </div>
+                        </div>
+                        <div class="horizon-line"></div>
+                    </div>
+                </div>
+                <!--Juxtapose Loop of Life-->
+                <div class="timeline-container section-header text-center">
+                    <div class="max-w-4xl timeline-item">
+                       
+                    </div>
+                </div>
+                    <div class="timeline-skills">
+
+                        <div class="timeline-column">
+                            <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
+                                Acrylic luminescent canvas painting 40" x 60" made by ~VAS (V. G.)
+                                Existence in its own means being. To be, what you represent is a form of creation within another form of creation and so on...
+                                Though there is diversity of connection through species and their surrounding environment that leads to multi-dimensional recreation of 'being'. Simply think of the existence you experience in this world. What you see here are:
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-column">
+                            <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
+                                ~ Two evolutionary pattern lines for this creature and how each side unfolds and evolves. The fact that they are so close and each part of the 'one' whole, practically makes them inseparable. ~
+                                " I find it interesting how we all get wrapped up in our perspective of life that the animistic part of us is slowly ripped a part from the need to compete for its survival in this modern world."
+                                With the button below you can find a split canvas of the artwork in regular lighting and under UV.
+                            </p>
+                        </div>
+                    </div>
+                        <div class="horizon-line"></div>
+                <br></br>
+                <!--SECOND CANVAS-->
+                <header class="text-center mb-12">
+                    <h1 class="text-3xl md:text-3x3 font-bold text-white mb-4 glow">
+                        Worlds of Color
+                    </h1>
+                </header>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="mx-auto max-w-6xl space-y-8">
+                        <!-- Second Canvas Row -->
+                        <div class="flex flex-col md:flex-row md:justify-between gap-4">
+                            <!-- Left Column -->
+                            <div class="w-full md:w-1/2 bg-gray-800 p-4 rounded-lg">
+                                <img src="canvas/WoC_clear.png" alt="Canvas Art 3" class="w-full rounded">
+                                <p class="text-white mt-2">Clear view with natural sun light</p>
+                            </div>
+                            <!-- Right Column -->
+                            <div class="w-full md:w-1/2 bg-gray-800 p-4 rounded-lg">
+                                <img src="canvas/WoC_uv.png" alt="Canvas Art 4" class="w-full rounded">
+                                <p class="text-white mt-2">UV view with Ultra violet light</p>
+                            </div>
+                        </div>
+                        <div class="horizon-line"></div>
+                    </div>
+                </div>
+                    <!--Juxtapose Loop of Life-->
+                    <div class="timeline-container section-header text-center">
+                        <div class="max-w-4xl timeline-item">
+                            
+                        </div>
+                    </div>
+                    <div class="timeline-skills">
+
+                        <div class="timeline-column">
+                            <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
+                                Life is a mystery. Ever lasting pattern of being (existence) which implies both to be and not to be at the same time. 
+                                Your personality consists traits that shape your presence - "Personality Traits" or " the Big Five". 
+                                Five characteristics of every human's behavior. 
+                                (Openness, Conscientiousness, Extroversion, Agreeableness, Neuroticism) 
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-column">
+                            <p class="text-2x8 md:text-3x3 fontawesome-css text-white mb-6">
+                                ~ This artwork presents two complimenting unities of "worlds in colors" & Pythagorean Cosmic morphology.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="horizon-line"></div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

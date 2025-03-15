@@ -1,9 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+html {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 @media (hover: none) {
-    .menu-trigger:hover { 
-      /* Reset hover styles on touch devices */
-    }
+   /* .menu-trigger:hover { Reset hover styles on touch devices } */
   }
 @media (max-width: 768px) {
 .group { position: relative; }
 .group:hover div { opacity: 1 !important; }
+}
+
+ /* Add custom styles for the slider */
+ .slider-container {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.slide {
+  transition: transform 0.5s ease-in-out;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide.hidden {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+ /* Optional: Custom glow effect if you want more control */
+ .glow {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+/* Auto-scrolling effect */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+:root {
+  --color-primary: #a9fc6e;
+  --color-contrast-higher: hsl(0, 100%, 99%);
+  --color-contrast-high: hsl(0, 0%, 81%);
+  --color-contrast-medium: hsl(0, 0%, 57%);
+  --color-contrast-low: hsl(0, 0%, 22%);
+  --color-contrast-lower: hsl(0, 0%, 15%);
+  --color-bg: hsl(0, 0%, 11%);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-contrast-high);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.horizon-line {
+  position: relative;
+  left: 50%;
+  width: 65%;
+  height: 2px;
+  background: #4194c4;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+.timeline-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-skills {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-divider {
+  width: 2px;
+  background: #4194c4;
+  margin: 0 10px;
+}
+
+.timeline-column {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  background: #4194c4;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 46%;
+  margin: 20px 0;
+  padding: 20px;
+  background: hsl(0, 0%, 15%);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+}
+
+.timeline-item.left {
+  left: 0;
+}
+
+.timeline-item.right {
+  left: 54%;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  top: 25px;
+  background: #ffc82f;
+  border-radius: 50%;
+}
+
+.left::after {
+  right: -30px;
+}
+
+.right::after {
+  left: -30px;
+}
+
+.elementor-icon svg {
+  fill: #ffc82f;
+  width: 24px;
+  height: 24px;
+}
+
+.software-mosaic {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 40px 0;
+}
+
+.software-logo {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+  max-width: 100px;
+}
+
+.software-logo:hover {
+  filter: grayscale(0%);
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
