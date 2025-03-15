@@ -5,7 +5,7 @@ The content is confidential and private.
 
 ## All Copyrights reserved 
 
-Copyright 2020-2025 Art-Revolt b.v. Nederland.
+Copyright &copy 2020 Art-Revolt b.v. Nederland.
 
 
 The Template uses reference from Tailwind. 
