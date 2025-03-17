@@ -24,7 +24,7 @@
     <!-- Navigation -->
     <div class="max-w-full container mx-auto" x-data>
       <div
-        class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-100">
+        class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
         <!-- Logo -->
         <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
           href="https://vasmaster.github.io/ArtRevolt">
@@ -94,7 +94,7 @@
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
         { id: 1, title: 'BoU', image: 'Bond_Of_Union_V1.png' },
-        { id: 2, title: 'swans', image: 'Swans.gif' },
+        { id: 2, title: 'swans', image: 'Swans_pre.png' },
         { id: 3, title: 'Hum3d', image: 'Hum3DCar.png' },
         { id: 4, title: 'keyboard', image: 'AOC Keyboard.png' },
       ], autoSlide() {
@@ -430,7 +430,72 @@
     rendered from Unreal Engine 5 with playfull eyecandy of the former TinyGiants logo.
   </p>
   </div>
+  <div x-data="{ 
+    isHalfway: false,
+    prevOpen: false,
+    nextOpen: false 
+    }" 
+    @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
+    class="fixed inset-0 pointer-events-none">
 
+    <!-- Previous Project (Left) -->
+    <div class="fixed left-4 bottom-4 transition-all duration-300"
+      :class="{
+        'translate-x-0': prevOpen,
+        '-translate-x-3/4': !prevOpen
+      }"
+      @mouseenter="if(isHalfway) prevOpen = true"
+      @mouseleave="prevOpen = false">
+      
+      <div class="bg-black-800/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
+          transition-all duration-300 flex items-center"
+          :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
+          
+          <div class="relative min-w-[3rem] h-full">
+            <img src="Projects/Unity/gameplay_overview.gif" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50 flex items-center justify-center
+              transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
+              ←
+            </div>
+          </div>
+          
+          <div x-show="prevOpen" class="p-3 text-white text-sm font-medium transition-opacity">
+            <a href="Projects/Unity/GameDev.html">
+              Previous Project
+            </a>
+          </div>
+      </div>
+    </div>
+
+    <!-- Next Project (Right) -->
+    <div class="fixed right-4 bottom-4 transition-all duration-300"
+      :class="{
+          'translate-x-0': nextOpen,
+          'translate-x-3/4': !nextOpen
+      }"
+      @mouseenter="if(isHalfway) nextOpen = true"
+      @mouseleave="nextOpen = false">
+      
+      <div class="bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
+        transition-all duration-300 flex items-center"
+        :class="nextOpen ? 'w-48 h-24' : 'w-12 h-12'">
+        
+        <div class="relative min-w-[3rem] h-full">
+          <img src="Projects/Speedboat/quick-preview.gif" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-black/50 flex items-center justify-center
+            transition-opacity" :class="nextOpen ? 'opacity-0' : 'opacity-100'">
+            →
+          </div>
+        </div>
+        
+        <div x-show="nextOpen" class="p-3 text-white text-sm font-medium transition-opacity">
+         <a href="Projects/Speedboat/Speedboat.html">
+          Next Project
+         </a> 
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
