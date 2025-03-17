@@ -22,7 +22,7 @@
   <div class="h-full">
     <!-- Navigation -->
     <div class="max-w-full container mx-auto" x-data>
-      <div class="max-w-full flex flex-col md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
+      <div class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
         <!-- Logo -->
         <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
           href="https://vasmaster.github.io/ArtRevolt">
@@ -33,15 +33,15 @@
         </a>
       
         <!-- Menu Container -->
-        <div class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-4 md:space-y-0 md:space-x-10">
+        <div class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
           <!-- Menu Triggers -->
-          <div class="flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-3" 
+          <div class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3" 
                x-data="{ openStripe: null }">
             
             <!-- Stripe 1: Contacts -->
-            <div x-data="{ open: false }" class="relative md:mr-4">
+            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
               <a href="Contacts.html">
-                <div class="md:absolute md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                <div class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
                      :class="{ 'w-28': open, 'w-3': !open }"
                      @mouseover="open = true, openStripe = 1"
                      @mouseleave="open = false, openStripe = null">
@@ -54,9 +54,9 @@
             </div>
       
             <!-- Stripe 2: Canvas -->
-            <div x-data="{ open: false }" class="relative md:mr-4">
+            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
               <a href="Canvas.html">
-                <div class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
                      :class="{ 'w-24': open, 'w-3': !open }"
                      @mouseover="open = true, openStripe = 2"
                      @mouseleave="open = false, openStripe = null"
@@ -72,7 +72,7 @@
             <!-- Stripe 3: CV -->
             <div x-data="{ open: false }" class="relative">
               <a href="CV_Vasil-Grancharov.html">
-                <div class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
                      :class="{ 'w-24': open, 'w-3': !open }"
                      @mouseover="open = true" 
                      @mouseleave="open = false"
@@ -187,24 +187,7 @@
     <br>
 
     </br>
-    <!--Footer-->
-    <!--<form class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
-      <div class="mb-4">
-        <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
-          Signup for our newsletter
-        </label>
-        <input
-        class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-        id="emailaddress" type="text" placeholder="you@somewhere.com" />
-      </div>
-      <div class="flex items-center justify-between pt-4">
-        <button
-        class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-        type="button">
-        Sign Up
-      </button>
-    </div>
-    </form>-->
+
     <!-- Footer (Optional) -->
     <footer class="bg-black-500 border-t mt-12 rounded-lg shadow-lg">
       <div class="max-w-4xl mx-auto px-4 py-4 text-center text-sm text-gray-600">

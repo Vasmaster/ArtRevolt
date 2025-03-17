@@ -21,65 +21,73 @@
 <body class="leading-normal tracking-normal text-indigo-100 m-8 bg-cover bg-fixed" data-theme="dark">
   <!-- Header (can be reused from your main layout) -->
   <header class="bg-black shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
-      <a href="https://vasmaster.github.io/ArtRevolt" class="text-3xl font-bold text-indigo-100">Art
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
-        Revolt</span></a>
-      <nav>
-       <!-- Menu + Social Media Container -->
-       <div class="flex flex-col md:flex-row w-full md:w-auto items-start md:items-center space-y-4 md:space-y-0 md:space-x-10
-       ">
-       <!-- Menu Triggers: Adjusted for mobile -->
-       <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-3" x-data="{ openStripe: null }">
-         <!-- Stripe 1: Contacts -->
-         <div x-data="{ open: false }" class="relative">
-           <a href="Contacts.html">
-             <div
-               class="md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer"
-               :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
-               @mouseleave="open = false, openStripe = null">
-               <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                 class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
-                 Contacts
-               </div>
-             </div>
-           </a>
-         </div>
-
-         <!-- Stripe 2: Canvas -->
-         <div x-data="{ open: false }" class="relative">
-           <a href="Canvas.html">
-             <div
-               class="absolute -translate-x-26 -translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer"
-               :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
-               @mouseleave="open = false, openStripe = null"
-               :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
-               <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                 class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
-                 Canvas
-               </div>
-             </div>
-           </a>
-         </div>
-
-         <!-- Stripe 3: CV -->
-         <div x-data="{ open: false }" class="relative">
-           <a href="CV_Vasil-Grancharov.html">
-             <div
-               class="absolute -translate-x-20 -translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer"
-               :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
-               :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
-               <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                 class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
-                 CV
-               </div>
-             </div>
-           </a>
-         </div>
-       </div>
-      </nav>
+    <!-- Navigation -->
+    <div class="max-w-full container mx-auto" x-data>
+      <div class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
+        <!-- Logo -->
+        <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+          href="https://vasmaster.github.io/ArtRevolt">
+          Art
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
+            Revolt
+          </span>
+        </a>
+      
+        <!-- Menu Container -->
+        <div class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
+          <!-- Menu Triggers -->
+          <div class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3" 
+               x-data="{ openStripe: null }">
+            
+            <!-- Stripe 1: Contacts -->
+            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
+              <a href="Contacts.html">
+                <div class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                     :class="{ 'w-28': open, 'w-3': !open }"
+                     @mouseover="open = true, openStripe = 1"
+                     @mouseleave="open = false, openStripe = null">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                       class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
+                    Contacts
+                  </div>
+                </div>
+              </a>
+            </div>
+      
+            <!-- Stripe 2: Canvas -->
+            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
+              <a href="Canvas.html">
+                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                     :class="{ 'w-24': open, 'w-3': !open }"
+                     @mouseover="open = true, openStripe = 2"
+                     @mouseleave="open = false, openStripe = null"
+                     :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                       class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
+                    Canvas
+                  </div>
+                </div>
+              </a>
+            </div>
+      
+            <!-- Stripe 3: CV -->
+            <div x-data="{ open: false }" class="relative">
+              <a href="CV_Vasil-Grancharov.html">
+                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                     :class="{ 'w-24': open, 'w-3': !open }"
+                     @mouseover="open = true" 
+                     @mouseleave="open = false"
+                     :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
+                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
+                       class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
+                    CV
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
