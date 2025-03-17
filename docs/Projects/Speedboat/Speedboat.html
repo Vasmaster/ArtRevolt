@@ -9,10 +9,10 @@
   <meta name="description" content="" />
   <meta name="keywords" content="" />
 
-    <!--My tailwind.css-->
-    <link rel="stylesheet" href="/css/output.css">
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <!--My tailwind.css-->
+  <link rel="stylesheet" href="/css/output.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
 
   <!-- Add Alpine.js for interactivity -->
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -24,7 +24,8 @@
   <div class="h-full">
     <!-- Navigation -->
     <div class="max-w-full container mx-auto" x-data>
-      <div class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
+      <div
+        class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
         <!-- Logo -->
         <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
           href="https://vasmaster.github.io/ArtRevolt">
@@ -33,54 +34,55 @@
             Revolt
           </span>
         </a>
-      
+
         <!-- Menu Container -->
-        <div class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
+        <div
+          class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
           <!-- Menu Triggers -->
-          <div class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3" 
-               x-data="{ openStripe: null }">
-            
+          <div
+            class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3"
+            x-data="{ openStripe: null }">
+
             <!-- Stripe 1: Contacts -->
             <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
               <a href="/Contacts.html">
-                <div class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-28': open, 'w-3': !open }"
-                     @mouseover="open = true, openStripe = 1"
-                     @mouseleave="open = false, openStripe = null">
+                <div
+                  class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                  :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
+                  @mouseleave="open = false, openStripe = null">
                   <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
+                    class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
                     Contacts
                   </div>
                 </div>
               </a>
             </div>
-      
+
             <!-- Stripe 2: Canvas -->
             <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
               <a href="/Canvas.html">
-                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-24': open, 'w-3': !open }"
-                     @mouseover="open = true, openStripe = 2"
-                     @mouseleave="open = false, openStripe = null"
-                     :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
+                <div
+                  class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
+                  @mouseleave="open = false, openStripe = null"
+                  :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
                   <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
+                    class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
                     Canvas
                   </div>
                 </div>
               </a>
             </div>
-      
+
             <!-- Stripe 3: CV -->
             <div x-data="{ open: false }" class="relative">
               <a href="/CV_Vasil-Grancharov.html">
-                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-24': open, 'w-3': !open }"
-                     @mouseover="open = true" 
-                     @mouseleave="open = false"
-                     :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
+                <div
+                  class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
+                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
+                  :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
                   <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
+                    class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
                     CV
                   </div>
                 </div>
@@ -109,7 +111,7 @@
             <div class="w-full flex-shrink-0 flex items-center justify-center">
               <a>
                 <img :src="slide.image" :alt="slide.title"
-                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
+                  class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
               </a>
             </div>
           </template>
@@ -153,15 +155,16 @@
               <!-- Each mosaic square without overlay -->
               <div class="relative overflow-hidden rounded-lg shadow-lg">
                 <img :src="slide.image" :alt="slide.title"
-                    class="w-full h-auto transition-transform duration-300 hover:scale-105">
+                  class="w-full h-auto transition-transform duration-300 hover:scale-105">
               </div>
             </template>
           </div>
         </div>
       </div>
       <p class="mt-2 text-base md:text-2xl text-white">
-        A speedboat model inspired from real-life reference of "WallyPower 80 series". 
-        Production with purpose of learning and training on hard-surface modeling and vehicle mechanics (including buoyancy).
+        A speedboat model inspired from real-life reference of "WallyPower 80 series".
+        Production with purpose of learning and training on hard-surface modeling and vehicle mechanics (including
+        buoyancy).
         The model was later used to create realistic physical behavior of the vehicle on the surface of the water.
         The water shader is made with Unreal Engine Material Editor and Material Functions.
         (lost archive)
@@ -182,7 +185,7 @@
             }, 4000);
           }
         }" x-init="autoSlide" class="relative w-full overflow-hidden">
-  
+
         <!-- Slideshow Images -->
         <div class="flex max-w-full"
           :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
@@ -190,7 +193,7 @@
             <div class="w-full flex-shrink-0 flex items-center justify-center">
               <a>
                 <img :src="slide.image" :alt="slide.title"
-                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
+                  class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
               </a>
             </div>
           </template>
@@ -203,7 +206,7 @@
           </p>
         </div>
 
-          <!-- Navigation Dots -->
+        <!-- Navigation Dots -->
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <template x-for="(slide, i) in slides" :key="i">
             <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
@@ -226,84 +229,80 @@
               <!-- Each mosaic square without overlay -->
               <div class="relative overflow-hidden rounded-lg shadow-lg">
                 <img :src="slide.image" :alt="slide.title"
-                    class="w-full h-auto transition-transform duration-300 hover:scale-105">
+                  class="w-full h-auto transition-transform duration-300 hover:scale-105">
               </div>
             </template>
           </div>
         </div>
       </div>
-     <h2 class="mt-2 text-base md:text-2xl text-white"> Game vehicle asset</h2>
+      <h2 class="mt-2 text-base md:text-2xl text-white"> Game vehicle asset</h2>
       <p class="mt-2 text-base md:text-2xl text-white">
-       Passion project. The render is made in Unreal Engine 4.25. The game was developed for a GameJam Event using Unity 2020. (lost archive)
+        Passion project. The render is made in Unreal Engine 4.25. The game was developed for a GameJam Event using
+        Unity 2020. (lost archive)
       </p>
-    </div>  
+    </div>
 
-   <!--FOOTER STICKY NAV LOCATIONS-->
-  <div x-data="{ 
+    <!--FOOTER STICKY NAV LOCATIONS-->
+    <div x-data="{ 
     isHalfway: false,
     prevOpen: false,
     nextOpen: false 
-    }" 
-    @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
-    class="fixed inset-0 pointer-events-none">
+    }" @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
+      class="fixed inset-0 pointer-events-none">
 
-    <!-- Previous Project (Left) -->
-    <div class="fixed left-4 bottom-4 transition-all duration-300"
-      :class="{
-        'translate-x-0': prevOpen,
-        '-translate-x-3/4': !prevOpen
-      }"
-      @mouseenter="if(isHalfway) prevOpen = true"
-      @mouseleave="prevOpen = false">
-      
-      <div href="/Projects/TG/TinyGiants.html" class="bg-black-800/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
-          transition-all duration-300 flex items-center"
-          :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
-          
-          <div class="relative min-w-[3rem] h-full">
-            <img src="/Projects/TG/Swans.gif" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/50 flex items-center justify-center
-              transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
-              ←
+      <!-- Previous Project (Left) -->
+      <div class="fixed left-4 bottom-4 transition-all duration-300" :class="{
+      'translate-x-0': prevOpen,
+      '-translate-x-3/4': !prevOpen
+  }" @mouseenter="if(isHalfway) prevOpen = true" @mouseleave="prevOpen = false">
+
+        <div class="bg-black/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
+        transition-all duration-300 flex items-center" :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
+
+          <a x-bind:href="isHalfway ? '/Projects/TG/TinyGiants.html' : null"
+            :class="isHalfway ? 'cursor-pointer' : 'cursor-default'" @click="if(!isHalfway) $event.preventDefault()"
+            class="flex items-center w-full h-full">
+            <div class="relative min-w-[3rem] h-full">
+              <img src="/Projects/TG/Swans.gif" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/50 flex items-center justify-center
+                    transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
+                ←
+              </div>
             </div>
-          </div>
-          
-          <div x-show="prevOpen" class="p-3 text-white text-sm font-medium transition-opacity">
-            <a >
-              Previous Project
-            </a>
-          </div>
-      </div>
-    </div>
 
-    <!-- Next Project (Right) -->
-    <div class="fixed right-4 bottom-4 transition-all duration-300"
-      :class="{
-          'translate-x-0': nextOpen,
-          'translate-x-3/4': !nextOpen
-      }"
-      @mouseenter="if(isHalfway) nextOpen = true"
-      @mouseleave="nextOpen = false">
-      
-      <div href="/Projects/UE/UnrealEngine.html" class="bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
-        transition-all duration-300 flex items-center"
-        :class="nextOpen ? 'w-48 h-24' : 'w-12 h-12'">
-        
-        <div class="relative min-w-[3rem] h-full">
-          <img src="/Projects/UE/Cloth sim compare.gif" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-black/50 flex items-center justify-center
-            transition-opacity" :class="nextOpen ? 'opacity-0' : 'opacity-100'">
-            →
-          </div>
+            <div x-show="prevOpen" class="p-3 text-white text-sm font-medium transition-opacity">
+              Previous Project
+            </div>
+          </a>
         </div>
-        
-        <div x-show="nextOpen" class="p-3 text-white text-sm font-medium transition-opacity">
-         <a >
-          Next Project
-         </a> 
+      </div>
+      <!-- Next Project (Right) -->
+      <div class="fixed right-4 bottom-4 transition-all duration-300" :class="{
+      'translate-x-0': nextOpen,
+      'translate-x-3/4': !nextOpen
+  }" @mouseenter="if(isHalfway) nextOpen = true" @mouseleave="nextOpen = false">
+
+        <div class="bg-black/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
+      transition-all duration-300 flex items-center" :class="nextOpen ? 'w-48 h-24' : 'w-12 h-12'">
+
+          <a x-bind:href="isHalfway ? '/Projects/UE/UnrealEngine.html' : null"
+            :class="isHalfway ? 'cursor-pointer' : 'cursor-default'" @click="if(!isHalfway) $event.preventDefault()"
+            class="flex items-center w-full h-full">
+            <div class="relative min-w-[3rem] h-full">
+              <img src="/Projects/UE/Cloth sim compare.gif" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/50 flex items-center justify-center
+                  transition-opacity" :class="nextOpen ? 'opacity-0' : 'opacity-100'">
+                →
+              </div>
+            </div>
+
+            <div x-show="nextOpen" class="p-3 text-white text-sm font-medium transition-opacity">
+              Next Project
+            </div>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-  </body>
+</body>
+
 </html>
