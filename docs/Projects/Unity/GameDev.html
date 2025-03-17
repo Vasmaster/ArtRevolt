@@ -107,13 +107,6 @@
             Serious Game project for training habits of healthy meal-preps
           </p>
         </div>
-
-        <style>
-          /* Optional: Custom glow effect if you want more control */
-          .glow {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-          }
-        </style>
       </div>
       <pre>
 
@@ -173,12 +166,6 @@
           </p>
         </div>
 
-        <style>
-          /* Optional: Custom glow effect if you want more control */
-          .glow {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-          }
-        </style>
       </div>
       <!-- Navigation Dots -->
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -187,18 +174,7 @@
             :class="{ 'bg-green-500': index === i }"></button>
         </template>
       </div>
-      <style>
-        /* Auto-scrolling effect */
-        @keyframes marquee {
-          0% {
-            transform: translateX(0%);
-          }
 
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-      </style>
     </div>
     <!-- Mosaic Slideshow Section -->
     <div x-data="{ slides: [
@@ -226,6 +202,73 @@
       My work on the project was team lead, scrum, level design, rigging and modeling, texturing, and more.
       The production and the process are santimental to me so is the reason to share this old archive.
     </p>
+  </div>
+  <!--FOOTER STICKY NAV LOCATIONS-->
+  <div x-data="{ 
+    isHalfway: false,
+    prevOpen: false,
+    nextOpen: false 
+    }" 
+    @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
+    class="fixed inset-0 pointer-events-none">
+
+    <!-- Previous Project (Left) -->
+    <div class="fixed left-4 bottom-4 transition-all duration-300"
+      :class="{
+        'translate-x-0': prevOpen,
+        '-translate-x-3/4': !prevOpen
+      }"
+      @mouseenter="if(isHalfway) prevOpen = true"
+      @mouseleave="prevOpen = false">
+      
+      <div href="/Projects/Tornado/TornadoStudios.html" class="bg-black-800/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
+          transition-all duration-300 flex items-center"
+          :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
+          
+          <div class="relative min-w-[3rem] h-full">
+            <img src="/Projects/Tornado/FC_wirefr.gif" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50 flex items-center justify-center
+              transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
+              ←
+            </div>
+          </div>
+          
+          <div x-show="prevOpen" class="p-3 text-white text-sm font-medium transition-opacity">
+            <a >
+              Previous Project
+            </a>
+          </div>
+      </div>
+    </div>
+
+    <!-- Next Project (Right) -->
+    <div class="fixed right-4 bottom-4 transition-all duration-300"
+      :class="{
+          'translate-x-0': nextOpen,
+          'translate-x-3/4': !nextOpen
+      }"
+      @mouseenter="if(isHalfway) nextOpen = true"
+      @mouseleave="nextOpen = false">
+      
+      <div href="/Projects/TG/TinyGiants.html" class="bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
+        transition-all duration-300 flex items-center"
+        :class="nextOpen ? 'w-48 h-24' : 'w-12 h-12'">
+        
+        <div class="relative min-w-[3rem] h-full">
+          <img src="/Projects/TG/Swans.gif" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-black/50 flex items-center justify-center
+            transition-opacity" :class="nextOpen ? 'opacity-0' : 'opacity-100'">
+            →
+          </div>
+        </div>
+        
+        <div x-show="nextOpen" class="p-3 text-white text-sm font-medium transition-opacity">
+         <a >
+          Next Project
+         </a> 
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 
