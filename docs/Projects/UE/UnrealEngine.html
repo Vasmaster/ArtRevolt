@@ -93,7 +93,7 @@
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
         { id: 1, title: 'top', image: 'dress_front.jpg' },
-        { id: 2, title: 'side', image: 'Cloth sim Hou.gif' },
+        { id: 2, title: 'side', image: 'nativeamericanstyle2.png' },
         { id: 3, title: 'back', image: 'Shader_1.png' }
       ], autoSlide() {
           setInterval(() => {
@@ -146,7 +146,7 @@
         { id: 5, title: 'control board', image: 'shaders_overview_draw.png' },
         { id: 6, title: 'kitchen', image: 'Shader_closeup.png' },
       ] }">
-        <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
+        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <template x-for="slide in slides" :key="slide.id">
@@ -163,11 +163,8 @@
         <img src="Cloth sim compare.gif" alt="Simulation comparisons" class="flex w-auto rounded-lg">
     </div>
       <p class="mt-2 text-base md:text-2xl text-white">
-        A speedboat model inspired from real-life reference of "WallyPower 80 series". 
-        Production with purpose of learning and training on hard-surface modeling and vehicle mechanics (including buoyancy).
-        The model was later used to create realistic physical behavior of the vehicle on the surface of the water.
-        The water shader is made with Unreal Engine Material Editor and Material Functions.
-        (lost archive)
+        Smart shaders made in Unreal Engine 4.25. Those materials were design and optimized <br>
+        for performances of alembic files of simulations extracted from Marvelous designer and SideFX Houdini. 
       </p>
       <pre>
 
@@ -176,9 +173,9 @@
       </br>
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'top', image: 'Buggy-front.png' },
-        { id: 2, title: 'side', image: 'Buggy-top-down.jpg' },
-        { id: 3, title: 'back', image: 'Buggy-side-by-side.jpg' }
+        { id: 1, title: 'top', image: 'dress_front.jpg' },
+        { id: 2, title: 'side', image: 'dress_closeup.jpg' },
+        { id: 3, title: 'back', image: 'skirt-layers.jpg' }
         ], autoSlide() {
             setInterval(() => {
               this.index = (this.index + 1) % this.slides.length;
@@ -202,7 +199,7 @@
         <!-- Overlay Text in Lower Left Corner -->
         <div class="absolute bottom-4 left-4 p-4">
           <p class="mt-2 text-base md:text-2xl text-white">
-            Buggy 3D model
+            Dress 3D model
           </p>
         </div>
 
@@ -216,13 +213,12 @@
       </div>
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
-        { id: 1, title: 'Boarding', image: 'Buggy-raw.jpg' },
-        { id: 2, title: 'top-view', image: 'Buggy-closeup-front.jpg' },
-        { id: 3, title: 'third-person', image: 'Buggy-closeup-back.jpg' },
-        { id: 4, title: 'preview', image: 'Buggy-side-by-side_2.jpg' },
-        { id: 5, title: 'control board', image: 'Buggy-top-down_2.jpg' },
+        { id: 1, title: 'Boarding', image: 'Cloth sim Hou.gif' },
+        { id: 2, title: 'top-view', image: 'Cloth sim compare.gif' },
+        { id: 3, title: 'third-person', image: 'nativeamericanstyle2.png' },
+        { id: 4, title: 'preview', image: '2020-06-1128229-1.jpg' },
         ] }">
-        <div class="max-w-full bg-gray-900 opacity-75 rounded-lg shadow-lg p-6">
+        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <template x-for="slide in slides" :key="slide.id">
@@ -235,9 +231,11 @@
           </div>
         </div>
       </div>
-     <h2 class="mt-2 text-base md:text-2xl text-white"> Game vehicle asset</h2>
+     <h2 class="mt-2 text-base md:text-2xl text-white"> Dress simulations</h2>
       <p class="mt-2 text-base md:text-2xl text-white">
-       Passion project. The render is made in Unreal Engine 4.25. The game was developed for a GameJam Event using Unity 2020. (lost archive)
+      The simulations are made in Marvelous Designer and SideFX Houdini. <br>
+      The render is made in Unreal Engine 4.25. <br>
+      
       </p>
     </div>  
   </body>
