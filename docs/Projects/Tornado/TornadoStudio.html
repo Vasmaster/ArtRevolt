@@ -193,61 +193,51 @@
       </div>
       <p class="mt-2 text-base md:text-2xl text-white">
         A foodcart model inspired from real-life reference. <br>
-        Production with purpose of learning and training on hard-surface modeling.<br>
-        
+        Production of hard-surface model for clients of Tornado Studios<br>
+        The topology is composed of control loops and optimized for subdivision to maintain the hard-edge geometry. <br>
+        Full quad geometry, |0|-|5| triangles constraint range, no engons, no six-point edges.
       </p>
       <pre>
 
       </pre>
       <br>
       </br>
-      <!-- Full-width Slideshow with Overlay Text -->
-      <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'top', image: 'Buggy-front.png' },
-        { id: 2, title: 'side', image: 'Buggy-top-down.jpg' },
-        { id: 3, title: 'back', image: 'Buggy-side-by-side.jpg' }
-        ], autoSlide() {
-            setInterval(() => {
-              this.index = (this.index + 1) % this.slides.length;
-            }, 4000);
-          }
-        }" x-init="autoSlide" class="relative w-full overflow-hidden">
-  
-        <!-- Slideshow Images -->
-        <div class="flex max-w-full"
-          :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
-          <template x-for="slide in slides" :key="slide.id">
-            <div class="w-full flex-shrink-0 flex items-center justify-center">
-              <a>
-                <img :src="slide.image" :alt="slide.title"
-                class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
-              </a>
-            </div>
-          </template>
+      <!-- Mosaic Slideshow Section -->
+      <div id="1" x-data="{ slides: [
+        { id: 1, title: 'Boarding', video: 'WB_Clear.mp4' },
+        { id: 2, title: 'top-view', video: 'WB_Wireframe.mp4' },
+        { id: 3, title: 'Boarding', video: 'WB_Broke_Clean.mp4' },
+        { id: 4, title: 'top-view', video: 'WB_Broke_wire.mp4' },
+      ] }">
+        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+          <!-- Grid Container: adjust the grid-cols as needed -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+            <template x-for="slide in slides" :key="slide.id">
+              <!-- Each mosaic square without overlay -->
+              <div class="relative overflow-hidden rounded-lg shadow-lg">
+                <!-- Video at the Top -->
+                <video controls class="w-full rounded-lg">
+                  <source :src="slide.video" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </template>
+          </div>
         </div>
-
         <!-- Overlay Text in Lower Left Corner -->
         <div class="absolute bottom-4 left-4 p-4">
           <p class="mt-2 text-base md:text-2xl text-white">
-            Buggy 3D model
+            Wooden Bench 3D model
           </p>
-        </div>
-
-          <!-- Navigation Dots -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <template x-for="(slide, i) in slides" :key="i">
-            <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-              :class="{ 'bg-green-500': index === i }"></button>
-          </template>
         </div>
       </div>
       <!-- Mosaic Slideshow Section -->
       <div x-data="{ slides: [
-        { id: 1, title: 'Boarding', image: 'Buggy-raw.jpg' },
-        { id: 2, title: 'top-view', image: 'Buggy-closeup-front.jpg' },
-        { id: 3, title: 'third-person', image: 'Buggy-closeup-back.jpg' },
-        { id: 4, title: 'preview', image: 'Buggy-side-by-side_2.jpg' },
-        { id: 5, title: 'control board', image: 'Buggy-top-down_2.jpg' },
+        { id: 1, title: 'front', image: 'WB_F.png' },
+        { id: 2, title: 'back', image: 'WB_B.png' },
+        { id: 3, title: 'side', image: 'WB_S.png' },
+        { id: 4, title: 'top', image: 'WB_T.png' },
+        { id: 5, title: 'side', image: 'WB_Persp.png' },
         ] }">
         <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
           <!-- Grid Container: adjust the grid-cols as needed -->
@@ -262,10 +252,134 @@
           </div>
         </div>
       </div>
-     <h2 class="mt-2 text-base md:text-2xl text-white"> Game vehicle asset</h2>
       <p class="mt-2 text-base md:text-2xl text-white">
-       Passion project. The render is made in Unreal Engine 4.25. The game was developed for a GameJam Event using Unity 2020. (lost archive)
+        A Wooden Bench model inspired from real-life reference. <br>
+        Production of hard-surface model for clients of Tornado Studios<br>
+        The topology is composed of control loops and optimized for subdivision to maintain the hard-edge geometry. <br>
+        Full quad geometry, |0|-|5| triangles constraint range, no engons, no six-point edges.
       </p>
     </div>  
+    <pre>
+
+    </pre>
+    <br>
+    </br>
+    <!-- Mosaic Slideshow Section -->
+    <div id="1" x-data="{ slides: [
+      { id: 1, title: 'Boarding', video: 'umbrella_clean.mp4' },
+      { id: 2, title: 'top-view', video: 'umbrella_wire.mp4' },
+    ] }">
+      <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+        <!-- Grid Container: adjust the grid-cols as needed -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+          <template x-for="slide in slides" :key="slide.id">
+            <!-- Each mosaic square without overlay -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg">
+              <!-- Video at the Top -->
+              <video controls class="w-full rounded-lg">
+                <source :src="slide.video" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </template>
+        </div>
+      </div>
+      <!-- Overlay Text in Lower Left Corner -->
+      <div class="absolute bottom-4 left-4 p-4">
+        <p class="mt-2 text-base md:text-2xl text-white">
+          Umbrella 3D model
+        </p>
+      </div>
+    </div>
+    <!-- Mosaic Slideshow Section -->
+    <div x-data="{ slides: [
+      { id: 1, title: 'front', image: 'Umbrella_F.png' },
+      { id: 2, title: 'back', image: 'Umbrella_lock.png' },
+      { id: 3, title: 'side', image: 'Umbrella_S.png' },
+      { id: 4, title: 'side', image: 'Umbrella_Persp.png' },
+      ] }">
+      <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+        <!-- Grid Container: adjust the grid-cols as needed -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <template x-for="slide in slides" :key="slide.id">
+            <!-- Each mosaic square without overlay -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg">
+              <img :src="slide.image" :alt="slide.title"
+                  class="w-full h-auto transition-transform duration-300 hover:scale-105">
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+    <p class="mt-2 text-base md:text-2xl text-white">
+      An Umbrella model inspired from real-life reference. <br>
+      Production of hard-surface model for training and learing with guidance from Tornado Studios<br>
+      The topology is composed of control loops and optimized for subdivision to maintain the hard-edge geometry. <br>
+      Full quad geometry, |0|-|5| triangles constraint range, no engons, no six-point edges.
+    </p>
+  </div>  
+  <pre>
+
+  </pre>
+  <br>
+  </br>
+  <!-- Mosaic Slideshow Section -->
+  <div id="1" x-data="{ slides: [
+    { id: 1, title: 'Boarding', video: 'Concrt_Trash_Clean.mp4' },
+    { id: 2, title: 'top-view', video: 'Concrt_Trash_wire.mp4' },
+  ] }">
+    <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+      <!-- Grid Container: adjust the grid-cols as needed -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+        <template x-for="slide in slides" :key="slide.id">
+          <!-- Each mosaic square without overlay -->
+          <div class="relative overflow-hidden rounded-lg shadow-lg">
+            <!-- Video at the Top -->
+            <video controls class="w-full rounded-lg">
+              <source :src="slide.video" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </template>
+      </div>
+    </div>
+    <!-- Overlay Text in Lower Left Corner -->
+    <div class="absolute bottom-4 left-4 p-4">
+      <p class="mt-2 text-base md:text-2xl text-white">
+        Concrete Trash can 3D model
+      </p>
+    </div>
+  </div>
+  <!-- Mosaic Slideshow Section -->
+  <div x-data="{ slides: [
+    { id: 1, title: 'front', image: 'Concrt_Trash_Fpng' },
+    { id: 2, title: 'back', image: 'Concrt_Trash_B.png' },
+    { id: 3, title: 'side', image: 'Concrt_Trash_S.png' },
+    { id: 4, title: 'top', image: 'Concrt_Trash_T.png' },
+    { id: 5, title: 'side', image: 'Concrt_Trash_Close.png' },
+    { id: 6, title: 'top', image: 'Med_Trash_T.png' },
+    { id: 7, title: 'side', image: 'Med_Trash_persp.png' },
+    ] }">
+    <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+      <!-- Grid Container: adjust the grid-cols as needed -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <template x-for="slide in slides" :key="slide.id">
+          <!-- Each mosaic square without overlay -->
+          <div class="relative overflow-hidden rounded-lg shadow-lg">
+            <img :src="slide.image" :alt="slide.title"
+                class="w-full h-auto transition-transform duration-300 hover:scale-105">
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+  <p class="mt-2 text-base md:text-2xl text-white">
+    A Concrete Trash Can and a medical trash can (used) model inspired from real-life reference. <br>
+    Production of hard-surface model for clients of Tornado Studios<br>
+    The topology is composed of control loops and optimized for subdivision to maintain the hard-edge geometry. <br>
+    Full quad geometry, |0|-|5| triangles constraint range, no engons, no six-point edges.
+  </p>
+</div>  
+
   </body>
 </html>
