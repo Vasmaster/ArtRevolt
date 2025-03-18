@@ -262,193 +262,190 @@
       This was an atempt to create a new style of an illusion with the side and front vantage points to perceive
       different personality of my artwork.
     </p>
-  </div>
-  <pre>
+    <pre>
 
-  </pre>
-  <br>
+    </pre>
+    <br>
 
-  </br>
-  <!-- AOC Keyboard - Overlay Text -->
-  <div id="4" class="relative"> <!-- Add relative positioning here -->
-    <!-- Video at the Top -->
-    <video controls class="w-full rounded-lg">
-      <source src="Aockeyboard V2.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    </br>
+    <!-- AOC Keyboard - Overlay Text -->
+    <div id="4" class="relative"> <!-- Add relative positioning here -->
+      <!-- Video at the Top -->
+      <video controls class="w-full rounded-lg">
+        <source src="Aockeyboard V2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
 
-    <!-- Overlay Text in Lower Left Corner -->
-    <div id="4" class="absolute top-4 left-4 p-4">
-      <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-        <span
-          class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-          AOC Keyboard Animation
-        </span>
-      </h1>
-      <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-        Dynamic professional product animation
-      </p>
+      <!-- Overlay Text in Lower Left Corner -->
+      <div id="4" class="absolute top-4 left-4 p-4">
+        <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+          <span
+            class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+            AOC Keyboard Animation
+          </span>
+        </h1>
+        <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+          Dynamic professional product animation
+        </p>
+      </div>
     </div>
-  </div>
-  <!-- Navigation Dots -->
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-    <template x-for="(slide, i) in slides" :key="i">
-      <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-        :class="{ 'bg-green-500': index === i }"></button>
-    </template>
-  </div>
-  </div>
-  <!-- Mosaic Slideshow Section -->
-  <div x-data="{ slides: [
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <template x-for="(slide, i) in slides" :key="i">
+        <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+          :class="{ 'bg-green-500': index === i }"></button>
+      </template>
+    </div>
+
+    <!-- Mosaic Slideshow Section -->
+    <div x-data="{ slides: [
     { id: 1, title: 'overview', image: 'AOC Keyboard.png' },
     { id: 2, title: 'steps', image: 'RockEmAOC_02_V1.png' },
     { id: 3, title: 'third-person', image: 'close-Up.png' },
     { id: 4, title: 'preview', image: 'Cloth_Sim_01_V2.png' },
     { id: 5, title: 'preview', image: 'RockEmAOC_01_V1.png' },
     ] }">
-    <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-      <!-- Grid Container: adjust the grid-cols as needed -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <template x-for="slide in slides" :key="slide.id">
-          <!-- Each mosaic square without overlay -->
-          <div class="relative overflow-hidden rounded-lg shadow-lg">
-            <img :src="slide.image" :alt="slide.title"
-              class="w-full h-auto transition-transform duration-300 hover:scale-105">
-          </div>
-        </template>
+      <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+        <!-- Grid Container: adjust the grid-cols as needed -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <template x-for="slide in slides" :key="slide.id">
+            <!-- Each mosaic square without overlay -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg">
+              <img :src="slide.image" :alt="slide.title"
+                class="w-full h-auto transition-transform duration-300 hover:scale-105">
+            </div>
+          </template>
+        </div>
       </div>
     </div>
-  </div>
-  <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
-  <p class="mt-2 text-base md:text-2xl text-white">
-    During my work for TinyGiants with their guidance and introduction to dive into some of their productions,
-    and rework in my own style the presentation of the AOC keyboard the team personaly made for the client.
-    I had to adapt the keyboard layout over the keys. Then animated and rendered a few sequences.
-    This gave me opportunity to explore simulations with C4D and complex compositing in After Effects.
-  </p>
-  </div>
-  <pre>
+    <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
+    <p class="mt-2 text-base md:text-2xl text-white">
+      During my work for TinyGiants with their guidance and introduction to dive into some of their productions,
+      and rework in my own style the presentation of the AOC keyboard the team personaly made for the client.
+      I had to adapt the keyboard layout over the keys. Then animated and rendered a few sequences.
+      This gave me opportunity to explore simulations with C4D and complex compositing in After Effects.
+    </p>
+    <pre>
 
-  </pre>
-  <br>
+    </pre>
+    <br>
 
-  </br>
+    </br>
 
-  <!-- Hum3dCar - Overlay Text -->
-  <div id="3" class="relative"> <!-- Add relative positioning here -->
+    <!-- Hum3dCar - Overlay Text -->
+    <div id="3" class="relative"> <!-- Add relative positioning here -->
 
-    <!-- Image at the Top -->
-    <video controls class="w-full rounded-lg">
-      <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
-    </video>
-    <!-- Overlay Text in Lower Left Corner -->
-    <div class="absolute top-4 left-4 p-4">
-      <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-        <span
-          class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-          Muscle car
-        </span>
-      </h1>
-      <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-        Whip animation and Compositing training production
-      </p>
+      <!-- Image at the Top -->
+      <video controls class="w-full rounded-lg">
+        <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
+      </video>
+      <!-- Overlay Text in Lower Left Corner -->
+      <div class="absolute top-4 left-4 p-4">
+        <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+          <span
+            class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+            Muscle car
+          </span>
+        </h1>
+        <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+          Whip animation and Compositing training production
+        </p>
+      </div>
     </div>
-  </div>
-  <!-- Navigation Dots -->
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-    <template x-for="(slide, i) in slides" :key="i">
-      <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-        :class="{ 'bg-green-500': index === i }"></button>
-    </template>
-  </div>
-  <!-- Mosaic Slideshow Section -->
-  <div x-data="{ slides: [
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <template x-for="(slide, i) in slides" :key="i">
+        <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+          :class="{ 'bg-green-500': index === i }"></button>
+      </template>
+    </div>
+    <!-- Mosaic Slideshow Section -->
+    <div x-data="{ slides: [
     { id: 1, title: 'overview', image: 'Hum3DCar.png' },
     { id: 2, title: 'steps', image: 'hum3DCar_back.png' },
     { id: 3, title: 'third-person', image: 'Hum3dCarShowcase.gif' },
     ] }">
-    <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-      <!-- Grid Container: adjust the grid-cols as needed -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <template x-for="slide in slides" :key="slide.id">
-          <!-- Each mosaic square without overlay -->
-          <div class="relative overflow-hidden rounded-lg shadow-lg">
-            <img :src="slide.image" :alt="slide.title"
-              class="w-full h-auto transition-transform duration-300 hover:scale-105">
-          </div>
-        </template>
+      <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
+        <!-- Grid Container: adjust the grid-cols as needed -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <template x-for="slide in slides" :key="slide.id">
+            <!-- Each mosaic square without overlay -->
+            <div class="relative overflow-hidden rounded-lg shadow-lg">
+              <img :src="slide.image" :alt="slide.title"
+                class="w-full h-auto transition-transform duration-300 hover:scale-105">
+            </div>
+          </template>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-  <h2 class="mt-2 text-base md:text-2xl text-white"> Guided production</h2>
-  <p class="mt-2 text-base md:text-2xl text-white">
-    Provided with the scene, materials and lights, I was given the chance to create a fun driven animation
-    and compose the render passes and shots with Adobe After Effects. Extremely educational project.
-    Got me up-to-speed working with proper color spaces and project managment in Ae.
-  </p>
-  </div>
-  <pre>
+    <h2 class="mt-2 text-base md:text-2xl text-white"> Guided production</h2>
+    <p class="mt-2 text-base md:text-2xl text-white">
+      Provided with the scene, materials and lights, I was given the chance to create a fun driven animation
+      and compose the render passes and shots with Adobe After Effects. Extremely educational project.
+      Got me up-to-speed working with proper color spaces and project managment in Ae.
+    </p>
+    <pre>
 
-  </pre>
-  <br>
+    </pre>
+    <br>
 
-  </br>
+    </br>
 
-  <!-- Single Image with Overlay Text -->
-  <div class="relative"> <!-- Add relative positioning here -->
-    <!-- Image at the Top -->
-    <video controls class="w-full rounded-lg">
-      <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
-    </video>
-    <!-- Overlay Text in Lower Left Corner -->
-    <div class="absolute top-4 left-4 p-4">
-      <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-        <span
-          class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-          Logo transition
-        </span>
-      </h1>
-      <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-        Whip transition animation
-      </p>
+    <!-- Single Image with Overlay Text -->
+    <div class="relative"> <!-- Add relative positioning here -->
+      <!-- Image at the Top -->
+      <video controls class="w-full rounded-lg">
+        <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
+      </video>
+      <!-- Overlay Text in Lower Left Corner -->
+      <div class="absolute top-4 left-4 p-4">
+        <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
+          <span
+            class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
+            Logo transition
+          </span>
+        </h1>
+        <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
+          Whip transition animation
+        </p>
+      </div>
     </div>
-  </div>
-  <!-- Navigation Dots -->
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-    <template x-for="(slide, i) in slides" :key="i">
-      <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-        :class="{ 'bg-green-500': index === i }"></button>
-    </template>
-  </div>
-  </div>
-  <div class="relative"> <!-- Add relative positioning here -->
-    <!-- Image at the Top -->
+    <!-- Navigation Dots -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <template x-for="(slide, i) in slides" :key="i">
+        <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
+          :class="{ 'bg-green-500': index === i }"></button>
+      </template>
+    </div>
 
-    <img src="TG_logo_studio_3kb.mp4" alt="Top Image" class="w-full">
-  </div>
-  <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
-  <p class="mt-2 text-base md:text-2xl text-white">
-    A fun-packed day got me to explore compositing in After Effects shots
-    rendered from Unreal Engine 5 with playfull eyecandy of the former TinyGiants logo.
-  </p>
+    <div class="relative"> <!-- Add relative positioning here -->
+      <!-- Image at the Top -->
+
+      <img src="TG_logo_studio_3kb.mp4" alt="Top Image" class="w-full">
+    </div>
+    <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
+    <p class="mt-2 text-base md:text-2xl text-white">
+      A fun-packed day got me to explore compositing in After Effects shots
+      rendered from Unreal Engine 5 with playfull eyecandy of the former TinyGiants logo.
+    </p>
+
   </div>
   <!--FOOTER STICKY NAV LOCATIONS-->
   <div x-data="{ 
-    isHalfway: false,
-    prevOpen: false,
-    nextOpen: false 
-    }" @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
+  isHalfway: false,
+  prevOpen: false,
+  nextOpen: false 
+  }" @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
     class="fixed inset-0 pointer-events-none">
 
     <!-- Previous Project (Left) -->
     <div class="fixed left-4 bottom-4 transition-all duration-300" :class="{
         'translate-x-0': prevOpen,
         '-translate-x-3/4': !prevOpen
-    }" @mouseenter="if(isHalfway) prevOpen = true" @mouseleave="prevOpen = false">
+     }" @mouseenter="if(isHalfway) prevOpen = true" @mouseleave="prevOpen = false">
 
       <div class="bg-black/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
-          transition-all duration-300 flex items-center" :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
+      transition-all duration-300 flex items-center" :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
 
         <a x-bind:href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
           :class="isHalfway ? 'cursor-pointer' : 'cursor-default'" @click="if(!isHalfway) $event.preventDefault()"
@@ -456,7 +453,7 @@
           <div class="relative min-w-[3rem] h-full">
             <img src="/Projects/Unity/gameplay_overview.gif" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/50 flex items-center justify-center
-                      transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
+      transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
               ←
             </div>
           </div>
@@ -469,8 +466,8 @@
     </div>
     <!-- Next Project (Right) -->
     <div class="fixed right-4 bottom-4 transition-all duration-300" :class="{
-        'translate-x-0': nextOpen,
-        'translate-x-3/4': !nextOpen
+  'translate-x-0': nextOpen,
+  'translate-x-3/4': !nextOpen
     }" @mouseenter="if(isHalfway) nextOpen = true" @mouseleave="nextOpen = false">
 
       <div class="bg-black/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
