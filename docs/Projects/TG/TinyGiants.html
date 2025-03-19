@@ -98,6 +98,7 @@
         { id: 2, title: 'swans', image: 'Swans_pre.png' },
         { id: 3, title: 'Hum3d', image: 'Hum3DCar.png' },
         { id: 4, title: 'keyboard', image: 'AOC Keyboard.png' },
+        { id: 5, title: 'Coulisse', image: 'Coulisse.png' },
       ], autoSlide() {
           setInterval(() => {
             this.index = (this.index + 1) % this.slides.length;
@@ -161,7 +162,7 @@
             <source src="Swans_3kb.mp4" alt="Top Image" class="w-full">
           </video>
           <!-- Overlay Text in top Left Corner -->
-          <div id="2" class="absolute top-10 left-4 p-4">
+          <div id="2" class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
             <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
               Netherlands Reisopera - production of a Fantasy-opera for all (10+)
             </p>
@@ -220,7 +221,7 @@
             Your browser does not support the video tag.
           </video>
           <!-- Overlay Text in Top Left Corner -->
-          <div id="1" class="absolute top-10 left-4 p-4">
+          <div id="1" class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
             <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
               Illusory artistic interpretation of the artwork Bond of Union from M.C. Escher
             </p>
@@ -275,7 +276,7 @@
           </video>
 
           <!-- Overlay Text in Lower Left Corner -->
-          <div id="4" class="absolute top-10 left-4 p-4">
+          <div id="4" class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
             <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
               Dynamic professional product animation
             </p>
@@ -328,7 +329,7 @@
             <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
           </video>
           <!-- Overlay Text in Lower Left Corner -->
-          <div class="absolute top-10 left-4 p-4">
+          <div class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
             <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
               Whip animation and Compositing training production
             </p>
@@ -363,7 +364,7 @@
       </br>
 
       <!-- Single Image with Overlay Text -->
-      <div class="relative"> <!-- Add relative positioning here -->
+      <div id="5" class="relative"> <!-- Add relative positioning here -->
         <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
           <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
             <span
@@ -376,7 +377,7 @@
             <source src="MB_reveal_2kb.mp4" type="video/mp4">
           </video>
           <!-- Overlay Text in Lower Left Corner -->
-          <div class="absolute top-10 left-4 p-4">
+          <div class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
             <p class="mt-2 text-1x1 md:text-2xl text-white filter drop-shadow-lg">
               Composition of Animations and screen recordings of interactions with products
             </p>
@@ -430,7 +431,7 @@
           <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
         </video>
         <!-- Overlay Text in Lower Left Corner -->
-        <div class="absolute top-12 left-4 p-4">
+        <div class="absolute top-12 sd:top-16 md:top-20 left-4 p-4">
           <p class="mt-2 text-base text-1x8 md:text-2xl text-white filter drop-shadow-lg">
             Whip transition animation
           </p>
