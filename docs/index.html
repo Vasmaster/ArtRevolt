@@ -91,9 +91,9 @@
       <!-- Main Content -->
       <!-- Full-width Slideshow with Overlay Text -->
       <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'TinyGiants', image: 'icons/Bond_Of_Union_V1.png', link: 'Projects/TG/TinyGiants.html#1' },
-        { id: 2, title: 'Speedboat', image: 'icons/Speedboat-moment-side.jpg', link: 'Projects/Speedboat/Speedboat.html' },
-        { id: 3, title: 'TinyGiants', image: 'icons/AOC Keyboard.png', link: 'Projects/TG/TinyGiants.html#4' }
+        { id: 1, title: 'Speedboat', image: 'icons/Speedboat-moment-side.jpg', link: 'Projects/Speedboat/Speedboat.html' },
+        { id: 2, title: 'TinyGiants', image: 'icons/AOC Keyboard.png', link: 'Projects/TG/TinyGiants.html#4' }
+        { id: 3, title: 'TinyGiants', image: 'icons/Bond_Of_Union_V1.png', link: 'Projects/TG/TinyGiants.html#1' },
       ], autoSlide() {
           setInterval(() => {
             this.index = (this.index + 1) % this.slides.length;
