@@ -1,171 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Game Development — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
 
-  <!-- NAVIGATION -->
-  <nav class="ar-nav">
-    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
-    <ul class="ar-nav-links">
-      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-      <li><a href="/Canvas.html">Canvas</a></li>
-      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-      <li><a href="/Contacts.html">Contact</a></li>
-    </ul>
-  </nav>
+<div x-data="{
+  lightbox: null,
+  lightboxCaption: '',
+  openLightbox(src, caption) {
+    this.lightbox = src;
+    this.lightboxCaption = caption || '';
+    document.body.style.overflow = 'hidden';
+  },
+  closeLightbox() {
+    this.lightbox = null;
+    document.body.style.overflow = '';
+  }
+}">
 
-  <!-- HERO -->
-  <div class="ar-hero" style="position:relative;overflow:hidden;">
-    <img src="agaricus_artwork-1.png" alt="Overliver game" style="width:100%;height:65vh;object-fit:cover;display:block;" />
-    <div class="ar-hero-overlay"></div>
-    <div class="ar-hero-text">
-      <h1><span class="glow-text">Game Development</span></h1>
-      <p>Overliver · Robbin' the Hood</p>
+  <body>
+
+    <!-- NAVIGATION -->
+    <nav class="ar-nav">
+      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+      <ul class="ar-nav-links">
+        <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="ar-hero" style="position:relative;overflow:hidden;">
+      <img src="agaricus_artwork-1.png" alt="Overliver game"
+        style="width:100%;height:65vh;object-fit:cover;display:block;" />
+      <div class="ar-hero-overlay"></div>
+      <div class="ar-hero-text">
+        <h1><span class="glow-text">Game Development</span></h1>
+        <p>Overliver · Robbin' the Hood</p>
+      </div>
     </div>
-  </div>
 
-  <!-- PAGE CONTENT -->
-  <div class="ar-page">
+    <!-- PAGE CONTENT -->
+    <div class="ar-page">
 
-    <!-- ============ OVERLIVER ============ -->
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <h2>Overliver — Serious Game</h2>
-        <p>Developed in collaboration with GameLab Oost (Enschede) and a faculty of MST. Intended for patients with NAFLD (Non-alcoholic Fatty Liver Disease) to promote healthy meal-prep habits. My scope: interactive UI elements matching the Lead Artist's style guide, recipe book system design, C# scripted functions, and Unity UI architecture.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unity (2020)</span>
-          <span class="ar-tech-tag">C#</span>
-          <span class="ar-tech-tag tool">Adobe Photoshop</span>
-          <span class="ar-tech-tag tool">Adobe Illustrator</span>
-          <span class="ar-tech-tag">UI / UX</span>
-          <span class="ar-tech-tag">Serious Game Design</span>
-          <span class="ar-tech-tag">GameLab Oost</span>
+      <!-- ============ OVERLIVER ============ -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>Overliver — Serious Game</h2>
+          <p>Developed in collaboration with GameLab Oost (Enschede) and a faculty of MST. Intended for patients with
+            NAFLD (Non-alcoholic Fatty Liver Disease) to promote healthy meal-prep habits. My scope: interactive UI
+            elements matching the Lead Artist's style guide, recipe book system design, C# scripted functions, and Unity
+            UI architecture.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unity (2020)</span>
+            <span class="ar-tech-tag">C#</span>
+            <span class="ar-tech-tag tool">Adobe Photoshop</span>
+            <span class="ar-tech-tag tool">Adobe Illustrator</span>
+            <span class="ar-tech-tag">UI / UX</span>
+            <span class="ar-tech-tag">Serious Game Design</span>
+            <span class="ar-tech-tag">GameLab Oost</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">UI Artist<br>Developer</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            CLIENT</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">GameLab Oost / MST</div>
         </div>
       </div>
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">UI Artist<br>Developer</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">CLIENT</div>
-        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">GameLab Oost / MST</div>
-      </div>
-    </div>
 
-    <h3 class="ar-section-title ar-reveal">Overliver — Gameplay</h3>
-    <p class="ar-section-sub">// RECIPE BOOK · MEAL PREP MECHANICS · UI SYSTEM</p>
+      <h3 class="ar-section-title ar-reveal">Overliver — Gameplay</h3>
+      <p class="ar-section-sub">// RECIPE BOOK · MEAL PREP MECHANICS · UI SYSTEM</p>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'Recipe_Menu.gif',       cap:'Recipe book UI'},
            {id:2,src:'Gameplay_Overliver.gif', cap:'Core gameplay loop'},
            {id:3,src:'Recipe_Menu_1.gif',      cap:'Menu navigation'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
-
-    <div class="ar-media-input ar-reveal">
-      <div class="ar-media-input-icon-placeholder">🧠</div>
-      <p class="ar-media-input-text">
-        The recipe book was a feature I proposed during brainstorms with the team and stakeholders. Written in C# with Unity UI canvas groups, it allows patients to browse recipes, mark favourites, and track meal-prep completion — all supporting the intended therapeutic habit loop. (Original archive lost.)
-      </p>
-    </div>
-
-    <hr class="ar-divider" />
-
-    <!-- ============ ROBBIN' THE HOOD ============ -->
-    <div class="ar-hero ar-reveal" style="margin:0 -2rem;position:relative;overflow:hidden;">
-      <img src="gameplay_overview.gif" alt="Robbin the Hood" style="width:100%;height:55vh;object-fit:cover;display:block;" />
-      <div class="ar-hero-overlay"></div>
-      <div class="ar-hero-text">
-        <h1 style="font-size:2rem;"><span class="glow-text">Robbin' the Hood</span></h1>
-        <p>Fun GameJam project — bachelor's programme</p>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
       </div>
-    </div>
 
-    <div class="ar-summary-card ar-reveal" style="margin-top:2rem;">
-      <div>
-        <h2>Robbin' the Hood</h2>
-        <p>School project developed during my Bachelor in Game Design and Production (Saxion). Multi-disciplinary team production — I served as Team Lead, Scrum Master, Level Designer, Rigger, Modeller, and Texture Artist. The project and its process are personally meaningful and represent the breadth of skills developed during the degree.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unity</span>
-          <span class="ar-tech-tag">C#</span>
-          <span class="ar-tech-tag">Maya</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">Level Design</span>
-          <span class="ar-tech-tag">Rigging</span>
-          <span class="ar-tech-tag">Scrum / Team Lead</span>
-          <span class="ar-tech-tag">Saxion University</span>
+      <div class="ar-media-input ar-reveal">
+        <div class="ar-media-input-icon-placeholder">🧠</div>
+        <p class="ar-media-input-text">
+          The recipe book was a feature I proposed during brainstorms with the team and stakeholders. Written in C# with
+          Unity UI canvas groups, it allows patients to browse recipes, mark favourites, and track meal-prep completion
+          — all supporting the intended therapeutic habit loop. (Original archive lost.)
+        </p>
+      </div>
+
+      <hr class="ar-divider" />
+
+      <!-- ============ ROBBIN' THE HOOD ============ -->
+      <div class="ar-hero ar-reveal" style="margin:0 -2rem;position:relative;overflow:hidden;">
+        <img src="gameplay_overview.gif" alt="Robbin the Hood"
+          style="width:100%;height:55vh;object-fit:cover;display:block;" />
+        <div class="ar-hero-overlay"></div>
+        <div class="ar-hero-text">
+          <h1 style="font-size:2rem;"><span class="glow-text">Robbin' the Hood</span></h1>
+          <p>Fun GameJam project — bachelor's programme</p>
         </div>
       </div>
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">Team Lead<br>Generalist</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">TYPE</div>
-        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Academic Project</div>
+
+      <div class="ar-summary-card ar-reveal" style="margin-top:2rem;">
+        <div>
+          <h2>Robbin' the Hood</h2>
+          <p>School project developed during my Bachelor in Game Design and Production (Saxion). Multi-disciplinary team
+            production — I served as Team Lead, Scrum Master, Level Designer, Rigger, Modeller, and Texture Artist. The
+            project and its process are personally meaningful and represent the breadth of skills developed during the
+            degree.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unity</span>
+            <span class="ar-tech-tag">C#</span>
+            <span class="ar-tech-tag">Maya</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">Level Design</span>
+            <span class="ar-tech-tag">Rigging</span>
+            <span class="ar-tech-tag">Scrum / Team Lead</span>
+            <span class="ar-tech-tag">Saxion University</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">Team Lead<br>Generalist</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            TYPE</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Academic Project</div>
+        </div>
       </div>
-    </div>
 
-    <h3 class="ar-section-title ar-reveal">Level Design</h3>
-    <p class="ar-section-sub">// ENVIRONMENT · NAVIGATION TRACES · LAYOUT</p>
+      <h3 class="ar-section-title ar-reveal">Level Design</h3>
+      <p class="ar-section-sub">// ENVIRONMENT · NAVIGATION TRACES · LAYOUT</p>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'map3_scene_overview.png', cap:'Scene overview'},
            {id:2,src:'steps_traces.gif',         cap:'Navigation traces'},
            {id:3,src:'level_design1.png',         cap:'Level layout v1'},
            {id:4,src:'level_design2.png',         cap:'Level layout v2'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Editable block -->
+      <div class="ar-media-input ar-reveal">
+        <div class="ar-media-input-icon-placeholder">📌</div>
+        <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
+          Add notes about this project — player mechanics, design decisions, or team composition. Click here to edit
+          directly.
+        </p>
+      </div>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2025 Vasil Grancharov / ArtRevolt
+    </footer>
+
+    <!-- PREV / NEXT -->
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Tornado/TornadoStudios.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Tornado/FC_wirefr.gif" alt="Tornado Studios" />
+        <span class="label">Tornado Studios</span>
+      </a>
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+        :href="isHalfway ? '/Projects/TG/TinyGiants.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/TG/Swans.gif" alt="TinyGiants" />
+        <span class="label">TinyGiants</span>
+      </a>
     </div>
 
-    <!-- Editable block -->
-    <div class="ar-media-input ar-reveal">
-      <div class="ar-media-input-icon-placeholder">📌</div>
-      <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
-        Add notes about this project — player mechanics, design decisions, or team composition. Click here to edit directly.
-      </p>
+  </body>
+  <!-- LIGHTBOX OVERLAY -->
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()">
+
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+
+      <img class="lightbox-img" :src="lightbox" @click.stop />
+
+      <div class="lightbox-caption" x-text="lightboxCaption"></div>
     </div>
+  </template>
+</div>
 
-  </div><!-- /ar-page -->
-
-  <footer class="ar-footer">
-    &copy; 2025 Vasil Grancharov / ArtRevolt
-  </footer>
-
-  <!-- PREV / NEXT -->
-  <div class="ar-footer-nav"
-       x-data="{ isHalfway: false }"
-       @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Tornado/TornadoStudios.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/Tornado/FC_wirefr.gif" alt="Tornado Studios" />
-      <span class="label">Tornado Studios</span>
-    </a>
-    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-       :href="isHalfway ? '/Projects/TG/TinyGiants.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/TG/Swans.gif" alt="TinyGiants" />
-      <span class="label">TinyGiants</span>
-    </a>
-  </div>
-
-</body>
 </html>

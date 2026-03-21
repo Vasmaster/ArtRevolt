@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unreal Engine Productions — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
 
-  <!-- NAVIGATION -->
-  <nav class="ar-nav">
-    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
-    <ul class="ar-nav-links">
-      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-      <li><a href="/Canvas.html">Canvas</a></li>
-      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-      <li><a href="/Contacts.html">Contact</a></li>
-    </ul>
-  </nav>
+<div x-data="{
+  lightbox: null,
+  lightboxCaption: '',
+  openLightbox(src, caption) {
+    this.lightbox = src;
+    this.lightboxCaption = caption || '';
+    document.body.style.overflow = 'hidden';
+  },
+  closeLightbox() {
+    this.lightbox = null;
+    document.body.style.overflow = '';
+  }
+}">
 
-  <!-- HERO -->
-  <div class="ar-hero"
-       x-data="{
+  <body>
+
+    <!-- NAVIGATION -->
+    <nav class="ar-nav">
+      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+      <ul class="ar-nav-links">
+        <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="ar-hero" x-data="{
          index:0,
          slides:[
            {id:1,image:'dress_front.jpg'},
@@ -33,104 +50,17 @@
            {id:3,image:'Shader_1.png'},
          ],
          autoSlide(){ setInterval(()=>{ this.index=(this.index+1)%this.slides.length; },4500); }
-       }"
-       x-init="autoSlide">
-    <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
-      <template x-for="s in slides" :key="s.id">
-        <div style="min-width:100%;"><img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" /></div>
-      </template>
-    </div>
-    <div class="ar-hero-overlay"></div>
-    <div class="ar-hero-text">
-      <h1><span class="glow-text">Unreal Engine</span></h1>
-      <p>Shaders · Simulations · Real-time Rendering</p>
-    </div>
-    <div class="ar-hero-dots">
-      <template x-for="(s,i) in slides" :key="i">
-        <button @click="index=i" :class="{active:index===i}"></button>
-      </template>
-    </div>
-  </div>
-
-  <!-- PAGE CONTENT -->
-  <div class="ar-page">
-
-    <!-- PROJECT SUMMARY -->
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <h2>Alembic Shader System</h2>
-        <p>Smart materials designed and optimised for real-time playback of alembic cache files exported from Marvelous Designer and SideFX Houdini. Shader networks handle cloth simulation detail, displacement, and subsurface response inside Unreal Engine 4.25 — achieving maximum fidelity at minimum performance cost.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 4.25</span>
-          <span class="ar-tech-tag">Marvelous Designer</span>
-          <span class="ar-tech-tag tool">SideFX Houdini</span>
-          <span class="ar-tech-tag render">Alembic Cache</span>
-          <span class="ar-tech-tag">Material Editor</span>
-          <span class="ar-tech-tag">Performance Opt.</span>
-        </div>
-      </div>
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">Tech Artist<br>Shader Dev</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">CONTEXT</div>
-        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">TinyGiants / ArtRevolt</div>
-      </div>
-    </div>
-
-    <!-- SHADER GALLERY -->
-    <h3 class="ar-section-title ar-reveal">Shader Network</h3>
-    <p class="ar-section-sub">// UNREAL ENGINE MATERIAL EDITOR</p>
-
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
-           {id:1,src:'Shader_1.png',        cap:'Shader variant 1'},
-           {id:2,src:'Shader_2.png',        cap:'Shader variant 2'},
-           {id:3,src:'Shader_3.png',        cap:'Shader variant 3'},
-           {id:4,src:'shaders_overview.png',cap:'Overview graph'},
-           {id:5,src:'shaders_overview_draw.png', cap:'Annotated graph'},
-           {id:6,src:'Shader_closeup.png',  cap:'Closeup detail'},
-         ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
-
-    <!-- Simulation GIF with note -->
-    <div class="ar-media-input ar-reveal">
-      <div class="ar-media-input-icon-placeholder">⚙️</div>
-      <div>
-        <p class="ar-media-input-text">Cloth simulation comparison — Houdini sim vs Marvelous Designer vs in-engine approximation. Alembic playback with the custom shader applied. The shader blends vertex colour data baked by Houdini to drive subsurface scattering intensity and emissive fringe detail in real time.</p>
-        <img src="Cloth sim compare.gif" alt="Cloth simulation comparison" style="max-width:480px;width:100%;border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-      </div>
-    </div>
-
-    <hr class="ar-divider" />
-
-    <!-- DRESS SECTION -->
-    <div
-      x-data="{
-        index:0,
-        slides:[
-          {id:1,image:'dress_front.jpg'},
-          {id:2,image:'dress_closeup.jpg'},
-          {id:3,image:'skirt-layers.jpg'},
-        ],
-        autoSlide(){ setInterval(()=>{ this.index=(this.index+1)%this.slides.length; },4000); }
-      }"
-      x-init="autoSlide"
-      class="ar-hero ar-reveal" style="margin:0 -2rem;">
+       }" x-init="autoSlide">
       <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
         <template x-for="s in slides" :key="s.id">
-          <div style="min-width:100%;"><img :src="s.image" style="width:100%;height:50vh;object-fit:cover;display:block;" /></div>
+          <div style="min-width:100%;"><img :src="s.image"
+              style="width:100%;height:65vh;object-fit:cover;display:block;" /></div>
         </template>
       </div>
       <div class="ar-hero-overlay"></div>
       <div class="ar-hero-text">
-        <h1 style="font-size:2rem;"><span class="glow-text">Dress Simulations</span></h1>
-        <p>Marvelous Designer · Houdini · Unreal Engine</p>
+        <h1><span class="glow-text">Unreal Engine</span></h1>
+        <p>Shaders · Simulations · Real-time Rendering</p>
       </div>
       <div class="ar-hero-dots">
         <template x-for="(s,i) in slides" :key="i">
@@ -139,65 +69,176 @@
       </div>
     </div>
 
-    <div class="ar-summary-card ar-reveal" style="margin-top:2rem;">
-      <div>
-        <h2>Dress Simulation Pipeline</h2>
-        <p>Garment simulations created in Marvelous Designer and SideFX Houdini, exported as Alembic caches and rendered in Unreal Engine 4.25 with the custom shader system. Multi-layer skirt dynamics with secondary motion preserved through the Alembic pipeline.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Marvelous Designer</span>
-          <span class="ar-tech-tag tool">SideFX Houdini</span>
-          <span class="ar-tech-tag engine">Unreal Engine 4.25</span>
-          <span class="ar-tech-tag render">Alembic Cache</span>
-          <span class="ar-tech-tag">Cloth Simulation</span>
+    <!-- PAGE CONTENT -->
+    <div class="ar-page">
+
+      <!-- PROJECT SUMMARY -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>Alembic Shader System</h2>
+          <p>Smart materials designed and optimised for real-time playback of alembic cache files exported from
+            Marvelous Designer and SideFX Houdini. Shader networks handle cloth simulation detail, displacement, and
+            subsurface response inside Unreal Engine 4.25 — achieving maximum fidelity at minimum performance cost.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 4.25</span>
+            <span class="ar-tech-tag">Marvelous Designer</span>
+            <span class="ar-tech-tag tool">SideFX Houdini</span>
+            <span class="ar-tech-tag render">Alembic Cache</span>
+            <span class="ar-tech-tag">Material Editor</span>
+            <span class="ar-tech-tag">Performance Opt.</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">Tech Artist<br>Shader Dev</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            CONTEXT</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">TinyGiants / ArtRevolt
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <!-- SHADER GALLERY -->
+      <h3 class="ar-section-title ar-reveal">Shader Network</h3>
+      <p class="ar-section-sub">// UNREAL ENGINE MATERIAL EDITOR</p>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
+           {id:1,src:'Shader_1.png',        cap:'Shader variant 1'},
+           {id:2,src:'Shader_2.png',        cap:'Shader variant 2'},
+           {id:3,src:'Shader_3.png',        cap:'Shader variant 3'},
+           {id:4,src:'shaders_overview.png',cap:'Overview graph'},
+           {id:5,src:'shaders_overview_draw.png', cap:'Annotated graph'},
+           {id:6,src:'Shader_closeup.png',  cap:'Closeup detail'},
+         ] }">
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Simulation GIF with note -->
+      <div class="ar-media-input ar-reveal">
+        <div class="ar-media-input-icon-placeholder">⚙️</div>
+        <div>
+          <p class="ar-media-input-text">Cloth simulation comparison — Houdini sim vs Marvelous Designer vs in-engine
+            approximation. Alembic playback with the custom shader applied. The shader blends vertex colour data baked
+            by Houdini to drive subsurface scattering intensity and emissive fringe detail in real time.</p>
+          <img src="Cloth sim compare.gif" alt="Cloth simulation comparison"
+            style="max-width:480px;width:100%;border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+        </div>
+      </div>
+
+      <hr class="ar-divider" />
+
+      <!-- DRESS SECTION -->
+      <div x-data="{
+        index:0,
+        slides:[
+          {id:1,image:'dress_front.jpg'},
+          {id:2,image:'dress_closeup.jpg'},
+          {id:3,image:'skirt-layers.jpg'},
+        ],
+        autoSlide(){ setInterval(()=>{ this.index=(this.index+1)%this.slides.length; },4000); }
+      }" x-init="autoSlide" class="ar-hero ar-reveal" style="margin:0 -2rem;">
+        <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
+          <template x-for="s in slides" :key="s.id">
+            <div style="min-width:100%;"><img :src="s.image"
+                style="width:100%;height:50vh;object-fit:cover;display:block;" /></div>
+          </template>
+        </div>
+        <div class="ar-hero-overlay"></div>
+        <div class="ar-hero-text">
+          <h1 style="font-size:2rem;"><span class="glow-text">Dress Simulations</span></h1>
+          <p>Marvelous Designer · Houdini · Unreal Engine</p>
+        </div>
+        <div class="ar-hero-dots">
+          <template x-for="(s,i) in slides" :key="i">
+            <button @click="index=i" :class="{active:index===i}"></button>
+          </template>
+        </div>
+      </div>
+
+      <div class="ar-summary-card ar-reveal" style="margin-top:2rem;">
+        <div>
+          <h2>Dress Simulation Pipeline</h2>
+          <p>Garment simulations created in Marvelous Designer and SideFX Houdini, exported as Alembic caches and
+            rendered in Unreal Engine 4.25 with the custom shader system. Multi-layer skirt dynamics with secondary
+            motion preserved through the Alembic pipeline.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Marvelous Designer</span>
+            <span class="ar-tech-tag tool">SideFX Houdini</span>
+            <span class="ar-tech-tag engine">Unreal Engine 4.25</span>
+            <span class="ar-tech-tag render">Alembic Cache</span>
+            <span class="ar-tech-tag">Cloth Simulation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'Cloth sim Hou.gif',    cap:'Houdini simulation'},
            {id:2,src:'Cloth sim compare.gif',cap:'Engine comparison'},
            {id:3,src:'nativeamericanstyle2.png', cap:'Cultural costume ref'},
            {id:4,src:'2020-06-1128229-1.jpg', cap:'Final render'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Editable note block -->
+      <div class="ar-media-input ar-reveal">
+        <div class="ar-media-input-icon-placeholder">📝</div>
+        <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
+          Add additional project notes here — click to edit. For example: render settings, polygon counts, simulation
+          timings, or client brief context.
+        </p>
+      </div>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2025 Vasil Grancharov / ArtRevolt
+    </footer>
+
+    <!-- PREV / NEXT -->
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
+        <span class="label">Speedboat</span>
+      </a>
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+        :href="isHalfway ? '/Projects/Tornado/TornadoStudios.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Tornado/FC_wirefr.gif" alt="Tornado Studios" />
+        <span class="label">Tornado Studios</span>
+      </a>
     </div>
 
-    <!-- Editable note block -->
-    <div class="ar-media-input ar-reveal">
-      <div class="ar-media-input-icon-placeholder">📝</div>
-      <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
-        Add additional project notes here — click to edit. For example: render settings, polygon counts, simulation timings, or client brief context.
-      </p>
+  </body>
+  <!-- LIGHTBOX OVERLAY -->
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()">
+
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+
+      <img class="lightbox-img" :src="lightbox" @click.stop />
+
+      <div class="lightbox-caption" x-text="lightboxCaption"></div>
     </div>
+  </template>
+</div>
 
-  </div><!-- /ar-page -->
-
-  <footer class="ar-footer">
-    &copy; 2025 Vasil Grancharov / ArtRevolt
-  </footer>
-
-  <!-- PREV / NEXT -->
-  <div class="ar-footer-nav"
-       x-data="{ isHalfway: false }"
-       @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
-      <span class="label">Speedboat</span>
-    </a>
-    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-       :href="isHalfway ? '/Projects/Tornado/TornadoStudios.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/Tornado/FC_wirefr.gif" alt="Tornado Studios" />
-      <span class="label">Tornado Studios</span>
-    </a>
-  </div>
-
-</body>
 </html>

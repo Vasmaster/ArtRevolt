@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TinyGiants Productions — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
 
-  <!-- NAVIGATION -->
-  <nav class="ar-nav">
-    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
-    <ul class="ar-nav-links">
-      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-      <li><a href="/Canvas.html">Canvas</a></li>
-      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-      <li><a href="/Contacts.html">Contact</a></li>
-    </ul>
-  </nav>
+<div x-data="{
+  lightbox: null,
+  lightboxCaption: '',
+  openLightbox(src, caption) {
+    this.lightbox = src;
+    this.lightboxCaption = caption || '';
+    document.body.style.overflow = 'hidden';
+  },
+  closeLightbox() {
+    this.lightbox = null;
+    document.body.style.overflow = '';
+  }
+}">
 
-  <!-- HERO -->
-  <div class="ar-hero"
-       x-data="{
+  <body>
+
+    <!-- NAVIGATION -->
+    <nav class="ar-nav">
+      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+      <ul class="ar-nav-links">
+        <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="ar-hero" x-data="{
          index: 0,
          slides: [
            { id:1, image:'Bond_Of_Union_V1.png' },
@@ -35,316 +52,359 @@
            { id:5, image:'Coulisse.png' },
          ],
          autoSlide() { setInterval(() => { this.index = (this.index+1) % this.slides.length; }, 4000); }
-       }"
-       x-init="autoSlide">
-    <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
-      <template x-for="s in slides" :key="s.id">
-        <div style="min-width:100%;">
-          <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
-        </div>
-      </template>
-    </div>
-    <div class="ar-hero-overlay"></div>
-    <div class="ar-hero-text">
-      <h1><span class="glow-text">TinyGiants</span></h1>
-      <p>3D Content · Live Events · Product Animation · VFX</p>
-    </div>
-    <div class="ar-hero-dots">
-      <template x-for="(s,i) in slides" :key="i">
-        <button @click="index=i" :class="{active:index===i}"></button>
-      </template>
-    </div>
-  </div>
-
-  <!-- PAGE CONTENT -->
-  <div class="ar-page">
-
-    <!-- SUMMARY -->
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <h2>TinyGiants Productions</h2>
-        <p>As 3D Producer at TinyGiants (Apr 2022 – Oct 2024), I developed real-time systems and mechanics in Unreal Engine 5, produced photorealistic Octane renders for external clients, animated and composited professional video content, and contributed personal creative productions alongside client work. Projects spanned opera live-event visuals, product animations, conceptual CG art, and brand identity motion.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 5</span>
-          <span class="ar-tech-tag render">OTOY Octane</span>
-          <span class="ar-tech-tag">Cinema 4D</span>
-          <span class="ar-tech-tag tool">Adobe After Effects</span>
-          <span class="ar-tech-tag tool">Adobe Premiere</span>
-          <span class="ar-tech-tag">Compositing</span>
-          <span class="ar-tech-tag">Product Animation</span>
-          <span class="ar-tech-tag">Live Event VFX</span>
-        </div>
+       }" x-init="autoSlide">
+      <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
+        <template x-for="s in slides" :key="s.id">
+          <div style="min-width:100%;">
+            <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
+          </div>
+        </template>
       </div>
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Producer</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">PERIOD</div>
-        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2022 – Oct 2024</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">LOCATION</div>
-        <div style="font-family:var(--font-display);font-size:0.95rem;">Enschede, NL</div>
+      <div class="ar-hero-overlay"></div>
+      <div class="ar-hero-text">
+        <h1><span class="glow-text">TinyGiants</span></h1>
+        <p>3D Content · Live Events · Product Animation · VFX</p>
+      </div>
+      <div class="ar-hero-dots">
+        <template x-for="(s,i) in slides" :key="i">
+          <button @click="index=i" :class="{active:index===i}"></button>
+        </template>
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════
+    <!-- PAGE CONTENT -->
+    <div class="ar-page">
+
+      <!-- SUMMARY -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>TinyGiants Productions</h2>
+          <p>As 3D Producer at TinyGiants (Apr 2022 – Oct 2024), I developed real-time systems and mechanics in Unreal
+            Engine 5, produced photorealistic Octane renders for external clients, animated and composited professional
+            video content, and contributed personal creative productions alongside client work. Projects spanned opera
+            live-event visuals, product animations, conceptual CG art, and brand identity motion.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag tool">Adobe After Effects</span>
+            <span class="ar-tech-tag tool">Adobe Premiere</span>
+            <span class="ar-tech-tag">Compositing</span>
+            <span class="ar-tech-tag">Product Animation</span>
+            <span class="ar-tech-tag">Live Event VFX</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Producer</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            PERIOD</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2022 – Oct 2024
+          </div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            LOCATION</div>
+          <div style="font-family:var(--font-display);font-size:0.95rem;">Enschede, NL</div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════
          PROJECT 1 — HANSEL & GRETEL OPERA
          ═══════════════════════════════════ -->
-    <hr class="ar-divider" />
+      <hr class="ar-divider" />
 
-    <h3 class="ar-section-title ar-reveal" id="2">Hänsel und Gretel Opera</h3>
-    <p class="ar-section-sub">// NETHERLANDS REISOPERA · LIVE 3D PROJECTION · FANTASY OPERA</p>
+      <h3 class="ar-section-title ar-reveal" id="2">Hänsel und Gretel Opera</h3>
+      <p class="ar-section-sub">// NETHERLANDS REISOPERA · LIVE 3D PROJECTION · FANTASY OPERA</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
-      <div>
-        <p>Real-time 3D projection visuals for the Netherlands Reisopera's fantasy opera production, accessible for audiences aged 10+. Breathtaking projected environments — from the enchanted forest intro to the dramatic staircase sequences and the swan lake finale — driven live alongside the performance. Music by Engelbert Humperdinck, sung in German with Dutch subtitles.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 5</span>
-          <span class="ar-tech-tag">Real-time Rendering</span>
-          <span class="ar-tech-tag tool">Live Production</span>
-          <span class="ar-tech-tag">3D Projection Mapping</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
+        <div>
+          <p>Real-time 3D projection visuals for the Netherlands Reisopera's fantasy opera production, accessible for
+            audiences aged 10+. Breathtaking projected environments — from the enchanted forest intro to the dramatic
+            staircase sequences and the swan lake finale — driven live alongside the performance. Music by Engelbert
+            Humperdinck, sung in German with Dutch subtitles.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag">Real-time Rendering</span>
+            <span class="ar-tech-tag tool">Live Production</span>
+            <span class="ar-tech-tag">3D Projection Mapping</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;">
-        <source src="Swans_3kb.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="Swans_3kb.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1, video:'Intro Forest_3kb.mp4', cap:'Intro — Enchanted Forest'},
            {id:2, video:'Stairs Run_3kb.mp4',   cap:'Scene — Staircase Run'},
            {id:3, video:'Swans_3kb.mp4',         cap:'Finale — Swans'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
-            <source :src="s.video" type="video/mp4">
-          </video>
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
+              <source :src="s.video" type="video/mp4">
+            </video>
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════════════════════════
+      <!-- ═══════════════════════════════════
          PROJECT 2 — BOND OF UNION
          ═══════════════════════════════════ -->
-    <hr class="ar-divider" />
+      <hr class="ar-divider" />
 
-    <h3 class="ar-section-title ar-reveal" id="1">Bond of Union</h3>
-    <p class="ar-section-sub">// CONCEPTUAL CG · M.C. ESCHER INTERPRETATION · PERSONAL PRODUCTION</p>
+      <h3 class="ar-section-title ar-reveal" id="1">Bond of Union</h3>
+      <p class="ar-section-sub">// CONCEPTUAL CG · M.C. ESCHER INTERPRETATION · PERSONAL PRODUCTION</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-gold);">
-      <div>
-        <p>A personal CG interpretation of M.C. Escher's "Bond of Union", blending Guido Moretti's sculptural style with Escher's illusory geometry. Conceptualised, designed and rendered entirely by me during my time at TinyGiants with their creative open-door invitation. The animation exploits shifting vantage points — side and front — to reveal distinct personalities within a single unified form.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 5</span>
-          <span class="ar-tech-tag render">OTOY Octane</span>
-          <span class="ar-tech-tag">Cinema 4D</span>
-          <span class="ar-tech-tag tool">After Effects</span>
-          <span class="ar-tech-tag">Conceptual Art</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-gold);">
+        <div>
+          <p>A personal CG interpretation of M.C. Escher's "Bond of Union", blending Guido Moretti's sculptural style
+            with Escher's illusory geometry. Conceptualised, designed and rendered entirely by me during my time at
+            TinyGiants with their creative open-door invitation. The animation exploits shifting vantage points — side
+            and front — to reveal distinct personalities within a single unified form.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Conceptual Art</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;">
-        <source src="Bond Of Union_3kb.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="Bond Of Union_3kb.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1, src:'Bond_Of_Union_V1.png',        cap:'Final render'},
            {id:2, src:'BondOfUnion.gif',              cap:'Animation loop'},
            {id:3, src:'MCEscher-Bond-of-union.jpeg',  cap:'M.C. Escher reference'},
            {id:4, src:'Parallelepipedi.jpg',           cap:'Geometry study'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════════════════════════
+      <!-- ═══════════════════════════════════
          PROJECT 3 — AOC KEYBOARD
          ═══════════════════════════════════ -->
-    <hr class="ar-divider" />
+      <hr class="ar-divider" />
 
-    <h3 class="ar-section-title ar-reveal" id="4">AOC Keyboard Animation</h3>
-    <p class="ar-section-sub">// PRODUCT ANIMATION · C4D SIMULATION · OCTANE RENDER · COMPOSITING</p>
+      <h3 class="ar-section-title ar-reveal" id="4">AOC Keyboard Animation</h3>
+      <p class="ar-section-sub">// PRODUCT ANIMATION · C4D SIMULATION · OCTANE RENDER · COMPOSITING</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-green);">
-      <div>
-        <p>Reworked and personalised the AOC keyboard presentation originally produced by the TinyGiants team for their client. I adapted the keyboard layout across the keys, then animated and rendered several sequences — exploring Cinema 4D's simulation tools and complex multi-pass compositing in After Effects. A pivotal production for levelling up in color-space management and project organisation in Ae.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Cinema 4D</span>
-          <span class="ar-tech-tag render">OTOY Octane</span>
-          <span class="ar-tech-tag tool">After Effects</span>
-          <span class="ar-tech-tag">Cloth Simulation</span>
-          <span class="ar-tech-tag">Product Viz</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-green);">
+        <div>
+          <p>Reworked and personalised the AOC keyboard presentation originally produced by the TinyGiants team for
+            their client. I adapted the keyboard layout across the keys, then animated and rendered several sequences —
+            exploring Cinema 4D's simulation tools and complex multi-pass compositing in After Effects. A pivotal
+            production for levelling up in color-space management and project organisation in Ae.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Cloth Simulation</span>
+            <span class="ar-tech-tag">Product Viz</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;">
-        <source src="Aockeyboard V2.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="Aockeyboard V2.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1, src:'AOC Keyboard.png',    cap:'Hero render'},
            {id:2, src:'RockEmAOC_02_V1.png', cap:'Sequence frame'},
            {id:3, src:'close-Up.png',         cap:'Closeup detail'},
            {id:4, src:'Cloth_Sim_01_V2.png',  cap:'Cloth simulation frame'},
            {id:5, src:'RockEmAOC_01_V1.png',  cap:'Alternate angle'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════════════════════════
+      <!-- ═══════════════════════════════════
          PROJECT 4 — MUSCLE CAR
          ═══════════════════════════════════ -->
-    <hr class="ar-divider" />
+      <hr class="ar-divider" />
 
-    <h3 class="ar-section-title ar-reveal" id="3">Muscle Car Showcase</h3>
-    <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
+      <h3 class="ar-section-title ar-reveal" id="3">Muscle Car Showcase</h3>
+      <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
 
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <p>Provided with a complete scene, materials, and lights by TinyGiants, I was tasked with creating a fun, driven animation and compositing the render passes and shots in Adobe After Effects. Extremely educational — it brought my understanding of proper color spaces and project management in Ae up to professional standard.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag render">OTOY Octane</span>
-          <span class="ar-tech-tag tool">After Effects</span>
-          <span class="ar-tech-tag">Render Pass Comp.</span>
-          <span class="ar-tech-tag">Camera Animation</span>
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <p>Provided with a complete scene, materials, and lights by TinyGiants, I was tasked with creating a fun,
+            driven animation and compositing the render passes and shots in Adobe After Effects. Extremely educational —
+            it brought my understanding of proper color spaces and project management in Ae up to professional standard.
+          </p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Render Pass Comp.</span>
+            <span class="ar-tech-tag">Camera Animation</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;">
-        <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1, src:'Hum3DCar.png',          cap:'Front render'},
            {id:2, src:'hum3DCar_back.png',      cap:'Rear render'},
            {id:3, src:'Hum3dCarShowcase.gif',   cap:'Animation preview'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════════════════════════
+      <!-- ═══════════════════════════════════
          PROJECT 5 — COULISSE
          ═══════════════════════════════════ -->
-    <hr class="ar-divider" />
+      <hr class="ar-divider" />
 
-    <h3 class="ar-section-title ar-reveal" id="5">Coulisse Product Animations</h3>
-    <p class="ar-section-sub">// CLIENT WORK · PRODUCT VIZ · OCTANE · AFTER EFFECTS</p>
+      <h3 class="ar-section-title ar-reveal" id="5">Coulisse Product Animations</h3>
+      <p class="ar-section-sub">// CLIENT WORK · PRODUCT VIZ · OCTANE · AFTER EFFECTS</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
-      <div>
-        <p>Intricate product animations timed and matched to screen recordings of live interactions with Coulisse smart-home products. Octane-rendered scenes composited with live interaction footage in After Effects — assembled into a polished complete marketing video across a range of products.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag render">OTOY Octane</span>
-          <span class="ar-tech-tag tool">After Effects</span>
-          <span class="ar-tech-tag">Cinema 4D</span>
-          <span class="ar-tech-tag">Product Animation</span>
-          <span class="ar-tech-tag">Screen Composite</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
+        <div>
+          <p>Intricate product animations timed and matched to screen recordings of live interactions with Coulisse
+            smart-home products. Octane-rendered scenes composited with live interaction footage in After Effects —
+            assembled into a polished complete marketing video across a range of products.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag">Product Animation</span>
+            <span class="ar-tech-tag">Screen Composite</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;">
-        <source src="MB_reveal_2kb.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="MB_reveal_2kb.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1, video:'MB_mounting_2kb.mp4', cap:'Mounting sequence'},
            {id:2, video:'MB_App_2kb.mp4',       cap:'App interaction composite'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
-            <source :src="s.video" type="video/mp4">
-          </video>
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
+              <source :src="s.video" type="video/mp4">
+            </video>
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════════════════════════
+      <!-- ═══════════════════════════════════
          PROJECT 6 — LOGO TRANSITION
          ═══════════════════════════════════ -->
-    <hr class="ar-divider" />
+      <hr class="ar-divider" />
 
-    <h3 class="ar-section-title ar-reveal">TinyGiants Logo Transition</h3>
-    <p class="ar-section-sub">// MOTION DESIGN · UNREAL ENGINE 5 · AFTER EFFECTS · PERSONAL</p>
+      <h3 class="ar-section-title ar-reveal">TinyGiants Logo Transition</h3>
+      <p class="ar-section-sub">// MOTION DESIGN · UNREAL ENGINE 5 · AFTER EFFECTS · PERSONAL</p>
 
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <p>A fun-packed personal day exploring compositing of shots rendered from Unreal Engine 5 — playful eye-candy built around the former TinyGiants logo. Two whip-transition sequences: one set in a forest environment, one in a studio scene.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 5</span>
-          <span class="ar-tech-tag tool">After Effects</span>
-          <span class="ar-tech-tag">Motion Design</span>
-          <span class="ar-tech-tag">Logo Animation</span>
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <p>A fun-packed personal day exploring compositing of shots rendered from Unreal Engine 5 — playful eye-candy
+            built around the former TinyGiants logo. Two whip-transition sequences: one set in a forest environment, one
+            in a studio scene.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Motion Design</span>
+            <span class="ar-tech-tag">Logo Animation</span>
+          </div>
         </div>
       </div>
+
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:1.5rem 0;border:1px solid var(--border-glow);"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;">
+          <source src="TG_logo_studio_3kb.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2025 Vasil Grancharov / ArtRevolt
+    </footer>
+
+    <!-- PREV / NEXT -->
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
+        <span class="label">Game Dev</span>
+      </a>
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+        :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
+        <span class="label">Speedboat</span>
+      </a>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:1.5rem 0;border:1px solid var(--border-glow);" class="ar-reveal">
-      <video controls style="width:100%;display:block;">
-        <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;">
-        <source src="TG_logo_studio_3kb.mp4" type="video/mp4">
-      </video>
+  </body>
+  <!-- LIGHTBOX OVERLAY -->
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()">
+
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+
+      <img class="lightbox-img" :src="lightbox" @click.stop />
+
+      <div class="lightbox-caption" x-text="lightboxCaption"></div>
     </div>
+  </template>
+</div>
 
-  </div><!-- /ar-page -->
-
-  <footer class="ar-footer">
-    &copy; 2025 Vasil Grancharov / ArtRevolt
-  </footer>
-
-  <!-- PREV / NEXT -->
-  <div class="ar-footer-nav"
-       x-data="{ isHalfway: false }"
-       @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
-      <span class="label">Game Dev</span>
-    </a>
-    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-       :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
-      <span class="label">Speedboat</span>
-    </a>
-  </div>
-
-</body>
 </html>

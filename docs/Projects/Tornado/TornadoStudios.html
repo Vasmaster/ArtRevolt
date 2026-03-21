@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tornado Studios — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
 
-  <nav class="ar-nav">
-    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
-    <ul class="ar-nav-links">
-      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-      <li><a href="/Canvas.html">Canvas</a></li>
-      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-      <li><a href="/Contacts.html">Contact</a></li>
-    </ul>
-  </nav>
+<div x-data="{
+  lightbox: null,
+  lightboxCaption: '',
+  openLightbox(src, caption) {
+    this.lightbox = src;
+    this.lightboxCaption = caption || '';
+    document.body.style.overflow = 'hidden';
+  },
+  closeLightbox() {
+    this.lightbox = null;
+    document.body.style.overflow = '';
+  }
+}">
 
-  <!-- HERO -->
-  <div class="ar-hero"
-       x-data="{
+  <body>
+
+    <nav class="ar-nav">
+      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+      <ul class="ar-nav-links">
+        <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="ar-hero" x-data="{
          index: 0,
          slides: [
            { id:1, image:'FC_cart.png' },
@@ -32,102 +49,115 @@
            { id:3, image:'Concrt_Trash_Close.png' },
          ],
          autoSlide(){ setInterval(()=>{ this.index=(this.index+1)%this.slides.length; }, 4000); }
-       }"
-       x-init="autoSlide">
-    <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
-      <template x-for="s in slides" :key="s.id">
-        <div style="min-width:100%;">
-          <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
+       }" x-init="autoSlide">
+      <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
+        <template x-for="s in slides" :key="s.id">
+          <div style="min-width:100%;">
+            <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
+          </div>
+        </template>
+      </div>
+      <div class="ar-hero-overlay"></div>
+      <div class="ar-hero-text">
+        <h1><span class="glow-text">Tornado Studios</span></h1>
+        <p>Hard-Surface Modelling · Photorealistic Assets · QA Pipeline</p>
+      </div>
+      <div class="ar-hero-dots">
+        <template x-for="(s,i) in slides" :key="i">
+          <button @click="index=i" :class="{active:index===i}"></button>
+        </template>
+      </div>
+    </div>
+
+    <div class="ar-page">
+
+      <!-- SUMMARY -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>Tornado Studios</h2>
+          <p>As a 3D Artist at Tornado Studios (Apr 2021 – Apr 2022), I produced photorealistic hard and soft-surface
+            models for client pipelines, applying strict geometry and UV execution standards. Every model was delivered
+            to exacting topology specifications: full quad geometry, a |0|–|5| triangle constraint range, zero n-gons,
+            and no six-point edges — subdivision-ready and production-clean throughout.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Autodesk Maya</span>
+            <span class="ar-tech-tag">3DS-Max</span>
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">Hard-Surface Modelling</span>
+            <span class="ar-tech-tag">UV Unwrapping</span>
+            <span class="ar-tech-tag">Subdivision Topology</span>
+            <span class="ar-tech-tag">QA Pipeline</span>
+          </div>
         </div>
-      </template>
-    </div>
-    <div class="ar-hero-overlay"></div>
-    <div class="ar-hero-text">
-      <h1><span class="glow-text">Tornado Studios</span></h1>
-      <p>Hard-Surface Modelling · Photorealistic Assets · QA Pipeline</p>
-    </div>
-    <div class="ar-hero-dots">
-      <template x-for="(s,i) in slides" :key="i">
-        <button @click="index=i" :class="{active:index===i}"></button>
-      </template>
-    </div>
-  </div>
-
-  <div class="ar-page">
-
-    <!-- SUMMARY -->
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <h2>Tornado Studios</h2>
-        <p>As a 3D Artist at Tornado Studios (Apr 2021 – Apr 2022), I produced photorealistic hard and soft-surface models for client pipelines, applying strict geometry and UV execution standards. Every model was delivered to exacting topology specifications: full quad geometry, a |0|–|5| triangle constraint range, zero n-gons, and no six-point edges — subdivision-ready and production-clean throughout.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Autodesk Maya</span>
-          <span class="ar-tech-tag">3DS-Max</span>
-          <span class="ar-tech-tag render">OTOY Octane</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">Hard-Surface Modelling</span>
-          <span class="ar-tech-tag">UV Unwrapping</span>
-          <span class="ar-tech-tag">Subdivision Topology</span>
-          <span class="ar-tech-tag">QA Pipeline</span>
-        </div>
-      </div>
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Artist</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">PERIOD</div>
-        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2021 – Apr 2022</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">TYPE</div>
-        <div style="font-family:var(--font-display);font-size:0.95rem;">Freelance / Remote</div>
-      </div>
-    </div>
-
-    <!-- Topology standards callout -->
-    <div style="background:rgba(0,229,255,0.03);border:1px solid var(--border-glow);padding:1rem 1.5rem;margin:0 0 1rem;display:flex;gap:2rem;flex-wrap:wrap;" class="ar-reveal">
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
-        <span style="color:var(--accent-cyan);">◆</span>&nbsp; Full quad geometry
-      </div>
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
-        <span style="color:var(--accent-cyan);">◆</span>&nbsp; |0|–|5| triangle constraint
-      </div>
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
-        <span style="color:var(--accent-cyan);">◆</span>&nbsp; Zero n-gons
-      </div>
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
-        <span style="color:var(--accent-cyan);">◆</span>&nbsp; No six-point edges
-      </div>
-      <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
-        <span style="color:var(--accent-cyan);">◆</span>&nbsp; Subdivision-ready control loops
-      </div>
-    </div>
-
-    <!-- ═══════════════ FOOD CART ═══════════════ -->
-    <hr class="ar-divider" />
-    <h3 class="ar-section-title ar-reveal">Food Cart</h3>
-    <p class="ar-section-sub">// CLIENT ASSET · HARD-SURFACE · FULL QUAD</p>
-
-    <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-green);">
-      <div>
-        <p>Hard-surface food cart model inspired by a real-life reference, produced for a Tornado Studios client. Topology built with control loops optimised for subdivision to maintain hard-edge silhouettes through all levels of detail.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Maya</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">Hard-Surface</span>
-          <span class="ar-tech-tag">Client Delivery</span>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Artist</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            PERIOD</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2021 – Apr 2022
+          </div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            TYPE</div>
+          <div style="font-family:var(--font-display);font-size:0.95rem;">Freelance / Remote</div>
         </div>
       </div>
-    </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="FC_Clear.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="FC_wireframe.mp4" type="video/mp4">
-      </video>
-    </div>
+      <!-- Topology standards callout -->
+      <div
+        style="background:rgba(0,229,255,0.03);border:1px solid var(--border-glow);padding:1rem 1.5rem;margin:0 0 1rem;display:flex;gap:2rem;flex-wrap:wrap;"
+        class="ar-reveal">
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
+          <span style="color:var(--accent-cyan);">◆</span>&nbsp; Full quad geometry
+        </div>
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
+          <span style="color:var(--accent-cyan);">◆</span>&nbsp; |0|–|5| triangle constraint
+        </div>
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
+          <span style="color:var(--accent-cyan);">◆</span>&nbsp; Zero n-gons
+        </div>
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
+          <span style="color:var(--accent-cyan);">◆</span>&nbsp; No six-point edges
+        </div>
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">
+          <span style="color:var(--accent-cyan);">◆</span>&nbsp; Subdivision-ready control loops
+        </div>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <!-- ═══════════════ FOOD CART ═══════════════ -->
+      <hr class="ar-divider" />
+      <h3 class="ar-section-title ar-reveal">Food Cart</h3>
+      <p class="ar-section-sub">// CLIENT ASSET · HARD-SURFACE · FULL QUAD</p>
+
+      <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-green);">
+        <div>
+          <p>Hard-surface food cart model inspired by a real-life reference, produced for a Tornado Studios client.
+            Topology built with control loops optimised for subdivision to maintain hard-edge silhouettes through all
+            levels of detail.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Maya</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">Hard-Surface</span>
+            <span class="ar-tech-tag">Client Delivery</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="FC_Clear.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="FC_wireframe.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'FC_wirefr.gif', cap:'Wireframe turntable'},
            {id:2,src:'FC_F.png',      cap:'Front orthographic'},
            {id:3,src:'FC_L.png',      cap:'Left orthographic'},
@@ -135,132 +165,147 @@
            {id:5,src:'FC_cart.png',   cap:'Perspective render'},
            {id:6,src:'FC_Wheel_1.png',cap:'Wheel detail'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════ WOODEN BENCH ═══════════════ -->
-    <hr class="ar-divider" />
-    <h3 class="ar-section-title ar-reveal">Wooden Bench</h3>
-    <p class="ar-section-sub">// CLIENT ASSET · HARD-SURFACE · BREAKDOWN VARIANT</p>
+      <!-- ═══════════════ WOODEN BENCH ═══════════════ -->
+      <hr class="ar-divider" />
+      <h3 class="ar-section-title ar-reveal">Wooden Bench</h3>
+      <p class="ar-section-sub">// CLIENT ASSET · HARD-SURFACE · BREAKDOWN VARIANT</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-gold);">
-      <div>
-        <p>Wooden bench model produced for Tornado Studios clients. Delivered in two variants — intact and broken/damaged — each with clean wireframe and beauty passes. Subdivision-ready topology with control loops maintaining crisp edges at any level of subdivision.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Maya</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">Hard-Surface</span>
-          <span class="ar-tech-tag">Damage Variant</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-gold);">
+        <div>
+          <p>Wooden bench model produced for Tornado Studios clients. Delivered in two variants — intact and
+            broken/damaged — each with clean wireframe and beauty passes. Subdivision-ready topology with control loops
+            maintaining crisp edges at any level of subdivision.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Maya</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">Hard-Surface</span>
+            <span class="ar-tech-tag">Damage Variant</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="WB_Clear.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="WB_Wireframe.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="WB_Broke_Clean.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="WB_Broke_wire.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="WB_Clear.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="WB_Wireframe.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="WB_Broke_Clean.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="WB_Broke_wire.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'WB_F.png',    cap:'Front'},
            {id:2,src:'WB_B.png',    cap:'Back'},
            {id:3,src:'WB_S.png',    cap:'Side'},
            {id:4,src:'WB_T.png',    cap:'Top'},
            {id:5,src:'WB_Persp.png',cap:'Perspective'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════ UMBRELLA ═══════════════ -->
-    <hr class="ar-divider" />
-    <h3 class="ar-section-title ar-reveal">Umbrella</h3>
-    <p class="ar-section-sub">// TRAINING ASSET · HARD + SOFT SURFACE · GUIDED PRODUCTION</p>
+      <!-- ═══════════════ UMBRELLA ═══════════════ -->
+      <hr class="ar-divider" />
+      <h3 class="ar-section-title ar-reveal">Umbrella</h3>
+      <p class="ar-section-sub">// TRAINING ASSET · HARD + SOFT SURFACE · GUIDED PRODUCTION</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-cyan);">
-      <div>
-        <p>Hard and soft-surface umbrella model produced for training and skill development under Tornado Studios guidance. The challenge here was managing the soft canvas geometry alongside the hard metal frame — requiring a mixed topology approach while maintaining the full-quad standard across both surface types.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Maya</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">Hard + Soft Surface</span>
-          <span class="ar-tech-tag">Training Production</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-cyan);">
+        <div>
+          <p>Hard and soft-surface umbrella model produced for training and skill development under Tornado Studios
+            guidance. The challenge here was managing the soft canvas geometry alongside the hard metal frame —
+            requiring a mixed topology approach while maintaining the full-quad standard across both surface types.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Maya</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">Hard + Soft Surface</span>
+            <span class="ar-tech-tag">Training Production</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="umbrella_clean.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="Umbrella_wire.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="umbrella_clean.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="Umbrella_wire.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'Umbrella_F.png',    cap:'Front'},
            {id:2,src:'Umbrella_lock.png', cap:'Lock mechanism'},
            {id:3,src:'Umbrella_S.png',    cap:'Side'},
            {id:4,src:'Umbrella_Persp.png',cap:'Perspective'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
 
-    <!-- ═══════════════ TRASH CANS ═══════════════ -->
-    <hr class="ar-divider" />
-    <h3 class="ar-section-title ar-reveal">Concrete &amp; Medical Trash Cans</h3>
-    <p class="ar-section-sub">// CLIENT ASSETS · HARD-SURFACE · TWO VARIANTS</p>
+      <!-- ═══════════════ TRASH CANS ═══════════════ -->
+      <hr class="ar-divider" />
+      <h3 class="ar-section-title ar-reveal">Concrete &amp; Medical Trash Cans</h3>
+      <p class="ar-section-sub">// CLIENT ASSETS · HARD-SURFACE · TWO VARIANTS</p>
 
-    <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-magenta);">
-      <div>
-        <p>Two trash can models — a concrete outdoor variant and a medical-use variant — produced for Tornado Studios clients. Both built to the same exacting topology standards with subdivision-ready geometry optimised for hard-edge control loops throughout.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag">Maya</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">Hard-Surface</span>
-          <span class="ar-tech-tag">Two Asset Variants</span>
-          <span class="ar-tech-tag">Client Delivery</span>
+      <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-magenta);">
+        <div>
+          <p>Two trash can models — a concrete outdoor variant and a medical-use variant — produced for Tornado Studios
+            clients. Both built to the same exacting topology standards with subdivision-ready geometry optimised for
+            hard-edge control loops throughout.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag">Maya</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">Hard-Surface</span>
+            <span class="ar-tech-tag">Two Asset Variants</span>
+            <span class="ar-tech-tag">Client Delivery</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;" class="ar-reveal">
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="Concrt_Trash_Clean.mp4" type="video/mp4">
-      </video>
-      <video controls style="width:100%;display:block;background:var(--bg-deep);">
-        <source src="Concrt_Trash_wire.mp4" type="video/mp4">
-      </video>
-    </div>
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border-glow);margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="Concrt_Trash_Clean.mp4" type="video/mp4">
+        </video>
+        <video controls style="width:100%;display:block;background:var(--bg-deep);">
+          <source src="Concrt_Trash_wire.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides:[
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
            {id:1,src:'Concrt_Trash_F.png',    cap:'Concrete — front'},
            {id:2,src:'Concrt_Trash_B.png',    cap:'Concrete — back'},
            {id:3,src:'Concrt_Trash_S.png',    cap:'Concrete — side'},
@@ -269,36 +314,49 @@
            {id:6,src:'Med_Trash_T.png',        cap:'Medical — top'},
            {id:7,src:'Med_Trash_persp.png',    cap:'Medical — perspective'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" 
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2025 Vasil Grancharov / ArtRevolt
+    </footer>
+
+    <!-- PREV / NEXT -->
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/UE/UnrealEngine.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/UE/Cloth sim compare.gif" alt="Unreal Engine" />
+        <span class="label">Unreal Engine</span>
+      </a>
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+        :href="isHalfway ? '/Projects/Unity/GameDev.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
+        <span class="label">Game Dev</span>
+      </a>
     </div>
 
-  </div><!-- /ar-page -->
+  </body>
+  <!-- LIGHTBOX OVERLAY -->
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()">
 
-  <footer class="ar-footer">
-    &copy; 2025 Vasil Grancharov / ArtRevolt
-  </footer>
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
 
-  <!-- PREV / NEXT -->
-  <div class="ar-footer-nav"
-       x-data="{ isHalfway: false }"
-       @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/UE/UnrealEngine.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/UE/Cloth sim compare.gif" alt="Unreal Engine" />
-      <span class="label">Unreal Engine</span>
-    </a>
-    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-       :href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
-      <span class="label">Game Dev</span>
-    </a>
-  </div>
+      <img class="lightbox-img" :src="lightbox" @click.stop />
 
-</body>
+      <div class="lightbox-caption" x-text="lightboxCaption"></div>
+    </div>
+  </template>
+</div>
+
 </html>
