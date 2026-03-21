@@ -1,199 +1,592 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>ArtRevolt Landing Page</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
-
-   <!--My tailwind.css-->
-   <link rel="stylesheet" href="src/output.css">
-   <link rel="stylesheet" href="css/layout.css">
-   <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-  <!--Replace with your tailwind.css once created-->
-  <!-- Add Alpine.js for interactivity -->
+  <title>ArtRevolt – Vasil Grancharov</title>
+  <meta name="description" content="Creative portfolio of Vasil Grancharov – 3D Generalist, VFX Artist, VR Developer, Game Designer, Traditional Painter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    /* === LANDING-SPECIFIC === */
+
+    /* Fullscreen hero section */
+    .hero-fullscreen {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg-void);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-slides-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-slides-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .hero-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(5,8,16,0.7) 0%, rgba(5,8,16,0.1) 60%),
+        linear-gradient(to top, rgba(5,8,16,0.85) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      max-width: 600px;
+      z-index: 5;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin: 0 0 0.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.5rem;
+      line-height: 1;
+    }
+
+    .hero-title .name-art { color: var(--text-primary); }
+    .hero-title .name-revolt {
+      background: linear-gradient(90deg, var(--accent-green) 0%, var(--accent-cyan) 50%, var(--accent-magenta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 16px rgba(0,229,255,0.4));
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin: 0.75rem 0 1.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-role-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid rgba(0,229,255,0.3);
+      color: var(--accent-cyan);
+      background: rgba(0,229,255,0.06);
+      text-transform: uppercase;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg-void);
+      background: var(--accent-cyan);
+      padding: 0.6rem 1.5rem;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: all 0.2s ease;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent-green);
+      box-shadow: 0 0 20px rgba(57,255,138,0.4);
+    }
+
+    .hero-click-hint {
+      position: absolute;
+      bottom: 4rem;
+      right: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .hero-dots {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .hero-dots button {
+      width: 28px;
+      height: 3px;
+      border: none;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s;
+    }
+
+    .hero-dots button.active {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      width: 44px;
+    }
+
+    /* === PROJECT GRID === */
+    .projects-section {
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .projects-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .projects-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .projects-header h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.2em;
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta));
+      flex-shrink: 0;
+    }
+
+    .projects-header span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 200px;
+      gap: 2px;
+    }
+
+    /* Bento-style layout */
+    .project-card { grid-column: span 4; grid-row: span 2; }
+    .project-card:nth-child(1) { grid-column: span 8; grid-row: span 2; }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.3s;
+    }
+
+    .project-card:hover { border-color: var(--accent-cyan); z-index: 2; }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(0.75) saturate(0.8);
+    }
+
+    .project-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.9) saturate(1.1);
+    }
+
+    .project-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,8,16,0.9) 0%, rgba(5,8,16,0.1) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+    }
+
+    .project-card-logo {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 1px solid var(--border-glow);
+      background: rgba(5,8,16,0.6);
+      padding: 3px;
+    }
+
+    .project-card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-primary);
+      margin: 0 0 0.25rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .project-card-sub {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin: 0 0 0.75rem;
+    }
+
+    .project-card-btn {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+      padding: 0.25rem 0.75rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .project-card-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === ABOUT STRIP === */
+    .about-strip {
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border-glow);
+      border-bottom: 1px solid var(--border-glow);
+      padding: 2rem;
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .about-strip::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -10%;
+      width: 40%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-text { flex: 1; }
+
+    .about-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin: 0 0 0.5rem;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .about-skills {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 200px;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .skill-row-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      width: 80px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    .skill-bar {
+      flex: 1;
+      height: 2px;
+      background: var(--border-dim);
+      position: relative;
+    }
+
+    .skill-bar-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+      transition: width 1s ease;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content { left: 1.5rem; bottom: 5rem; }
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 180px;
+      }
+      .project-card,
+      .project-card:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .about-strip { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="leading-normal tracking-normal text-indigo-100 m-8 bg-cover bg-fixed" data-theme="dark">
-  <div class="h-full">
-    <!-- Navigation -->
-    <div class="max-w-full container mx-auto" x-data>
-      <div class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
-        <!-- Logo -->
-        <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-          href="https://vasmaster.github.io/ArtRevolt">
-          Art
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
-            Revolt
-          </span>
-        </a>
-      
-        <!-- Menu Container -->
-        <div class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
-          <!-- Menu Triggers -->
-          <div class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3" 
-               x-data="{ openStripe: null }">
-            
-            <!-- Stripe 1: Contacts -->
-            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
-              <a href="Contacts.html">
-                <div class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-28': open, 'w-3': !open }"
-                     @mouseover="open = true, openStripe = 1"
-                     @mouseleave="open = false, openStripe = null">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
-                    Contacts
-                  </div>
-                </div>
-              </a>
-            </div>
-      
-            <!-- Stripe 2: Canvas -->
-            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
-              <a href="Canvas.html">
-                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-24': open, 'w-3': !open }"
-                     @mouseover="open = true, openStripe = 2"
-                     @mouseleave="open = false, openStripe = null"
-                     :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
-                    Canvas
-                  </div>
-                </div>
-              </a>
-            </div>
-      
-            <!-- Stripe 3: CV -->
-            <div x-data="{ open: false }" class="relative">
-              <a href="CV_Vasil-Grancharov.html">
-                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-24': open, 'w-3': !open }"
-                     @mouseover="open = true" 
-                     @mouseleave="open = false"
-                     :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
-                    CV
-                  </div>
-                </div>
-              </a>
-            </div>
+  <!-- NAVIGATION -->
+  <nav class="ar-nav">
+    <a href="index.html" class="ar-logo">Art<span class="accent">Revolt</span></a>
+    <ul class="ar-nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="Canvas.html">Canvas</a></li>
+      <li><a href="CV_Vasil-Grancharov.html">CV</a></li>
+      <li><a href="Contacts.html">Contact</a></li>
+    </ul>
+    <div class="ar-nav-social">
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/vasil-grancharov" title="LinkedIn">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/></svg>
+      </a>
+      <!-- X/Twitter -->
+      <a href="https://x.com/Art_Revolt" title="X / Twitter">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- FULLSCREEN HERO SLIDESHOW -->
+  <div class="hero-fullscreen"
+       x-data="{
+         index: 0,
+         slides: [
+           { id: 1, label: 'Featured Work', title: 'Speedboat', sub: 'Vehicle Mechanics & Hard-Surface Modeling', image: 'icons/Speedboat-moment-side.jpg', link: 'Projects/Speedboat/Speedboat.html' },
+           { id: 2, label: 'Featured Work', title: 'TinyGiants', sub: 'Keyboard Visualizer — Realtime 3D', image: 'icons/AOC Keyboard.png', link: 'Projects/TG/TinyGiants.html#4' },
+           { id: 3, label: 'Featured Work', title: 'Bond of Union', sub: 'Conceptual CG Art — TinyGiants', image: 'icons/Bond_Of_Union_V1.png', link: 'Projects/TG/TinyGiants.html#1' },
+         ],
+         autoSlide() { setInterval(() => { this.index = (this.index + 1) % this.slides.length; }, 5000); }
+       }"
+       x-init="autoSlide">
+
+    <div class="hero-slides-wrap">
+      <div class="hero-slides-track"
+           :style="'transform: translateX(' + (-index * 100) + '%)'">
+        <template x-for="slide in slides" :key="slide.id">
+          <div class="hero-slide">
+            <img :src="slide.image" :alt="slide.title" />
+            <div class="hero-slide-overlay"></div>
           </div>
-        </div>
+        </template>
       </div>
 
-      <!-- Main Content -->
-      <!-- Full-width Slideshow with Overlay Text -->
-      <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'Speedboat', image: 'icons/Speedboat-moment-side.jpg', link: 'Projects/Speedboat/Speedboat.html' },
-        { id: 2, title: 'TinyGiants', image: 'icons/AOC Keyboard.png', link: 'Projects/TG/TinyGiants.html#4' },
-        { id: 3, title: 'TinyGiants', image: 'icons/Bond_Of_Union_V1.png', link: 'Projects/TG/TinyGiants.html#1' },
-      ], autoSlide() {
-          setInterval(() => {
-            this.index = (this.index + 1) % this.slides.length;
-          }, 4000);
-        }
-      }" x-init="autoSlide" class="relative w-full overflow-hidden">
-
-        <!-- Slideshow Images -->
-        <div class="flex max-w-full"
-          :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
-          <template x-for="slide in slides" :key="slide.id">
-            <div class="w-full flex-shrink-0 flex items-center justify-center">
-              <a :href="slide.link">
-                <img :src="slide.image" :alt="slide.title"
-                  class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
-              </a>
-            </div>
-          </template>
+      <!-- Content (updates with slide) -->
+      <div class="hero-content">
+        <p class="hero-eyebrow" x-text="slides[index].label"></p>
+        <h1 class="hero-title">
+          <span class="name-art" x-text="slides[index].title"></span>
+        </h1>
+        <p class="hero-sub" x-text="slides[index].sub"></p>
+        <div class="hero-roles">
+          <span class="hero-role-tag">3D Generalist</span>
+          <span class="hero-role-tag">VFX Artist</span>
+          <span class="hero-role-tag">VR Developer</span>
+          <span class="hero-role-tag">Game Designer</span>
+          <span class="hero-role-tag">Painter</span>
         </div>
-
-        <!-- Overlay Text in Lower Left Corner -->
-        <div class="absolute bottom-4 left-4 p-4">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Highlight
-            </span>
-            Content
-          </h1>
-          <p class="mt-2 text-base md:text-2xl text-white">
-            Official Homepage
-          </p>
-        </div>
-        <!-- Overlay Text in Lower Left Corner -->
-        <div class="absolute bottom-4 right-4 p-2">
-          <p class="mt-1 text-base md:text-1xl text-white font-italic">
-            Click to visit
-          </p>
-        </div>
-        <!-- Navigation Dots -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <template x-for="(slide, i) in slides" :key="i">
-            <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-              :class="{ 'bg-green-500': index === i }"></button>
-          </template>
-        </div>
+        <a :href="slides[index].link" class="hero-cta">View Project →</a>
       </div>
-      <pre>
 
-      </pre>
-      <br>
-      </br>
-      <!-- Mosaic Slideshow Section -->
-      <div x-data="{ slides: [
-        { id: 1, title: 'TinyGiants Productions & Content', image: 'icons/aoc_keyboard.gif', cornerImage: 'icons/TG-logo.png', link: 'Projects/TG/TinyGiants.html' },
-        { id: 2, title: 'Unreal Engine vehicle mechanics', image: 'Projects/Speedboat/quick-preview.gif', cornerImage: 'icons/ArtRevolt-logo.jpg', link: 'Projects/Speedboat/Speedboat.html' },
-        { id: 3, title: 'Unreal Engine Productions', image: 'Projects/UE/Cloth sim compare.gif', cornerImage: 'icons/ArtRevolt-logo.jpg', link: 'Projects/UE/UnrealEngine.html' },
-        { id: 4, title: 'Tornado Studios Content', image: 'Projects/Tornado/FC_wirefr.gif', cornerImage: 'icons/Tornado-logo.png', link: 'Projects/Tornado/TornadoStudios.html' },
-        { id: 5, title: 'Unity Game Development', image: 'Projects/Unity/gameplay_overview.gif', cornerImage: 'icons/ArtRevolt-logo.jpg', link: 'Projects/Unity/GameDev.html' },
-      ] }">
-        <div class="max-w-full bg-black-500 opacity-75 rounded-lg border-t shadow-lg p-8">
-          <!-- Grid Container: adjust the grid-cols as needed -->
-          <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-            <template x-for="slide in slides" :key="slide.id">
-              <!-- Each mosaic square -->
-              <div class="relative group overflow-hidden rounded-lg shadow-lg">
-                <img :src="slide.image" :alt="slide.title"
-                  class="w-full h-auto transition-transform duration-300 group-hover:scale-105">
-                <!-- Corner Image -->
-          <img :src="slide.cornerImage" 
-          class="absolute bottom-2 right-2 w-12 h-12 z-10 object-contain rounded-full"
-          :alt="`${slide.title} logo`">
+      <p class="hero-click-hint">↓ Scroll to explore</p>
 
-          <!-- Overlay: hidden by default and fades in on hover -->
-          <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h2 x-text="slide.title" class="text-2xl text-white font-bold"></h2>
-                  <a :href="slide.link" rel="noopener noreferrer"
-                    class="mt-2 inline-block bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded">
-                    View Project
-                  </a>
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
+      <div class="hero-dots">
+        <template x-for="(slide, i) in slides" :key="i">
+          <button @click="index = i" :class="{ 'active': index === i }"></button>
+        </template>
       </div>
     </div>
-    <pre>
-
-    </pre>
-    <br>
-
-    </br>
-
-    <!-- Footer (Optional) -->
-    <footer class="bg-black-500 border-t mt-12 rounded-lg shadow-lg">
-      <div class="max-w-4xl mx-auto px-4 py-4 text-center text-sm text-gray-600">
-          &copy; 2025 Vasil Grancharov. All rights reserved.
-      </div>
-    </footer>
   </div>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip">
+    <div class="about-text">
+      <h2>Vasil Grancharov</h2>
+      <p>Creative technologist based in Enschede, NL. Founder of ArtRevolt — bridging real-time 3D, VFX simulation, XR development, and traditional art. Bachelor's in Creative Media & Game Technologies (Saxion University).</p>
+    </div>
+    <div class="about-skills">
+      <div class="skill-row">
+        <span class="skill-row-label">3D / VFX</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-row-label">Unreal / UE5</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-row-label">XR / VR Dev</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-row-label">Unity / C#</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-row-label">Houdini</span>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT GRID -->
+  <div class="projects-section">
+    <div class="projects-header">
+      <h2>Projects</h2>
+      <span>// SELECT PROJECT TO EXPLORE</span>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Card 1 – large -->
+      <a class="project-card" href="Projects/TG/TinyGiants.html">
+        <img src="icons/aoc_keyboard.gif" alt="TinyGiants Productions" />
+        <img class="project-card-logo" src="icons/TG-logo.png" alt="TinyGiants" />
+        <div class="project-card-overlay">
+          <h3 class="project-card-title">TinyGiants Productions</h3>
+          <p class="project-card-sub">// 3D CONTENT · LIVE EVENTS · VFX</p>
+          <span class="project-card-btn">View Project →</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="project-card" href="Projects/Speedboat/Speedboat.html">
+        <img src="Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
+        <img class="project-card-logo" src="icons/ArtRevolt-logo.jpg" alt="ArtRevolt" />
+        <div class="project-card-overlay">
+          <h3 class="project-card-title">Speedboat</h3>
+          <p class="project-card-sub">// VEHICLE MECHANICS · UNREAL ENGINE</p>
+          <span class="project-card-btn">View Project →</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="project-card" href="Projects/UE/UnrealEngine.html">
+        <img src="Projects/UE/Cloth sim compare.gif" alt="Unreal Engine" />
+        <img class="project-card-logo" src="icons/ArtRevolt-logo.jpg" alt="ArtRevolt" />
+        <div class="project-card-overlay">
+          <h3 class="project-card-title">Unreal Engine</h3>
+          <p class="project-card-sub">// SHADERS · CLOTH SIM · RENDERING</p>
+          <span class="project-card-btn">View Project →</span>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a class="project-card" href="Projects/Tornado/TornadoStudios.html">
+        <img src="Projects/Tornado/FC_wirefr.gif" alt="Tornado Studios" />
+        <img class="project-card-logo" src="icons/Tornado-logo.png" alt="Tornado" />
+        <div class="project-card-overlay">
+          <h3 class="project-card-title">Tornado Studios</h3>
+          <p class="project-card-sub">// HARD-SURFACE · PHOTOREALISTIC 3D</p>
+          <span class="project-card-btn">View Project →</span>
+        </div>
+      </a>
+
+      <!-- Card 5 -->
+      <a class="project-card" href="Projects/Unity/GameDev.html">
+        <img src="Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
+        <img class="project-card-logo" src="icons/ArtRevolt-logo.jpg" alt="ArtRevolt" />
+        <div class="project-card-overlay">
+          <h3 class="project-card-title">Game Development</h3>
+          <p class="project-card-sub">// UNITY · LEVEL DESIGN · C#</p>
+          <span class="project-card-btn">View Project →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ar-footer">
+    &copy; 2025 Vasil Grancharov / ArtRevolt &nbsp;·&nbsp; Enschede, Netherlands &nbsp;·&nbsp; All rights reserved
+  </footer>
+
 </body>
 </html>
