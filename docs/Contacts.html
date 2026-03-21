@@ -1,127 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
-  <title>Contact – Vasil Grancharov</title>
-  
-  <!--My tailwind.css-->
-  <link rel="stylesheet" href="css/output.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-  <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — ArtRevolt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/artrevolt-style.css">
 
-  <!-- Add Alpine.js for interactivity -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    .contact-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      position: relative;
+      z-index: 1;
+    }
 
-  
+    /* Page heading */
+    .contact-heading {
+      margin-bottom: 3rem;
+    }
+
+    .contact-heading h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin: 0 0 0.35rem;
+    }
+
+    .contact-heading h1 span {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-heading p {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Layout: form left, info right */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* Form */
+    .ar-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ar-field label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .ar-field label span {
+      color: var(--accent-cyan);
+      margin-right: 0.25rem;
+    }
+
+    .ar-field input,
+    .ar-field textarea {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 0;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+    }
+
+    .ar-field input:focus,
+    .ar-field textarea:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 1px var(--accent-cyan), 0 0 16px rgba(0,229,255,0.1);
+    }
+
+    .ar-field textarea {
+      resize: vertical;
+      min-height: 160px;
+      line-height: 1.6;
+    }
+
+    /* Clip-path submit button matching the rest of the design system */
+    .ar-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg-void);
+      background: var(--accent-cyan);
+      border: none;
+      padding: 0.75rem 2rem;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      transition: background 0.2s, box-shadow 0.2s;
+      align-self: flex-start;
+    }
+
+    .ar-submit:hover {
+      background: var(--accent-green);
+      box-shadow: 0 0 24px rgba(57,255,138,0.35);
+    }
+
+    .ar-submit svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* Contact info sidebar */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-info-heading {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      border-left: 3px solid transparent;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-info-item:hover {
+      border-left-color: var(--accent-cyan);
+      background: var(--bg-panel);
+    }
+
+    .contact-info-item .info-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-info-item .info-value {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .contact-social {
+      margin-top: 1.5rem;
+    }
+
+    .contact-social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      transition: all 0.2s;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-social-link:hover {
+      color: var(--accent-gold);
+      border-color: rgba(240,192,64,0.35);
+      background: rgba(240,192,64,0.04);
+    }
+
+    .contact-social-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Success / error states via CSS (Formspree handles redirect) */
+    @media (max-width: 720px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-wrap { padding: 2.5rem 1rem 5rem; }
+    }
+  </style>
 </head>
-<body class="leading-normal tracking-normal text-indigo-100 m-8 bg-cover bg-fixed" data-theme="dark">
-  <!-- Header (can be reused from your main layout) -->
-  <header class="bg-black shadow sticky top-0 z-50">
-    <!-- Navigation -->
-    <div class="max-w-full container mx-auto" x-data>
-      <div class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
-        <!-- Logo -->
-        <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-          href="https://vasmaster.github.io/ArtRevolt">
-          Art
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
-            Revolt
-          </span>
-        </a>
-      
-        <!-- Menu Container -->
-        <div class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
-          <!-- Menu Triggers -->
-          <div class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3" 
-               x-data="{ openStripe: null }">
-            
-            <!-- Stripe 1: Contacts -->
-            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
-              <a href="Contacts.html">
-                <div class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-28': open, 'w-3': !open }"
-                     @mouseover="open = true, openStripe = 1"
-                     @mouseleave="open = false, openStripe = null">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
-                    Contacts
-                  </div>
-                </div>
-              </a>
-            </div>
-      
-            <!-- Stripe 2: Canvas -->
-            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
-              <a href="Canvas.html">
-                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-24': open, 'w-3': !open }"
-                     @mouseover="open = true, openStripe = 2"
-                     @mouseleave="open = false, openStripe = null"
-                     :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
-                    Canvas
-                  </div>
-                </div>
-              </a>
-            </div>
-      
-            <!-- Stripe 3: CV -->
-            <div x-data="{ open: false }" class="relative">
-              <a href="CV_Vasil-Grancharov.html">
-                <div class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                     :class="{ 'w-24': open, 'w-3': !open }"
-                     @mouseover="open = true" 
-                     @mouseleave="open = false"
-                     :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                       class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
-                    CV
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
+<body>
+
+  <nav class="ar-nav">
+    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+    <ul class="ar-nav-links">
+      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+      <li><a href="Canvas.html">Canvas</a></li>
+      <li><a href="CV_Vasil-Grancharov.html">CV</a></li>
+      <li><a href="Contacts.html" class="active">Contact</a></li>
+    </ul>
+    <div class="ar-nav-social">
+      <a href="https://linkedin.com/in/vasil-grancharov" title="LinkedIn">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/></svg>
+      </a>
+      <a href="https://x.com/Art_Revolt" title="X / Twitter">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <div class="contact-wrap">
+
+    <div class="contact-heading ar-reveal">
+      <h1><span>Get in</span> Touch</h1>
+      <p>// Open for freelance, collaboration &amp; exciting new projects</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <form class="ar-form ar-reveal" action="https://formspree.io/f/xzzepaeb" method="POST">
+
+        <div class="ar-field">
+          <label for="name"><span>//</span> Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
         </div>
+
+        <div class="ar-field">
+          <label for="email"><span>//</span> Email</label>
+          <input type="email" id="email" name="_replyto" placeholder="your@email.com" required />
+        </div>
+
+        <div class="ar-field">
+          <label for="subject"><span>//</span> Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Project brief, collaboration, ..." />
+        </div>
+
+        <div class="ar-field">
+          <label for="message"><span>//</span> Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+        </div>
+
+        <button type="submit" class="ar-submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          Send Message
+        </button>
+
+      </form>
+
+      <!-- SIDEBAR INFO -->
+      <div class="contact-info ar-reveal">
+
+        <p class="contact-info-heading">// Direct contact</p>
+
+        <a href="mailto:v.grancharov@artrevolt.nl" class="contact-info-item">
+          <span class="info-label">Email</span>
+          <span class="info-value">v.grancharov@artrevolt.nl</span>
+        </a>
+
+        <a href="tel:+31620840837" class="contact-info-item">
+          <span class="info-label">Phone</span>
+          <span class="info-value">+31 6 20840837</span>
+        </a>
+
+        <div class="contact-info-item" style="cursor:default;">
+          <span class="info-label">Location</span>
+          <span class="info-value">Enschede, Netherlands</span>
+        </div>
+
+        <div class="contact-social">
+          <p class="contact-info-heading">// Social &amp; portfolio</p>
+
+          <a href="https://linkedin.com/in/vasil-grancharov" class="contact-social-link" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/></svg>
+            linkedin.com/in/vasil-grancharov
+          </a>
+
+          <a href="https://x.com/Art_Revolt" class="contact-social-link" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            x.com/Art_Revolt
+          </a>
+
+          <a href="https://vasmaster.github.io/ArtRevolt" class="contact-social-link" target="_blank" rel="noopener">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            ArtRevolt Portfolio
+          </a>
+        </div>
+
       </div>
     </div>
-  </header>
 
-  <!-- Main Content: Contact Form -->
-  <main class="max-w-4xl mx-auto p-6 mt-8 bg-black rounded-lg shadow">
-    <h1 class="text-indigo-100 text-3xl font-bold mb-4">Get in Touch</h1>
-    <p class="mb-6 text-indigo-100">Fill out the form below and I'll get back to you as soon as possible.</p>
-    <form action="https://formspree.io/f/xzzepaeb" method="POST" class="space-y-6">
-      <div>
-        <label for="name" class="block text-lg font-medium text-indigo-100">Name</label>
-        <input type="text" id="name" name="name" required 
-               class="mt-1 block w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-      <div>
-        <label for="email" class="block text-lg font-medium text-indigo-100">Email</label>
-        <input type="email" id="email" name="_replyto" required 
-               class="mt-1 block w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-      <div>
-        <label for="message" class="block text-lg font-medium text-indigo-100">Message</label>
-        <textarea id="message" name="message" rows="6" required 
-                  class="mt-1 block w-full p-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-      </div>
-      <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
-        Send Message
-      </button>
-    </form>
-  </main>
+  </div>
 
-  <!-- Footer (Optional) -->
-  <footer class="bg-black mt-12 border-t">
-    <div class="max-w-6xl mx-auto px-4 py-4 text-center text-sm text-gray-600">
-      &copy; 2025 Vasil Grancharov. All rights reserved.
-    </div>
+  <footer class="ar-footer">
+    &copy; 2025 Vasil Grancharov / ArtRevolt &nbsp;·&nbsp; Enschede, Netherlands
   </footer>
+
 </body>
 </html>
