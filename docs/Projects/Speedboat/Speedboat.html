@@ -116,7 +116,9 @@
          ] }">
         <template x-for="s in slides" :key="s.id">
           <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" />
+            <img :src="s.src" :alt="s.cap"     
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
             <div class="caption" x-text="s.cap"></div>
           </div>
         </template>
@@ -186,7 +188,9 @@
          ] }">
         <template x-for="s in slides" :key="s.id">
           <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" />
+            <img :src="s.src" :alt="s.cap"     
+            style="cursor: zoom-in;"
+            @click="openLightbox(s.src, s.cap)" />
             <div class="caption" x-text="s.cap"></div>
           </div>
         </template>
@@ -216,6 +220,21 @@
     </div>
 
   </body>
+    <!-- LIGHTBOX OVERLAY -->
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop"
+        @click="closeLightbox()"
+        @keydown.escape.window="closeLightbox()">
+
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+
+      <img class="lightbox-img"
+          :src="lightbox"
+          @click.stop />
+
+      <div class="lightbox-caption" x-text="lightboxCaption"></div>
+    </div>
+  </template>
 </div>
 
 </html>
