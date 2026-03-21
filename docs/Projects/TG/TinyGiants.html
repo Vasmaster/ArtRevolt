@@ -1,518 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>TinyGiants page</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
-
-  <!--My tailwind.css-->
-  <link rel="stylesheet" href="/css/output.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-
-  <!-- Add Alpine.js for interactivity -->
+  <title>TinyGiants Productions — ArtRevolt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 </head>
+<body>
 
-<body class="leading-normal tracking-normal text-indigo-100 m-8 bg-cover bg-fixed" data-theme="dark">
-  <div class="h-full">
-    <!-- Navigation -->
-    <div class="max-w-full container mx-auto" x-data>
-      <div
-        class="max-w-full flex flex-row md:flex-row items-start md:items-center justify-between py-4 space-y-4 md:space-y-0 sticky top-0 z-50">
-        <!-- Logo -->
-        <a class="flex items-center text-indigo-100 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-          href="https://vasmaster.github.io/ArtRevolt">
-          Art
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-450 to-red-600">
-            Revolt
-          </span>
-        </a>
+  <!-- NAVIGATION -->
+  <nav class="ar-nav">
+    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+    <ul class="ar-nav-links">
+      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+      <li><a href="/Canvas.html">Canvas</a></li>
+      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+      <li><a href="/Contacts.html">Contact</a></li>
+    </ul>
+  </nav>
 
-        <!-- Menu Container -->
-        <div
-          class="flex flex-col md:flex-row w-full md:w-auto items-end md:items-center space-y-0 md:space-y-0 md:space-x-10">
-          <!-- Menu Triggers -->
-          <div
-            class="flex flex-row md:flex-row items-end md:items-center -space-y-14 space-x-0 space-x-3 md:space-y-0 md:space-x-3"
-            x-data="{ openStripe: null }">
-
-            <!-- Stripe 1: Contacts -->
-            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
-              <a href="/Contacts.html">
-                <div
-                  class="absolute md:absolute -translate-x-16 -translate-y-6 md:-translate-x-16 md:-translate-y-6 h-10 bg-indigo-100 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                  :class="{ 'w-28': open, 'w-3': !open }" @mouseover="open = true, openStripe = 1"
-                  @mouseleave="open = false, openStripe = null">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                    class="top-0 ml-2 px-2 py-1 bg-indigo-100 text-indigo-900 rounded whitespace-nowrap">
-                    Contacts
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Stripe 2: Canvas -->
-            <div x-data="{ open: false }" class="relative mr-4 md:mr-4">
-              <a href="/Canvas.html">
-                <div
-                  class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-green-400 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true, openStripe = 2"
-                  @mouseleave="open = false, openStripe = null"
-                  :style="{ transform: `translateX(${ openStripe === 1 ? '10px' : '-78px'}) translateY(-1.5rem) skewX(-6deg)`, }">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                    class="top-0 ml-2 px-2 py-1 bg-green-400 text-green-900 rounded whitespace-nowrap">
-                    Canvas
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <!-- Stripe 3: CV -->
-            <div x-data="{ open: false }" class="relative">
-              <a href="/CV_Vasil-Grancharov.html">
-                <div
-                  class="absolute md:absolute md:-translate-x-20 md:-translate-y-6 h-10 bg-red-600 transform -skew-x-6 transition-all duration-300 cursor-pointer static"
-                  :class="{ 'w-24': open, 'w-3': !open }" @mouseover="open = true" @mouseleave="open = false"
-                  :style="{ transform: `translateX(${ openStripe === 1 ? 10 : openStripe === 2 ? 8 : -76 }px) translateY(-1.5rem) skewX(-6deg)`, }">
-                  <div x-show="open" x-transition:enter="transition duration-300 ease-out"
-                    class="top-0 ml-2 px-2 py-1 bg-red-600 text-red-100 rounded whitespace-nowrap">
-                    CV
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
+  <!-- HERO -->
+  <div class="ar-hero"
+       x-data="{
+         index: 0,
+         slides: [
+           { id:1, image:'Bond_Of_Union_V1.png' },
+           { id:2, image:'Swans_pre.png' },
+           { id:3, image:'Hum3DCar.png' },
+           { id:4, image:'AOC Keyboard.png' },
+           { id:5, image:'Coulisse.png' },
+         ],
+         autoSlide() { setInterval(() => { this.index = (this.index+1) % this.slides.length; }, 4000); }
+       }"
+       x-init="autoSlide">
+    <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
+      <template x-for="s in slides" :key="s.id">
+        <div style="min-width:100%;">
+          <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
         </div>
-      </div>
-
-      <!-- Main Content -->
-      <!-- Full-width Slideshow with Overlay Text -->
-      <div x-data="{ index: 0, slides: [
-        { id: 1, title: 'BoU', image: 'Bond_Of_Union_V1.png' },
-        { id: 2, title: 'swans', image: 'Swans_pre.png' },
-        { id: 3, title: 'Hum3d', image: 'Hum3DCar.png' },
-        { id: 4, title: 'keyboard', image: 'AOC Keyboard.png' },
-        { id: 5, title: 'Coulisse', image: 'Coulisse.png' },
-      ], autoSlide() {
-          setInterval(() => {
-            this.index = (this.index + 1) % this.slides.length;
-          }, 4000);
-        }
-      }" x-init="autoSlide" class="relative w-full overflow-hidden">
-
-        <!-- Slideshow Images -->
-        <div class="flex max-w-full"
-          :style="'transform: translateX(' + (-index * 100) + '%); transition: transform 1s ease-in-out;'">
-          <template x-for="slide in slides" :key="slide.id">
-            <div class="w-full flex-shrink-0 flex items-center justify-center">
-              <a :href="'#' + slide.id">
-                <img :src="slide.image" :alt="slide.title"
-                  class="max-w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-700">
-              </a>
-            </div>
-          </template>
-        </div>
-
-        <!-- Overlay Text in Lower Left Corner -->
-        <div class="absolute bottom-4 left-4 p-4">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Highlights
-            </span>
-          </h1>
-          <p class="mt-2 text-base md:text-2xl text-white">
-            TinyGiants Productions
-          </p>
-        </div>
-
-        <!-- Navigation Dots -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <template x-for="(slide, i) in slides" :key="i">
-            <button @click="index = i" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100"
-              :class="{ 'bg-green-500': index === i }"></button>
-          </template>
-        </div>
-      </div>
-
-      <pre>
-        <br> 
-        </br>
-        <br>    
-        </br>
-      </pre>
-
-      <!-- Hansel & Gretel - Overlay Text -->
-      <div id="2" class="relative">
-        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Hansel und Gretel Opera
-            </span>
-          </h1>
-          <!-- Video at the Top -->
-          <video controls class="w-full rounded-lg">
-            <source src="Swans_3kb.mp4" alt="Top Image" class="w-full">
-          </video>
-          <!-- Overlay Text in top Left Corner -->
-          <div id="2" class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
-            <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-              Netherlands Reisopera - production of a Fantasy-opera for all (10+)
-            </p>
-          </div>
-          <!-- Mosaic Slideshow Section -->
-          <div x-data="{ slides: [
-          { id: 1, title: 'forest', video: 'Intro Forest_3kb.mp4' },
-          { id: 2, title: 'stairs', video: 'Stairs Run_3kb.mp4' },
-          { id: 3, title: 'swans', video: 'Swans_3kb.mp4' },
-          ] }">
-            <!-- Grid Container: adjust the grid-cols as needed -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <template x-for="slide in slides" :key="slide.id">
-                <!-- Each mosaic square without overlay -->
-                <div class="relative overflow-hidden rounded-lg shadow-lg">
-                  <video controls class="w-full rounded-lg">
-                    <source :src="slide.video" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </template>
-            </div>
-            <p class="mt-2 text-base md:text-2xl text-white">
-              This was a wonderful production carried from the team of TinyGiants and the director of the play. <br>
-              The imaginative decor contains breathtaking 3D projections and the lavish, <br>
-              romantic music of composer Engelbert Humperdinck is full of dance rhythms and is therefore very
-              accessible.<br>
-              The opera is sung in German and is easy to follow with Dutch overtitles for children from 10 years
-              old.<br>
-              For many it is an undisputed musical highlight in the opera Hänsel und Gretel: <br>
-              the beautiful, quiet evening prayer – ‘Abends will ich schlafen geh'n ’ – of the two children when they
-              rest in
-              the dark forest .
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <pre>
-        <br>    
-        </br>
-      </pre>
-
-      <!-- Bond of Union - Overlay Text -->
-      <div id="1" class="relative">
-        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Bond of Union
-            </span>
-          </h1>
-          <!-- Video at the Top -->
-          <video controls class="w-full rounded-lg">
-            <source src="Bond Of Union_3kb.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <!-- Overlay Text in Top Left Corner -->
-          <div id="1" class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
-            <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-              Illusory artistic interpretation of the artwork Bond of Union from M.C. Escher
-            </p>
-          </div>
-          <!-- Mosaic Slideshow Section -->
-          <div x-data="{ slides: [
-        { id: 1, title: 'overview', image: 'Bond_Of_Union_V1.png' },
-        { id: 2, title: 'steps', image: 'BondOfUnion.gif' },
-        { id: 3, title: 'third-person', image: 'MCEscher-Bond-of-union.jpeg' },
-        { id: 4, title: 'preview', image: 'Parallelepipedi.jpg' },
-        ] }">
-            <!-- Grid Container: adjust the grid-cols as needed -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <template x-for="slide in slides" :key="slide.id">
-                <!-- Each mosaic square without overlay -->
-                <div class="relative overflow-hidden rounded-lg shadow-lg">
-                  <img :src="slide.image" :alt="Top Image" class="w-full">
-                </div>
-              </template>
-            </div>
-            <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
-            <p class="mt-2 text-base md:text-2xl text-white">
-              During my work for TinyGiants with their guidance and open invitation to dive into something new,
-              creative and interesting subject for me.<br>
-              I conceptualized, designed and rendered an animation of Escher's artwork.<br>
-              My spin on it was a combination of Guido Moretti style and Bond of Union.<br>
-              This was an atempt to create a new style of an illusion with the side and front vantage points to perceive
-              different personality of my artwork.<br>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <pre>
-        <br>    
-        </br>
-      </pre>
-
-      <!-- AOC Keyboard - Overlay Text -->
-      <div id="4" class="relative"> <!-- Add relative positioning here -->
-        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              AOC Keyboard Animation
-            </span>
-          </h1>
-          <!-- Video at the Top -->
-          <video controls class="w-full rounded-lg">
-            <source src="Aockeyboard V2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-
-          <!-- Overlay Text in Lower Left Corner -->
-          <div id="4" class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
-            <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-              Dynamic professional product animation
-            </p>
-          </div>
-          <!-- Mosaic Slideshow Section -->
-          <div x-data="{ slides: [
-          { id: 1, title: 'overview', image: 'AOC Keyboard.png' },
-          { id: 2, title: 'steps', image: 'RockEmAOC_02_V1.png' },
-          { id: 3, title: 'third-person', image: 'close-Up.png' },
-          { id: 4, title: 'preview', image: 'Cloth_Sim_01_V2.png' },
-          { id: 5, title: 'preview', image: 'RockEmAOC_01_V1.png' },
-          ] }">
-            <!-- Grid Container: adjust the grid-cols as needed -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <template x-for="slide in slides" :key="slide.id">
-                <!-- Each mosaic square without overlay -->
-                <div class="relative overflow-hidden rounded-lg shadow-lg">
-                  <img :src="slide.image" :alt="slide.title"
-                    class="w-full h-auto transition-transform duration-300 hover:scale-105">
-                </div>
-              </template>
-            </div>
-            <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
-            <p class="mt-2 text-base md:text-2xl text-white">
-              During my work for TinyGiants with their guidance and introduction to dive into some of their productions,
-              and rework in my own style the presentation of the AOC keyboard the team personaly made for the client.
-              I had to adapt the keyboard layout over the keys. Then animated and rendered a few sequences.
-              This gave me opportunity to explore simulations with C4D and complex compositing in After Effects.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <pre>
-        <br>
-        </br>
-      </pre>
-
-      <!-- Hum3dCar - Overlay Text -->
-      <div id="3" class="relative"> <!-- Add relative positioning here -->
-        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Muscle car
-            </span>
-          </h1>
-          <!-- Image at the Top -->
-          <video controls class="w-full rounded-lg">
-            <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
-          </video>
-          <!-- Overlay Text in Lower Left Corner -->
-          <div class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
-            <p class="mt-2 text-base md:text-2xl text-white filter drop-shadow-lg">
-              Whip animation and Compositing training production
-            </p>
-          </div>
-          <!-- Mosaic Slideshow Section -->
-          <div x-data="{ slides: [
-    { id: 1, title: 'overview', image: 'Hum3DCar.png' },
-    { id: 2, title: 'steps', image: 'hum3DCar_back.png' },
-    { id: 3, title: 'third-person', image: 'Hum3dCarShowcase.gif' },
-    ] }">
-            <!-- Grid Container: adjust the grid-cols as needed -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <template x-for="slide in slides" :key="slide.id">
-                <!-- Each mosaic square without overlay -->
-                <div class="relative overflow-hidden rounded-lg shadow-lg">
-                  <img :src="slide.image" :alt="slide.title"
-                    class="w-full h-auto transition-transform duration-300 hover:scale-105">
-                </div>
-              </template>
-            </div>
-            <h2 class="mt-2 text-base md:text-2xl text-white"> Guided production</h2>
-            <p class="mt-2 text-base md:text-2xl text-white">
-              Provided with the scene, materials and lights, I was given the chance to create a fun driven animation
-              and compose the render passes and shots with Adobe After Effects. Extremely educational project.
-              Got me up-to-speed working with proper color spaces and project managment in Ae.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <br>
-      </br>
-
-      <!-- Single Image with Overlay Text -->
-      <div id="5" class="relative"> <!-- Add relative positioning here -->
-        <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-          <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-            <span
-              class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-              Coulisse Product Animations
-            </span>
-          </h1>
-          <!-- Image at the Top -->
-          <video controls class="w-full rounded-lg">
-            <source src="MB_reveal_2kb.mp4" type="video/mp4">
-          </video>
-          <!-- Overlay Text in Lower Left Corner -->
-          <div class="absolute top-10 sd:top-16 md:top-20 left-4 p-4">
-            <p class="mt-2 text-1x1 md:text-2xl text-white filter drop-shadow-lg">
-              Composition of Animations and screen recordings of interactions with products
-            </p>
-          </div>
-          <!-- Mosaic Slideshow Section -->
-          <div id="1" x-data="{ slides: [
-        { id: 1, title: 'mounting', video: 'MB_mounting_2kb.mp4' },
-        { id: 2, title: 'app', video: 'MB_App_2kb.mp4' },
-        ] }">
-            <!-- Grid Container: adjust the grid-cols as needed -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-              <template x-for="slide in slides" :key="slide.id">
-                <!-- Each mosaic square without overlay -->
-                <div class="relative overflow-hidden rounded-lg shadow-lg">
-                  <!-- Video at the Top -->
-                  <video controls class="w-full rounded-lg">
-                    <source :src="slide.video" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </template>
-            </div>
-            <h2 class="mt-2 text-base md:text-2xl text-white"> Clients production</h2>
-            <p class="mt-2 text-base md:text-2xl text-white">
-              Intricate animations matching the screen recordings of live interactions with Coulisse products.<br>
-              Octane Rendered scenes and After Effects compositions made in a complete production video for a variety of
-              products.
-            </p>
-
-          </div>
-        </div>
-      </div>
+      </template>
     </div>
-
-    <pre>
-      <br>    
-      </br>
-    </pre>
-
-    <!-- Single Image with Overlay Text -->
-    <div class="relative"> <!-- Add relative positioning here -->
-      <div class="max-w-full bg-black-500 opacity-75 rounded-lg shadow-lg p-6">
-        <h1 class="text-3xl md:text-5xl text-white font-bold leading-tight">
-          <span
-            class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-400 to-blue-400 filter drop-shadow-lg">
-            Logo transition
-          </span>
-        </h1>
-        <!-- Image at the Top -->
-        <video controls class="w-full rounded-lg">
-          <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
-        </video>
-        <!-- Overlay Text in Lower Left Corner -->
-        <div class="absolute top-12 sd:top-16 md:top-20 left-4 p-4">
-          <p class="mt-2 text-base text-1x8 md:text-2xl text-white filter drop-shadow-lg">
-            Whip transition animation
-          </p>
-        </div>
-        <!-- Image at the Top -->
-        <video controls class="w-full rounded-lg">
-          <source src="TG_logo_studio_3kb.mp4" alt="Top Image" class="w-full">
-        </video>
-        <h2 class="mt-2 text-base md:text-2xl text-white"> Personal production</h2>
-        <p class="mt-2 text-base md:text-2xl text-white">
-          A fun-packed day got me to explore compositing in After Effects shots
-          rendered from Unreal Engine 5 with playfull eyecandy of the former TinyGiants logo.
-        </p>
-      </div>
+    <div class="ar-hero-overlay"></div>
+    <div class="ar-hero-text">
+      <h1><span class="glow-text">TinyGiants</span></h1>
+      <p>3D Content · Live Events · Product Animation · VFX</p>
     </div>
-
-
+    <div class="ar-hero-dots">
+      <template x-for="(s,i) in slides" :key="i">
+        <button @click="index=i" :class="{active:index===i}"></button>
+      </template>
+    </div>
   </div>
-  </div>
-  <!--FOOTER STICKY NAV LOCATIONS-->
-  <div x-data="{ 
-  isHalfway: false,
-  prevOpen: false,
-  nextOpen: false 
-  }" @scroll.window="isHalfway = (window.pageYOffset > document.documentElement.scrollHeight/2)"
-    class="fixed inset-0 pointer-events-none">
 
-    <!-- Previous Project (Left) -->
-    <div class="fixed left-4 bottom-4 transition-all duration-300" :class="{
-        'translate-x-0': prevOpen,
-        '-translate-x-3/4': !prevOpen
-     }" @mouseenter="if(isHalfway) prevOpen = true" @mouseleave="prevOpen = false">
+  <!-- PAGE CONTENT -->
+  <div class="ar-page">
 
-      <div class="bg-black/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
-      transition-all duration-300 flex items-center" :class="prevOpen ? 'w-48 h-24' : 'w-12 h-12'">
-
-        <a x-bind:href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
-          :class="isHalfway ? 'cursor-pointer' : 'cursor-default'" @click="if(!isHalfway) $event.preventDefault()"
-          class="flex items-center w-full h-full">
-          <div class="relative min-w-[3rem] h-full">
-            <img src="/Projects/Unity/gameplay_overview.gif" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/50 flex items-center justify-center
-      transition-opacity" :class="prevOpen ? 'opacity-0' : 'opacity-100'">
-              ←
-            </div>
-          </div>
-
-          <div x-show="prevOpen" class="p-3 text-white text-sm font-medium transition-opacity">
-            Previous Project
-          </div>
-        </a>
+    <!-- SUMMARY -->
+    <div class="ar-summary-card ar-reveal">
+      <div>
+        <h2>TinyGiants Productions</h2>
+        <p>As 3D Producer at TinyGiants (Apr 2022 – Oct 2024), I developed real-time systems and mechanics in Unreal Engine 5, produced photorealistic Octane renders for external clients, animated and composited professional video content, and contributed personal creative productions alongside client work. Projects spanned opera live-event visuals, product animations, conceptual CG art, and brand identity motion.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Unreal Engine 5</span>
+          <span class="ar-tech-tag render">OTOY Octane</span>
+          <span class="ar-tech-tag">Cinema 4D</span>
+          <span class="ar-tech-tag tool">Adobe After Effects</span>
+          <span class="ar-tech-tag tool">Adobe Premiere</span>
+          <span class="ar-tech-tag">Compositing</span>
+          <span class="ar-tech-tag">Product Animation</span>
+          <span class="ar-tech-tag">Live Event VFX</span>
+        </div>
       </div>
-    </div>
-    <!-- Next Project (Right) -->
-    <div class="fixed right-4 bottom-4 transition-all duration-300" :class="{
-  'translate-x-0': nextOpen,
-  'translate-x-3/4': !nextOpen
-    }" @mouseenter="if(isHalfway) nextOpen = true" @mouseleave="nextOpen = false">
-
-      <div class="bg-black/80 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden pointer-events-auto
-        transition-all duration-300 flex items-center" :class="nextOpen ? 'w-48 h-24' : 'w-12 h-12'">
-
-        <a x-bind:href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null"
-          :class="isHalfway ? 'cursor-pointer' : 'cursor-default'" @click="if(!isHalfway) $event.preventDefault()"
-          class="flex items-center w-full h-full">
-          <div class="relative min-w-[3rem] h-full">
-            <img src="/Projects/Speedboat/quick-preview.gif" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/50 flex items-center justify-center
-                    transition-opacity" :class="nextOpen ? 'opacity-0' : 'opacity-100'">
-              →
-            </div>
-          </div>
-
-          <div x-show="nextOpen" class="p-3 text-white text-sm font-medium transition-opacity">
-            Next Project
-          </div>
-        </a>
+      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Producer</div>
+        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">PERIOD</div>
+        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2022 – Oct 2024</div>
+        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">LOCATION</div>
+        <div style="font-family:var(--font-display);font-size:0.95rem;">Enschede, NL</div>
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════
+         PROJECT 1 — HANSEL & GRETEL OPERA
+         ═══════════════════════════════════ -->
+    <hr class="ar-divider" />
+
+    <h3 class="ar-section-title ar-reveal" id="2">Hänsel und Gretel Opera</h3>
+    <p class="ar-section-sub">// NETHERLANDS REISOPERA · LIVE 3D PROJECTION · FANTASY OPERA</p>
+
+    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
+      <div>
+        <p>Real-time 3D projection visuals for the Netherlands Reisopera's fantasy opera production, accessible for audiences aged 10+. Breathtaking projected environments — from the enchanted forest intro to the dramatic staircase sequences and the swan lake finale — driven live alongside the performance. Music by Engelbert Humperdinck, sung in German with Dutch subtitles.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Unreal Engine 5</span>
+          <span class="ar-tech-tag">Real-time Rendering</span>
+          <span class="ar-tech-tag tool">Live Production</span>
+          <span class="ar-tech-tag">3D Projection Mapping</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
+      <video controls style="width:100%;display:block;">
+        <source src="Swans_3kb.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="ar-mosaic ar-reveal"
+         x-data="{ slides:[
+           {id:1, video:'Intro Forest_3kb.mp4', cap:'Intro — Enchanted Forest'},
+           {id:2, video:'Stairs Run_3kb.mp4',   cap:'Scene — Staircase Run'},
+           {id:3, video:'Swans_3kb.mp4',         cap:'Finale — Swans'},
+         ] }">
+      <template x-for="s in slides" :key="s.id">
+        <div class="ar-mosaic-item">
+          <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
+            <source :src="s.video" type="video/mp4">
+          </video>
+          <div class="caption" x-text="s.cap"></div>
+        </div>
+      </template>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         PROJECT 2 — BOND OF UNION
+         ═══════════════════════════════════ -->
+    <hr class="ar-divider" />
+
+    <h3 class="ar-section-title ar-reveal" id="1">Bond of Union</h3>
+    <p class="ar-section-sub">// CONCEPTUAL CG · M.C. ESCHER INTERPRETATION · PERSONAL PRODUCTION</p>
+
+    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-gold);">
+      <div>
+        <p>A personal CG interpretation of M.C. Escher's "Bond of Union", blending Guido Moretti's sculptural style with Escher's illusory geometry. Conceptualised, designed and rendered entirely by me during my time at TinyGiants with their creative open-door invitation. The animation exploits shifting vantage points — side and front — to reveal distinct personalities within a single unified form.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Unreal Engine 5</span>
+          <span class="ar-tech-tag render">OTOY Octane</span>
+          <span class="ar-tech-tag">Cinema 4D</span>
+          <span class="ar-tech-tag tool">After Effects</span>
+          <span class="ar-tech-tag">Conceptual Art</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
+      <video controls style="width:100%;display:block;">
+        <source src="Bond Of Union_3kb.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="ar-mosaic ar-reveal"
+         x-data="{ slides:[
+           {id:1, src:'Bond_Of_Union_V1.png',        cap:'Final render'},
+           {id:2, src:'BondOfUnion.gif',              cap:'Animation loop'},
+           {id:3, src:'MCEscher-Bond-of-union.jpeg',  cap:'M.C. Escher reference'},
+           {id:4, src:'Parallelepipedi.jpg',           cap:'Geometry study'},
+         ] }">
+      <template x-for="s in slides" :key="s.id">
+        <div class="ar-mosaic-item">
+          <img :src="s.src" :alt="s.cap" />
+          <div class="caption" x-text="s.cap"></div>
+        </div>
+      </template>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         PROJECT 3 — AOC KEYBOARD
+         ═══════════════════════════════════ -->
+    <hr class="ar-divider" />
+
+    <h3 class="ar-section-title ar-reveal" id="4">AOC Keyboard Animation</h3>
+    <p class="ar-section-sub">// PRODUCT ANIMATION · C4D SIMULATION · OCTANE RENDER · COMPOSITING</p>
+
+    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-green);">
+      <div>
+        <p>Reworked and personalised the AOC keyboard presentation originally produced by the TinyGiants team for their client. I adapted the keyboard layout across the keys, then animated and rendered several sequences — exploring Cinema 4D's simulation tools and complex multi-pass compositing in After Effects. A pivotal production for levelling up in color-space management and project organisation in Ae.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag">Cinema 4D</span>
+          <span class="ar-tech-tag render">OTOY Octane</span>
+          <span class="ar-tech-tag tool">After Effects</span>
+          <span class="ar-tech-tag">Cloth Simulation</span>
+          <span class="ar-tech-tag">Product Viz</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
+      <video controls style="width:100%;display:block;">
+        <source src="Aockeyboard V2.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="ar-mosaic ar-reveal"
+         x-data="{ slides:[
+           {id:1, src:'AOC Keyboard.png',    cap:'Hero render'},
+           {id:2, src:'RockEmAOC_02_V1.png', cap:'Sequence frame'},
+           {id:3, src:'close-Up.png',         cap:'Closeup detail'},
+           {id:4, src:'Cloth_Sim_01_V2.png',  cap:'Cloth simulation frame'},
+           {id:5, src:'RockEmAOC_01_V1.png',  cap:'Alternate angle'},
+         ] }">
+      <template x-for="s in slides" :key="s.id">
+        <div class="ar-mosaic-item">
+          <img :src="s.src" :alt="s.cap" />
+          <div class="caption" x-text="s.cap"></div>
+        </div>
+      </template>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         PROJECT 4 — MUSCLE CAR
+         ═══════════════════════════════════ -->
+    <hr class="ar-divider" />
+
+    <h3 class="ar-section-title ar-reveal" id="3">Muscle Car Showcase</h3>
+    <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
+
+    <div class="ar-summary-card ar-reveal">
+      <div>
+        <p>Provided with a complete scene, materials, and lights by TinyGiants, I was tasked with creating a fun, driven animation and compositing the render passes and shots in Adobe After Effects. Extremely educational — it brought my understanding of proper color spaces and project management in Ae up to professional standard.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag render">OTOY Octane</span>
+          <span class="ar-tech-tag tool">After Effects</span>
+          <span class="ar-tech-tag">Render Pass Comp.</span>
+          <span class="ar-tech-tag">Camera Animation</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
+      <video controls style="width:100%;display:block;">
+        <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="ar-mosaic ar-reveal"
+         x-data="{ slides:[
+           {id:1, src:'Hum3DCar.png',          cap:'Front render'},
+           {id:2, src:'hum3DCar_back.png',      cap:'Rear render'},
+           {id:3, src:'Hum3dCarShowcase.gif',   cap:'Animation preview'},
+         ] }">
+      <template x-for="s in slides" :key="s.id">
+        <div class="ar-mosaic-item">
+          <img :src="s.src" :alt="s.cap" />
+          <div class="caption" x-text="s.cap"></div>
+        </div>
+      </template>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         PROJECT 5 — COULISSE
+         ═══════════════════════════════════ -->
+    <hr class="ar-divider" />
+
+    <h3 class="ar-section-title ar-reveal" id="5">Coulisse Product Animations</h3>
+    <p class="ar-section-sub">// CLIENT WORK · PRODUCT VIZ · OCTANE · AFTER EFFECTS</p>
+
+    <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
+      <div>
+        <p>Intricate product animations timed and matched to screen recordings of live interactions with Coulisse smart-home products. Octane-rendered scenes composited with live interaction footage in After Effects — assembled into a polished complete marketing video across a range of products.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag render">OTOY Octane</span>
+          <span class="ar-tech-tag tool">After Effects</span>
+          <span class="ar-tech-tag">Cinema 4D</span>
+          <span class="ar-tech-tag">Product Animation</span>
+          <span class="ar-tech-tag">Screen Composite</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;" class="ar-reveal">
+      <video controls style="width:100%;display:block;">
+        <source src="MB_reveal_2kb.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="ar-mosaic ar-reveal"
+         x-data="{ slides:[
+           {id:1, video:'MB_mounting_2kb.mp4', cap:'Mounting sequence'},
+           {id:2, video:'MB_App_2kb.mp4',       cap:'App interaction composite'},
+         ] }">
+      <template x-for="s in slides" :key="s.id">
+        <div class="ar-mosaic-item">
+          <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
+            <source :src="s.video" type="video/mp4">
+          </video>
+          <div class="caption" x-text="s.cap"></div>
+        </div>
+      </template>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         PROJECT 6 — LOGO TRANSITION
+         ═══════════════════════════════════ -->
+    <hr class="ar-divider" />
+
+    <h3 class="ar-section-title ar-reveal">TinyGiants Logo Transition</h3>
+    <p class="ar-section-sub">// MOTION DESIGN · UNREAL ENGINE 5 · AFTER EFFECTS · PERSONAL</p>
+
+    <div class="ar-summary-card ar-reveal">
+      <div>
+        <p>A fun-packed personal day exploring compositing of shots rendered from Unreal Engine 5 — playful eye-candy built around the former TinyGiants logo. Two whip-transition sequences: one set in a forest environment, one in a studio scene.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Unreal Engine 5</span>
+          <span class="ar-tech-tag tool">After Effects</span>
+          <span class="ar-tech-tag">Motion Design</span>
+          <span class="ar-tech-tag">Logo Animation</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:1.5rem 0;border:1px solid var(--border-glow);" class="ar-reveal">
+      <video controls style="width:100%;display:block;">
+        <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
+      </video>
+      <video controls style="width:100%;display:block;">
+        <source src="TG_logo_studio_3kb.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div><!-- /ar-page -->
+
+  <footer class="ar-footer">
+    &copy; 2025 Vasil Grancharov / ArtRevolt
+  </footer>
+
+  <!-- PREV / NEXT -->
+  <div class="ar-footer-nav"
+       x-data="{ isHalfway: false }"
+       @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
+       @click="if(!isHalfway) $event.preventDefault()">
+      <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
+      <span class="label">Game Dev</span>
+    </a>
+    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+       :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null"
+       @click="if(!isHalfway) $event.preventDefault()">
+      <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
+      <span class="label">Speedboat</span>
+    </a>
   </div>
+
 </body>
-
 </html>
