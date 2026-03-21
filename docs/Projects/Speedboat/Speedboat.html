@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speedboat — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
 
-  <!-- NAVIGATION -->
-  <nav class="ar-nav">
-    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
-    <ul class="ar-nav-links">
-      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-      <li><a href="/Canvas.html">Canvas</a></li>
-      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-      <li><a href="/Contacts.html">Contact</a></li>
-    </ul>
-  </nav>
+<div x-data="{
+  lightbox: null,
+  lightboxCaption: '',
+  openLightbox(src, caption) {
+    this.lightbox = src;
+    this.lightboxCaption = caption || '';
+    document.body.style.overflow = 'hidden';
+  },
+  closeLightbox() {
+    this.lightbox = null;
+    document.body.style.overflow = '';
+  }
+}">
 
-  <!-- HERO SLIDESHOW -->
-  <div class="ar-hero"
-       x-data="{
+  <body>
+
+    <!-- NAVIGATION -->
+    <nav class="ar-nav">
+      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+      <ul class="ar-nav-links">
+        <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO SLIDESHOW -->
+    <div class="ar-hero" x-data="{
          index: 0,
          slides: [
            { id:1, image:'Speedboat-moment-side.jpg' },
@@ -33,106 +50,18 @@
            { id:3, image:'Speedboat-moment-back.jpg' },
          ],
          autoSlide() { setInterval(() => { this.index = (this.index+1) % this.slides.length; }, 4500); }
-       }"
-       x-init="autoSlide">
-    <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
-      <template x-for="s in slides" :key="s.id">
-        <div style="min-width:100%;position:relative;">
-          <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
-        </div>
-      </template>
-    </div>
-    <div class="ar-hero-overlay"></div>
-    <div class="ar-hero-text">
-      <h1><span class="glow-text">Speedboat</span></h1>
-      <p>3D Model &amp; Vehicle Mechanics</p>
-    </div>
-    <div class="ar-hero-dots">
-      <template x-for="(s,i) in slides" :key="i">
-        <button @click="index=i" :class="{active:index===i}"></button>
-      </template>
-    </div>
-  </div>
-
-  <!-- PAGE CONTENT -->
-  <div class="ar-page">
-
-    <!-- PROJECT SUMMARY CARD -->
-    <div class="ar-summary-card ar-reveal">
-      <div>
-        <h2>Speedboat — WallyPower 80</h2>
-        <p>Hard-surface model inspired by real-life reference of the WallyPower 80 series. Training production focused on hard-surface modelling and realistic vehicle mechanics including buoyancy simulation. The model was used to develop physical behavior on a water surface, with a custom water shader built using Unreal Engine's Material Editor and Material Functions.</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 4</span>
-          <span class="ar-tech-tag">Maya / 3DS-Max</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag render">Octane Render</span>
-          <span class="ar-tech-tag">Vehicle Physics</span>
-          <span class="ar-tech-tag">Water Shader</span>
-          <span class="ar-tech-tag">Buoyancy System</span>
-        </div>
-      </div>
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Artist<br>Tech Artist</div>
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">TYPE</div>
-        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Personal Project</div>
-      </div>
-    </div>
-
-    <!-- MOSAIC -->
-    <h3 class="ar-section-title ar-reveal">Gallery</h3>
-    <p class="ar-section-sub">// HARD-SURFACE DETAIL RENDERS</p>
-
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides: [
-           {id:1, src:'Boarding.jpg',      cap:'Boarding view'},
-           {id:2, src:'top-view.png',      cap:'Top view'},
-           {id:3, src:'third-person.png',  cap:'Third-person'},
-           {id:4, src:'quick-preview.gif', cap:'Real-time preview'},
-           {id:5, src:'Speedboat-moment-control.jpg', cap:'Control board'},
-           {id:6, src:'Speedboat-moment-kitchen.png', cap:'Interior cabin'},
-         ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
-    </div>
-
-    <!-- EXTRA INFO BLOCK -->
-    <div class="ar-media-input ar-reveal">
-      <div class="ar-media-input-icon-placeholder">🚤</div>
-      <p class="ar-media-input-text">
-        The water shader is built with Unreal Engine's Material Editor using custom Material Functions for wave displacement and surface refraction. Vehicle physics implemented with buoyancy forces calculated against a dynamic ocean heightfield. (Original project archive lost — shown from backup renders.)
-      </p>
-    </div>
-
-    <hr class="ar-divider" />
-
-    <!-- BUGGY SECTION -->
-    <div
-      x-data="{
-        index:0,
-        slides:[
-          {id:1,image:'Buggy-front.png'},
-          {id:2,image:'Buggy-top-down.jpg'},
-          {id:3,image:'Buggy-side-by-side.jpg'},
-        ],
-        autoSlide(){ setInterval(()=>{ this.index=(this.index+1)%this.slides.length; },4000); }
-      }"
-      x-init="autoSlide"
-      class="ar-hero ar-reveal" style="margin:0 -2rem;">
+       }" x-init="autoSlide">
       <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
         <template x-for="s in slides" :key="s.id">
-          <div style="min-width:100%;"><img :src="s.image" style="width:100%;height:50vh;object-fit:cover;display:block;" /></div>
+          <div style="min-width:100%;position:relative;">
+            <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
+          </div>
         </template>
       </div>
       <div class="ar-hero-overlay"></div>
       <div class="ar-hero-text">
-        <h1 style="font-size:2rem;"><span class="glow-text">Buggy</span></h1>
-        <p>Game Vehicle Asset</p>
+        <h1><span class="glow-text">Speedboat</span></h1>
+        <p>3D Model &amp; Vehicle Mechanics</p>
       </div>
       <div class="ar-hero-dots">
         <template x-for="(s,i) in slides" :key="i">
@@ -141,60 +70,152 @@
       </div>
     </div>
 
-    <div class="ar-summary-card ar-reveal" style="margin-top:2rem;">
-      <div>
-        <h2>Off-Road Buggy</h2>
-        <p>Passion project. A game-ready vehicle asset developed for a GameJam using Unity 2020. Rendered in Unreal Engine 4.25 for portfolio purposes. (Original archive lost.)</p>
-        <div class="ar-tech-stack">
-          <span class="ar-tech-tag engine">Unreal Engine 4</span>
-          <span class="ar-tech-tag engine">Unity 2020</span>
-          <span class="ar-tech-tag">Maya</span>
-          <span class="ar-tech-tag tool">Substance Painter</span>
-          <span class="ar-tech-tag">GameJam</span>
+    <!-- PAGE CONTENT -->
+    <div class="ar-page">
+
+      <!-- PROJECT SUMMARY CARD -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>Speedboat — WallyPower 80</h2>
+          <p>Hard-surface model inspired by real-life reference of the WallyPower 80 series. Training production focused
+            on hard-surface modelling and realistic vehicle mechanics including buoyancy simulation. The model was used
+            to develop physical behavior on a water surface, with a custom water shader built using Unreal Engine's
+            Material Editor and Material Functions.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 4</span>
+            <span class="ar-tech-tag">Maya / 3DS-Max</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag render">Octane Render</span>
+            <span class="ar-tech-tag">Vehicle Physics</span>
+            <span class="ar-tech-tag">Water Shader</span>
+            <span class="ar-tech-tag">Buoyancy System</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Artist<br>Tech Artist</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            TYPE</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Personal Project</div>
         </div>
       </div>
-    </div>
 
-    <div class="ar-mosaic ar-reveal"
-         x-data="{ slides: [
+      <!-- MOSAIC -->
+      <h3 class="ar-section-title ar-reveal">Gallery</h3>
+      <p class="ar-section-sub">// HARD-SURFACE DETAIL RENDERS</p>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides: [
+           {id:1, src:'Boarding.jpg',      cap:'Boarding view'},
+           {id:2, src:'top-view.png',      cap:'Top view'},
+           {id:3, src:'third-person.png',  cap:'Third-person'},
+           {id:4, src:'quick-preview.gif', cap:'Real-time preview'},
+           {id:5, src:'Speedboat-moment-control.jpg', cap:'Control board'},
+           {id:6, src:'Speedboat-moment-kitchen.png', cap:'Interior cabin'},
+         ] }">
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- EXTRA INFO BLOCK -->
+      <div class="ar-media-input ar-reveal">
+        <div class="ar-media-input-icon-placeholder">🚤</div>
+        <p class="ar-media-input-text">
+          The water shader is built with Unreal Engine's Material Editor using custom Material Functions for wave
+          displacement and surface refraction. Vehicle physics implemented with buoyancy forces calculated against a
+          dynamic ocean heightfield. (Original project archive lost — shown from backup renders.)
+        </p>
+      </div>
+
+      <hr class="ar-divider" />
+
+      <!-- BUGGY SECTION -->
+      <div x-data="{
+        index:0,
+        slides:[
+          {id:1,image:'Buggy-front.png'},
+          {id:2,image:'Buggy-top-down.jpg'},
+          {id:3,image:'Buggy-side-by-side.jpg'},
+        ],
+        autoSlide(){ setInterval(()=>{ this.index=(this.index+1)%this.slides.length; },4000); }
+      }" x-init="autoSlide" class="ar-hero ar-reveal" style="margin:0 -2rem;">
+        <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
+          <template x-for="s in slides" :key="s.id">
+            <div style="min-width:100%;"><img :src="s.image"
+                style="width:100%;height:50vh;object-fit:cover;display:block;" /></div>
+          </template>
+        </div>
+        <div class="ar-hero-overlay"></div>
+        <div class="ar-hero-text">
+          <h1 style="font-size:2rem;"><span class="glow-text">Buggy</span></h1>
+          <p>Game Vehicle Asset</p>
+        </div>
+        <div class="ar-hero-dots">
+          <template x-for="(s,i) in slides" :key="i">
+            <button @click="index=i" :class="{active:index===i}"></button>
+          </template>
+        </div>
+      </div>
+
+      <div class="ar-summary-card ar-reveal" style="margin-top:2rem;">
+        <div>
+          <h2>Off-Road Buggy</h2>
+          <p>Passion project. A game-ready vehicle asset developed for a GameJam using Unity 2020. Rendered in Unreal
+            Engine 4.25 for portfolio purposes. (Original archive lost.)</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 4</span>
+            <span class="ar-tech-tag engine">Unity 2020</span>
+            <span class="ar-tech-tag">Maya</span>
+            <span class="ar-tech-tag tool">Substance Painter</span>
+            <span class="ar-tech-tag">GameJam</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides: [
            {id:1, src:'Buggy-raw.jpg',           cap:'Raw mesh'},
            {id:2, src:'Buggy-closeup-front.jpg', cap:'Front closeup'},
            {id:3, src:'Buggy-closeup-back.jpg',  cap:'Rear closeup'},
            {id:4, src:'Buggy-side-by-side_2.jpg',cap:'Side by side'},
            {id:5, src:'Buggy-top-down_2.jpg',    cap:'Top-down view'},
          ] }">
-      <template x-for="s in slides" :key="s.id">
-        <div class="ar-mosaic-item">
-          <img :src="s.src" :alt="s.cap" />
-          <div class="caption" x-text="s.cap"></div>
-        </div>
-      </template>
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2025 Vasil Grancharov / ArtRevolt
+    </footer>
+
+    <!-- PREV / NEXT NAV -->
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <!-- Prev -->
+      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/TG/TinyGiants.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/TG/Swans.gif" alt="TinyGiants" />
+        <span class="label">TinyGiants</span>
+      </a>
+      <!-- Next -->
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+        :href="isHalfway ? '/Projects/UE/UnrealEngine.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/UE/Cloth sim compare.gif" alt="Unreal Engine" />
+        <span class="label">Unreal Engine</span>
+      </a>
     </div>
 
-  </div><!-- /ar-page -->
+  </body>
+</div>
 
-  <footer class="ar-footer">
-    &copy; 2025 Vasil Grancharov / ArtRevolt
-  </footer>
-
-  <!-- PREV / NEXT NAV -->
-  <div class="ar-footer-nav"
-       x-data="{ isHalfway: false }"
-       @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-    <!-- Prev -->
-    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/TG/TinyGiants.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/TG/Swans.gif" alt="TinyGiants" />
-      <span class="label">TinyGiants</span>
-    </a>
-    <!-- Next -->
-    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-       :href="isHalfway ? '/Projects/UE/UnrealEngine.html' : null"
-       @click="if(!isHalfway) $event.preventDefault()">
-      <img class="thumb" src="/Projects/UE/Cloth sim compare.gif" alt="Unreal Engine" />
-      <span class="label">Unreal Engine</span>
-    </a>
-  </div>
-
-</body>
 </html>
