@@ -372,13 +372,13 @@
       color: #c077ff
     }
 
-    /* ── BLUEPRINT TOC PREVIEW POPUP ─────────── */
+    /* ── BLUEPRINT TOC PREVIEW POPUP — DOCKED ── */
     .bp-preview {
       position: absolute;
-      left: calc(100% + 12px);
+      right: 24px;
       top: 50%;
-      transform: translateY(-50%) translateX(-6px);
-      width: 220px;
+      transform: translateY(-50%) translateX(8px);
+      width: 380px;
       background: #0d1525;
       border: 1px solid var(--border-glow);
       border-radius: 4px;
@@ -390,14 +390,14 @@
       overflow: hidden;
     }
 
-    .bp-node:hover .bp-preview {
+    .bp-preview.is-visible {
       opacity: 1;
       transform: translateY(-50%) translateX(0);
     }
 
     .bp-preview img {
       width: 100%;
-      height: 110px;
+      height: 200px;
       object-fit: cover;
       display: block;
       border-bottom: 1px solid var(--border-glow);
@@ -405,7 +405,7 @@
 
     .bp-preview .bp-preview-img-placeholder {
       width: 100%;
-      height: 110px;
+      height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -418,16 +418,16 @@
     }
 
     .bp-preview-body {
-      padding: 8px 10px 10px;
+      padding: 10px 12px 12px;
     }
 
     .bp-preview-title {
       font-family: var(--font-display);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       color: var(--text-primary);
-      margin: 0 0 3px;
+      margin: 0 0 4px;
     }
 
     .bp-preview-desc {
@@ -435,20 +435,8 @@
       font-size: 0.68rem;
       letter-spacing: 0.04em;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.6;
       margin: 0;
-    }
-
-    /* Pin the popup below the node on the last 2 items
-   so it doesn't clip above the canvas top */
-    .bp-node:nth-last-child(-n+2) .bp-preview {
-      bottom: auto;
-      top: calc(100% + 10px);
-      transform: translateX(-50%) translateY(-4px);
-    }
-
-    .bp-node:nth-last-child(-n+2):hover .bp-preview {
-      transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
@@ -690,7 +678,7 @@
               anchor: '#toc-aoc',
               preview: 'AOC Keyboard.png',
               previewTitle: 'AOC Keyboard Animation',
-              previewDesc: 'Dynamic product animation with C4D simulations and multi-pass After Effects compositing.'
+              previewDesc: 'Dynamic product animation with C4D simulations and After Effects compositing.'
             },
             {
               id: 'car',
@@ -712,7 +700,7 @@
               anchor: '#toc-coulisse',
               preview: 'Coulisse.png',
               previewTitle: 'Coulisse Product Animations',
-              previewDesc: 'Octane renders composited with live product interaction recordings for a full marketing video.'
+              previewDesc: 'Octane renders composited with live product interaction recordings.'
             },
             {
               id: 'logo',
@@ -728,16 +716,24 @@
           ];
 
           var col = document.getElementById('bp-col');
+          var canvas = document.getElementById('bp-canvas');
 
+          /* ── Shared docked preview element ── */
+          var preview = document.createElement('div');
+          preview.className = 'bp-preview';
+          preview.innerHTML =
+            '<div class="bp-preview-img-placeholder">Hover a node</div>' +
+            '<div class="bp-preview-body">' +
+            '<p class="bp-preview-title">—</p>' +
+            '<p class="bp-preview-desc">Hover any section node to preview it here.</p>' +
+            '</div>';
+          canvas.appendChild(preview);
+
+          /* ── Build nodes ── */
           SECTIONS.forEach(function (s) {
             var div = document.createElement('div');
             div.className = 'bp-node bp-' + s.theme;
             div.id = 'bp-node-' + s.id;
-            div.style.position = 'relative';  /* needed for popup positioning */
-
-            var imgHtml = s.preview
-              ? '<img src="' + s.preview + '" alt="' + s.label + '" />'
-              : '<div class="bp-preview-img-placeholder">No preview</div>';
 
             div.innerHTML =
               '<a href="' + s.anchor + '">' +
@@ -753,22 +749,32 @@
               '</div>' +
               '<div class="bp-jump">Jump to section <span class="bp-jump-arrow">→</span></div>' +
               '</div>' +
-              '</a>' +
-              /* preview popup — outside the <a> so it doesn't trigger navigation */
-              '<div class="bp-preview">' +
-              imgHtml +
-              '<div class="bp-preview-body">' +
-              '<p class="bp-preview-title">' + s.previewTitle + '</p>' +
-              '<p class="bp-preview-desc">' + s.previewDesc + '</p>' +
-              '</div>' +
-              '</div>';
+              '</a>';
+
+            /* ── Hover: swap preview content ── */
+            div.addEventListener('mouseenter', function () {
+              var imgHtml = s.preview
+                ? '<img src="' + s.preview + '" alt="' + s.label + '" />'
+                : '<div class="bp-preview-img-placeholder">No preview</div>';
+              preview.innerHTML =
+                imgHtml +
+                '<div class="bp-preview-body">' +
+                '<p class="bp-preview-title">' + s.previewTitle + '</p>' +
+                '<p class="bp-preview-desc">' + s.previewDesc + '</p>' +
+                '</div>';
+              preview.classList.add('is-visible');
+            });
+
+            div.addEventListener('mouseleave', function () {
+              preview.classList.remove('is-visible');
+            });
 
             col.appendChild(div);
           });
 
+          /* ── Wire drawing ── */
           function drawWires() {
             var svg = document.getElementById('bp-wires');
-            var canvas = document.getElementById('bp-canvas');
             var pinEl = document.getElementById('bp-entry-out');
             svg.innerHTML = '';
             var cr = canvas.getBoundingClientRect();
