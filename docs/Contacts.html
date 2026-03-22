@@ -220,17 +220,31 @@
 <body>
 
   <!-- NAVIGATION -->
-  <nav class="ar-nav" style="position:relative;" x-data="{ open: false }">
+  <!-- HOVER TRIGGER STRIP -->
+  <div class="ar-nav-trigger"
+       x-data
+       @mouseenter="$dispatch('nav-open')"
+       @touchstart.passive="$dispatch('nav-toggle')">
+  </div>
+
+  <!-- NAV BAR -->
+  <nav class="ar-nav"
+       x-data="{ open: false }"
+       :class="{ 'is-open': open }"
+       @nav-open.window="open = true"
+       @nav-close.window="open = false"
+       @nav-toggle.window="open = !open"
+       @mouseleave="open = false"
+       @keydown.escape.window="open = false">
 
     <!-- Logo -->
     <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
       Art<span class="accent">Revolt</span>
     </a>
 
-    <!-- Hamburger button -->
+    <!-- Hamburger -->
     <button class="ar-hamburger"
             @click="open = !open"
-            @keydown.escape.window="open = false"
             :aria-expanded="open"
             aria-label="Toggle menu">
       <div class="stripe stripe-1"></div>
@@ -242,15 +256,13 @@
     <div class="ar-dropdown"
          x-show="open"
          x-transition:enter="transition duration-150 ease-out"
-         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-start="opacity-0 -translate-y-1"
          x-transition:enter-end="opacity-100 translate-y-0"
          x-transition:leave="transition duration-100 ease-in"
          x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-2"
-         @click.outside="open = false"
-         @keydown.escape.window="open = false">
+         x-transition:leave-end="opacity-0 -translate-y-1"
+         @click.outside="open = false">
 
-      <!-- Page links -->
       <ul class="ar-nav-links">
         <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
         <li><a href="/Canvas.html">Canvas</a></li>
@@ -260,7 +272,6 @@
 
       <div class="ar-dropdown-divider"></div>
 
-      <!-- Social links -->
       <div class="ar-dropdown-social">
         <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 448 512">

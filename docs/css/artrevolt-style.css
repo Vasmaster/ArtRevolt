@@ -51,37 +51,54 @@ body::before {
   z-index: 0;
 }
 
-/* === NAVIGATION === */
-.ar-nav {
-  position: sticky;
+/* ── AUTOHIDE NAV ─────────────────────────── */
+
+/* Invisible hover trigger strip — always on top */
+.ar-nav-trigger {
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  height: 4vh;
+  z-index: 300;
+  cursor: default;
+}
+
+/* The nav bar itself — slides in from above */
+.ar-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 2rem;
-  background: rgba(5,8,16,0.85);
+  background: rgba(5, 8, 16, 0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-glow);
+
+  /* Hidden above the viewport by default */
+  transform: translateY(-110%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity   0.35s ease;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.ar-logo {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 0;
+/* Revealed state */
+.ar-nav.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
 }
 
-.ar-logo .accent {
-  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-magenta));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Push page content down so the nav doesn't cover it when open.
+   Add this class to <body> if you want the page to shift — 
+   leave it out for a true overlay effect (recommended for full-bleed hero). */
+.nav-pushes-content .ar-nav.is-open ~ * {
+  padding-top: 64px;
 }
 
 /* ── HAMBURGER MENU ───────────────────────── */
