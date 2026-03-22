@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/artrevolt-style.css">
 
   <style>
@@ -98,7 +101,7 @@
     .ar-field input:focus,
     .ar-field textarea:focus {
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 0 1px var(--accent-cyan), 0 0 16px rgba(0,229,255,0.1);
+      box-shadow: 0 0 0 1px var(--accent-cyan), 0 0 16px rgba(0, 229, 255, 0.1);
     }
 
     .ar-field textarea {
@@ -129,10 +132,14 @@
 
     .ar-submit:hover {
       background: var(--accent-green);
-      box-shadow: 0 0 24px rgba(57,255,138,0.35);
+      box-shadow: 0 0 24px rgba(57, 255, 138, 0.35);
     }
 
-    .ar-submit svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .ar-submit svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
 
     /* Contact info sidebar */
     .contact-info {
@@ -204,47 +211,48 @@
 
     .contact-social-link:hover {
       color: var(--accent-gold);
-      border-color: rgba(240,192,64,0.35);
-      background: rgba(240,192,64,0.04);
+      border-color: rgba(240, 192, 64, 0.35);
+      background: rgba(240, 192, 64, 0.04);
     }
 
-    .contact-social-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .contact-social-link svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
 
     /* Success / error states via CSS (Formspree handles redirect) */
     @media (max-width: 720px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      .contact-wrap { padding: 2.5rem 1rem 5rem; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-wrap {
+        padding: 2.5rem 1rem 5rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- NAVIGATION -->
   <!-- HOVER TRIGGER STRIP -->
-  <div class="ar-nav-trigger"
-       x-data
-       @mouseenter="$dispatch('nav-open')"
-       @touchstart.passive="$dispatch('nav-toggle')">
+  <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')" @touchstart.passive="$dispatch('nav-toggle')">
   </div>
 
   <!-- NAV BAR -->
-  <nav class="ar-nav"
-       x-data="{
-         open: false,
-         atTop: true,
-         init() {
+  <nav class="ar-nav" x-data="{
+       open: false,
+       atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => {
            this.atTop = window.scrollY < window.innerHeight * 0.08;
-           window.addEventListener('scroll', () => {
-             this.atTop = window.scrollY < window.innerHeight * 0.08;
-             if (this.atTop) this.open = false;
-           }, { passive: true });
-         }
-       }"
-       :class="{ 'is-open': open || atTop }"
-       @nav-open.window="if (!atTop) open = true"
-       @nav-toggle.window="open = !open"
-       @mouseleave="if (!atTop) open = false"
-       @keydown.escape.window="open = false">
+           if (this.atTop) this.open = false;
+         }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+    @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
 
     <!-- Logo -->
     <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
@@ -252,31 +260,23 @@
     </a>
 
     <!-- Hamburger -->
-    <button class="ar-hamburger"
-            @click="open = !open"
-            :aria-expanded="open"
-            aria-label="Toggle menu">
+    <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
       <div class="stripe stripe-1"></div>
       <div class="stripe stripe-2"></div>
       <div class="stripe stripe-3"></div>
     </button>
 
     <!-- Dropdown -->
-    <div class="ar-dropdown"
-         x-show="open"
-         x-transition:enter="transition duration-150 ease-out"
-         x-transition:enter-start="opacity-0 -translate-y-1"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition duration-100 ease-in"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-1"
-         @click.outside="open = false">
+    <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+      x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
 
       <ul class="ar-nav-links">
         <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
         <li><a href="/Canvas.html">Canvas</a></li>
         <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-        <li><a href="/Contacts.html" class="active">Contact</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
       </ul>
 
       <div class="ar-dropdown-divider"></div>
@@ -284,13 +284,15 @@
       <div class="ar-dropdown-social">
         <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 448 512">
-            <path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/>
+            <path
+              d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
           </svg>
           LinkedIn
         </a>
         <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
           X / Twitter
         </a>
@@ -332,8 +334,10 @@
         </div>
 
         <button type="submit" class="ar-submit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
           </svg>
           Send Message
         </button>
@@ -364,17 +368,27 @@
           <p class="contact-info-heading">// Social &amp; portfolio</p>
 
           <a href="https://linkedin.com/in/vasil-grancharov" class="contact-social-link" target="_blank" rel="noopener">
-            <svg fill="currentColor" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/></svg>
+            <svg fill="currentColor" viewBox="0 0 448 512">
+              <path
+                d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+            </svg>
             linkedin.com/in/vasil-grancharov
           </a>
 
           <a href="https://x.com/Art_Revolt" class="contact-social-link" target="_blank" rel="noopener">
-            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
             x.com/Art_Revolt
           </a>
 
           <a href="https://vasmaster.github.io/ArtRevolt" class="contact-social-link" target="_blank" rel="noopener">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
             ArtRevolt Portfolio
           </a>
         </div>
@@ -389,4 +403,5 @@
   </footer>
 
 </body>
+
 </html>

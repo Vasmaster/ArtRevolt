@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV — Vasil Grancharov</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
 
   <style>
@@ -36,7 +39,7 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--accent-cyan);
-      box-shadow: 0 0 20px rgba(0,229,255,0.25);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.25);
       flex-shrink: 0;
     }
 
@@ -89,7 +92,7 @@
     .cv-contact-link:hover {
       color: var(--accent-cyan);
       border-color: var(--accent-cyan);
-      background: rgba(0,229,255,0.04);
+      background: rgba(0, 229, 255, 0.04);
     }
 
     /* Section heading (CV context) */
@@ -248,8 +251,13 @@
       padding: 1.25rem;
     }
 
-    .cv-skills-col:nth-child(2) { border-top-color: var(--accent-magenta); }
-    .cv-skills-col:nth-child(3) { border-top-color: var(--accent-gold); }
+    .cv-skills-col:nth-child(2) {
+      border-top-color: var(--accent-magenta);
+    }
+
+    .cv-skills-col:nth-child(3) {
+      border-top-color: var(--accent-gold);
+    }
 
     .cv-skills-col h3 {
       font-family: var(--font-display);
@@ -286,8 +294,13 @@
       font-size: 0.6rem;
     }
 
-    .cv-skills-col:nth-child(2) ul li::before { color: var(--accent-magenta); }
-    .cv-skills-col:nth-child(3) ul li::before { color: var(--accent-gold); }
+    .cv-skills-col:nth-child(2) ul li::before {
+      color: var(--accent-magenta);
+    }
+
+    .cv-skills-col:nth-child(3) ul li::before {
+      color: var(--accent-gold);
+    }
 
     /* Software mosaic */
     .cv-software-grid {
@@ -333,40 +346,41 @@
     }
 
     @media (max-width: 680px) {
-      .cv-profile { flex-direction: column; gap: 1.5rem; }
-      .cv-skills-grid { grid-template-columns: 1fr; }
-      .cv-wrap { padding: 2rem 1rem 6rem; }
+      .cv-profile {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .cv-skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-wrap {
+        padding: 2rem 1rem 6rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- NAVIGATION -->
   <!-- HOVER TRIGGER STRIP -->
-  <div class="ar-nav-trigger"
-       x-data
-       @mouseenter="$dispatch('nav-open')"
-       @touchstart.passive="$dispatch('nav-toggle')">
+  <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')" @touchstart.passive="$dispatch('nav-toggle')">
   </div>
 
   <!-- NAV BAR -->
-  <nav class="ar-nav"
-       x-data="{
-         open: false,
-         atTop: true,
-         init() {
+  <nav class="ar-nav" x-data="{
+       open: false,
+       atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => {
            this.atTop = window.scrollY < window.innerHeight * 0.08;
-           window.addEventListener('scroll', () => {
-             this.atTop = window.scrollY < window.innerHeight * 0.08;
-             if (this.atTop) this.open = false;
-           }, { passive: true });
-         }
-       }"
-       :class="{ 'is-open': open || atTop }"
-       @nav-open.window="if (!atTop) open = true"
-       @nav-toggle.window="open = !open"
-       @mouseleave="if (!atTop) open = false"
-       @keydown.escape.window="open = false">
+           if (this.atTop) this.open = false;
+         }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+    @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
 
     <!-- Logo -->
     <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
@@ -374,30 +388,22 @@
     </a>
 
     <!-- Hamburger -->
-    <button class="ar-hamburger"
-            @click="open = !open"
-            :aria-expanded="open"
-            aria-label="Toggle menu">
+    <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
       <div class="stripe stripe-1"></div>
       <div class="stripe stripe-2"></div>
       <div class="stripe stripe-3"></div>
     </button>
 
     <!-- Dropdown -->
-    <div class="ar-dropdown"
-         x-show="open"
-         x-transition:enter="transition duration-150 ease-out"
-         x-transition:enter-start="opacity-0 -translate-y-1"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition duration-100 ease-in"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-1"
-         @click.outside="open = false">
+    <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+      x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
 
       <ul class="ar-nav-links">
         <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
         <li><a href="/Canvas.html">Canvas</a></li>
-        <li><a href="/CV_Vasil-Grancharov.html" class="active">CV</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
         <li><a href="/Contacts.html">Contact</a></li>
       </ul>
 
@@ -406,13 +412,15 @@
       <div class="ar-dropdown-social">
         <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 448 512">
-            <path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/>
+            <path
+              d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
           </svg>
           LinkedIn
         </a>
         <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
           X / Twitter
         </a>
@@ -429,14 +437,23 @@
       <div class="cv-profile-text">
         <h1>Vasil Grancharov</h1>
         <p class="title-line">3D Generalist · VFX Artist · VR Developer · Game Designer · Painter</p>
-        <p>Artistically expressive creative technologist with a broad range of disciplines. Founder of ArtRevolt — an interactive development organisation building XR applications and creative content. Solo developer with a strong affinity for team-building. Always working on something exciting and new. This website and all its contents were built and created by me.</p>
+        <p>Artistically expressive creative technologist with a broad range of disciplines. Founder of ArtRevolt — an
+          interactive development organisation building XR applications and creative content. Solo developer with a
+          strong affinity for team-building. Always working on something exciting and new. This website and all its
+          contents were built and created by me.</p>
         <div class="cv-contact-row">
           <a href="mailto:vasil@artrevolt.gallery" class="cv-contact-link">
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
             v.grancharov@artrevolt.nl
           </a>
           <a href="tel:+31620840837" class="cv-contact-link">
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+            </svg>
             +31 6 20840837
           </a>
           <a href="https://linkedin.com/in/vasil-grancharov" class="cv-contact-link" target="_blank">
@@ -618,19 +635,19 @@
     </div>
 
     <div class="cv-software-grid ar-reveal">
-      <div class="cv-software-item"><img src="icons/maya-logo.png"       alt="Maya"           /><span>Maya</span></div>
-      <div class="cv-software-item"><img src="icons/c4d-logo.jpg"        alt="Cinema 4D"      /><span>C4D</span></div>
-      <div class="cv-software-item"><img src="icons/blender_logo.png"    alt="Blender"        /><span>Blender</span></div>
-      <div class="cv-software-item"><img src="icons/Octane-logo.png"     alt="Octane"         /><span>Octane</span></div>
-      <div class="cv-software-item"><img src="icons/ae-logo.png"         alt="After Effects"  /><span>Ae</span></div>
-      <div class="cv-software-item"><img src="icons/pr-logo.png"         alt="Premiere Pro"   /><span>Premiere</span></div>
-      <div class="cv-software-item"><img src="icons/Photoshop-logo.png"  alt="Photoshop"      /><span>Photoshop</span></div>
-      <div class="cv-software-item"><img src="icons/ue_logo.png"         alt="Unreal Engine"  /><span>Unreal</span></div>
-      <div class="cv-software-item"><img src="icons/unity-logo.png"      alt="Unity"          /><span>Unity</span></div>
-      <div class="cv-software-item"><img src="icons/marvelous-logo.jpg"  alt="Marvelous"      /><span>Marvelous</span></div>
-      <div class="cv-software-item"><img src="icons/substance-logo.png"  alt="Substance"      /><span>Substance</span></div>
-      <div class="cv-software-item"><img src="icons/zbrush-logo.png"     alt="ZBrush"         /><span>ZBrush</span></div>
-      <div class="cv-software-item"><img src="icons/houdini-logo.png"    alt="Houdini"        /><span>Houdini</span></div>
+      <div class="cv-software-item"><img src="icons/maya-logo.png" alt="Maya" /><span>Maya</span></div>
+      <div class="cv-software-item"><img src="icons/c4d-logo.jpg" alt="Cinema 4D" /><span>C4D</span></div>
+      <div class="cv-software-item"><img src="icons/blender_logo.png" alt="Blender" /><span>Blender</span></div>
+      <div class="cv-software-item"><img src="icons/Octane-logo.png" alt="Octane" /><span>Octane</span></div>
+      <div class="cv-software-item"><img src="icons/ae-logo.png" alt="After Effects" /><span>Ae</span></div>
+      <div class="cv-software-item"><img src="icons/pr-logo.png" alt="Premiere Pro" /><span>Premiere</span></div>
+      <div class="cv-software-item"><img src="icons/Photoshop-logo.png" alt="Photoshop" /><span>Photoshop</span></div>
+      <div class="cv-software-item"><img src="icons/ue_logo.png" alt="Unreal Engine" /><span>Unreal</span></div>
+      <div class="cv-software-item"><img src="icons/unity-logo.png" alt="Unity" /><span>Unity</span></div>
+      <div class="cv-software-item"><img src="icons/marvelous-logo.jpg" alt="Marvelous" /><span>Marvelous</span></div>
+      <div class="cv-software-item"><img src="icons/substance-logo.png" alt="Substance" /><span>Substance</span></div>
+      <div class="cv-software-item"><img src="icons/zbrush-logo.png" alt="ZBrush" /><span>ZBrush</span></div>
+      <div class="cv-software-item"><img src="icons/houdini-logo.png" alt="Houdini" /><span>Houdini</span></div>
     </div>
 
   </div><!-- /cv-wrap -->
@@ -640,4 +657,5 @@
   </footer>
 
 </body>
+
 </html>

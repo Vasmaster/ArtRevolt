@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Canvas Artwork — ArtRevolt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
 
@@ -20,11 +23,16 @@
       background: var(--accent-cyan) !important;
     }
 
-    .jx-arrow.jx-left  { border-color: transparent var(--accent-cyan) transparent transparent !important; }
-    .jx-arrow.jx-right { border-color: transparent transparent transparent var(--accent-cyan) !important; }
+    .jx-arrow.jx-left {
+      border-color: transparent var(--accent-cyan) transparent transparent !important;
+    }
+
+    .jx-arrow.jx-right {
+      border-color: transparent transparent transparent var(--accent-cyan) !important;
+    }
 
     .jx-label {
-      background: rgba(5,8,16,0.75) !important;
+      background: rgba(5, 8, 16, 0.75) !important;
       font-family: var(--font-mono) !important;
       font-size: 0.7rem !important;
       letter-spacing: 0.08em !important;
@@ -38,7 +46,7 @@
       border-radius: 4px;
       overflow: hidden;
       background: var(--bg-card);
-      box-shadow: 0 0 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,229,255,0.02);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.02);
       margin: 1.5rem 0;
     }
 
@@ -96,15 +104,16 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #c77dff;
-      border: 1px solid rgba(199,125,255,0.35);
-      background: rgba(199,125,255,0.06);
+      border: 1px solid rgba(199, 125, 255, 0.35);
+      background: rgba(199, 125, 255, 0.06);
       padding: 0.2rem 0.6rem;
       margin-left: 0.5rem;
     }
 
     .ar-uv-badge::before {
       content: '';
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #c77dff;
       box-shadow: 0 0 6px #c77dff;
@@ -114,7 +123,7 @@
     /* Quote block for artist statements */
     .ar-quote {
       border-left: 3px solid var(--accent-gold);
-      background: rgba(240,192,64,0.04);
+      background: rgba(240, 192, 64, 0.04);
       padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
       font-family: var(--font-body);
@@ -144,38 +153,32 @@
     }
 
     @media (max-width: 640px) {
-      .ar-compare-grid { grid-template-columns: 1fr; }
+      .ar-compare-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- NAVIGATION -->
   <!-- HOVER TRIGGER STRIP -->
-  <div class="ar-nav-trigger"
-       x-data
-       @mouseenter="$dispatch('nav-open')"
-       @touchstart.passive="$dispatch('nav-toggle')">
+  <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')" @touchstart.passive="$dispatch('nav-toggle')">
   </div>
 
   <!-- NAV BAR -->
-  <nav class="ar-nav"
-       x-data="{
-         open: false,
-         atTop: true,
-         init() {
+  <nav class="ar-nav" x-data="{
+       open: false,
+       atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => {
            this.atTop = window.scrollY < window.innerHeight * 0.08;
-           window.addEventListener('scroll', () => {
-             this.atTop = window.scrollY < window.innerHeight * 0.08;
-             if (this.atTop) this.open = false;
-           }, { passive: true });
-         }
-       }"
-       :class="{ 'is-open': open || atTop }"
-       @nav-open.window="if (!atTop) open = true"
-       @nav-toggle.window="open = !open"
-       @mouseleave="if (!atTop) open = false"
-       @keydown.escape.window="open = false">
+           if (this.atTop) this.open = false;
+         }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+    @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
 
     <!-- Logo -->
     <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
@@ -183,29 +186,21 @@
     </a>
 
     <!-- Hamburger -->
-    <button class="ar-hamburger"
-            @click="open = !open"
-            :aria-expanded="open"
-            aria-label="Toggle menu">
+    <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
       <div class="stripe stripe-1"></div>
       <div class="stripe stripe-2"></div>
       <div class="stripe stripe-3"></div>
     </button>
 
     <!-- Dropdown -->
-    <div class="ar-dropdown"
-         x-show="open"
-         x-transition:enter="transition duration-150 ease-out"
-         x-transition:enter-start="opacity-0 -translate-y-1"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition duration-100 ease-in"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-1"
-         @click.outside="open = false">
+    <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+      x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
 
       <ul class="ar-nav-links">
         <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-        <li><a href="/Canvas.html" class="active">Canvas</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
         <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
         <li><a href="/Contacts.html">Contact</a></li>
       </ul>
@@ -215,13 +210,15 @@
       <div class="ar-dropdown-social">
         <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 448 512">
-            <path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/>
+            <path
+              d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
           </svg>
           LinkedIn
         </a>
         <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
           <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
           X / Twitter
         </a>
@@ -235,11 +232,14 @@
 
     <!-- PAGE HEADER -->
     <div class="ar-reveal" style="margin-bottom:3rem;">
-      <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;letter-spacing:0.04em;margin:0 0 0.25rem;line-height:1;">
-        <span style="background:linear-gradient(90deg,var(--accent-gold),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Canvas</span>
+      <h1
+        style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:700;letter-spacing:0.04em;margin:0 0 0.25rem;line-height:1;">
+        <span
+          style="background:linear-gradient(90deg,var(--accent-gold),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Canvas</span>
         <span style="color:var(--text-primary);"> Artwork</span>
       </h1>
-      <p style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin:0.25rem 0 0 3px;">
+      <p
+        style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin:0.25rem 0 0 3px;">
         // Acrylic &amp; Oil Paintings — Traditional &amp; UV-Luminescent
       </p>
     </div>
@@ -253,17 +253,29 @@
 
     <div class="ar-summary-card ar-reveal" style="border-left-color: #c77dff;">
       <div>
-        <p>Acrylic luminescent canvas painting, 40" × 60", made by ~VAS (V.G.). A meditation on the multi-dimensional nature of existence — two evolutionary pattern lines of a single creature, each side unfolding and evolving yet inseparable from the other whole. Painted with UV-reactive pigments that reveal a second layer of meaning under ultraviolet light.</p>
+        <p>Acrylic luminescent canvas painting, 40" × 60", made by ~VAS (V.G.). A meditation on the multi-dimensional
+          nature of existence — two evolutionary pattern lines of a single creature, each side unfolding and evolving
+          yet inseparable from the other whole. Painted with UV-reactive pigments that reveal a second layer of meaning
+          under ultraviolet light.</p>
         <div class="ar-tech-stack">
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Acrylic Paint</span>
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">UV-Luminescent Pigment</span>
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">40" × 60" Canvas</span>
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Traditional</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Acrylic
+            Paint</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">UV-Luminescent
+            Pigment</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">40" × 60"
+            Canvas</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Traditional</span>
         </div>
       </div>
       <div style="min-width:120px;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">MEDIUM</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#c77dff;">Acrylic<br>+ UV Reactive</div>
+        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">MEDIUM
+        </div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#c77dff;">Acrylic<br>+ UV
+          Reactive</div>
       </div>
     </div>
 
@@ -280,23 +292,28 @@
     </div>
 
     <!-- Juxtapose slider -->
-    <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;margin-bottom:0.5rem;">
+    <p
+      style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;margin-bottom:0.5rem;">
       // DRAG THE SLIDER TO COMPARE NATURAL vs UV LIGHT
     </p>
     <div class="ar-juxtapose-wrap ar-reveal">
       <div class="juxtapose" data-mode="horizontal">
         <img src="canvas/juxaposeclean.png" alt="Natural light" width="1602" height="2376" />
-        <img src="canvas/juxaposeuv.png"    alt="UV light"      width="1602" height="2376" />
+        <img src="canvas/juxaposeuv.png" alt="UV light" width="1602" height="2376" />
       </div>
     </div>
 
     <div class="ar-quote ar-reveal">
-      "I find it interesting how we all get wrapped up in our perspective of life — that the animistic part of us is slowly ripped apart from the need to compete for survival in this modern world."
+      "I find it interesting how we all get wrapped up in our perspective of life — that the animistic part of us is
+      slowly ripped apart from the need to compete for survival in this modern world."
       <cite>— ~VAS, on Loop of Life</cite>
     </div>
 
     <p class="ar-text ar-reveal">
-      What you see here are two evolutionary pattern lines for this creature — how each side unfolds and evolves. The fact that they are so close and each part of the 'one' whole makes them practically inseparable. Existence in its own means being: to be, what you represent, is a form of creation within another form of creation and so on. The UV layer reveals the hidden dimension of the work — the animistic undercurrent beneath the visible surface.
+      What you see here are two evolutionary pattern lines for this creature — how each side unfolds and evolves. The
+      fact that they are so close and each part of the 'one' whole makes them practically inseparable. Existence in its
+      own means being: to be, what you represent, is a form of creation within another form of creation and so on. The
+      UV layer reveals the hidden dimension of the work — the animistic undercurrent beneath the visible surface.
     </p>
 
     <!-- ═══════════════════════════════════
@@ -310,17 +327,29 @@
 
     <div class="ar-summary-card ar-reveal" style="border-left-color: #c77dff;">
       <div>
-        <p>Two complimenting unities of "worlds in colors" merged with Pythagorean Cosmic morphology. The artwork presents personality as color — mapping the Big Five personality traits (Openness, Conscientiousness, Extroversion, Agreeableness, Neuroticism) onto an ever-lasting pattern of being that implies both existence and absence simultaneously. UV-reactive pigments again reveal a second dimensional layer.</p>
+        <p>Two complimenting unities of "worlds in colors" merged with Pythagorean Cosmic morphology. The artwork
+          presents personality as color — mapping the Big Five personality traits (Openness, Conscientiousness,
+          Extroversion, Agreeableness, Neuroticism) onto an ever-lasting pattern of being that implies both existence
+          and absence simultaneously. UV-reactive pigments again reveal a second dimensional layer.</p>
         <div class="ar-tech-stack">
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Acrylic Paint</span>
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">UV-Luminescent Pigment</span>
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Canvas</span>
-          <span class="ar-tech-tag" style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Pythagorean Geometry</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Acrylic
+            Paint</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">UV-Luminescent
+            Pigment</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Canvas</span>
+          <span class="ar-tech-tag"
+            style="border-color:rgba(199,125,255,0.3);color:#c77dff;background:rgba(199,125,255,0.05);">Pythagorean
+            Geometry</span>
         </div>
       </div>
       <div style="min-width:120px;">
-        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">MEDIUM</div>
-        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#c77dff;">Acrylic<br>+ UV Reactive</div>
+        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">MEDIUM
+        </div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#c77dff;">Acrylic<br>+ UV
+          Reactive</div>
       </div>
     </div>
 
@@ -337,18 +366,23 @@
     </div>
 
     <!-- Juxtapose slider -->
-    <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;margin-bottom:0.5rem;">
+    <p
+      style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;margin-bottom:0.5rem;">
       // DRAG THE SLIDER TO COMPARE NATURAL vs UV LIGHT
     </p>
     <div class="ar-juxtapose-wrap ar-reveal">
       <div class="juxtapose" data-mode="horizontal">
         <img src="canvas/WoC_clear.png" alt="Natural light" width="1602" height="2376" />
-        <img src="canvas/WoC_uv.png"    alt="UV light"      width="1602" height="2376" />
+        <img src="canvas/WoC_uv.png" alt="UV light" width="1602" height="2376" />
       </div>
     </div>
 
     <p class="ar-text ar-reveal">
-      Life is a mystery — an ever-lasting pattern of being which implies both to be and not to be at the same time. Your personality consists of traits that shape your presence: the "Big Five" characteristics of every human's behaviour — Openness, Conscientiousness, Extroversion, Agreeableness, Neuroticism. This artwork presents two complimenting unities of worlds in colors, merged with Pythagorean Cosmic morphology, asking what it means to carry all five dimensions simultaneously.
+      Life is a mystery — an ever-lasting pattern of being which implies both to be and not to be at the same time. Your
+      personality consists of traits that shape your presence: the "Big Five" characteristics of every human's behaviour
+      — Openness, Conscientiousness, Extroversion, Agreeableness, Neuroticism. This artwork presents two complimenting
+      unities of worlds in colors, merged with Pythagorean Cosmic morphology, asking what it means to carry all five
+      dimensions simultaneously.
     </p>
 
   </div><!-- /ar-page -->
@@ -361,4 +395,5 @@
   <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
 
 </body>
+
 </html>
