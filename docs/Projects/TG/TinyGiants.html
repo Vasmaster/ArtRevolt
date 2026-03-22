@@ -26,6 +26,7 @@
       padding: 24px 16px 32px;
       margin-bottom: 2rem;
       border: 1px solid var(--border-glow);
+      overflow: visible;
     }
 
     svg.bp-wires {
@@ -374,9 +375,9 @@
     /* ── BLUEPRINT TOC PREVIEW POPUP ─────────── */
     .bp-preview {
       position: absolute;
-      bottom: calc(100% + 10px);
-      left: 50%;
-      transform: translateX(-50%) translateY(4px);
+      left: calc(100% + 12px);
+      top: 50%;
+      transform: translateY(-50%) translateX(-6px);
       width: 220px;
       background: #0d1525;
       border: 1px solid var(--border-glow);
@@ -384,14 +385,14 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      transition: opacity 0.18s ease, transform 0.18s ease;
       z-index: 100;
       overflow: hidden;
     }
 
     .bp-node:hover .bp-preview {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(-50%) translateX(0);
     }
 
     .bp-preview img {
@@ -402,7 +403,6 @@
       border-bottom: 1px solid var(--border-glow);
     }
 
-    /* Fallback when no image — coloured gradient bar */
     .bp-preview .bp-preview-img-placeholder {
       width: 100%;
       height: 110px;
