@@ -17,14 +17,36 @@
 <div x-data="{
   lightbox: null,
   lightboxCaption: '',
-  openLightbox(src, caption) {
-    this.lightbox = src;
-    this.lightboxCaption = caption || '';
+  lightboxGallery: [],
+  lightboxIndex: 0,
+
+  openLightbox(src, cap, gallery) {
+    this.lightboxGallery = gallery || [{ src, cap }];
+    this.lightboxIndex   = this.lightboxGallery.findIndex(s => s.src === src);
+    if (this.lightboxIndex === -1) this.lightboxIndex = 0;
+    this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
     document.body.style.overflow = 'hidden';
   },
+
   closeLightbox() {
     this.lightbox = null;
+    this.lightboxGallery = [];
     document.body.style.overflow = '';
+  },
+
+  nextImage() {
+    if (!this.lightboxGallery.length) return;
+    this.lightboxIndex   = (this.lightboxIndex + 1) % this.lightboxGallery.length;
+    this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+  },
+
+  prevImage() {
+    if (!this.lightboxGallery.length) return;
+    this.lightboxIndex   = (this.lightboxIndex - 1 + this.lightboxGallery.length) % this.lightboxGallery.length;
+    this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
   }
 }">
 
@@ -194,9 +216,7 @@
          ] }">
         <template x-for="s in slides" :key="s.id">
           <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" 
-            style="cursor: zoom-in;"
-            @click="openLightbox(s.src, s.cap)" />
+            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
             <div class="caption" x-text="s.cap"></div>
           </div>
         </template>
@@ -242,9 +262,7 @@
          ] }">
         <template x-for="s in slides" :key="s.id">
           <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" 
-            style="cursor: zoom-in;"
-            @click="openLightbox(s.src, s.cap)" />
+            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
             <div class="caption" x-text="s.cap"></div>
           </div>
         </template>
@@ -287,9 +305,7 @@
          ] }">
         <template x-for="s in slides" :key="s.id">
           <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" 
-            style="cursor: zoom-in;"
-            @click="openLightbox(s.src, s.cap)" />
+            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
             <div class="caption" x-text="s.cap"></div>
           </div>
         </template>
@@ -396,13 +412,34 @@
   </body>
   <!-- LIGHTBOX OVERLAY -->
   <template x-if="lightbox">
-    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()"
+      @keydown.arrowleft.window="prevImage()" @keydown.arrowright.window="nextImage()">
 
       <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
 
-      <img class="lightbox-img" :src="lightbox" @click.stop />
+      <!-- Image + split click zones -->
+      <div style="position:relative; display:inline-flex;" @click.stop>
 
-      <div class="lightbox-caption" x-text="lightboxCaption"></div>
+        <img class="lightbox-img" :src="lightbox" :alt="lightboxCaption" />
+
+        <!-- LEFT half — previous -->
+        <div style="position:absolute; inset:0; width:50%; cursor:w-resize; z-index:2;" @click="prevImage()"></div>
+
+        <!-- RIGHT half — next -->
+        <div style="position:absolute; inset:0; left:50%; width:50%; cursor:e-resize; z-index:2;" @click="nextImage()">
+        </div>
+
+      </div>
+
+      <!-- Counter -->
+      <div class="lightbox-caption">
+        <span x-text="lightboxCaption"></span>
+        <template x-if="lightboxGallery.length > 1">
+          <span style="margin-left:1rem; opacity:0.4;"
+            x-text="(lightboxIndex + 1) + ' / ' + lightboxGallery.length"></span>
+        </template>
+      </div>
+
     </div>
   </template>
 </div>
