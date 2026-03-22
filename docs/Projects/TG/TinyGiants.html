@@ -12,6 +12,365 @@
     rel="stylesheet">
   <link rel="stylesheet" href="/css/artrevolt-style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    /* ── BLUEPRINT TOC ─────────────────────────── */
+    .bp-canvas {
+      position: relative;
+      width: 100%;
+      background: #1a1f2e;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      padding: 24px 16px 32px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-glow);
+    }
+
+    svg.bp-wires {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible
+    }
+
+    .bp-nodes {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      width: 100%
+    }
+
+    .bp-entry {
+      display: flex;
+      flex-direction: column;
+      min-width: 160px;
+      flex-shrink: 0
+    }
+
+    .bp-entry-head {
+      background: #1e3a1e;
+      border: 1px solid #2d6e2d;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      padding: 6px 10px 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .bp-entry-head .bp-icon {
+      width: 12px;
+      height: 12px;
+      background: #4ade80;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .bp-entry-head span {
+      color: #4ade80;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: var(--font-mono)
+    }
+
+    .bp-entry-body {
+      background: #141a14;
+      border: 1px solid #2d6e2d;
+      border-radius: 0 0 5px 5px;
+      padding: 8px 10px
+    }
+
+    .bp-entry-body .bp-subtitle {
+      color: #5a8a5a;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--font-mono)
+    }
+
+    .bp-exec-out {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 8px;
+      gap: 4px
+    }
+
+    .bp-exec-out span {
+      color: #a0a8b8;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      font-family: var(--font-mono)
+    }
+
+    .bp-exec-pin {
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      clip-path: polygon(0 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0 80%);
+      flex-shrink: 0
+    }
+
+    .bp-node {
+      display: flex;
+      flex-direction: column;
+      min-width: 148px;
+      cursor: pointer;
+      transition: transform 0.15s;
+      margin-bottom: 10px
+    }
+
+    .bp-node:last-child {
+      margin-bottom: 0
+    }
+
+    .bp-node:hover {
+      transform: translateY(-2px)
+    }
+
+    .bp-node a {
+      text-decoration: none;
+      display: block
+    }
+
+    .bp-node-head {
+      border-radius: 5px 5px 0 0;
+      padding: 5px 9px 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: none
+    }
+
+    .bp-node-head .bp-exec-pin {
+      transform: scaleX(-1);
+      margin-right: 2px
+    }
+
+    .bp-node-head span {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      font-family: var(--font-mono)
+    }
+
+    .bp-node-body {
+      border-radius: 0 0 5px 5px;
+      padding: 6px 9px 8px;
+      border-top: none
+    }
+
+    .bp-func {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      font-family: var(--font-mono)
+    }
+
+    .bp-pin-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px
+    }
+
+    .bp-pin-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .bp-pin-label {
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      font-family: var(--font-mono)
+    }
+
+    .bp-jump {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      margin-top: 5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      transition: color 0.15s;
+      font-family: var(--font-mono)
+    }
+
+    .bp-jump-arrow {
+      display: inline-block;
+      transition: transform 0.15s
+    }
+
+    .bp-node:hover .bp-jump-arrow {
+      transform: translateX(3px)
+    }
+
+    /* colour themes */
+    .bp-cyan .bp-node-head {
+      background: #0d2a30;
+      border: 1px solid #00a8c8
+    }
+
+    .bp-cyan .bp-node-body {
+      background: #0a1e24;
+      border: 1px solid #00a8c8
+    }
+
+    .bp-cyan .bp-node-head span {
+      color: #00e5ff
+    }
+
+    .bp-cyan .bp-func {
+      color: #7dd8e8
+    }
+
+    .bp-cyan .bp-pin-dot {
+      background: #00e5ff
+    }
+
+    .bp-cyan .bp-pin-label,
+    .bp-cyan .bp-jump {
+      color: #4aabb8
+    }
+
+    .bp-cyan:hover .bp-jump {
+      color: #00e5ff
+    }
+
+    .bp-green .bp-node-head {
+      background: #0d2a14;
+      border: 1px solid #2d8a3e
+    }
+
+    .bp-green .bp-node-body {
+      background: #0a1e0e;
+      border: 1px solid #2d8a3e
+    }
+
+    .bp-green .bp-node-head span {
+      color: #4ade80
+    }
+
+    .bp-green .bp-func {
+      color: #7dd87a
+    }
+
+    .bp-green .bp-pin-dot {
+      background: #39ff8a
+    }
+
+    .bp-green .bp-pin-label,
+    .bp-green .bp-jump {
+      color: #4a8a5a
+    }
+
+    .bp-green:hover .bp-jump {
+      color: #39ff8a
+    }
+
+    .bp-pink .bp-node-head {
+      background: #2a0d1e;
+      border: 1px solid #8a2d5e
+    }
+
+    .bp-pink .bp-node-body {
+      background: #1e0a14;
+      border: 1px solid #8a2d5e
+    }
+
+    .bp-pink .bp-node-head span {
+      color: #ff6eb0
+    }
+
+    .bp-pink .bp-func {
+      color: #e87aaa
+    }
+
+    .bp-pink .bp-pin-dot {
+      background: #ff2d78
+    }
+
+    .bp-pink .bp-pin-label,
+    .bp-pink .bp-jump {
+      color: #8a4a6a
+    }
+
+    .bp-pink:hover .bp-jump {
+      color: #ff2d78
+    }
+
+    .bp-gold .bp-node-head {
+      background: #2a1e0a;
+      border: 1px solid #8a6a1e
+    }
+
+    .bp-gold .bp-node-body {
+      background: #1e160a;
+      border: 1px solid #8a6a1e
+    }
+
+    .bp-gold .bp-node-head span {
+      color: #f0c040
+    }
+
+    .bp-gold .bp-func {
+      color: #c8a840
+    }
+
+    .bp-gold .bp-pin-dot {
+      background: #f0c040
+    }
+
+    .bp-gold .bp-pin-label,
+    .bp-gold .bp-jump {
+      color: #8a7840
+    }
+
+    .bp-gold:hover .bp-jump {
+      color: #f0c040
+    }
+
+    .bp-purple .bp-node-head {
+      background: #1e0d2a;
+      border: 1px solid #6a3a8a
+    }
+
+    .bp-purple .bp-node-body {
+      background: #160a1e;
+      border: 1px solid #6a3a8a
+    }
+
+    .bp-purple .bp-node-head span {
+      color: #c077ff
+    }
+
+    .bp-purple .bp-func {
+      color: #a877e8
+    }
+
+    .bp-purple .bp-pin-dot {
+      background: #c077ff
+    }
+
+    .bp-purple .bp-pin-label,
+    .bp-purple .bp-jump {
+      color: #7a5a9a
+    }
+
+    .bp-purple:hover .bp-jump {
+      color: #c077ff
+    }
+  </style>
 </head>
 
 <div x-data="{
@@ -53,16 +412,13 @@
   <body>
 
     <!-- NAVIGATION -->
-<!-- HOVER TRIGGER STRIP -->
-<div class="ar-nav-trigger"
-     x-data
-     @mouseenter="$dispatch('nav-open')"
-     @touchstart.passive="$dispatch('nav-toggle')">
-</div>
+    <!-- HOVER TRIGGER STRIP -->
+    <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')"
+      @touchstart.passive="$dispatch('nav-toggle')">
+    </div>
 
-<!-- NAV BAR -->
-<nav class="ar-nav"
-     x-data="{
+    <!-- NAV BAR -->
+    <nav class="ar-nav" x-data="{
        open: false,
        atTop: true,
        init() {
@@ -72,65 +428,55 @@
            if (this.atTop) this.open = false;
          }, { passive: true });
        }
-     }"
-     :class="{ 'is-open': open || atTop }"
-     @nav-open.window="if (!atTop) open = true"
-     @nav-toggle.window="open = !open"
-     @mouseleave="if (!atTop) open = false"
-     @keydown.escape.window="open = false">
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+      @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
 
-  <!-- Logo -->
-  <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
-    Art<span class="accent">Revolt</span>
-  </a>
-
-  <!-- Hamburger -->
-  <button class="ar-hamburger"
-          @click="open = !open"
-          :aria-expanded="open"
-          aria-label="Toggle menu">
-    <div class="stripe stripe-1"></div>
-    <div class="stripe stripe-2"></div>
-    <div class="stripe stripe-3"></div>
-  </button>
-
-  <!-- Dropdown -->
-  <div class="ar-dropdown"
-       x-show="open"
-       x-transition:enter="transition duration-150 ease-out"
-       x-transition:enter-start="opacity-0 -translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition duration-100 ease-in"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 -translate-y-1"
-       @click.outside="open = false">
-
-    <ul class="ar-nav-links">
-      <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
-      <li><a href="/Canvas.html">Canvas</a></li>
-      <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
-      <li><a href="/Contacts.html">Contact</a></li>
-    </ul>
-
-    <div class="ar-dropdown-divider"></div>
-
-    <div class="ar-dropdown-social">
-      <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
-        <svg fill="currentColor" viewBox="0 0 448 512">
-          <path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/>
-        </svg>
-        LinkedIn
+      <!-- Logo -->
+      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
+        Art<span class="accent">Revolt</span>
       </a>
-      <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
-        <svg fill="currentColor" viewBox="0 0 24 24">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-        X / Twitter
-      </a>
-    </div>
 
-  </div>
-</nav>
+      <!-- Hamburger -->
+      <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+        <div class="stripe stripe-1"></div>
+        <div class="stripe stripe-2"></div>
+        <div class="stripe stripe-3"></div>
+      </button>
+
+      <!-- Dropdown -->
+      <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+        x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
+
+        <ul class="ar-nav-links">
+          <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+          <li><a href="/Canvas.html">Canvas</a></li>
+          <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+          <li><a href="/Contacts.html">Contact</a></li>
+        </ul>
+
+        <div class="ar-dropdown-divider"></div>
+
+        <div class="ar-dropdown-social">
+          <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 448 512">
+              <path
+                d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            X / Twitter
+          </a>
+        </div>
+
+      </div>
+    </nav>
 
     <!-- HERO -->
     <div class="ar-hero" x-data="{
@@ -165,7 +511,110 @@
 
     <!-- PAGE CONTENT -->
     <div class="ar-page">
+      <!-- ── BLUEPRINT TOC ── -->
+      <div class="bp-canvas" id="bp-canvas">
+        <svg class="bp-wires" id="bp-wires"></svg>
+        <div class="bp-nodes">
 
+          <!-- Entry node -->
+          <div class="bp-entry" id="bp-entry">
+            <div class="bp-entry-head">
+              <div class="bp-icon"></div>
+              <span>Begin Play</span>
+            </div>
+            <div class="bp-entry-body">
+              <div class="bp-subtitle">TinyGiants Productions</div>
+              <div class="bp-exec-out">
+                <span>Exec</span>
+                <div class="bp-exec-pin" id="bp-entry-out"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spacer for wire routing -->
+          <div style="width:48px;flex-shrink:0;"></div>
+
+          <!-- Section nodes -->
+          <div id="bp-col" style="display:flex;flex-direction:column;position:relative;flex-shrink:0;"></div>
+
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var SECTIONS = [
+            { id: 'opera', label: 'Hänsel & Gretel', func: 'LoadOperaScene()', theme: 'cyan', pin: 'Live Event', anchor: '#toc-opera' },
+            { id: 'bond', label: 'Bond of Union', func: 'RenderConceptArt()', theme: 'purple', pin: 'CG Art', anchor: '#toc-bond' },
+            { id: 'aoc', label: 'AOC Keyboard', func: 'PlayAnimation()', theme: 'gold', pin: 'Product Viz', anchor: '#toc-aoc' },
+            { id: 'car', label: 'Muscle Car', func: 'LoadShowcase()', theme: 'pink', pin: 'Animation', anchor: '#toc-car' },
+            { id: 'coulisse', label: 'Coulisse Products', func: 'StreamVideoReel()', theme: 'green', pin: 'Client Work', anchor: '#toc-coulisse' },
+            { id: 'logo', label: 'Logo Transition', func: 'PlayMotionReel()', theme: 'cyan', pin: 'Motion', anchor: '#toc-logo' },
+          ];
+
+          var col = document.getElementById('bp-col');
+
+          SECTIONS.forEach(function (s) {
+            var div = document.createElement('div');
+            div.className = 'bp-node bp-' + s.theme;
+            div.id = 'bp-node-' + s.id;
+            div.innerHTML =
+              '<a href="' + s.anchor + '">' +
+              '<div class="bp-node-head">' +
+              '<div class="bp-exec-pin" style="transform:scaleX(-1);margin-right:2px"></div>' +
+              '<span>' + s.label + '</span>' +
+              '</div>' +
+              '<div class="bp-node-body">' +
+              '<div class="bp-func">' + s.func + '</div>' +
+              '<div class="bp-pin-row">' +
+              '<div class="bp-pin-dot"></div>' +
+              '<span class="bp-pin-label">' + s.pin + '</span>' +
+              '</div>' +
+              '<div class="bp-jump">Jump to section <span class="bp-jump-arrow">→</span></div>' +
+              '</div>' +
+              '</a>';
+            col.appendChild(div);
+          });
+
+          function drawWires() {
+            var svg = document.getElementById('bp-wires');
+            var canvas = document.getElementById('bp-canvas');
+            var pinEl = document.getElementById('bp-entry-out');
+            svg.innerHTML = '';
+            var cr = canvas.getBoundingClientRect();
+            var pr = pinEl.getBoundingClientRect();
+            var ex = pr.right - cr.left + 4;
+            var ey = pr.top + pr.height / 2 - cr.top;
+            var colorMap = { cyan: '#00e5ff', green: '#39ff8a', pink: '#ff2d78', gold: '#f0c040', purple: '#c077ff' };
+
+            SECTIONS.forEach(function (s) {
+              var nodeEl = document.getElementById('bp-node-' + s.id);
+              if (!nodeEl) return;
+              var nr = nodeEl.getBoundingClientRect();
+              var nx = nr.left - cr.left;
+              var ny = nr.top + 14 - cr.top;
+              var col = colorMap[s.theme] || '#c8c8c8';
+              var mx = ex + (nx - ex) * 0.45;
+              var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+              p.setAttribute('d', 'M' + ex + ',' + ey + ' C' + mx + ',' + ey + ' ' + mx + ',' + ny + ' ' + nx + ',' + ny);
+              p.setAttribute('fill', 'none');
+              p.setAttribute('stroke', col);
+              p.setAttribute('stroke-width', '1.5');
+              p.setAttribute('opacity', '0.55');
+              svg.appendChild(p);
+            });
+
+            svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + canvas.offsetHeight);
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () { setTimeout(drawWires, 100); });
+          } else {
+            setTimeout(drawWires, 100);
+          }
+          window.addEventListener('resize', drawWires);
+        })();
+      </script>
+      
       <!-- SUMMARY -->
       <div class="ar-summary-card ar-reveal">
         <div>
@@ -206,7 +655,7 @@
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
-      <h3 class="ar-section-title ar-reveal" id="2">Hänsel und Gretel Opera</h3>
+      <h3 class="ar-section-title ar-reveal" id="toc-opera">Hänsel und Gretel Opera</h3>
       <p class="ar-section-sub">// NETHERLANDS REISOPERA · LIVE 3D PROJECTION · FANTASY OPERA</p>
 
       <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
@@ -251,7 +700,7 @@
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
-      <h3 class="ar-section-title ar-reveal" id="1">Bond of Union</h3>
+      <h3 class="ar-section-title ar-reveal" id="toc-bond">Bond of Union</h3>
       <p class="ar-section-sub">// CONCEPTUAL CG · M.C. ESCHER INTERPRETATION · PERSONAL PRODUCTION</p>
 
       <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-gold);">
@@ -296,7 +745,7 @@
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
-      <h3 class="ar-section-title ar-reveal" id="4">AOC Keyboard Animation</h3>
+      <h3 class="ar-section-title ar-reveal" id="toc-aoc">AOC Keyboard Animation</h3>
       <p class="ar-section-sub">// PRODUCT ANIMATION · C4D SIMULATION · OCTANE RENDER · COMPOSITING</p>
 
       <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-green);">
@@ -342,7 +791,7 @@
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
-      <h3 class="ar-section-title ar-reveal" id="3">Muscle Car Showcase</h3>
+      <h3 class="ar-section-title ar-reveal" id="toc-car">Muscle Car Showcase</h3>
       <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
 
       <div class="ar-summary-card ar-reveal">
@@ -385,7 +834,7 @@
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
-      <h3 class="ar-section-title ar-reveal" id="5">Coulisse Product Animations</h3>
+      <h3 class="ar-section-title ar-reveal" id="toc-coulisse">Coulisse Product Animations</h3>
       <p class="ar-section-sub">// CLIENT WORK · PRODUCT VIZ · OCTANE · AFTER EFFECTS</p>
 
       <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
@@ -429,7 +878,7 @@
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
-      <h3 class="ar-section-title ar-reveal">TinyGiants Logo Transition</h3>
+      <h3 class="ar-section-title ar-reveal" id="toc-logo">TinyGiants Logo Transition</h3>
       <p class="ar-section-sub">// MOTION DESIGN · UNREAL ENGINE 5 · AFTER EFFECTS · PERSONAL</p>
 
       <div class="ar-summary-card ar-reveal">

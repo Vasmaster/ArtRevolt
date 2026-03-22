@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#1a1f2e;font-family:'Share Tech Mono',monospace;overflow-x:hidden}
+  .bp-canvas{position:relative;width:100%;min-height:320px;background:#1a1f2e;background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);background-size:24px 24px;padding:24px 16px 32px}
+  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+  .nodes{position:relative;z-index:2;display:flex;align-items:flex-start;gap:0;width:100%}
+
+  /* ENTRY NODE */
+  .bp-entry{display:flex;flex-direction:column;min-width:160px;flex-shrink:0}
+  .bp-entry-head{background:#1e3a1e;border:1px solid #2d6e2d;border-bottom:none;border-radius:5px 5px 0 0;padding:6px 10px 5px;display:flex;align-items:center;gap:6px}
+  .bp-entry-head .icon{width:12px;height:12px;background:#4ade80;border-radius:50%;flex-shrink:0}
+  .bp-entry-head span{color:#4ade80;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+  .bp-entry-body{background:#141a14;border:1px solid #2d6e2d;border-radius:0 0 5px 5px;padding:8px 10px}
+  .bp-entry-body .subtitle{color:#5a8a5a;font-size:10px;letter-spacing:0.1em;text-transform:uppercase}
+  .exec-out{display:flex;align-items:center;justify-content:flex-end;margin-top:8px;gap:4px}
+  .exec-out span{color:#a0a8b8;font-size:10px;letter-spacing:0.06em}
+  .exec-pin{width:14px;height:14px;background:#c8c8c8;clip-path:polygon(0 20%,60% 20%,60% 0%,100% 50%,60% 100%,60% 80%,0 80%);flex-shrink:0}
+  .exec-pin.filled{background:#ffffff}
+
+  /* BRANCH connector area */
+  .bp-branch-col{display:flex;flex-direction:column;justify-content:space-around;padding:0 0;flex-shrink:0;position:relative}
+
+  /* SECTION NODE */
+  .bp-node{display:flex;flex-direction:column;min-width:148px;cursor:pointer;transition:transform 0.15s}
+  .bp-node:hover{transform:translateY(-2px)}
+  .bp-node-head{border-radius:5px 5px 0 0;padding:5px 9px 4px;display:flex;align-items:center;gap:6px;border-bottom:none}
+  .bp-node-body{border-radius:0 0 5px 5px;padding:6px 9px 8px;border-top:none}
+  .bp-node-body .func-name{font-size:11px;letter-spacing:0.05em;margin-bottom:4px}
+  .bp-node-pin-row{display:flex;align-items:center;gap:5px;margin-top:2px}
+  .pin-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .pin-label{font-size:10px;letter-spacing:0.04em}
+
+  /* Color themes per section */
+  .theme-cyan  .bp-node-head{background:#0d2a30;border:1px solid #00a8c8} .theme-cyan  .bp-node-body{background:#0a1e24;border:1px solid #00a8c8}
+  .theme-cyan  .bp-node-head span{color:#00e5ff} .theme-cyan .func-name{color:#7dd8e8} .theme-cyan .pin-dot{background:#00e5ff} .theme-cyan .pin-label{color:#4aabb8}
+  .theme-green .bp-node-head{background:#0d2a14;border:1px solid #2d8a3e} .theme-green .bp-node-body{background:#0a1e0e;border:1px solid #2d8a3e}
+  .theme-green .bp-node-head span{color:#4ade80} .theme-green .func-name{color:#7dd87a} .theme-green .pin-dot{background:#39ff8a} .theme-green .pin-label{color:#4a8a5a}
+  .theme-pink  .bp-node-head{background:#2a0d1e;border:1px solid #8a2d5e} .theme-pink  .bp-node-body{background:#1e0a14;border:1px solid #8a2d5e}
+  .theme-pink  .bp-node-head span{color:#ff6eb0} .theme-pink  .func-name{color:#e87aaa} .theme-pink  .pin-dot{background:#ff2d78} .theme-pink  .pin-label{color:#8a4a6a}
+  .theme-gold  .bp-node-head{background:#2a1e0a;border:1px solid #8a6a1e} .theme-gold  .bp-node-body{background:#1e160a;border:1px solid #8a6a1e}
+  .theme-gold  .bp-node-head span{color:#f0c040} .theme-gold  .func-name{color:#c8a840} .theme-gold  .pin-dot{background:#f0c040} .theme-gold  .pin-label{color:#8a7840}
+  .theme-purple.bp-node-head{background:#1e0d2a;border:1px solid #6a3a8a} .theme-purple.bp-node-body{background:#160a1e;border:1px solid #6a3a8a}
+  .theme-purple .bp-node-head span{color:#c077ff} .theme-purple .func-name{color:#a877e8} .theme-purple .pin-dot{background:#c077ff} .theme-purple .pin-label{color:#7a5a9a}
+
+  .node-icon{width:10px;height:10px;border-radius:1px;flex-shrink:0;font-style:normal;font-size:10px;line-height:1}
+
+  /* wire SVG paths */
+  .wire{fill:none;stroke:#c8c8c8;stroke-width:1.5;opacity:0.55}
+  .wire-exec{fill:none;stroke:#c8c8c8;stroke-width:2;opacity:0.7}
+
+  /* jump link */
+  .bp-node a{text-decoration:none;display:block}
+  .bp-node-body .jump{font-size:9px;color:#556;letter-spacing:0.08em;margin-top:5px;text-transform:uppercase;display:flex;align-items:center;gap:3px;transition:color 0.15s}
+  .theme-cyan  .bp-node:hover .jump{color:#00e5ff}
+  .theme-green .bp-node:hover .jump{color:#39ff8a}
+  .theme-pink  .bp-node:hover .jump{color:#ff2d78}
+  .theme-gold  .bp-node:hover .jump{color:#f0c040}
+  .theme-purple .bp-node:hover .jump{color:#c077ff}
+  .jump-arrow{display:inline-block;transition:transform 0.15s}
+  .bp-node:hover .jump-arrow{transform:translateX(3px)}
+</style>
+</head>
+<body>
+<div class="bp-canvas" id="canvas">
+  <svg class="wires" id="wires"></svg>
+  <div class="nodes" id="nodes">
+
+    <!-- ENTRY NODE -->
+    <div class="bp-entry" id="entry">
+      <div class="bp-entry-head">
+        <div class="icon"></div>
+        <span>Begin Play</span>
+      </div>
+      <div class="bp-entry-body">
+        <div class="subtitle">Page Contents</div>
+        <div class="exec-out">
+          <span>Exec</span>
+          <div class="exec-pin filled" id="entry-out"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPACER for wire routing -->
+    <div style="width:48px;flex-shrink:0"></div>
+
+    <!-- SECTION NODES column -->
+    <div class="bp-branch-col" id="branch-col">
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SECTIONS = [
+  { id:'summary',   label:'Project Summary',    func:'GetSummaryCard()',   theme:'cyan',   pin:'Overview',   anchor:'#summary'   },
+  { id:'gallery',   label:'Gallery',             func:'LoadMosaicGrid()',   theme:'green',  pin:'Images',     anchor:'#gallery'   },
+  { id:'software',  label:'Software Used',       func:'GetTechStack()',     theme:'gold',   pin:'Tools',      anchor:'#tech'      },
+  { id:'video',     label:'Video / Demo',        func:'PlayVideoReel()',    theme:'pink',   pin:'Media',      anchor:'#video'     },
+  { id:'notes',     label:'Dev Notes',           func:'ReadDevLog()',       theme:'purple', pin:'Context',    anchor:'#notes'     },
+];
+
+function buildNode(s, idx) {
+  const div = document.createElement('div');
+  div.className = `bp-node theme-${s.theme}`;
+  div.id = `node-${s.id}`;
+  div.style.marginBottom = idx < SECTIONS.length - 1 ? '10px' : '0';
+  div.innerHTML = `
+    <a href="${s.anchor}">
+      <div class="bp-node-head">
+        <div class="exec-pin" style="transform:scaleX(-1);margin-right:2px"></div>
+        <span>${s.label}</span>
+      </div>
+      <div class="bp-node-body">
+        <div class="func-name">${s.func}</div>
+        <div class="bp-node-pin-row">
+          <div class="pin-dot"></div>
+          <span class="pin-label">${s.pin}</span>
+        </div>
+        <div class="jump">Jump to section <span class="jump-arrow">→</span></div>
+      </div>
+    </a>`;
+  return div;
+}
+
+const col = document.getElementById('branch-col');
+SECTIONS.forEach((s, i) => col.appendChild(buildNode(s, i)));
+
+function drawWires() {
+  const svg = document.getElementById('wires');
+  const canvas = document.getElementById('canvas');
+  const canvasRect = canvas.getBoundingClientRect();
+
+  svg.innerHTML = '';
+
+  const entryEl = document.getElementById('entry');
+  const entryRect = entryEl.getBoundingClientRect();
+  const execPinEl = document.getElementById('entry-out');
+  const execRect = execPinEl.getBoundingClientRect();
+
+  const ex = execRect.right - canvasRect.left + 4;
+  const ey = execRect.top + execRect.height / 2 - canvasRect.top;
+
+  SECTIONS.forEach((s, i) => {
+    const nodeEl = document.getElementById(`node-${s.id}`);
+    if (!nodeEl) return;
+    const nodeRect = nodeEl.getBoundingClientRect();
+    const nx = nodeRect.left - canvasRect.left;
+    const ny = nodeRect.top + 14 - canvasRect.top;
+
+    const midX = ex + (nx - ex) * 0.5;
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+
+    const colorMap = {cyan:'#00e5ff',green:'#39ff8a',pink:'#ff2d78',gold:'#f0c040',purple:'#c077ff'};
+    const col = colorMap[s.theme] || '#c8c8c8';
+
+    if (i === 0) {
+      path.setAttribute('d', `M${ex},${ey} C${midX},${ey} ${midX},${ny} ${nx},${ny}`);
+      path.setAttribute('stroke', '#c8c8c8');
+      path.setAttribute('stroke-width', '2');
+      path.setAttribute('opacity', '0.65');
+    } else {
+      const prev = document.getElementById(`node-${SECTIONS[i-1].id}`);
+      if (!prev) return;
+      const prevRect = prev.getBoundingClientRect();
+      const px = prevRect.left + 10 - canvasRect.left;
+      const py = prevRect.bottom - canvasRect.top;
+      const curve = document.createElementNS('http://www.w3.org/2000/svg','path');
+      curve.setAttribute('d', `M${px},${py} C${px},${py+10} ${nx - 12},${ny-10} ${nx},${ny}`);
+      curve.setAttribute('fill','none');
+      curve.setAttribute('stroke', col);
+      curve.setAttribute('stroke-width', '1.5');
+      curve.setAttribute('opacity', '0.45');
+      svg.appendChild(curve);
+      path.setAttribute('d', `M${ex},${ey} C${ex+30},${ey} ${nx - 30},${ny} ${nx},${ny}`);
+      path.setAttribute('stroke', col);
+      path.setAttribute('stroke-width', '1.5');
+      path.setAttribute('opacity', '0.3');
+    }
+    path.setAttribute('fill','none');
+    svg.appendChild(path);
+  });
+
+  svg.setAttribute('viewBox', `0 0 ${canvasRect.width} ${canvas.offsetHeight}`);
+}
+
+window.addEventListener('load', () => { setTimeout(drawWires, 80); });
+window.addEventListener('resize', drawWires);
+</script>
+</body>
+</html>
