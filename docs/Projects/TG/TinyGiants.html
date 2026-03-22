@@ -62,12 +62,21 @@
 
 <!-- NAV BAR -->
 <nav class="ar-nav"
-     x-data="{ open: false }"
-     :class="{ 'is-open': open }"
-     @nav-open.window="open = true"
-     @nav-close.window="open = false"
+     x-data="{
+       open: false,
+       atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => {
+           this.atTop = window.scrollY < window.innerHeight * 0.08;
+           if (this.atTop) this.open = false;
+         }, { passive: true });
+       }
+     }"
+     :class="{ 'is-open': open || atTop }"
+     @nav-open.window="if (!atTop) open = true"
      @nav-toggle.window="open = !open"
-     @mouseleave="open = false"
+     @mouseleave="if (!atTop) open = false"
      @keydown.escape.window="open = false">
 
   <!-- Logo -->

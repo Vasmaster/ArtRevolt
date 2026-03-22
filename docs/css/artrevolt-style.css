@@ -51,6 +51,28 @@ body::before {
   z-index: 0;
 }
 
+.ar-logo {
+  font-family: 'Rajdhani', var(--font-display), sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* Prevent the fixed nav from inheriting any body font override */
+  -webkit-font-smoothing: antialiased;
+}
+
+.ar-logo .accent {
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(0,229,255,0.5));
+}
+
 /* ── AUTOHIDE NAV ─────────────────────────── */
 
 /* Invisible hover trigger strip — always on top */
