@@ -84,16 +84,61 @@ body::before {
   background-clip: text;
 }
 
-.ar-nav-links {
+/* ── HAMBURGER MENU ───────────────────────── */
+
+.ar-hamburger {
   display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  z-index: 200;
+  flex-shrink: 0;
 }
 
-.ar-nav-links a {
+.ar-hamburger .stripe {
+  width: 28px;
+  height: 3px;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+.ar-hamburger .stripe-1 { background: #ffffff; }
+.ar-hamburger .stripe-2 { background: var(--accent-green); }
+.ar-hamburger .stripe-3 { background: #e03030; }
+
+/* Subtle animation on hover — stripes stagger */
+.ar-hamburger:hover .stripe-1 { width: 22px; }
+.ar-hamburger:hover .stripe-3 { width: 22px; }
+
+/* Dropdown panel */
+.ar-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 220px;
+  background: rgba(5, 8, 16, 0.97);
+  border: 1px solid var(--border-glow);
+  border-top: none;
+  backdrop-filter: blur(16px);
+  z-index: 150;
+  overflow: hidden;
+}
+
+/* Nav links inside dropdown */
+.ar-dropdown .ar-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  margin: 0;
+}
+
+.ar-dropdown .ar-nav-links a {
+  display: block;
+  padding: 0.7rem 1.5rem;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -101,26 +146,56 @@ body::before {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--text-muted);
-  padding: 0.4rem 0.9rem;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  position: relative;
+  border: none;
+  border-left: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
-.ar-nav-links a:hover {
+.ar-dropdown .ar-nav-links a:hover,
+.ar-dropdown .ar-nav-links a.active {
   color: var(--accent-cyan);
-  border-color: var(--border-glow);
-  background: rgba(0,229,255,0.05);
+  border-left-color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.04);
 }
 
-.ar-nav-links a.active {
-  color: var(--accent-cyan);
-  border-color: var(--accent-cyan);
+/* Divider between nav links and social links */
+.ar-dropdown-divider {
+  height: 1px;
+  background: var(--border-dim);
+  margin: 0.4rem 1.5rem;
 }
 
-.ar-nav-social { display: flex; gap: 0.75rem; align-items: center; }
-.ar-nav-social a { color: var(--text-muted); transition: color 0.2s; }
-.ar-nav-social a:hover { color: var(--accent-gold); }
+/* Social links inside dropdown */
+.ar-dropdown-social {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.25rem 0 0.5rem;
+}
+
+.ar-dropdown-social a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.15s, background 0.15s;
+}
+
+.ar-dropdown-social a:hover {
+  color: var(--accent-gold);
+  background: rgba(240, 192, 64, 0.04);
+}
+
+.ar-dropdown-social svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
 
 /* === HERO SLIDESHOW === */
 .ar-hero {

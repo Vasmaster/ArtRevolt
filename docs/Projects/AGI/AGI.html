@@ -255,15 +255,64 @@
 </head>
 <body>
 
-  <nav class="ar-nav">
-    <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">Art<span class="accent">Revolt</span></a>
+  <nav class="ar-nav" style="position:relative;" x-data="{ open: false }">
+
+  <!-- Logo -->
+  <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
+    Art<span class="accent">Revolt</span>
+  </a>
+
+  <!-- Hamburger button -->
+  <button class="ar-hamburger"
+          @click="open = !open"
+          @keydown.escape.window="open = false"
+          :aria-expanded="open"
+          aria-label="Toggle menu">
+    <div class="stripe stripe-1"></div>
+    <div class="stripe stripe-2"></div>
+    <div class="stripe stripe-3"></div>
+  </button>
+
+  <!-- Dropdown -->
+  <div class="ar-dropdown"
+       x-show="open"
+       x-transition:enter="transition duration-150 ease-out"
+       x-transition:enter-start="opacity-0 -translate-y-2"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition duration-100 ease-in"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-2"
+       @click.outside="open = false"
+       @keydown.escape.window="open = false">
+
+    <!-- Page links -->
     <ul class="ar-nav-links">
       <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
       <li><a href="/Canvas.html">Canvas</a></li>
       <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
       <li><a href="/Contacts.html">Contact</a></li>
     </ul>
-  </nav>
+
+    <div class="ar-dropdown-divider"></div>
+
+    <!-- Social links -->
+    <div class="ar-dropdown-social">
+      <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
+        <svg fill="currentColor" viewBox="0 0 448 512">
+          <path d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        X / Twitter
+      </a>
+    </div>
+
+  </div>
+</nav>
 
   <!-- HERO — static image/video placeholder until renders are ready -->
   <div style="position:relative;width:100%;height:65vh;overflow:hidden;background:var(--bg-deep);display:flex;align-items:center;justify-content:center;">
