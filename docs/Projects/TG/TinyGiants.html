@@ -18,10 +18,10 @@
     .bp-canvas {
       position: relative;
       width: 100%;
-      background: #1a1f2e;
+      background: #0a0d16;
       background-image:
-        linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
       background-size: 24px 24px;
       padding: 24px 16px 32px;
       margin-bottom: 2rem;
@@ -370,6 +370,86 @@
     .bp-purple:hover .bp-jump {
       color: #c077ff
     }
+
+    /* ── BLUEPRINT TOC PREVIEW POPUP ─────────── */
+    .bp-preview {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      width: 220px;
+      background: #0d1525;
+      border: 1px solid var(--border-glow);
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .bp-node:hover .bp-preview {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .bp-preview img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border-glow);
+    }
+
+    /* Fallback when no image — coloured gradient bar */
+    .bp-preview .bp-preview-img-placeholder {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-glow);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .bp-preview-body {
+      padding: 8px 10px 10px;
+    }
+
+    .bp-preview-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      margin: 0 0 3px;
+    }
+
+    .bp-preview-desc {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Pin the popup below the node on the last 2 items
+   so it doesn't clip above the canvas top */
+    .bp-node:nth-last-child(-n+2) .bp-preview {
+      bottom: auto;
+      top: calc(100% + 10px);
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    .bp-node:nth-last-child(-n+2):hover .bp-preview {
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 
@@ -511,6 +591,42 @@
 
     <!-- PAGE CONTENT -->
     <div class="ar-page">
+
+      <!-- SUMMARY -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>TinyGiants Productions</h2>
+          <p>As 3D Producer at TinyGiants (Apr 2022 – Oct 2024), I developed real-time systems and mechanics in Unreal
+            Engine 5, produced photorealistic Octane renders for external clients, animated and composited professional
+            video content, and contributed personal creative productions alongside client work. Projects spanned opera
+            live-event visuals, product animations, conceptual CG art, and brand identity motion.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag tool">Adobe After Effects</span>
+            <span class="ar-tech-tag tool">Adobe Premiere</span>
+            <span class="ar-tech-tag">Compositing</span>
+            <span class="ar-tech-tag">Product Animation</span>
+            <span class="ar-tech-tag">Live Event VFX</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Producer</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            PERIOD</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2022 – Oct 2024
+          </div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            LOCATION</div>
+          <div style="font-family:var(--font-display);font-size:0.95rem;">Enschede, NL</div>
+        </div>
+      </div>
+
       <!-- ── BLUEPRINT TOC ── -->
       <div class="bp-canvas" id="bp-canvas">
         <svg class="bp-wires" id="bp-wires"></svg>
@@ -543,12 +659,72 @@
       <script>
         (function () {
           var SECTIONS = [
-            { id: 'opera', label: 'Hänsel & Gretel', func: 'LoadOperaScene()', theme: 'cyan', pin: 'Live Event', anchor: '#toc-opera' },
-            { id: 'bond', label: 'Bond of Union', func: 'RenderConceptArt()', theme: 'purple', pin: 'CG Art', anchor: '#toc-bond' },
-            { id: 'aoc', label: 'AOC Keyboard', func: 'PlayAnimation()', theme: 'gold', pin: 'Product Viz', anchor: '#toc-aoc' },
-            { id: 'car', label: 'Muscle Car', func: 'LoadShowcase()', theme: 'pink', pin: 'Animation', anchor: '#toc-car' },
-            { id: 'coulisse', label: 'Coulisse Products', func: 'StreamVideoReel()', theme: 'green', pin: 'Client Work', anchor: '#toc-coulisse' },
-            { id: 'logo', label: 'Logo Transition', func: 'PlayMotionReel()', theme: 'cyan', pin: 'Motion', anchor: '#toc-logo' },
+            {
+              id: 'opera',
+              label: 'Hänsel & Gretel',
+              func: 'LoadOperaScene()',
+              theme: 'cyan',
+              pin: 'Live Event',
+              anchor: '#toc-opera',
+              preview: 'Swans_pre.png',
+              previewTitle: 'Hänsel und Gretel Opera',
+              previewDesc: 'Netherlands Reisopera — live 3D projection visuals for a fantasy opera.'
+            },
+            {
+              id: 'bond',
+              label: 'Bond of Union',
+              func: 'RenderConceptArt()',
+              theme: 'purple',
+              pin: 'CG Art',
+              anchor: '#toc-bond',
+              preview: 'Bond_Of_Union_V1.png',
+              previewTitle: 'Bond of Union',
+              previewDesc: 'CG interpretation of M.C. Escher — illusory geometry meets Guido Moretti sculpture.'
+            },
+            {
+              id: 'aoc',
+              label: 'AOC Keyboard',
+              func: 'PlayAnimation()',
+              theme: 'gold',
+              pin: 'Product Viz',
+              anchor: '#toc-aoc',
+              preview: 'AOC Keyboard.png',
+              previewTitle: 'AOC Keyboard Animation',
+              previewDesc: 'Dynamic product animation with C4D simulations and multi-pass After Effects compositing.'
+            },
+            {
+              id: 'car',
+              label: 'Muscle Car',
+              func: 'LoadShowcase()',
+              theme: 'pink',
+              pin: 'Animation',
+              anchor: '#toc-car',
+              preview: 'Hum3DCar.png',
+              previewTitle: 'Muscle Car Showcase',
+              previewDesc: 'Whip animation and render-pass compositing training production.'
+            },
+            {
+              id: 'coulisse',
+              label: 'Coulisse Products',
+              func: 'StreamVideoReel()',
+              theme: 'green',
+              pin: 'Client Work',
+              anchor: '#toc-coulisse',
+              preview: 'Coulisse.png',
+              previewTitle: 'Coulisse Product Animations',
+              previewDesc: 'Octane renders composited with live product interaction recordings for a full marketing video.'
+            },
+            {
+              id: 'logo',
+              label: 'Logo Transition',
+              func: 'PlayMotionReel()',
+              theme: 'cyan',
+              pin: 'Motion',
+              anchor: '#toc-logo',
+              preview: 'Swans_pre.png',
+              previewTitle: 'TinyGiants Logo Transition',
+              previewDesc: 'Whip transition animation rendered in UE5, composited in After Effects.'
+            },
           ];
 
           var col = document.getElementById('bp-col');
@@ -557,6 +733,12 @@
             var div = document.createElement('div');
             div.className = 'bp-node bp-' + s.theme;
             div.id = 'bp-node-' + s.id;
+            div.style.position = 'relative';  /* needed for popup positioning */
+
+            var imgHtml = s.preview
+              ? '<img src="' + s.preview + '" alt="' + s.label + '" />'
+              : '<div class="bp-preview-img-placeholder">No preview</div>';
+
             div.innerHTML =
               '<a href="' + s.anchor + '">' +
               '<div class="bp-node-head">' +
@@ -571,7 +753,16 @@
               '</div>' +
               '<div class="bp-jump">Jump to section <span class="bp-jump-arrow">→</span></div>' +
               '</div>' +
-              '</a>';
+              '</a>' +
+              /* preview popup — outside the <a> so it doesn't trigger navigation */
+              '<div class="bp-preview">' +
+              imgHtml +
+              '<div class="bp-preview-body">' +
+              '<p class="bp-preview-title">' + s.previewTitle + '</p>' +
+              '<p class="bp-preview-desc">' + s.previewDesc + '</p>' +
+              '</div>' +
+              '</div>';
+
             col.appendChild(div);
           });
 
@@ -614,41 +805,6 @@
           window.addEventListener('resize', drawWires);
         })();
       </script>
-      
-      <!-- SUMMARY -->
-      <div class="ar-summary-card ar-reveal">
-        <div>
-          <h2>TinyGiants Productions</h2>
-          <p>As 3D Producer at TinyGiants (Apr 2022 – Oct 2024), I developed real-time systems and mechanics in Unreal
-            Engine 5, produced photorealistic Octane renders for external clients, animated and composited professional
-            video content, and contributed personal creative productions alongside client work. Projects spanned opera
-            live-event visuals, product animations, conceptual CG art, and brand identity motion.</p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag engine">Unreal Engine 5</span>
-            <span class="ar-tech-tag render">OTOY Octane</span>
-            <span class="ar-tech-tag">Cinema 4D</span>
-            <span class="ar-tech-tag tool">Adobe After Effects</span>
-            <span class="ar-tech-tag tool">Adobe Premiere</span>
-            <span class="ar-tech-tag">Compositing</span>
-            <span class="ar-tech-tag">Product Animation</span>
-            <span class="ar-tech-tag">Live Event VFX</span>
-          </div>
-        </div>
-        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
-          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
-          </div>
-          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Producer</div>
-          <div
-            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
-            PERIOD</div>
-          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2022 – Oct 2024
-          </div>
-          <div
-            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
-            LOCATION</div>
-          <div style="font-family:var(--font-display);font-size:0.95rem;">Enschede, NL</div>
-        </div>
-      </div>
 
       <!-- ═══════════════════════════════════
          PROJECT 1 — HANSEL & GRETEL OPERA
