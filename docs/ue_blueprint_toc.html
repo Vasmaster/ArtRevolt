@@ -94,7 +94,7 @@
 
     .exec-out {
       display: flex;
-      align-items: center;
+      align-items: end;
       justify-content: flex-end;
       margin-top: 8px;
       gap: 4px
@@ -118,12 +118,12 @@
       background: #ffffff
     }
 
-    /* BRANCH connector area */
+    /* BRANCH connector area - Grid layout */
     .bp-branch-col {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      padding: 0 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px 24px;
+      max-width: 600px;
       flex-shrink: 0;
       position: relative
     }
@@ -429,11 +429,10 @@
       const div = document.createElement('div');
       div.className = `bp-node theme-${s.theme}`;
       div.id = `node-${s.id}`;
-      div.style.marginBottom = idx < SECTIONS.length - 1 ? '10px' : '0';
       div.innerHTML = `
     <a href="${s.anchor}">
       <div class="bp-node-head">
-        <div class="exec-pin" style="transform:scaleX(-1);margin-right:2px"></div>
+        <div class="exec-pin" style="margin-right:2px"></div>
         <span>${s.label}</span>
       </div>
       <div class="bp-node-body">
@@ -485,22 +484,41 @@
           path.setAttribute('stroke-width', '2');
           path.setAttribute('opacity', '0.65');
         } else {
-          const prev = document.getElementById(`node-${SECTIONS[i - 1].id}`);
+          const prevIdx = i - 1;
+          const prev = document.getElementById(`node-${SECTIONS[prevIdx].id}`);
           if (!prev) return;
           const prevRect = prev.getBoundingClientRect();
           const px = prevRect.left + 10 - canvasRect.left;
           const py = prevRect.bottom - canvasRect.top;
-          const curve = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          curve.setAttribute('d', `M${px},${py} C${px},${py + 10} ${nx - 12},${ny - 10} ${nx},${ny}`);
-          curve.setAttribute('fill', 'none');
-          curve.setAttribute('stroke', col);
-          curve.setAttribute('stroke-width', '1.5');
-          curve.setAttribute('opacity', '0.45');
-          svg.appendChild(curve);
-          path.setAttribute('d', `M${ex},${ey} C${ex + 30},${ey} ${nx - 30},${ny} ${nx},${ny}`);
-          path.setAttribute('stroke', col);
-          path.setAttribute('stroke-width', '1.5');
-          path.setAttribute('opacity', '0.3');
+          
+          // Grid layout: check if on same row (items 0-2, 3-5, etc.)
+          const itemsPerRow = 3;
+          const currentRow = Math.floor(i / itemsPerRow);
+          const prevRow = Math.floor(prevIdx / itemsPerRow);
+          const currentCol = i % itemsPerRow;
+          const prevCol = prevIdx % itemsPerRow;
+          const sameRow = currentRow === prevRow;
+          
+          if (currentCol === 0 || !sameRow) {
+            // First item in row or different row - curve from entry point
+            path.setAttribute('d', `M${ex},${ey} C${ex + 30},${ey} ${nx - 30},${ny} ${nx},${ny}`);
+            path.setAttribute('stroke', col);
+            path.setAttribute('stroke-width', '1.5');
+            path.setAttribute('opacity', '0.3');
+          } else {
+            // Same row - horizontal connection from previous node
+            const curve = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            curve.setAttribute('d', `M${px},${py} C${px},${py + 10} ${nx - 12},${ny - 10} ${nx},${ny}`);
+            curve.setAttribute('fill', 'none');
+            curve.setAttribute('stroke', col);
+            curve.setAttribute('stroke-width', '1.5');
+            curve.setAttribute('opacity', '0.45');
+            svg.appendChild(curve);
+            path.setAttribute('d', `M${ex},${ey} C${ex + 30},${ey} ${nx - 30},${ny} ${nx},${ny}`);
+            path.setAttribute('stroke', col);
+            path.setAttribute('stroke-width', '1.5');
+            path.setAttribute('opacity', '0.25');
+          }
         }
         path.setAttribute('fill', 'none');
         svg.appendChild(path);
