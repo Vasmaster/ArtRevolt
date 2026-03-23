@@ -363,9 +363,10 @@
         // HERO RENDER PLACEHOLDER
       </div>
       <div style="font-size:4rem;opacity:0.15;">🥽</div>
-      <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;">
+      <div
+        style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;position:relative;overflow:hidden;">
         <img src="Banner.jpg" alt="Banner"
-          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+          style="width:100%;display:block;border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;box-shadow:inset 0 -60px 40px rgba(5,8,16,0.9);">
       </div>
     </div>
 
@@ -503,14 +504,18 @@
           <div class="slot-label">Full 360° Shot — Gallery Walkthrough</div>
         </div>
         <div class="agi-media ar-reveal">
-          <img src="OpeningShot.jpg" alt="OpeningShot"
-            style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          <div class="slot-label">Intro shot from the 360° World of Color Canvas</div>
+          <div class="agi-media-slot" style="min-height:280px;">
+            <img src="OpeningShot.jpg" alt="OpeningShot"
+              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+            <div class="slot-label">Intro shot from the 360° World of Color Canvas</div>
+          </div>
         </div>
         <div class="agi-media ar-reveal">
-          <img src="WoC_360_UV.png" alt="CaptionShot-UV"
-            style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          <div class="slot-label">Full 360° Shot — Gallery Walkthrough in Fluorescent Post-Processing Effect</div>
+          <div class="agi-media-slot" style="min-height:280px;">
+            <img src="WoC_360_UV.png" alt="CaptionShot-UV"
+              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+            <div class="slot-label">Full 360° Shot — Gallery Walkthrough in Fluorescent Post-Processing Effect</div>
+          </div>
         </div>
       </div>
 
@@ -519,8 +524,8 @@
         <div class="agi-media-slot" style="min-height:280px;">
           <div class="slot-icon">▶️</div>
           <div class="slot-label">Full 360° Animation — Trailer</div>
-          <iframe width="100%" height="400" src="https://www.youtube.com/embed/AsD8CfeVHx8"
-            title="YouTube video player" frameborder="0"
+          <iframe width="100%" height="400" src="https://www.youtube.com/embed/AsD8CfeVHx8" title="YouTube video player"
+            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
             style="border: 1px solid var(--border-glow);"></iframe>
