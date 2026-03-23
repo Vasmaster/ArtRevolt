@@ -455,8 +455,8 @@
     <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-gold);">
       <div>
         <p>The first entry point into the AGI experience. High-resolution equirectangular 360° animations rendered in
-          Unreal Engine 5 capture a complete VR world based on a canvas that embodies Pythagorean Cosmic Morphology 
-          and the five Platonic solids.<br> Guided by an AI narrator, participants embark on narrative journeys through 
+          Unreal Engine 5 capture a complete VR world based on a canvas that embodies Pythagorean Cosmic Morphology
+          and the five Platonic solids.<br> Guided by an AI narrator, participants embark on narrative journeys through
           these 360° environments, which are visually and thematically expanded from the original paintings.</p>
         <div class="ar-tech-stack">
           <span class="ar-tech-tag engine">Unreal Engine 5</span>
@@ -499,15 +499,15 @@
       <div class="agi-media ar-reveal">
         <div class="agi-media-slot" style="min-height:280px;">
           <img src="WoC_360.png" alt="CaptionShot"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+            style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
           <div class="slot-label">Full 360° Shot — Gallery Walkthrough</div>
           <div class="agi-media-slot">
             <img src="OpeningShot.jpg" alt="OpeningShot"
               style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-              <div class="slot-label">Intro shot from the 360° World of Color Canvas</div>
+            <div class="slot-label">Intro shot from the 360° World of Color Canvas</div>
           </div>
           <img src="WoC_360_UV.png" alt="CaptionShot-UV"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+            style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
           <div class="slot-label">Full 360° Shot — Gallery Walkthrough in Fluorescent Post-Processing Effect</div>
         </div>
 
@@ -523,277 +523,282 @@
 
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="agi-dev-note ar-reveal">
-          <strong>// Dev Note</strong>
-          360° renders are the cinematic backbone of the project — they let anyone experience the gallery without a
-          headset.
-        </div>
+    <div class="agi-dev-note ar-reveal">
+      <strong>// Dev Note</strong>
+      360° renders are the cinematic backbone of the project — they let anyone experience the gallery without a
+      headset.
+    </div>
 
-        <!-- ═══════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════
          CHAPTER 02 — MR INTERACTIVE GAME-MODE
          ═══════════════════════════════════════════ -->
 
-        <div class="agi-chapter-sep ar-reveal">
-          <div class="line"></div>
-          <div class="label">Chapter 02 of 03</div>
-          <div class="line"></div>
+    <div class="agi-chapter-sep ar-reveal">
+      <div class="line"></div>
+      <div class="label">Chapter 02 of 03</div>
+      <div class="line"></div>
+    </div>
+
+    <div class="ar-reveal" style="margin-bottom:1rem;">
+      <div class="agi-chapter-badge">
+        <span class="num">02</span>
+        <span class="agi-mode-pill mode-mr">Mixed Reality</span>
+        <span class="agi-status wip">In Development</span>
+      </div>
+      <h2 class="ar-section-title" style="margin-top:0.5rem;">MR Interactive Game-Mode</h2>
+      <p class="ar-section-sub">// PASSTHROUGH · META QUEST · REAL-WORLD ANCHORED · INTERACTIVE</p>
+    </div>
+
+    <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-cyan);">
+      <div>
+        <p>The second chapter layers the virtual gallery over the user's real physical space using Meta Quest
+          passthrough. Visitors wearing the headset see their actual room augmented with world portals linked to the
+          corresponding
+          painting, and interactive elements altering the environment in bio diversity. A game-mode layer introduces
+          interaction
+          mechanics — interacting with AI agent -NPC to aquire information about the artworks, reading information
+          panels, and navigating between Canvas worlds — making
+          the experience exploratory rather than passive.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Unreal Engine 5</span>
+          <span class="ar-tech-tag">Meta XR SDK</span>
+          <span class="ar-tech-tag">Mixed Reality Passthrough</span>
+          <span class="ar-tech-tag">Scene Understanding</span>
+          <span class="ar-tech-tag">Spatial Anchors</span>
+          <span class="ar-tech-tag">Hand Tracking</span>
+          <span class="ar-tech-tag">Meta Quest 2 / 3</span>
+          <span class="ar-tech-tag">Blueprint / C++</span>
         </div>
+      </div>
+    </div>
 
-        <div class="ar-reveal" style="margin-bottom:1rem;">
-          <div class="agi-chapter-badge">
-            <span class="num">02</span>
-            <span class="agi-mode-pill mode-mr">Mixed Reality</span>
-            <span class="agi-status wip">In Development</span>
-          </div>
-          <h2 class="ar-section-title" style="margin-top:0.5rem;">MR Interactive Game-Mode</h2>
-          <p class="ar-section-sub">// PASSTHROUGH · META QUEST · REAL-WORLD ANCHORED · INTERACTIVE</p>
-        </div>
+    <!-- Spec table -->
+    <table class="agi-spec-table ar-reveal">
+      <tr>
+        <td>Platform</td>
+        <td>PC tethered running on Meta Quest 2 / 3S</td>
+      </tr>
+      <tr>
+        <td>SDK</td>
+        <td>Meta XR SDK — Mixed Reality Utility Kit (MRUK)</td>
+      </tr>
+      <tr>
+        <td>Room Mapping</td>
+        <td>Scene Understanding API — walls, floor, ceiling, furniture</td>
+      </tr>
+      <tr>
+        <td>Interaction</td>
+        <td>Hand tracking + controller fallback — grab, inspect, navigate</td>
+      </tr>
+      <tr>
+        <td>Rendering</td>
+        <td>UE5 Deferred Renderer — Higher Quality Rendering Settings</td>
+      </tr>
+      <tr>
+        <td>Target FPS</td>
+        <td>60 fps on PC tether</td>
+      </tr>
+    </table>
 
-        <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-cyan);">
-          <div>
-            <p>The second chapter layers the virtual gallery over the user's real physical space using Meta Quest
-              passthrough. Visitors wearing the headset see their actual room augmented with world portals linked to the corresponding
-              painting, and interactive elements altering the environment in bio diversity. A game-mode layer introduces interaction
-              mechanics — interacting with AI agent -NPC to aquire information about the artworks, reading information panels, and navigating between Canvas worlds — making
-              the experience exploratory rather than passive.</p>
-            <div class="ar-tech-stack">
-              <span class="ar-tech-tag engine">Unreal Engine 5</span>
-              <span class="ar-tech-tag">Meta XR SDK</span>
-              <span class="ar-tech-tag">Mixed Reality Passthrough</span>
-              <span class="ar-tech-tag">Scene Understanding</span>
-              <span class="ar-tech-tag">Spatial Anchors</span>
-              <span class="ar-tech-tag">Hand Tracking</span>
-              <span class="ar-tech-tag">Meta Quest 2 / 3</span>
-              <span class="ar-tech-tag">Blueprint / C++</span>
-            </div>
-          </div>
-        </div>
+    <!-- Media placeholders -->
+    <div class="agi-media-2col ar-reveal">
+      <div class="agi-media-slot">
+        <div class="slot-icon">🥽</div>
+        <div class="slot-label">Worlds of Color - Overview</div>
+        <img src="001_Intro.gif" alt="Worlds of Color"
+          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+      </div>
 
-        <!-- Spec table -->
-        <table class="agi-spec-table ar-reveal">
-          <tr>
-            <td>Platform</td>
-            <td>PC tethered running on Meta Quest 2 / 3S</td>
-          </tr>
-          <tr>
-            <td>SDK</td>
-            <td>Meta XR SDK — Mixed Reality Utility Kit (MRUK)</td>
-          </tr>
-          <tr>
-            <td>Room Mapping</td>
-            <td>Scene Understanding API — walls, floor, ceiling, furniture</td>
-          </tr>
-          <tr>
-            <td>Interaction</td>
-            <td>Hand tracking + controller fallback — grab, inspect, navigate</td>
-          </tr>
-          <tr>
-            <td>Rendering</td>
-            <td>UE5 Deferred Renderer — Higher Quality Rendering Settings</td>
-          </tr>
-          <tr>
-            <td>Target FPS</td>
-            <td>60 fps on PC tether</td>
-          </tr>
-        </table>
+      <div class="agi-media-slot">
+        <div class="slot-icon">🖐️</div>
+        <div class="slot-label">Fluorescent-UV post-process style</div>
+        <img src="002_UV.gif" alt="UV Effect"
+          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+      </div>
+    </div>
 
-        <!-- Media placeholders -->
-        <div class="agi-media-2col ar-reveal">
-          <div class="agi-media-slot">
-            <div class="slot-icon">🥽</div>
-            <div class="slot-label">Worlds of Color - Overview</div>
-            <img src="001_Intro.gif" alt="Worlds of Color"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          </div>
+    <div class="agi-media ar-reveal">
+      <div class="agi-media-slot" style="min-height:280px;">
+        <div class="slot-icon">▶️</div>
+        <div class="slot-label">World diversity - Interaction Walkthrough</div>
+        <img src="003_Underwater.gif" alt="Interaction"
+          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+      </div>
+    </div>
 
-          <div class="agi-media-slot">
-            <div class="slot-icon">🖐️</div>
-            <div class="slot-label">Fluorescent-UV post-process style</div>
-            <img src="002_UV.gif" alt="UV Effect"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          </div>
-        </div>
+    <div class="agi-media-2col ar-reveal">
+      <div class="agi-media-slot">
+        <div class="slot-icon">🥽</div>
+        <div class="slot-label">Teleportation mobility</div>
+        <img src="004_Teleport.gif" alt="Teleportation"
+          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+      </div>
 
-        <div class="agi-media ar-reveal">
-          <div class="agi-media-slot" style="min-height:280px;">
-            <div class="slot-icon">▶️</div>
-            <div class="slot-label">World diversity - Interaction Walkthrough</div>
-            <img src="003_Underwater.gif" alt="Interaction"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          </div>
-        </div>
+      <div class="agi-media-slot">
+        <div class="slot-icon">🖐️</div>
+        <div class="slot-label">Loop of Life - Work in progress</div>
+        <img src="005_Loop_of_Life.gif" alt="Loop of Life"
+          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+      </div>
+    </div>
 
-        <div class="agi-media-2col ar-reveal">
-          <div class="agi-media-slot">
-            <div class="slot-icon">🥽</div>
-            <div class="slot-label">Teleportation mobility</div>
-            <img src="004_Teleport.gif" alt="Teleportation"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          </div>
+    <div class="agi-media ar-reveal">
+      <div class="agi-media-slot" style="min-height:280px;">
+        <div class="slot-icon">▶️</div>
+        <div class="slot-label">Beyond the Consciousness - Coming Soon</div>
+        <img src="006_Beyond_the_Consciousness.gif" alt="Beyond the Consciousness"
+          style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
+      </div>
+    </div>
+    <!-- Editable notes -->
+    <div class="ar-media-input ar-reveal">
+      <div class="ar-media-input-icon-placeholder">📋</div>
+      <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
+        Add development notes here — scene understanding setup, interaction blueprint logic, performance profiling
+        results, or design decisions about the game-mode mechanics.
+      </p>
+    </div>
 
-          <div class="agi-media-slot">
-            <div class="slot-icon">🖐️</div>
-            <div class="slot-label">Loop of Life - Work in progress</div>
-            <img src="005_Loop_of_Life.gif" alt="Loop of Life"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          </div>
-        </div>
+    <div class="agi-dev-note ar-reveal">
+      <strong>// Dev Note</strong>
+      For the MR chapter, capture gameplay directly from the Quest headset using the Meta Quest Developer Hub screen
+      recording, or use the built-in cast to Chromecast for live recording. Add those captures above to show the
+      passthrough anchoring and fully mapped mechanics to hand-tracking interactions work in progress implementation.
+    </div>
 
-        <div class="agi-media ar-reveal">
-          <div class="agi-media-slot" style="min-height:280px;">
-            <div class="slot-icon">▶️</div>
-            <div class="slot-label">Beyond the Consciousness - Coming Soon</div>
-            <img src="006_Beyond_the_Consciousness.gif" alt="Beyond the Consciousness"
-              style="border:1px solid var(--border-glow);margin-top:0.75rem;border-radius:2px;">
-          </div>
-        </div>
-        <!-- Editable notes -->
-        <div class="ar-media-input ar-reveal">
-          <div class="ar-media-input-icon-placeholder">📋</div>
-          <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
-            Add development notes here — scene understanding setup, interaction blueprint logic, performance profiling
-            results, or design decisions about the game-mode mechanics.
-          </p>
-        </div>
-
-        <div class="agi-dev-note ar-reveal">
-          <strong>// Dev Note</strong>
-          For the MR chapter, capture gameplay directly from the Quest headset using the Meta Quest Developer Hub screen
-          recording, or use the built-in cast to Chromecast for live recording. Add those captures above to show the
-          passthrough anchoring and fully mapped mechanics to hand-tracking interactions work in progress implementation.
-        </div>
-
-        <!-- ═══════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════
          CHAPTER 03 — AR MOBILE TEST DEMO
          ══════════════════════════════════════════ -->
 
-        <div class="agi-chapter-sep ar-reveal">
-          <div class="line"></div>
-          <div class="label">Chapter 03 of 03</div>
-          <div class="line"></div>
-        </div>
+    <div class="agi-chapter-sep ar-reveal">
+      <div class="line"></div>
+      <div class="label">Chapter 03 of 03</div>
+      <div class="line"></div>
+    </div>
 
-        <div class="ar-reveal" style="margin-bottom:1rem;">
-          <div class="agi-chapter-badge">
-            <span class="num">03</span>
-            <span class="agi-mode-pill mode-ar">AR Mobile</span>
-            <span class="agi-status demo">Test Demo</span>
-          </div>
-          <h2 class="ar-section-title" style="margin-top:0.5rem;">AR Test Demo — Mobile</h2>
-          <p class="ar-section-sub">// AR FOUNDATION · iOS / ANDROID · SURFACE DETECTION · PORTABLE</p>
-        </div>
-
-        <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-green);">
-          <div>
-            <p>The third chapter is an accessible AR demo deployable on any modern iOS or Android smartphone — no
-              headset required. Using AR Foundation (Unity) or Unreal's ARKit/ARCore integration, individual artworks
-              from the gallery are placed onto real-world surfaces detected by the phone camera. Users can walk around
-              the virtual artwork, scale it, and read contextual information overlaid alongside it — a portable taste of
-              the full gallery experience.</p>
-            <div class="ar-tech-stack">
-              <span class="ar-tech-tag engine">Unity (AR Foundation)</span>
-              <span class="ar-tech-tag">ARKit (iOS)</span>
-              <span class="ar-tech-tag">ARCore (Android)</span>
-              <span class="ar-tech-tag">Plane Detection</span>
-              <span class="ar-tech-tag">World Anchors</span>
-              <span class="ar-tech-tag">Touch Interaction</span>
-              <span class="ar-tech-tag">C#</span>
-              <span class="ar-tech-tag">iOS / Android Build</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Spec table -->
-        <table class="agi-spec-table ar-reveal">
-          <tr>
-            <td>Platform</td>
-            <td>iOS 14+ (ARKit 4) &amp; Android 8.0+ (ARCore 1.x)</td>
-          </tr>
-          <tr>
-            <td>Framework</td>
-            <td>Unity AR Foundation — unified ARKit / ARCore backend</td>
-          </tr>
-          <tr>
-            <td>Detection</td>
-            <td>Horizontal &amp; vertical plane detection — floor, table, wall</td>
-          </tr>
-          <tr>
-            <td>Interaction</td>
-            <td>Tap to place · Pinch to scale · Rotate with two fingers</td>
-          </tr>
-          <tr>
-            <td>Content</td>
-            <td>Individual artworks as optimised real-time 3D objects</td>
-          </tr>
-          <tr>
-            <td>Distribution</td>
-            <td>TestFlight (iOS) / APK sideload (Android) — test demo</td>
-          </tr>
-        </table>
-
-        <!-- Media placeholders -->
-        <div class="agi-media-2col ar-reveal">
-          <div class="agi-media-slot">
-            <div class="slot-icon">📱</div>
-            <div class="slot-label">AR Plane Detection — Surface Placement</div>
-            <div class="slot-hint">Add phone screen recording here</div>
-          </div>
-          <div class="agi-media-slot">
-            <div class="slot-icon">🖼️</div>
-            <div class="slot-label">AR Artwork in Real World — Walk-around</div>
-            <div class="slot-hint">Add video or screenshot here</div>
-          </div>
-        </div>
-
-        <div class="agi-media ar-reveal">
-          <div class="agi-media-slot" style="min-height:280px;">
-            <div class="slot-icon">▶️</div>
-            <div class="slot-label">AR Demo — Full Mobile Test Recording</div>
-            <div class="slot-hint">Add screen recording from iPhone or Android here</div>
-          </div>
-        </div>
-
-        <!-- Editable input block -->
-        <div class="ar-media-input ar-reveal">
-          <div class="ar-media-input-icon-placeholder">📱</div>
-          <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
-            Add notes about the AR test demo here — what artworks are available to place, how the plane detection
-            performs, build instructions for the APK/TestFlight, or known limitations of the demo version.
-          </p>
-        </div>
-
-        <div class="agi-dev-note ar-reveal">
-          <strong>// Dev Note</strong>
-          For the AR mobile chapter, record the demo using your phone's built-in screen recorder while running the AR
-          session — this captures both the camera feed and the overlaid 3D content accurately. Add those recordings
-          above. You can also link to a TestFlight or APK download here for recruiters to try it directly.
-        </div>
-
-      </div><!-- /ar-page -->
-
-      <footer class="ar-footer">
-        &copy; 2025 Vasil Grancharov / ArtRevolt &nbsp;·&nbsp; AGI — Art Gallery Interactive
-      </footer>
-
-      <!-- PREV / NEXT — update hrefs to match your project order -->
-      <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-        @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-        <a class="ar-footer-nav-btn" :href="isHalfway ? 'https://vasmaster.github.io/ArtRevolt' : null"
-          @click="if(!isHalfway) $event.preventDefault()">
-          <div class="thumb"
-            style="width:52px;height:52px;background:var(--bg-panel);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
-            🏠</div>
-          <span class="label">Home</span>
-        </a>
-        <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? '/Contacts.html' : null"
-          @click="if(!isHalfway) $event.preventDefault()">
-          <div class="thumb"
-            style="width:52px;height:52px;background:var(--bg-panel);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
-            ✉️</div>
-          <span class="label">Contact</span>
-        </a>
+    <div class="ar-reveal" style="margin-bottom:1rem;">
+      <div class="agi-chapter-badge">
+        <span class="num">03</span>
+        <span class="agi-mode-pill mode-ar">AR Mobile</span>
+        <span class="agi-status demo">Test Demo</span>
       </div>
+      <h2 class="ar-section-title" style="margin-top:0.5rem;">AR Test Demo — Mobile</h2>
+      <p class="ar-section-sub">// AR FOUNDATION · iOS / ANDROID · SURFACE DETECTION · PORTABLE</p>
+    </div>
+
+    <div class="ar-summary-card ar-reveal" style="border-left-color:var(--accent-green);">
+      <div>
+        <p>The third chapter is an accessible AR demo deployable on any modern iOS or Android smartphone — no
+          headset required. Using AR Foundation (Unity) or Unreal's ARKit/ARCore integration, individual artworks
+          from the gallery are placed onto real-world surfaces detected by the phone camera. Users can walk around
+          the virtual artwork, scale it, and read contextual information overlaid alongside it — a portable taste of
+          the full gallery experience.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Unity (AR Foundation)</span>
+          <span class="ar-tech-tag">ARKit (iOS)</span>
+          <span class="ar-tech-tag">ARCore (Android)</span>
+          <span class="ar-tech-tag">Plane Detection</span>
+          <span class="ar-tech-tag">World Anchors</span>
+          <span class="ar-tech-tag">Touch Interaction</span>
+          <span class="ar-tech-tag">C#</span>
+          <span class="ar-tech-tag">iOS / Android Build</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spec table -->
+    <table class="agi-spec-table ar-reveal">
+      <tr>
+        <td>Platform</td>
+        <td>iOS 14+ (ARKit 4) &amp; Android 8.0+ (ARCore 1.x)</td>
+      </tr>
+      <tr>
+        <td>Framework</td>
+        <td>Unity AR Foundation — unified ARKit / ARCore backend</td>
+      </tr>
+      <tr>
+        <td>Detection</td>
+        <td>Horizontal &amp; vertical plane detection — floor, table, wall</td>
+      </tr>
+      <tr>
+        <td>Interaction</td>
+        <td>Tap to place · Pinch to scale · Rotate with two fingers</td>
+      </tr>
+      <tr>
+        <td>Content</td>
+        <td>Individual artworks as optimised real-time 3D objects</td>
+      </tr>
+      <tr>
+        <td>Distribution</td>
+        <td>TestFlight (iOS) / APK sideload (Android) — test demo</td>
+      </tr>
+    </table>
+
+    <!-- Media placeholders -->
+    <div class="agi-media-2col ar-reveal">
+      <div class="agi-media-slot">
+        <div class="slot-icon">📱</div>
+        <div class="slot-label">AR Plane Detection — Surface Placement</div>
+        <div class="slot-hint">Add phone screen recording here</div>
+      </div>
+      <div class="agi-media-slot">
+        <div class="slot-icon">🖼️</div>
+        <div class="slot-label">AR Artwork in Real World — Walk-around</div>
+        <div class="slot-hint">Add video or screenshot here</div>
+      </div>
+    </div>
+
+    <div class="agi-media ar-reveal">
+      <div class="agi-media-slot" style="min-height:280px;">
+        <div class="slot-icon">▶️</div>
+        <div class="slot-label">AR Demo — Full Mobile Test Recording</div>
+        <div class="slot-hint">Add screen recording from iPhone or Android here</div>
+      </div>
+    </div>
+
+    <!-- Editable input block -->
+    <div class="ar-media-input ar-reveal">
+      <div class="ar-media-input-icon-placeholder">📱</div>
+      <p class="ar-media-input-text" contenteditable="true" title="Click to edit">
+        Add notes about the AR test demo here — what artworks are available to place, how the plane detection
+        performs, build instructions for the APK/TestFlight, or known limitations of the demo version.
+      </p>
+    </div>
+
+    <div class="agi-dev-note ar-reveal">
+      <strong>// Dev Note</strong>
+      For the AR mobile chapter, record the demo using your phone's built-in screen recorder while running the AR
+      session — this captures both the camera feed and the overlaid 3D content accurately. Add those recordings
+      above. You can also link to a TestFlight or APK download here for recruiters to try it directly.
+    </div>
+
+  </div><!-- /ar-page -->
+
+  <footer class="ar-footer">
+    &copy; 2025 Vasil Grancharov / ArtRevolt &nbsp;·&nbsp; AGI — Art Gallery Interactive
+  </footer>
+
+  <!-- PREV / NEXT — update hrefs to match your project order -->
+  <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+    @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+    <a class="ar-footer-nav-btn" :href="isHalfway ? 'https://vasmaster.github.io/ArtRevolt' : null"
+      @click="if(!isHalfway) $event.preventDefault()">
+      <div class="thumb"
+        style="width:52px;height:52px;background:var(--bg-panel);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+        🏠</div>
+      <span class="label">Home</span>
+    </a>
+    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? '/Contacts.html' : null"
+      @click="if(!isHalfway) $event.preventDefault()">
+      <div class="thumb"
+        style="width:52px;height:52px;background:var(--bg-panel);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+        ✉️</div>
+      <span class="label">Contact</span>
+    </a>
+  </div>
 
 </body>
 
