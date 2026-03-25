@@ -137,6 +137,12 @@
       transform: translateY(-2px)
     }
 
+    /* Staggered two-row grid container */
+    .bp-stagger-grid {
+      position: relative;
+      flex-shrink: 0;
+    }
+
     .bp-node a {
       text-decoration: none;
       display: block
@@ -638,8 +644,8 @@
           <!-- Spacer for wire routing -->
           <div style="width:48px;flex-shrink:0;"></div>
 
-          <!-- Section nodes -->
-          <div id="bp-col" style="display:flex;flex-direction:column;position:relative;flex-shrink:0;"></div>
+          <!-- Two-row staggered grid -->
+          <div id="bp-col" class="bp-stagger-grid"></div>
 
         </div>
       </div>
@@ -702,6 +708,17 @@
               previewTitle: 'Coulisse Product Animations',
               previewDesc: 'Octane renders composited with live product interaction recordings.'
             },
+            {
+              id: 'logo',
+              label: 'Logo Transition',
+              func: 'PlayMotionReel()',
+              theme: 'cyan',
+              pin: 'Motion',
+              anchor: '#toc-logo',
+              preview: 'Swans_pre.png',
+              previewTitle: 'TinyGiants Logo Transition',
+              previewDesc: 'Whip transition animation rendered in UE5, composited in After Effects.'
+            },
           ];
 
           var col = document.getElementById('bp-col');
@@ -718,17 +735,27 @@
             '</div>';
           canvas.appendChild(preview);
 
-          /* ── Build nodes ── */
-          SECTIONS.forEach(function (s) {
+          /* ── Build nodes into two staggered rows ──
+             Row 0 (top):    items 0, 2, 4  — odd indices in visual order
+             Row 1 (bottom): items 1, 3, 5  — offset right by half a node width
+             Each node is absolutely positioned inside the grid container.
+          ── */
+          SECTIONS.forEach(function (s, i) {
             var div = document.createElement('div');
             div.className = 'bp-node bp-' + s.theme;
             div.id = 'bp-node-' + s.id;
 
+            /* which row and column in the stagger */
+            var row = i % 2;          /* 0 = top row, 1 = bottom row */
+            var col_i = Math.floor(i / 2); /* position along that row */
+            div.setAttribute('data-row', row);
+            div.setAttribute('data-col', col_i);
+
             div.innerHTML =
               '<a href="' + s.anchor + '">' +
               '<div class="bp-node-head">' +
-              '<div class="bp-exec-pin" style="margin-right:2px"></div>' +
               '<span>' + s.label + '</span>' +
+              '<div class="bp-exec-pin" style="margin-left:auto;flex-shrink:0;"></div>' +
               '</div>' +
               '<div class="bp-node-body">' +
               '<div class="bp-func">' + s.func + '</div>' +
@@ -740,7 +767,6 @@
               '</div>' +
               '</a>';
 
-            /* ── Hover: swap preview content ── */
             div.addEventListener('mouseenter', function () {
               var imgHtml = s.preview
                 ? '<img src="' + s.preview + '" alt="' + s.label + '" />'
@@ -761,6 +787,39 @@
             col.appendChild(div);
           });
 
+          /* ── Position nodes in staggered grid ── */
+          function layoutNodes() {
+            var nodes = col.querySelectorAll('.bp-node');
+            var nodeW = 160;   /* node width  */
+            var gapX = 20;    /* horizontal gap between nodes in same row */
+            var rowH = 86;    /* row height (node height ~74px + gap) */
+            var offsetX = 90;    /* how far row 1 is shifted right (the stagger) */
+
+            var maxCols = 0;
+            nodes.forEach(function (n) {
+              maxCols = Math.max(maxCols, parseInt(n.getAttribute('data-col')) + 1);
+            });
+
+            /* total width needed for the grid — row 1 is offset so needs extra space */
+            var totalW = maxCols * (nodeW + gapX) + offsetX;
+            col.style.position = 'relative';
+            col.style.width = totalW + 'px';
+            col.style.height = (rowH * 2 + 12) + 'px';
+            col.style.flexShrink = '0';
+
+            nodes.forEach(function (n) {
+              var r = parseInt(n.getAttribute('data-row'));
+              var c = parseInt(n.getAttribute('data-col'));
+              var x = c * (nodeW + gapX) + (r === 1 ? offsetX : 0);
+              var y = r * rowH;
+              n.style.position = 'absolute';
+              n.style.left = x + 'px';
+              n.style.top = y + 'px';
+              n.style.width = nodeW + 'px';
+              n.style.marginBottom = '0';
+            });
+          }
+
           /* ── Wire drawing ── */
           function drawWires() {
             var svg = document.getElementById('bp-wires');
@@ -772,32 +831,46 @@
             var ey = pr.top + pr.height / 2 - cr.top;
             var colorMap = { cyan: '#00e5ff', green: '#39ff8a', pink: '#ff2d78', gold: '#f0c040', purple: '#c077ff' };
 
-            SECTIONS.forEach(function (s) {
+            SECTIONS.forEach(function (s, i) {
               var nodeEl = document.getElementById('bp-node-' + s.id);
               if (!nodeEl) return;
               var nr = nodeEl.getBoundingClientRect();
               var nx = nr.left - cr.left;
               var ny = nr.top + 14 - cr.top;
-              var col = colorMap[s.theme] || '#c8c8c8';
-              var mx = ex + (nx - ex) * 0.45;
+              var c = colorMap[s.theme] || '#c8c8c8';
+              /* cubic bezier: start horizontal from exec pin, arrive horizontal into node */
+              var mx1 = ex + (nx - ex) * 0.5;
+              var mx2 = ex + (nx - ex) * 0.5;
               var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-              p.setAttribute('d', 'M' + ex + ',' + ey + ' C' + mx + ',' + ey + ' ' + mx + ',' + ny + ' ' + nx + ',' + ny);
+              p.setAttribute('d',
+                'M' + ex + ',' + ey +
+                ' C' + mx1 + ',' + ey +
+                ' ' + mx2 + ',' + ny +
+                ' ' + nx + ',' + ny);
               p.setAttribute('fill', 'none');
-              p.setAttribute('stroke', col);
-              p.setAttribute('stroke-width', '1.5');
-              p.setAttribute('opacity', '0.55');
+              p.setAttribute('stroke', c);
+              p.setAttribute('stroke-width', i === 0 ? '2' : '1.5');
+              p.setAttribute('opacity', i === 0 ? '0.7' : '0.45');
               svg.appendChild(p);
             });
 
             svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + canvas.offsetHeight);
           }
 
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function () { setTimeout(drawWires, 100); });
-          } else {
-            setTimeout(drawWires, 100);
+          function init() {
+            layoutNodes();
+            setTimeout(drawWires, 80);
           }
-          window.addEventListener('resize', drawWires);
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+          } else {
+            init();
+          }
+          window.addEventListener('resize', function () {
+            layoutNodes();
+            drawWires();
+          });
         })();
       </script>
 
