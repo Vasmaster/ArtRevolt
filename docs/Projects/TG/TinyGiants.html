@@ -14,6 +14,28 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <style>
+    /* Chapter separator with label */
+    .tg-chapter-sep {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 4rem 0 2rem;
+    }
+
+    .tg-chapter-sep .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-dim);
+    }
+
+    .tg-chapter-sep .label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
     /* ── BLUEPRINT TOC ─────────────────────────── */
     .bp-canvas {
       position: relative;
@@ -556,11 +578,11 @@
     <div class="ar-hero" x-data="{
          index: 0,
          slides: [
-           { id:1, image:'Bond_Of_Union_V1.png' },
-           { id:2, image:'Swans_pre.png' },
-           { id:3, image:'Hum3DCar.png' },
-           { id:4, image:'AOC Keyboard.png' },
-           { id:5, image:'Coulisse.png' },
+           { id:1, image:'Bond_Of_Union_V1.jpg' },
+           { id:2, image:'Swans_pre.jpg' },
+           { id:3, image:'Hum3DCar.jpg' },
+           { id:4, image:'AOC Keyboard.jpg' },
+           { id:5, image:'Coulisse.jpg' },
          ],
          autoSlide() { setInterval(() => { this.index = (this.index+1) % this.slides.length; }, 4000); }
        }" x-init="autoSlide">
@@ -660,7 +682,7 @@
               theme: 'cyan',
               pin: 'Live Event',
               anchor: '#toc-opera',
-              preview: 'Swans_pre.png',
+              preview: 'Swans_pre.jpg',
               previewTitle: 'Hänsel und Gretel Opera',
               previewDesc: 'Netherlands Reisopera — live 3D projection visuals for a fantasy opera.'
             },
@@ -671,7 +693,7 @@
               theme: 'purple',
               pin: 'CG Art',
               anchor: '#toc-bond',
-              preview: 'Bond_Of_Union_V1.png',
+              preview: 'Bond_Of_Union_V1.jpg',
               previewTitle: 'Bond of Union',
               previewDesc: 'CG interpretation of M.C. Escher — illusory geometry meets Guido Moretti sculpture.'
             },
@@ -682,20 +704,9 @@
               theme: 'gold',
               pin: 'Product Viz',
               anchor: '#toc-aoc',
-              preview: 'AOC Keyboard.png',
+              preview: 'AOC Keyboard.jpg',
               previewTitle: 'AOC Keyboard Animation',
               previewDesc: 'Dynamic product animation with C4D simulations and After Effects compositing.'
-            },
-            {
-              id: 'car',
-              label: 'Muscle Car',
-              func: 'LoadShowcase()',
-              theme: 'pink',
-              pin: 'Animation',
-              anchor: '#toc-car',
-              preview: 'Hum3DCar.png',
-              previewTitle: 'Muscle Car Showcase',
-              previewDesc: 'Whip animation and render-pass compositing training production.'
             },
             {
               id: 'coulisse',
@@ -704,9 +715,20 @@
               theme: 'green',
               pin: 'Client Work',
               anchor: '#toc-coulisse',
-              preview: 'Coulisse.png',
+              preview: 'Coulisse.jpg',
               previewTitle: 'Coulisse Product Animations',
               previewDesc: 'Octane renders composited with live product interaction recordings.'
+            },
+            {
+              id: 'Additional',
+              label: 'Extras',
+              func: 'LoadShowcase()',
+              theme: 'pink',
+              pin: 'Animation',
+              anchor: '#toc-additional',
+              preview: 'Hum3DCar.jpg',
+              previewTitle: 'Showcase',
+              previewDesc: 'Whip animation and render-pass compositing training production.'
             },
           ];
 
@@ -887,8 +909,10 @@
           <p>Real-time 3D projection visuals for the Netherlands Reisopera's fantasy opera production, accessible for
             audiences aged 10+. Breathtaking projected environments — from the enchanted forest intro to the dramatic
             staircase sequences and the swan lake finale — driven live alongside the performance. Music by Engelbert
-            Humperdinck, sung in German with Dutch subtitles.</p>
-          <div class="ar-tech-stack">
+            Humperdinck, sung in German with Dutch subtitles. 
+            Reference: <a href="https://www.theater.nl/hansel-gretel-nederlandse-reisopera" target="_blank" rel="noopener">hansel-gretel-nederlandse-reisopera</a>
+            More information: <a href="https://www.operabase.com/productions/hansel-und-gretel-105256/27-october-2022/en" target="_blank" rel="noopener">Operabase</a></p>
+            <div class="ar-tech-stack">
             <span class="ar-tech-tag engine">Unreal Engine 5</span>
             <span class="ar-tech-tag">Real-time Rendering</span>
             <span class="ar-tech-tag tool">Live Production</span>
@@ -951,7 +975,7 @@
       </div>
 
       <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, src:'Bond_Of_Union_V1.png',        cap:'Final render'},
+           {id:1, src:'Bond_Of_Union_V1.jpg',        cap:'Final render'},
            {id:2, src:'BondOfUnion.gif',              cap:'Animation loop'},
            {id:3, src:'MCEscher-Bond-of-union.jpeg',  cap:'M.C. Escher reference'},
            {id:4, src:'Parallelepipedi.jpg',           cap:'Geometry study'},
@@ -996,11 +1020,11 @@
       </div>
 
       <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, src:'AOC Keyboard.png',    cap:'Hero render'},
-           {id:2, src:'RockEmAOC_02_V1.png', cap:'Sequence frame'},
-           {id:3, src:'close-Up.png',         cap:'Closeup detail'},
-           {id:4, src:'Cloth_Sim_01_V2.png',  cap:'Cloth simulation frame'},
-           {id:5, src:'RockEmAOC_01_V1.png',  cap:'Alternate angle'},
+           {id:1, src:'AOC Keyboard.jpg',    cap:'Hero render'},
+           {id:2, src:'RockEmAOC_02_V1.jpg', cap:'Sequence frame'},
+           {id:3, src:'close-Up.jpg',         cap:'Closeup detail'},
+           {id:4, src:'Cloth_Sim_01_V2.jpg',  cap:'Cloth simulation frame'},
+           {id:5, src:'RockEmAOC_01_V1.jpg',  cap:'Alternate angle'},
          ] }">
         <template x-for="s in slides" :key="s.id">
           <div class="ar-mosaic-item">
@@ -1011,50 +1035,7 @@
       </div>
 
       <!-- ═══════════════════════════════════
-         PROJECT 4 — MUSCLE CAR
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-car">Muscle Car Showcase</h3>
-      <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
-
-      <div class="ar-summary-card ar-reveal">
-        <div>
-          <p>Provided with a complete scene, materials, and lights by TinyGiants, I was tasked with creating a fun,
-            driven animation and compositing the render passes and shots in Adobe After Effects. Extremely educational —
-            it brought my understanding of proper color spaces and project management in Ae up to professional standard.
-          </p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag render">OTOY Octane</span>
-            <span class="ar-tech-tag tool">After Effects</span>
-            <span class="ar-tech-tag">Render Pass Comp.</span>
-            <span class="ar-tech-tag">Camera Animation</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, src:'Hum3DCar.png',          cap:'Front render'},
-           {id:2, src:'hum3DCar_back.png',      cap:'Rear render'},
-           {id:3, src:'Hum3dCarShowcase.gif',   cap:'Animation preview'},
-         ] }">
-        <template x-for="s in slides" :key="s.id">
-          <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
-            <div class="caption" x-text="s.cap"></div>
-          </div>
-        </template>
-      </div>
-
-      <!-- ═══════════════════════════════════
-         PROJECT 5 — COULISSE
+         PROJECT 4 — COULISSE
          ═══════════════════════════════════ -->
       <hr class="ar-divider" />
 
@@ -1097,6 +1078,50 @@
         </template>
       </div>
 
+      <div class="tg-chapter-sep ar-reveal">
+      <div class="line"></div>
+      <div class="label">EXTRAS - Addotional Content</div>
+      <div class="line" id="toc-additional"></div>
+    </div>
+          <hr class="ar-divider" />
+
+      <h3 class="ar-section-title ar-reveal" >Muscle Car Showcase</h3>
+      <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
+
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <p>Provided with a complete scene, materials, and lights by TinyGiants, I was tasked with creating a fun,
+            driven animation and compositing the render passes and shots in Adobe After Effects. Extremely educational —
+            it brought my understanding of proper color spaces and project management in Ae up to professional standard.
+          </p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Render Pass Comp.</span>
+            <span class="ar-tech-tag">Camera Animation</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
+           {id:1, src:'Hum3DCar.jpg',          cap:'Front render'},
+           {id:2, src:'hum3DCar_back.jpg',      cap:'Rear render'},
+           {id:3, src:'Hum3dCarShowcase.gif',   cap:'Animation preview'},
+         ] }">
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
       <!-- ═══════════════════════════════════
          PROJECT 6 — LOGO TRANSITION
          ═══════════════════════════════════ -->
@@ -1129,7 +1154,35 @@
           <source src="TG_logo_studio_3kb.mp4" type="video/mp4">
         </video>
       </div>
+ <!-- ═══════════════════════════════════
+         PROJECT 7 — Moddifications
+         ═══════════════════════════════════ -->
+      <hr class="ar-divider" />
 
+      <h3 class="ar-section-title ar-reveal" id="toc-additional">Ultra Dynamic Sky Modifications</h3>
+      <p class="ar-section-sub">// BLUEPRINTS · UNREAL ENGINE 5 · SHADER GRAPH · NETHERLANDS REISOPERA</p>
+
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <p>A set of modifications to the Ultra Dynamic Sky package for Unreal Engine 5, creating more dynamic and realistic cloud formations and rigourous manipulations.<br>
+          This project explores advanced shader techniques and blueprint design to enhance the visual fidelity of sky environments.
+        Originaly the UDS package is a global volumetric sky system. The break-down of the structure helped me understand the underlying mechanics.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag tool">Blueprints</span>
+            <span class="ar-tech-tag">Shader Graph</span>
+            <span class="ar-tech-tag">NETHERLANDS REISOPERA</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:1.5rem 0;border:1px solid var(--border-glow);"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="UDS_Upgrade_h264.mp4" type="video/mp4">
+        </video>
+      </div>
     </div><!-- /ar-page -->
 
     <footer class="ar-footer">
