@@ -724,27 +724,25 @@
             '</div>';
           canvas.appendChild(preview);
 
-          /* ── Build nodes into two staggered rows ──
-             Row 0 (top):    items 0, 2, 4  — odd indices in visual order
-             Row 1 (bottom): items 1, 3, 5  — offset right by half a node width
-             Each node is absolutely positioned inside the grid container.
-          ── */
+          /* 1. NODE GENERATION WITH IN/OUT PINS */
           SECTIONS.forEach(function (s, i) {
             var div = document.createElement('div');
             div.className = 'bp-node bp-' + s.theme;
             div.id = 'bp-node-' + s.id;
 
             /* which row and column in the stagger */
-            var row = i % 2;          /* 0 = top row, 1 = bottom row */
-            var col_i = Math.floor(i / 2); /* position along that row */
+            var row = i % 2;
+            var col_i = Math.floor(i / 2);
             div.setAttribute('data-row', row);
             div.setAttribute('data-col', col_i);
 
+            // Added an Input pin (left) and an Output pin (right)
             div.innerHTML =
               '<a href="' + s.anchor + '">' +
               '<div class="bp-node-head">' +
+              '<div class="bp-exec-pin" id="bp-in-' + s.id + '" style="margin-right:6px;"></div>' +
               '<span>' + s.label + '</span>' +
-              '<div class="bp-exec-pin" style="margin-left:auto;flex-shrink:0;"></div>' +
+              '<div class="bp-exec-pin" id="bp-out-' + s.id + '" style="margin-left:auto;flex-shrink:0;"></div>' +
               '</div>' +
               '<div class="bp-node-body">' +
               '<div class="bp-func">' + s.func + '</div>' +
@@ -809,43 +807,56 @@
             });
           }
 
-          /* ── Wire drawing ── */
+          /* 2. SEQUENTIAL WIRE DRAWING LOGIC */
           function drawWires() {
             var svg = document.getElementById('bp-wires');
             var pinEl = document.getElementById('bp-entry-out');
             svg.innerHTML = '';
             var cr = canvas.getBoundingClientRect();
+
+            // Starting point coordinates (Begin Play's output pin)
             var pr = pinEl.getBoundingClientRect();
-            var ex = pr.right - cr.left + 4;
-            var ey = pr.top + pr.height / 2 - cr.top;
-            var colorMap = { cyan: '#00e5ff', green: '#39ff8a', pink: '#ff2d78', gold: '#f0c040', purple: '#c077ff' };
+            var currentX = pr.right - cr.left;
+            var currentY = pr.top + pr.height / 2 - cr.top;
 
             SECTIONS.forEach(function (s, i) {
               var nodeEl = document.getElementById('bp-node-' + s.id);
               if (!nodeEl) return;
-              var nr = nodeEl.getBoundingClientRect();
-              var nx = nr.left - cr.left;
-              var ny = nr.top + 14 - cr.top;
-              var c = colorMap[s.theme] || '#c8c8c8';
-              /* cubic bezier: start horizontal from exec pin, arrive horizontal into node */
-              var mx1 = ex + (nx - ex) * 0.5;
-              var mx2 = ex + (nx - ex) * 0.5;
+
+              var inPin = document.getElementById('bp-in-' + s.id);
+              var outPin = document.getElementById('bp-out-' + s.id);
+
+              // Target coordinates (Current node's input pin)
+              var inRect = inPin.getBoundingClientRect();
+              var nx = inRect.left - cr.left - 2; // Slight offset so it enters the pin cleanly
+              var ny = inRect.top + inRect.height / 2 - cr.top;
+
+              // Bezier curve calculations
+              var mx1 = currentX + (nx - currentX) * 0.5;
+              var mx2 = currentX + (nx - currentX) * 0.5;
+
               var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
               p.setAttribute('d',
-                'M' + ex + ',' + ey +
-                ' C' + mx1 + ',' + ey +
+                'M' + currentX + ',' + currentY +
+                ' C' + mx1 + ',' + currentY +
                 ' ' + mx2 + ',' + ny +
                 ' ' + nx + ',' + ny);
+
+              // Style as a standard white execution wire
               p.setAttribute('fill', 'none');
-              p.setAttribute('stroke', c);
-              p.setAttribute('stroke-width', i === 0 ? '2' : '1.5');
-              p.setAttribute('opacity', i === 0 ? '0.7' : '0.45');
+              p.setAttribute('stroke', '#ffffff');
+              p.setAttribute('stroke-width', '2');
+              p.setAttribute('opacity', '0.7');
               svg.appendChild(p);
+
+              // Update the currentX/Y to THIS node's output pin for the next loop iteration
+              var outRect = outPin.getBoundingClientRect();
+              currentX = outRect.right - cr.left;
+              currentY = outRect.top + outRect.height / 2 - cr.top;
             });
 
             svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + canvas.offsetHeight);
           }
-
           function init() {
             layoutNodes();
             setTimeout(drawWires, 80);
