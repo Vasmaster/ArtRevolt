@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TinyGiants Productions — ArtRevolt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/artrevolt-style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    /* Chapter separator with label */
+    .tg-chapter-sep {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 4rem 0 2rem;
+    }
+
+    .tg-chapter-sep .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-dim);
+    }
+
+    .tg-chapter-sep .label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    /* ── BLUEPRINT TOC ─────────────────────────── */
+    .bp-canvas {
+      position: relative;
+      width: 100%;
+      background: #0a0d16;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      padding: 24px 16px 32px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-glow);
+      overflow: visible;
+    }
+
+    svg.bp-wires {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible
+    }
+
+    .bp-nodes {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      width: 100%
+    }
+
+    .bp-entry {
+      display: flex;
+      flex-direction: column;
+      min-width: 160px;
+      flex-shrink: 0
+    }
+
+    .bp-entry-head {
+      background: #1e3a1e;
+      border: 1px solid #2d6e2d;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      padding: 6px 10px 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .bp-entry-head .bp-icon {
+      width: 12px;
+      height: 12px;
+      background: #4ade80;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .bp-entry-head span {
+      color: #4ade80;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: var(--font-mono)
+    }
+
+    .bp-entry-body {
+      background: #141a14;
+      border: 1px solid #2d6e2d;
+      border-radius: 0 0 5px 5px;
+      padding: 8px 10px
+    }
+
+    .bp-entry-body .bp-subtitle {
+      color: #5a8a5a;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--font-mono)
+    }
+
+    .bp-exec-out {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 8px;
+      gap: 4px
+    }
+
+    .bp-exec-out span {
+      color: #a0a8b8;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      font-family: var(--font-mono)
+    }
+
+    .bp-exec-pin {
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      clip-path: polygon(0 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0 80%);
+      flex-shrink: 0
+    }
+
+    .bp-node {
+      display: flex;
+      flex-direction: column;
+      min-width: 148px;
+      cursor: pointer;
+      transition: transform 0.15s;
+      margin-bottom: 10px
+    }
+
+    .bp-node:last-child {
+      margin-bottom: 0
+    }
+
+    .bp-node:hover {
+      transform: translateY(-2px)
+    }
+
+    /* Staggered two-row grid container */
+    .bp-stagger-grid {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .bp-node a {
+      text-decoration: none;
+      display: block
+    }
+
+    .bp-node-head {
+      border-radius: 5px 5px 0 0;
+      padding: 5px 9px 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: none
+    }
+
+    .bp-node-head .bp-exec-pin {
+      transform: scale(1);
+      margin-right: 2px
+    }
+
+    .bp-node-head span {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      font-family: var(--font-mono)
+    }
+
+    .bp-node-body {
+      border-radius: 0 0 5px 5px;
+      padding: 6px 9px 8px;
+      border-top: none
+    }
+
+    .bp-func {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      font-family: var(--font-mono)
+    }
+
+    .bp-pin-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px
+    }
+
+    .bp-pin-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .bp-pin-label {
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      font-family: var(--font-mono)
+    }
+
+    .bp-jump {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      margin-top: 5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      transition: color 0.15s;
+      font-family: var(--font-mono)
+    }
+
+    .bp-jump-arrow {
+      display: inline-block;
+      transition: transform 0.15s
+    }
+
+    .bp-node:hover .bp-jump-arrow {
+      transform: translateX(3px)
+    }
+
+    /* colour themes */
+    .bp-cyan .bp-node-head {
+      background: #0d2a30;
+      border: 1px solid #00a8c8
+    }
+
+    .bp-cyan .bp-node-body {
+      background: #0a1e24;
+      border: 1px solid #00a8c8
+    }
+
+    .bp-cyan .bp-node-head span {
+      color: #00e5ff
+    }
+
+    .bp-cyan .bp-func {
+      color: #7dd8e8
+    }
+
+    .bp-cyan .bp-pin-dot {
+      background: #00e5ff
+    }
+
+    .bp-cyan .bp-pin-label,
+    .bp-cyan .bp-jump {
+      color: #4aabb8
+    }
+
+    .bp-cyan:hover .bp-jump {
+      color: #00e5ff
+    }
+
+    .bp-green .bp-node-head {
+      background: #0d2a14;
+      border: 1px solid #2d8a3e
+    }
+
+    .bp-green .bp-node-body {
+      background: #0a1e0e;
+      border: 1px solid #2d8a3e
+    }
+
+    .bp-green .bp-node-head span {
+      color: #4ade80
+    }
+
+    .bp-green .bp-func {
+      color: #7dd87a
+    }
+
+    .bp-green .bp-pin-dot {
+      background: #39ff8a
+    }
+
+    .bp-green .bp-pin-label,
+    .bp-green .bp-jump {
+      color: #4a8a5a
+    }
+
+    .bp-green:hover .bp-jump {
+      color: #39ff8a
+    }
+
+    .bp-pink .bp-node-head {
+      background: #2a0d1e;
+      border: 1px solid #8a2d5e
+    }
+
+    .bp-pink .bp-node-body {
+      background: #1e0a14;
+      border: 1px solid #8a2d5e
+    }
+
+    .bp-pink .bp-node-head span {
+      color: #ff6eb0
+    }
+
+    .bp-pink .bp-func {
+      color: #e87aaa
+    }
+
+    .bp-pink .bp-pin-dot {
+      background: #ff2d78
+    }
+
+    .bp-pink .bp-pin-label,
+    .bp-pink .bp-jump {
+      color: #8a4a6a
+    }
+
+    .bp-pink:hover .bp-jump {
+      color: #ff2d78
+    }
+
+    .bp-gold .bp-node-head {
+      background: #2a1e0a;
+      border: 1px solid #8a6a1e
+    }
+
+    .bp-gold .bp-node-body {
+      background: #1e160a;
+      border: 1px solid #8a6a1e
+    }
+
+    .bp-gold .bp-node-head span {
+      color: #f0c040
+    }
+
+    .bp-gold .bp-func {
+      color: #c8a840
+    }
+
+    .bp-gold .bp-pin-dot {
+      background: #f0c040
+    }
+
+    .bp-gold .bp-pin-label,
+    .bp-gold .bp-jump {
+      color: #8a7840
+    }
+
+    .bp-gold:hover .bp-jump {
+      color: #f0c040
+    }
+
+    .bp-purple .bp-node-head {
+      background: #1e0d2a;
+      border: 1px solid #6a3a8a
+    }
+
+    .bp-purple .bp-node-body {
+      background: #160a1e;
+      border: 1px solid #6a3a8a
+    }
+
+    .bp-purple .bp-node-head span {
+      color: #c077ff
+    }
+
+    .bp-purple .bp-func {
+      color: #a877e8
+    }
+
+    .bp-purple .bp-pin-dot {
+      background: #c077ff
+    }
+
+    .bp-purple .bp-pin-label,
+    .bp-purple .bp-jump {
+      color: #7a5a9a
+    }
+
+    .bp-purple:hover .bp-jump {
+      color: #c077ff
+    }
+
+    /* ── BLUEPRINT TOC PREVIEW POPUP — DOCKED ── */
+    .bp-preview {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      width: clamp(220px, 28vw, 480px);
+      background: #0d1525;
+      border: 1px solid var(--border-glow);
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .bp-preview.is-visible {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .bp-preview img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border-glow);
+    }
+
+    .bp-preview .bp-preview-img-placeholder {
+      width: 100%;
+      height: clamp(130px, 16vw, 280px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-glow);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .bp-preview-body {
+      padding: 10px 12px 12px;
+    }
+
+    .bp-preview-title {
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 1.1vw, 1.1rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      margin: 0 0 4px;
+    }
+
+    .bp-preview-desc {
+      font-family: var(--font-mono);
+      font-size: clamp(0.68rem, 0.85vw, 0.82rem);
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<div x-data="{
+  lightbox: null,
+  lightboxCaption: '',
+  lightboxGallery: [],
+  lightboxIndex: 0,
+
+  openLightbox(src, cap, gallery) {
+    this.lightboxGallery = gallery || [{ src, cap }];
+    this.lightboxIndex   = this.lightboxGallery.findIndex(s => s.src === src);
+    if (this.lightboxIndex === -1) this.lightboxIndex = 0;
+    this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+    document.body.style.overflow = 'hidden';
+  },
+
+  closeLightbox() {
+    this.lightbox = null;
+    this.lightboxGallery = [];
+    document.body.style.overflow = '';
+  },
+
+  nextImage() {
+    if (!this.lightboxGallery.length) return;
+    this.lightboxIndex   = (this.lightboxIndex + 1) % this.lightboxGallery.length;
+    this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+  },
+
+  prevImage() {
+    if (!this.lightboxGallery.length) return;
+    this.lightboxIndex   = (this.lightboxIndex - 1 + this.lightboxGallery.length) % this.lightboxGallery.length;
+    this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+  }
+}">
+
+  <body>
+
+    <!-- NAVIGATION -->
+    <!-- HOVER TRIGGER STRIP -->
+    <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')"
+      @touchstart.passive="$dispatch('nav-toggle')">
+    </div>
+
+    <!-- NAV BAR -->
+    <nav class="ar-nav" x-data="{
+       open: false,
+       atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => {
+           this.atTop = window.scrollY < window.innerHeight * 0.08;
+           if (this.atTop) this.open = false;
+         }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+      @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
+
+      <!-- Logo -->
+      <a href="/index.html" class="ar-logo">
+        Art<span class="accent">Revolt</span>
+      </a>
+
+      <!-- Hamburger -->
+      <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+        <div class="stripe stripe-1"></div>
+        <div class="stripe stripe-2"></div>
+        <div class="stripe stripe-3"></div>
+      </button>
+
+      <!-- Dropdown -->
+      <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+        x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
+
+        <ul class="ar-nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/index.html#industries">Work</a></li>
+          <li><a href="/Canvas.html">Canvas</a></li>
+          <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+          <li><a href="/Contacts.html">Contact</a></li>
+        </ul>
+
+        <div class="ar-dropdown-divider"></div>
+
+        <div class="ar-dropdown-social">
+          <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 448 512">
+              <path
+                d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            X / Twitter
+          </a>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="ar-hero" x-data="{
+         index: 0,
+         slides: [
+           { id:1, image:'Bond_Of_Union_V1.jpg' },
+           { id:2, image:'Swans_pre.jpg' },
+           { id:3, image:'Hum3DCar.jpg' },
+           { id:4, image:'AOC Keyboard.jpg' },
+           { id:5, image:'Coulisse.jpg' },
+         ],
+         autoSlide() { setInterval(() => { this.index = (this.index+1) % this.slides.length; }, 4000); }
+       }" x-init="autoSlide">
+      <div class="ar-hero-slides" :style="'transform:translateX('+(-index*100)+'%)'">
+        <template x-for="s in slides" :key="s.id">
+          <div style="min-width:100%;">
+            <img :src="s.image" style="width:100%;height:65vh;object-fit:cover;display:block;" />
+          </div>
+        </template>
+      </div>
+      <div class="ar-hero-overlay"></div>
+      <div class="ar-hero-text">
+        <h1><span class="glow-text">TinyGiants</span></h1>
+        <p>3D Content · Live Events · Product Animation · VFX</p>
+      </div>
+      <div class="ar-hero-dots">
+        <template x-for="(s,i) in slides" :key="i">
+          <button @click="index=i" :class="{active:index===i}"></button>
+        </template>
+      </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="ar-page">
+
+      <!-- SUMMARY -->
+      <div class="ar-summary-card ar-reveal">
+        <div>
+          <h2>TinyGiants Productions</h2>
+          <p>As 3D Producer at TinyGiants (Apr 2022 – Oct 2024), I developed real-time systems and mechanics in Unreal
+            Engine 5, produced photorealistic Octane renders for external clients, animated and composited professional
+            video content, and contributed personal creative productions alongside client work. Projects spanned opera
+            live-event visuals, product animations, conceptual CG art, and brand identity motion.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag engine">Unreal Engine 5</span>
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag tool">Adobe After Effects</span>
+            <span class="ar-tech-tag tool">Adobe Premiere</span>
+            <span class="ar-tech-tag">Compositing</span>
+            <span class="ar-tech-tag">Product Animation</span>
+            <span class="ar-tech-tag">Live Event VFX</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+          </div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">3D Producer</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            PERIOD</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Apr 2022 – Oct 2024
+          </div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            LOCATION</div>
+          <div style="font-family:var(--font-display);font-size:0.95rem;">Enschede, NL</div>
+        </div>
+      </div>
+
+      <!-- ── BLUEPRINT TOC ── -->
+      <div class="bp-canvas" id="bp-canvas">
+        <svg class="bp-wires" id="bp-wires"></svg>
+        <div class="bp-nodes">
+
+          <!-- Entry node -->
+          <div class="bp-entry" id="bp-entry">
+            <div class="bp-entry-head">
+              <div class="bp-icon"></div>
+              <span>Begin Play</span>
+            </div>
+            <div class="bp-entry-body">
+              <div class="bp-subtitle">TinyGiants Productions</div>
+              <div class="bp-exec-out">
+                <span>Exec</span>
+                <div class="bp-exec-pin" id="bp-entry-out"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spacer for wire routing -->
+          <div style="width:48px;flex-shrink:0;"></div>
+
+          <!-- Two-row staggered grid -->
+          <div id="bp-col" class="bp-stagger-grid"></div>
+
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var SECTIONS = [
+            {
+              id: 'opera',
+              label: 'Hänsel & Gretel',
+              func: 'LoadOperaScene()',
+              theme: 'cyan',
+              pin: 'Live Event',
+              anchor: 'opera.html',
+              preview: 'Swans_pre.jpg',
+              previewTitle: 'Hänsel und Gretel Opera',
+              previewDesc: 'Netherlands Reisopera — live 3D projection visuals for a fantasy opera.'
+            },
+            {
+              id: 'bond',
+              label: 'Bond of Union',
+              func: 'RenderConceptArt()',
+              theme: 'purple',
+              pin: 'CG Art',
+              anchor: 'bond-of-union.html',
+              preview: 'Bond_Of_Union_V1.jpg',
+              previewTitle: 'Bond of Union',
+              previewDesc: 'CG interpretation of M.C. Escher — illusory geometry meets Guido Moretti sculpture.'
+            },
+            {
+              id: 'aoc',
+              label: 'AOC Keyboard',
+              func: 'PlayAnimation()',
+              theme: 'gold',
+              pin: 'Product Viz',
+              anchor: 'aoc-keyboard.html',
+              preview: 'AOC Keyboard.jpg',
+              previewTitle: 'AOC Keyboard Animation',
+              previewDesc: 'Dynamic product animation with C4D simulations and After Effects compositing.'
+            },
+            {
+              id: 'coulisse',
+              label: 'Coulisse Products',
+              func: 'StreamVideoReel()',
+              theme: 'green',
+              pin: 'Client Work',
+              anchor: 'coulisse.html',
+              preview: 'Coulisse.jpg',
+              previewTitle: 'Coulisse Product Animations',
+              previewDesc: 'Octane renders composited with live product interaction recordings.'
+            },
+            {
+              id: 'muscle',
+              label: 'Muscle Car',
+              func: 'DriveSequence()',
+              theme: 'pink',
+              pin: 'Animation',
+              anchor: 'muscle-car.html',
+              preview: 'Hum3DCar.jpg',
+              previewTitle: 'Muscle Car Showcase',
+              previewDesc: 'Driven car animation with render-pass compositing in After Effects.'
+            },
+            {
+              id: 'logo',
+              label: 'Logo Transition',
+              func: 'WhipTransition()',
+              theme: 'cyan',
+              pin: 'Motion Design',
+              anchor: 'logo-transition.html',
+              preview: '',
+              previewTitle: 'TinyGiants Logo Transition',
+              previewDesc: 'Playful UE5 whip-transition motion design around the studio logo.'
+            },
+            {
+              id: 'uds',
+              label: 'Ultra Dynamic Sky',
+              func: 'ModifySkySystem()',
+              theme: 'gold',
+              pin: 'Blueprints',
+              anchor: 'ultra-dynamic-sky.html',
+              preview: '',
+              previewTitle: 'Ultra Dynamic Sky Mods',
+              previewDesc: 'Blueprint & shader-graph modifications to the UDS volumetric sky.'
+            },
+          ];
+
+          var col = document.getElementById('bp-col');
+          var canvas = document.getElementById('bp-canvas');
+
+          /* ── Shared docked preview element ── */
+          var preview = document.createElement('div');
+          preview.className = 'bp-preview';
+          preview.innerHTML =
+            '<div class="bp-preview-img-placeholder">Hover a node</div>' +
+            '<div class="bp-preview-body">' +
+            '<p class="bp-preview-title">—</p>' +
+            '<p class="bp-preview-desc">Hover any section node to preview it here.</p>' +
+            '</div>';
+          canvas.appendChild(preview);
+
+          /* 1. NODE GENERATION WITH IN/OUT PINS */
+          SECTIONS.forEach(function (s, i) {
+            var div = document.createElement('div');
+            div.className = 'bp-node bp-' + s.theme;
+            div.id = 'bp-node-' + s.id;
+
+            /* which row and column in the stagger */
+            var row = i % 2;
+            var col_i = Math.floor(i / 2);
+            div.setAttribute('data-row', row);
+            div.setAttribute('data-col', col_i);
+
+            // Added an Input pin (left) and an Output pin (right)
+            div.innerHTML =
+              '<a href="' + s.anchor + '">' +
+              '<div class="bp-node-head">' +
+              '<div class="bp-exec-pin" id="bp-in-' + s.id + '" style="margin-right:6px;"></div>' +
+              '<span>' + s.label + '</span>' +
+              '<div class="bp-exec-pin" id="bp-out-' + s.id + '" style="margin-left:auto;flex-shrink:0;"></div>' +
+              '</div>' +
+              '<div class="bp-node-body">' +
+              '<div class="bp-func">' + s.func + '</div>' +
+              '<div class="bp-pin-row">' +
+              '<div class="bp-pin-dot"></div>' +
+              '<span class="bp-pin-label">' + s.pin + '</span>' +
+              '</div>' +
+              '<div class="bp-jump">Jump to section <span class="bp-jump-arrow">→</span></div>' +
+              '</div>' +
+              '</a>';
+
+            div.addEventListener('mouseenter', function () {
+              var imgHtml = s.preview
+                ? '<img src="' + s.preview + '" alt="' + s.label + '" />'
+                : '<div class="bp-preview-img-placeholder">No preview</div>';
+              preview.innerHTML =
+                imgHtml +
+                '<div class="bp-preview-body">' +
+                '<p class="bp-preview-title">' + s.previewTitle + '</p>' +
+                '<p class="bp-preview-desc">' + s.previewDesc + '</p>' +
+                '</div>';
+              preview.classList.add('is-visible');
+            });
+
+            div.addEventListener('mouseleave', function () {
+              preview.classList.remove('is-visible');
+            });
+
+            col.appendChild(div);
+          });
+
+          /* ── Position nodes in staggered grid ── */
+          function layoutNodes() {
+            var nodes = col.querySelectorAll('.bp-node');
+            var nodeW = 160;   /* node width  */
+            var gapX = 20;    /* horizontal gap between nodes in same row */
+            var rowH = 126;    /* row height (node height ~74px + gap) */
+            var offsetX = 90;    /* how far row 1 is shifted right (the stagger) */
+
+            var maxCols = 0;
+            nodes.forEach(function (n) {
+              maxCols = Math.max(maxCols, parseInt(n.getAttribute('data-col')) + 1);
+            });
+
+            /* total width needed for the grid — row 1 is offset so needs extra space */
+            var totalW = maxCols * (nodeW + gapX) + offsetX;
+            col.style.position = 'relative';
+            col.style.width = totalW + 'px';
+            col.style.height = (rowH * 2 + 12) + 'px';
+            col.style.flexShrink = '0';
+
+            nodes.forEach(function (n) {
+              var r = parseInt(n.getAttribute('data-row'));
+              var c = parseInt(n.getAttribute('data-col'));
+              var x = c * (nodeW + gapX) + (r === 1 ? offsetX : 0);
+              var y = r * rowH;
+              n.style.position = 'absolute';
+              n.style.left = x + 'px';
+              n.style.top = y + 'px';
+              n.style.width = nodeW + 'px';
+              n.style.marginBottom = '0';
+            });
+          }
+
+          /* 2. SEQUENTIAL WIRE DRAWING LOGIC */
+          function drawWires() {
+            var svg = document.getElementById('bp-wires');
+            var pinEl = document.getElementById('bp-entry-out');
+            svg.innerHTML = '';
+            var cr = canvas.getBoundingClientRect();
+
+            // Starting point coordinates (Begin Play's output pin)
+            var pr = pinEl.getBoundingClientRect();
+            var currentX = pr.right - cr.left;
+            var currentY = pr.top + pr.height / 2 - cr.top;
+
+            SECTIONS.forEach(function (s, i) {
+              var nodeEl = document.getElementById('bp-node-' + s.id);
+              if (!nodeEl) return;
+
+              var inPin = document.getElementById('bp-in-' + s.id);
+              var outPin = document.getElementById('bp-out-' + s.id);
+
+              // Target coordinates (Current node's input pin)
+              var inRect = inPin.getBoundingClientRect();
+              var nx = inRect.left - cr.left - 2; // Slight offset so it enters the pin cleanly
+              var ny = inRect.top + inRect.height / 2 - cr.top;
+
+              // Bezier curve calculations
+              var mx1 = currentX + (nx - currentX) * 0.5;
+              var mx2 = currentX + (nx - currentX) * 0.5;
+
+              var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+              p.setAttribute('d',
+                'M' + currentX + ',' + currentY +
+                ' C' + mx1 + ',' + currentY +
+                ' ' + mx2 + ',' + ny +
+                ' ' + nx + ',' + ny);
+
+              // Style as a standard white execution wire
+              p.setAttribute('fill', 'none');
+              p.setAttribute('stroke', '#ffffff');
+              p.setAttribute('stroke-width', '2');
+              p.setAttribute('opacity', '0.7');
+              svg.appendChild(p);
+
+              // Update the currentX/Y to THIS node's output pin for the next loop iteration
+              var outRect = outPin.getBoundingClientRect();
+              currentX = outRect.right - cr.left;
+              currentY = outRect.top + outRect.height / 2 - cr.top;
+            });
+
+            svg.setAttribute('viewBox', '0 0 ' + cr.width + ' ' + canvas.offsetHeight);
+          }
+          function init() {
+            layoutNodes();
+            setTimeout(drawWires, 80);
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+          } else {
+            init();
+          }
+          window.addEventListener('resize', function () {
+            layoutNodes();
+            drawWires();
+          });
+        })();
+      </script>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2026 ArtRevolt · Vasil Grancharov
+    </footer>
+
+    <!-- PREV / NEXT -->
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
+        <span class="label">Game Dev</span>
+      </a>
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
+        :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
+        <span class="label">Speedboat</span>
+      </a>
+    </div>
+
+  </body>
+  <!-- LIGHTBOX OVERLAY -->
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()"
+      @keydown.arrowleft.window="prevImage()" @keydown.arrowright.window="nextImage()">
+
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+
+      <!-- Image + split click zones -->
+      <div style="position:relative; display:inline-flex;" @click.stop>
+
+        <img class="lightbox-img" :src="lightbox" :alt="lightboxCaption" />
+
+        <!-- LEFT half — previous -->
+        <div style="position:absolute; inset:0; width:50%; cursor:w-resize; z-index:2;" @click="prevImage()"></div>
+
+        <!-- RIGHT half — next -->
+        <div style="position:absolute; inset:0; left:50%; width:50%; cursor:e-resize; z-index:2;" @click="nextImage()">
+        </div>
+
+      </div>
+
+      <!-- Counter -->
+      <div class="lightbox-caption">
+        <span x-text="lightboxCaption"></span>
+        <template x-if="lightboxGallery.length > 1">
+          <span style="margin-left:1rem; opacity:0.4;"
+            x-text="(lightboxIndex + 1) + ' / ' + lightboxGallery.length"></span>
+        </template>
+      </div>
+
+    </div>
+  </template>
+</div>
+
+</html>
