@@ -155,15 +155,12 @@
       &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
     </footer>
 
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? 'wooden-bench.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="wooden-bench.html">
         <img class="thumb" src="WB_Persp.png" alt="Wooden Bench" />
         <span class="label">Wooden Bench</span>
       </a>
-      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? 'trash-cans.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" href="trash-cans.html">
         <img class="thumb" src="Concrt_Trash_Close.png" alt="Trash Cans" />
         <span class="label">Trash Cans</span>
       </a>

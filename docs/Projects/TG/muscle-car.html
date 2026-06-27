@@ -151,15 +151,12 @@
       &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
     </footer>
 
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? 'coulisse.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="coulisse.html">
         <img class="thumb" src="Coulisse.jpg" alt="Coulisse" />
         <span class="label">Coulisse</span>
       </a>
-      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? 'logo-transition.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" href="logo-transition.html">
         <img class="thumb" src="/icons/TG-logo.png" alt="Logo Transition" />
         <span class="label">Logo Transition</span>
       </a>

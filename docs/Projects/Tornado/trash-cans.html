@@ -159,15 +159,12 @@
       &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
     </footer>
 
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? 'umbrella.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="umbrella.html">
         <img class="thumb" src="Umbrella_Persp.png" alt="Umbrella" />
         <span class="label">Umbrella</span>
       </a>
-      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? 'TornadoStudios.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" href="TornadoStudios.html">
         <img class="thumb" src="/icons/Tornado-logo.png" alt="Tornado Studios" />
         <span class="label">Tornado hub</span>
       </a>

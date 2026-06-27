@@ -304,16 +304,13 @@
     </footer>
 
     <!-- PREV / NEXT -->
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="/Projects/Speedboat/Speedboat.html">
         <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
         <span class="label">Speedboat</span>
       </a>
       <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-        :href="isHalfway ? '/Projects/Tornado/TornadoStudios.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+        href="/Projects/Tornado/TornadoStudios.html">
         <img class="thumb" src="/Projects/Tornado/FC_wirefr.gif" alt="Tornado Studios" />
         <span class="label">Tornado Studios</span>
       </a>

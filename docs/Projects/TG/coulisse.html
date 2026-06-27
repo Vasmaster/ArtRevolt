@@ -152,15 +152,12 @@
       &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
     </footer>
 
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? 'aoc-keyboard.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="aoc-keyboard.html">
         <img class="thumb" src="AOC Keyboard.jpg" alt="AOC Keyboard" />
         <span class="label">AOC Keyboard</span>
       </a>
-      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? 'muscle-car.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" href="muscle-car.html">
         <img class="thumb" src="Hum3DCar.jpg" alt="Muscle Car" />
         <span class="label">Muscle Car</span>
       </a>

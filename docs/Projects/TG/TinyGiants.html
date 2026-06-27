@@ -253,15 +253,13 @@
     </footer>
 
     <!-- PREV / NEXT -->
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/Unity/GameDev.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="/Projects/Unity/GameDev.html">
         <img class="thumb" src="/Projects/Unity/gameplay_overview.gif" alt="Game Dev" />
         <span class="label">Game Dev</span>
       </a>
       <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-        :href="isHalfway ? '/Projects/Speedboat/Speedboat.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        href="/Projects/Speedboat/Speedboat.html">
         <img class="thumb" src="/Projects/Speedboat/quick-preview.gif" alt="Speedboat" />
         <span class="label">Speedboat</span>
       </a>

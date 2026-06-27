@@ -140,15 +140,13 @@
       &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
     </footer>
 
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? 'muscle-car.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="muscle-car.html">
         <img class="thumb" src="Hum3DCar.jpg" alt="Muscle Car" />
         <span class="label">Muscle Car</span>
       </a>
       <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-        :href="isHalfway ? 'ultra-dynamic-sky.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        href="ultra-dynamic-sky.html">
         <img class="thumb" src="/icons/TG-logo.png" alt="Ultra Dynamic Sky" />
         <span class="label">Ultra Dynamic Sky</span>
       </a>

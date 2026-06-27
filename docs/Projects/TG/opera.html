@@ -158,15 +158,13 @@
     </footer>
 
     <!-- PREV / NEXT (within TinyGiants) -->
-    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
-      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
-      <a class="ar-footer-nav-btn" :href="isHalfway ? 'TinyGiants.html' : null"
-        @click="if(!isHalfway) $event.preventDefault()">
+    <div class="ar-footer-nav">
+      <a class="ar-footer-nav-btn" href="TinyGiants.html">
         <img class="thumb" src="/icons/TG-logo.png" alt="TinyGiants" />
         <span class="label">TinyGiants hub</span>
       </a>
       <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;"
-        :href="isHalfway ? 'bond-of-union.html' : null" @click="if(!isHalfway) $event.preventDefault()">
+        href="bond-of-union.html">
         <img class="thumb" src="Bond_Of_Union_V1.jpg" alt="Bond of Union" />
         <span class="label">Bond of Union</span>
       </a>
