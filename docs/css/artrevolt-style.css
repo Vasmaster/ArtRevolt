@@ -414,6 +414,80 @@ body::before {
   margin: 0 0 2rem 1.5rem;
 }
 
+/* === WORK-PAGE BREADCRUMB === */
+.ar-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 1.75rem;
+}
+
+.ar-breadcrumb a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ar-breadcrumb a:hover { text-decoration: underline; }
+.ar-breadcrumb .sep { opacity: 0.4; }
+.ar-breadcrumb .current { color: var(--text-primary); }
+
+/* === EMPLOYER-HUB WORK GRID === */
+.ar-works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.ar-work-card {
+  display: block;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.ar-work-card:hover { border-color: var(--accent-cyan); transform: translateY(-3px); }
+
+.ar-work-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.8) saturate(0.85);
+  transition: filter 0.25s;
+}
+
+.ar-work-card:hover img { filter: none; }
+
+.ar-work-card .ar-work-body { padding: 0.85rem 1rem 1rem; }
+
+.ar-work-card .ar-work-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+}
+
+.ar-work-card .ar-work-sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0;
+}
+
 /* === PROJECT SUMMARY CARD === */
 .ar-summary-card {
   background: var(--bg-card);

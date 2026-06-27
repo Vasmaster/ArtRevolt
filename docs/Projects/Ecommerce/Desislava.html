@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desislava Headless Storefront — ArtRevolt</title>
+  <meta name="description"
+    content="Headless e-commerce: migrating the Desislava brand from Shopify to a self-hosted Next.js + Docker + WooCommerce stack behind a Cloudflare Tunnel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/artrevolt-style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    .ecom-hero {
+      position: relative;
+      min-height: 56vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      background:
+        radial-gradient(ellipse at 50% 120%, rgba(0,229,255,0.12), transparent 60%),
+        linear-gradient(135deg, var(--bg-deep), var(--bg-card));
+      border-bottom: 1px solid var(--border-glow);
+      overflow: hidden;
+    }
+    .ecom-hero-logo {
+      height: 84px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 24px rgba(0,229,255,0.25));
+    }
+    .ecom-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+      margin: 0 0 0.75rem;
+    }
+    .ecom-hero h1 .glow-text {
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 16px rgba(0,229,255,0.4));
+    }
+    .ecom-hero p.sub {
+      font-family: var(--font-mono);
+      font-size: clamp(0.8rem, 1.6vw, 1rem);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    .arch-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      border-top: 3px solid var(--accent-cyan);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .arch-card .arch-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.15em;
+    }
+    .arch-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .arch-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .arch-card.magenta { border-top-color: var(--accent-magenta); }
+    .arch-card.magenta .arch-num { color: var(--accent-magenta); }
+    .arch-card.green { border-top-color: var(--accent-green); }
+    .arch-card.green .arch-num { color: var(--accent-green); }
+    .arch-card.gold { border-top-color: var(--accent-gold); }
+    .arch-card.gold .arch-num { color: var(--accent-gold); }
+
+    code {
+      font-family: var(--font-mono);
+      color: var(--accent-green);
+      background: rgba(57,255,138,0.08);
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')" @touchstart.passive="$dispatch('nav-toggle')">
+  </div>
+
+  <nav class="ar-nav" x-data="{
+       open: false,
+       atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => {
+           this.atTop = window.scrollY < window.innerHeight * 0.08;
+           if (this.atTop) this.open = false;
+         }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+    @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
+
+    <a href="/index.html" class="ar-logo">Art<span class="accent">Revolt</span></a>
+
+    <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+      <div class="stripe stripe-1"></div>
+      <div class="stripe stripe-2"></div>
+      <div class="stripe stripe-3"></div>
+    </button>
+
+    <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+      x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
+      <ul class="ar-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#industries">Work</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+      <div class="ar-dropdown-divider"></div>
+      <div class="ar-dropdown-social">
+        <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
+          <svg fill="currentColor" viewBox="0 0 448 512">
+            <path
+              d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          X / Twitter
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="ecom-hero">
+    <div style="position:relative; z-index:2;">
+      <img class="ecom-hero-logo" src="/icons/desislava-lingerie-logo.png" alt="Desislava"
+        onerror="this.style.display='none'" />
+      <h1><span class="glow-text">Desislava Headless Storefront</span></h1>
+      <p class="sub">Transitioning from Shopify to a custom Next.js &amp; Docker infrastructure</p>
+    </div>
+  </header>
+
+  <div class="ar-page">
+
+    <!-- OVERVIEW -->
+    <div class="ar-summary-card ar-reveal">
+      <div>
+        <h2>Project Overview</h2>
+        <p>A self-hosted, headless e-commerce ecosystem for the Desislava brand — replacing a rigid,
+          subscription-based Shopify store with a fully owned, high-performance architecture built on modern React,
+          containerised backends and enterprise-grade networking.</p>
+        <div class="ar-tech-stack">
+          <span class="ar-tech-tag engine">Next.js 14</span>
+          <span class="ar-tech-tag">Tailwind CSS</span>
+          <span class="ar-tech-tag">Framer Motion</span>
+          <span class="ar-tech-tag tool">Docker</span>
+          <span class="ar-tech-tag">WordPress / WooCommerce</span>
+          <span class="ar-tech-tag">MySQL</span>
+          <span class="ar-tech-tag render">Cloudflare Tunnel</span>
+          <span class="ar-tech-tag">Stripe · iDEAL</span>
+          <span class="ar-tech-tag">Ubuntu · Minisforum N5</span>
+        </div>
+      </div>
+      <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+        <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">ROLE
+        </div>
+        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;">Full-Stack Dev<br>DevOps / Infra
+        </div>
+        <div
+          style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+          TYPE</div>
+        <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">Client Project</div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE -->
+    <h3 class="ar-section-title ar-reveal">The Challenge</h3>
+    <p class="ar-section-sub">// OWNERSHIP, PERFORMANCE &amp; SECURITY</p>
+    <p class="ar-text ar-reveal">Migrate an active e-commerce brand from a rigid, subscription-based <strong>Shopify</strong>
+      model to a fully owned, high-performance headless architecture — <strong>without sacrificing security or
+        uptime</strong>. The goal: eliminate recurring platform fees, take full control of the data and storefront, and
+      deliver sub-second page loads on self-hosted hardware.</p>
+
+    <hr class="ar-divider" />
+
+    <!-- SOLUTION / ARCHITECTURE -->
+    <h3 class="ar-section-title ar-reveal">The Architecture</h3>
+    <p class="ar-section-sub">// FIVE LAYERS, FULLY SELF-HOSTED</p>
+
+    <div class="arch-grid ar-reveal">
+      <div class="arch-card">
+        <span class="arch-num">01 · FRONTEND</span>
+        <h3>Next.js 14 App Router</h3>
+        <p>A lightning-fast, server-side-rendered storefront built with Tailwind CSS and Framer Motion — sub-second page
+          loads and dynamic image optimisation.</p>
+      </div>
+      <div class="arch-card magenta">
+        <span class="arch-num">02 · BACKEND</span>
+        <h3>WooCommerce via Docker</h3>
+        <p>An isolated MySQL database and WordPress admin running in Docker containers, bound strictly to local loopback
+          (port 8080) for maximum security against unauthorised access.</p>
+      </div>
+      <div class="arch-card green">
+        <span class="arch-num">03 · INFRASTRUCTURE</span>
+        <h3>Cloudflare Tunnel</h3>
+        <p>Deployed on a Minisforum N5 Air NAS via Ubuntu. A <code>cloudflared</code> reverse tunnel replaces
+          port-forwarding — hiding the home server's IP while adding DDoS mitigation and a WAF.</p>
+      </div>
+      <div class="arch-card gold">
+        <span class="arch-num">04 · PAYMENTS</span>
+        <h3>Stripe · iDEAL</h3>
+        <p>Seamless checkout supporting credit cards and Dutch iDEAL through Stripe, with PCI DSS Level 1 compliance
+          handled entirely off-server.</p>
+      </div>
+      <div class="arch-card">
+        <span class="arch-num">05 · MAINTENANCE</span>
+        <h3>Backups &amp; Assets</h3>
+        <p>Automated 12-hour cron-job backups secure the database and user uploads — accompanied by custom video/image
+          editing and compositing for high-converting product resale.</p>
+      </div>
+    </div>
+
+    <!-- SCREENSHOTS PLACEHOLDER -->
+    <h3 class="ar-section-title ar-reveal">Storefront</h3>
+    <p class="ar-section-sub">// SCREENS &amp; CAPTURES</p>
+    <div class="ar-media-input ar-reveal">
+      <div class="ar-media-input-icon-placeholder">🛒</div>
+      <p class="ar-media-input-text">
+        Add storefront screenshots, the checkout flow, and the admin / Docker dashboard here. Drop images into
+        <strong>/docs/Projects/Ecommerce/</strong> and swap them into an <code>.ar-mosaic</code> grid (see the Speedboat
+        page for the pattern).
+      </p>
+    </div>
+
+  </div><!-- /ar-page -->
+
+  <footer class="ar-footer">
+    &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
+  </footer>
+
+  <!-- PREV / NEXT NAV -->
+  <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+    @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+    <a class="ar-footer-nav-btn" :href="isHalfway ? '/Projects/AGI/AGI.html' : null"
+      @click="if(!isHalfway) $event.preventDefault()">
+      <img class="thumb" src="/Projects/AGI/UV-style.gif" alt="Art Gallery Interactive" />
+      <span class="label">Art Gallery Interactive</span>
+    </a>
+    <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? '/index.html#industries' : null"
+      @click="if(!isHalfway) $event.preventDefault()">
+      <img class="thumb" src="/icons/ArtRevolt-logo.jpg" alt="All work" />
+      <span class="label">All Work</span>
+    </a>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coulisse Product Animations — TinyGiants — ArtRevolt</title>
+  <meta name="description"
+    content="Octane-rendered product animations composited with live interaction footage for Coulisse smart-home products." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/artrevolt-style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<div x-data="{
+  lightbox: null, lightboxCaption: '', lightboxGallery: [], lightboxIndex: 0,
+  openLightbox(src, cap, gallery) {
+    this.lightboxGallery = gallery || [{ src, cap }];
+    this.lightboxIndex = this.lightboxGallery.findIndex(s => s.src === src);
+    if (this.lightboxIndex === -1) this.lightboxIndex = 0;
+    this.lightbox = this.lightboxGallery[this.lightboxIndex].src;
+    this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+    document.body.style.overflow = 'hidden';
+  },
+  closeLightbox() { this.lightbox = null; this.lightboxGallery = []; document.body.style.overflow = ''; },
+  nextImage() { if (!this.lightboxGallery.length) return; this.lightboxIndex = (this.lightboxIndex + 1) % this.lightboxGallery.length; this.lightbox = this.lightboxGallery[this.lightboxIndex].src; this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || ''; },
+  prevImage() { if (!this.lightboxGallery.length) return; this.lightboxIndex = (this.lightboxIndex - 1 + this.lightboxGallery.length) % this.lightboxGallery.length; this.lightbox = this.lightboxGallery[this.lightboxIndex].src; this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || ''; }
+}">
+
+  <body>
+
+    <!-- NAVIGATION -->
+    <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')"
+      @touchstart.passive="$dispatch('nav-toggle')"></div>
+
+    <nav class="ar-nav" x-data="{
+       open: false, atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => { this.atTop = window.scrollY < window.innerHeight * 0.08; if (this.atTop) this.open = false; }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+      @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
+      <a href="/index.html" class="ar-logo">Art<span class="accent">Revolt</span></a>
+      <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+        <div class="stripe stripe-1"></div>
+        <div class="stripe stripe-2"></div>
+        <div class="stripe stripe-3"></div>
+      </button>
+      <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+        x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
+        <ul class="ar-nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/index.html#industries">Work</a></li>
+          <li><a href="/Canvas.html">Canvas</a></li>
+          <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+          <li><a href="/Contacts.html">Contact</a></li>
+        </ul>
+        <div class="ar-dropdown-divider"></div>
+        <div class="ar-dropdown-social">
+          <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 448 512">
+              <path
+                d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            X / Twitter
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <div class="ar-page" style="padding-top:6rem;">
+
+      <nav class="ar-breadcrumb">
+        <a href="/index.html#industries">Video &amp; VFX</a>
+        <span class="sep">/</span>
+        <a href="TinyGiants.html">TinyGiants</a>
+        <span class="sep">/</span>
+        <span class="current">Coulisse Product Animations</span>
+      </nav>
+
+      <h1 class="ar-section-title" style="margin-top:0;">Coulisse Product Animations</h1>
+      <p class="ar-section-sub">// CLIENT WORK · PRODUCT VIZ · OCTANE · AFTER EFFECTS</p>
+
+      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
+        <div>
+          <p>Intricate product animations timed and matched to screen recordings of live interactions with Coulisse
+            smart-home products. Octane-rendered scenes composited with live interaction footage in After Effects —
+            assembled into a polished complete marketing video across a range of products.</p>
+          <div class="ar-tech-stack">
+            <span class="ar-tech-tag render">OTOY Octane</span>
+            <span class="ar-tech-tag tool">After Effects</span>
+            <span class="ar-tech-tag">Cinema 4D</span>
+            <span class="ar-tech-tag">Product Animation</span>
+            <span class="ar-tech-tag">Screen Composite</span>
+          </div>
+        </div>
+        <div style="min-width:160px;display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;">
+            EMPLOYER</div>
+          <div style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;"><a href="TinyGiants.html"
+              style="color:var(--accent-cyan);text-decoration:none;">TinyGiants ↗</a></div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            TYPE</div>
+          <div style="font-family:var(--font-display);font-size:1rem;">Client Work</div>
+          <div
+            style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.08em;margin-top:0.75rem;">
+            YEAR</div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--accent-cyan);">2023</div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
+        class="ar-reveal">
+        <video controls style="width:100%;display:block;">
+          <source src="MB_reveal_2kb.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
+           {id:1, video:'MB_mounting_2kb.mp4', cap:'Mounting sequence'},
+           {id:2, video:'MB_App_2kb.mp4',       cap:'App interaction composite'},
+         ] }">
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
+              <source :src="s.video" type="video/mp4">
+            </video>
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+    </div><!-- /ar-page -->
+
+    <footer class="ar-footer">
+      &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
+    </footer>
+
+    <div class="ar-footer-nav" x-data="{ isHalfway: false }"
+      @scroll.window="isHalfway = window.pageYOffset > document.documentElement.scrollHeight/2">
+      <a class="ar-footer-nav-btn" :href="isHalfway ? 'aoc-keyboard.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="AOC Keyboard.jpg" alt="AOC Keyboard" />
+        <span class="label">AOC Keyboard</span>
+      </a>
+      <a class="ar-footer-nav-btn" style="flex-direction:row-reverse;" :href="isHalfway ? 'muscle-car.html' : null"
+        @click="if(!isHalfway) $event.preventDefault()">
+        <img class="thumb" src="Hum3DCar.jpg" alt="Muscle Car" />
+        <span class="label">Muscle Car</span>
+      </a>
+    </div>
+
+  </body>
+
+  <template x-if="lightbox">
+    <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()"
+      @keydown.arrowleft.window="prevImage()" @keydown.arrowright.window="nextImage()">
+      <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+      <div style="position:relative; display:inline-flex;" @click.stop>
+        <img class="lightbox-img" :src="lightbox" :alt="lightboxCaption" />
+        <div style="position:absolute; inset:0; width:50%; cursor:w-resize; z-index:2;" @click="prevImage()"></div>
+        <div style="position:absolute; inset:0; left:50%; width:50%; cursor:e-resize; z-index:2;" @click="nextImage()">
+        </div>
+      </div>
+      <div class="lightbox-caption">
+        <span x-text="lightboxCaption"></span>
+        <template x-if="lightboxGallery.length > 1">
+          <span style="margin-left:1rem; opacity:0.4;"
+            x-text="(lightboxIndex + 1) + ' / ' + lightboxGallery.length"></span>
+        </template>
+      </div>
+    </div>
+  </template>
+</div>
+
+</html>

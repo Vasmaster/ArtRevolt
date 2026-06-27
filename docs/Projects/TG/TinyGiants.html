@@ -528,7 +528,7 @@
       @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
 
       <!-- Logo -->
-      <a href="https://vasmaster.github.io/ArtRevolt" class="ar-logo">
+      <a href="/index.html" class="ar-logo">
         Art<span class="accent">Revolt</span>
       </a>
 
@@ -546,7 +546,8 @@
         x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
 
         <ul class="ar-nav-links">
-          <li><a href="https://vasmaster.github.io/ArtRevolt">Home</a></li>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/index.html#industries">Work</a></li>
           <li><a href="/Canvas.html">Canvas</a></li>
           <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
           <li><a href="/Contacts.html">Contact</a></li>
@@ -681,7 +682,7 @@
               func: 'LoadOperaScene()',
               theme: 'cyan',
               pin: 'Live Event',
-              anchor: '#toc-opera',
+              anchor: 'opera.html',
               preview: 'Swans_pre.jpg',
               previewTitle: 'Hänsel und Gretel Opera',
               previewDesc: 'Netherlands Reisopera — live 3D projection visuals for a fantasy opera.'
@@ -692,7 +693,7 @@
               func: 'RenderConceptArt()',
               theme: 'purple',
               pin: 'CG Art',
-              anchor: '#toc-bond',
+              anchor: 'bond-of-union.html',
               preview: 'Bond_Of_Union_V1.jpg',
               previewTitle: 'Bond of Union',
               previewDesc: 'CG interpretation of M.C. Escher — illusory geometry meets Guido Moretti sculpture.'
@@ -703,7 +704,7 @@
               func: 'PlayAnimation()',
               theme: 'gold',
               pin: 'Product Viz',
-              anchor: '#toc-aoc',
+              anchor: 'aoc-keyboard.html',
               preview: 'AOC Keyboard.jpg',
               previewTitle: 'AOC Keyboard Animation',
               previewDesc: 'Dynamic product animation with C4D simulations and After Effects compositing.'
@@ -714,21 +715,43 @@
               func: 'StreamVideoReel()',
               theme: 'green',
               pin: 'Client Work',
-              anchor: '#toc-coulisse',
+              anchor: 'coulisse.html',
               preview: 'Coulisse.jpg',
               previewTitle: 'Coulisse Product Animations',
               previewDesc: 'Octane renders composited with live product interaction recordings.'
             },
             {
-              id: 'Additional',
-              label: 'Extras',
-              func: 'LoadShowcase()',
+              id: 'muscle',
+              label: 'Muscle Car',
+              func: 'DriveSequence()',
               theme: 'pink',
               pin: 'Animation',
-              anchor: '#toc-additional',
+              anchor: 'muscle-car.html',
               preview: 'Hum3DCar.jpg',
-              previewTitle: 'Showcase',
-              previewDesc: 'Whip animation and render-pass compositing training production.'
+              previewTitle: 'Muscle Car Showcase',
+              previewDesc: 'Driven car animation with render-pass compositing in After Effects.'
+            },
+            {
+              id: 'logo',
+              label: 'Logo Transition',
+              func: 'WhipTransition()',
+              theme: 'cyan',
+              pin: 'Motion Design',
+              anchor: 'logo-transition.html',
+              preview: '',
+              previewTitle: 'TinyGiants Logo Transition',
+              previewDesc: 'Playful UE5 whip-transition motion design around the studio logo.'
+            },
+            {
+              id: 'uds',
+              label: 'Ultra Dynamic Sky',
+              func: 'ModifySkySystem()',
+              theme: 'gold',
+              pin: 'Blueprints',
+              anchor: 'ultra-dynamic-sky.html',
+              preview: '',
+              previewTitle: 'Ultra Dynamic Sky Mods',
+              previewDesc: 'Blueprint & shader-graph modifications to the UDS volumetric sky.'
             },
           ];
 
@@ -896,297 +919,10 @@
         })();
       </script>
 
-      <!-- ═══════════════════════════════════
-         PROJECT 1 — HANSEL & GRETEL OPERA
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-opera">Hänsel und Gretel Opera</h3>
-      <p class="ar-section-sub">// NETHERLANDS REISOPERA · LIVE 3D PROJECTION · FANTASY OPERA</p>
-
-      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
-        <div>
-          <p>Real-time 3D projection visuals for the Netherlands Reisopera's fantasy opera production, accessible for
-            audiences aged 10+. Breathtaking projected environments — from the enchanted forest intro to the dramatic
-            staircase sequences and the swan lake finale — driven live alongside the performance. Music by Engelbert
-            Humperdinck, sung in German with Dutch subtitles. 
-            Reference: <a href="https://www.theater.nl/hansel-gretel-nederlandse-reisopera" target="_blank" rel="noopener">hansel-gretel-nederlandse-reisopera</a>
-            More information: <a href="https://www.operabase.com/productions/hansel-und-gretel-105256/27-october-2022/en" target="_blank" rel="noopener">Operabase</a></p>
-            <div class="ar-tech-stack">
-            <span class="ar-tech-tag engine">Unreal Engine 5</span>
-            <span class="ar-tech-tag">Real-time Rendering</span>
-            <span class="ar-tech-tag tool">Live Production</span>
-            <span class="ar-tech-tag">3D Projection Mapping</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="Swans_3kb.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, video:'Intro Forest_3kb.mp4', cap:'Intro — Enchanted Forest'},
-           {id:2, video:'Stairs Run_3kb.mp4',   cap:'Scene — Staircase Run'},
-           {id:3, video:'Swans_3kb.mp4',         cap:'Finale — Swans'},
-         ] }">
-        <template x-for="s in slides" :key="s.id">
-          <div class="ar-mosaic-item">
-            <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
-              <source :src="s.video" type="video/mp4">
-            </video>
-            <div class="caption" x-text="s.cap"></div>
-          </div>
-        </template>
-      </div>
-
-      <!-- ═══════════════════════════════════
-         PROJECT 2 — BOND OF UNION
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-bond">Bond of Union</h3>
-      <p class="ar-section-sub">// CONCEPTUAL CG · M.C. ESCHER INTERPRETATION · PERSONAL PRODUCTION</p>
-
-      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-gold);">
-        <div>
-          <p>A personal CG interpretation of M.C. Escher's "Bond of Union", blending Guido Moretti's sculptural style
-            with Escher's illusory geometry. Conceptualised, designed and rendered entirely by me during my time at
-            TinyGiants with their creative open-door invitation. The animation exploits shifting vantage points — side
-            and front — to reveal distinct personalities within a single unified form.</p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag engine">Unreal Engine 5</span>
-            <span class="ar-tech-tag render">OTOY Octane</span>
-            <span class="ar-tech-tag">Cinema 4D</span>
-            <span class="ar-tech-tag tool">After Effects</span>
-            <span class="ar-tech-tag">Conceptual Art</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="Bond Of Union_3kb.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, src:'Bond_Of_Union_V1.jpg',        cap:'Final render'},
-           {id:2, src:'BondOfUnion.gif',              cap:'Animation loop'},
-           {id:3, src:'MCEscher-Bond-of-union.jpeg',  cap:'M.C. Escher reference'},
-           {id:4, src:'Parallelepipedi.jpg',           cap:'Geometry study'},
-         ] }">
-        <template x-for="s in slides" :key="s.id">
-          <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
-            <div class="caption" x-text="s.cap"></div>
-          </div>
-        </template>
-      </div>
-
-      <!-- ═══════════════════════════════════
-         PROJECT 3 — AOC KEYBOARD
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-aoc">AOC Keyboard Animation</h3>
-      <p class="ar-section-sub">// PRODUCT ANIMATION · C4D SIMULATION · OCTANE RENDER · COMPOSITING</p>
-
-      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-green);">
-        <div>
-          <p>Reworked and personalised the AOC keyboard presentation originally produced by the TinyGiants team for
-            their client. I adapted the keyboard layout across the keys, then animated and rendered several sequences —
-            exploring Cinema 4D's simulation tools and complex multi-pass compositing in After Effects. A pivotal
-            production for levelling up in color-space management and project organisation in Ae.</p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag">Cinema 4D</span>
-            <span class="ar-tech-tag render">OTOY Octane</span>
-            <span class="ar-tech-tag tool">After Effects</span>
-            <span class="ar-tech-tag">Cloth Simulation</span>
-            <span class="ar-tech-tag">Product Viz</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="Aockeyboard V2.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, src:'AOC Keyboard.jpg',    cap:'Hero render'},
-           {id:2, src:'RockEmAOC_02_V1.jpg', cap:'Sequence frame'},
-           {id:3, src:'close-Up.jpg',         cap:'Closeup detail'},
-           {id:4, src:'Cloth_Sim_01_V2.jpg',  cap:'Cloth simulation frame'},
-           {id:5, src:'RockEmAOC_01_V1.jpg',  cap:'Alternate angle'},
-         ] }">
-        <template x-for="s in slides" :key="s.id">
-          <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
-            <div class="caption" x-text="s.cap"></div>
-          </div>
-        </template>
-      </div>
-
-      <!-- ═══════════════════════════════════
-         PROJECT 4 — COULISSE
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-coulisse">Coulisse Product Animations</h3>
-      <p class="ar-section-sub">// CLIENT WORK · PRODUCT VIZ · OCTANE · AFTER EFFECTS</p>
-
-      <div class="ar-summary-card ar-reveal" style="border-left-color: var(--accent-magenta);">
-        <div>
-          <p>Intricate product animations timed and matched to screen recordings of live interactions with Coulisse
-            smart-home products. Octane-rendered scenes composited with live interaction footage in After Effects —
-            assembled into a polished complete marketing video across a range of products.</p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag render">OTOY Octane</span>
-            <span class="ar-tech-tag tool">After Effects</span>
-            <span class="ar-tech-tag">Cinema 4D</span>
-            <span class="ar-tech-tag">Product Animation</span>
-            <span class="ar-tech-tag">Screen Composite</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="MB_reveal_2kb.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, video:'MB_mounting_2kb.mp4', cap:'Mounting sequence'},
-           {id:2, video:'MB_App_2kb.mp4',       cap:'App interaction composite'},
-         ] }">
-        <template x-for="s in slides" :key="s.id">
-          <div class="ar-mosaic-item">
-            <video controls style="width:100%;height:100%;object-fit:cover;display:block;">
-              <source :src="s.video" type="video/mp4">
-            </video>
-            <div class="caption" x-text="s.cap"></div>
-          </div>
-        </template>
-      </div>
-
-      <div class="tg-chapter-sep ar-reveal">
-      <div class="line"></div>
-      <div class="label">EXTRAS - Addotional Content</div>
-      <div class="line" id="toc-additional"></div>
-    </div>
-          <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" >Muscle Car Showcase</h3>
-      <p class="ar-section-sub">// ANIMATION · RENDER PASS COMPOSITING · GUIDED PRODUCTION</p>
-
-      <div class="ar-summary-card ar-reveal">
-        <div>
-          <p>Provided with a complete scene, materials, and lights by TinyGiants, I was tasked with creating a fun,
-            driven animation and compositing the render passes and shots in Adobe After Effects. Extremely educational —
-            it brought my understanding of proper color spaces and project management in Ae up to professional standard.
-          </p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag render">OTOY Octane</span>
-            <span class="ar-tech-tag tool">After Effects</span>
-            <span class="ar-tech-tag">Render Pass Comp.</span>
-            <span class="ar-tech-tag">Camera Animation</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid var(--border-glow);border-radius:4px;overflow:hidden;margin:1.5rem 0;"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="Hum3d Car Showcase_3kb.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <div class="ar-mosaic ar-reveal" x-data="{ slides:[
-           {id:1, src:'Hum3DCar.jpg',          cap:'Front render'},
-           {id:2, src:'hum3DCar_back.jpg',      cap:'Rear render'},
-           {id:3, src:'Hum3dCarShowcase.gif',   cap:'Animation preview'},
-         ] }">
-        <template x-for="s in slides" :key="s.id">
-          <div class="ar-mosaic-item">
-            <img :src="s.src" :alt="s.cap" style="cursor: zoom-in;" @click="openLightbox(s.src, s.cap, slides)" />
-            <div class="caption" x-text="s.cap"></div>
-          </div>
-        </template>
-      </div>
-      <!-- ═══════════════════════════════════
-         PROJECT 6 — LOGO TRANSITION
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-logo">TinyGiants Logo Transition</h3>
-      <p class="ar-section-sub">// MOTION DESIGN · UNREAL ENGINE 5 · AFTER EFFECTS · PERSONAL</p>
-
-      <div class="ar-summary-card ar-reveal">
-        <div>
-          <p>A fun-packed personal day exploring compositing of shots rendered from Unreal Engine 5 — playful eye-candy
-            built around the former TinyGiants logo. Two whip-transition sequences: one set in a forest environment, one
-            in a studio scene.</p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag engine">Unreal Engine 5</span>
-            <span class="ar-tech-tag tool">After Effects</span>
-            <span class="ar-tech-tag">Motion Design</span>
-            <span class="ar-tech-tag">Logo Animation</span>
-          </div>
-        </div>
-      </div>
-
-      <div
-        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:1.5rem 0;border:1px solid var(--border-glow);"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="TG_logo_forest_3kb.mp4" type="video/mp4">
-        </video>
-        <video controls style="width:100%;display:block;">
-          <source src="TG_logo_studio_3kb.mp4" type="video/mp4">
-        </video>
-      </div>
- <!-- ═══════════════════════════════════
-         PROJECT 7 — Moddifications
-         ═══════════════════════════════════ -->
-      <hr class="ar-divider" />
-
-      <h3 class="ar-section-title ar-reveal" id="toc-additional">Ultra Dynamic Sky Modifications</h3>
-      <p class="ar-section-sub">// BLUEPRINTS · UNREAL ENGINE 5 · SHADER GRAPH · NETHERLANDS REISOPERA</p>
-
-      <div class="ar-summary-card ar-reveal">
-        <div>
-          <p>A set of modifications to the Ultra Dynamic Sky package for Unreal Engine 5, creating more dynamic and realistic cloud formations and rigourous manipulations.<br>
-          This project explores advanced shader techniques and blueprint design to enhance the visual fidelity of sky environments.
-        Originaly the UDS package is a global volumetric sky system. The break-down of the structure helped me understand the underlying mechanics.</p>
-          <div class="ar-tech-stack">
-            <span class="ar-tech-tag engine">Unreal Engine 5</span>
-            <span class="ar-tech-tag tool">Blueprints</span>
-            <span class="ar-tech-tag">Shader Graph</span>
-            <span class="ar-tech-tag">NETHERLANDS REISOPERA</span>
-          </div>
-        </div>
-      </div>
-
-      <div
-        style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:1.5rem 0;border:1px solid var(--border-glow);"
-        class="ar-reveal">
-        <video controls style="width:100%;display:block;">
-          <source src="UDS_Upgrade_h264.mp4" type="video/mp4">
-        </video>
-      </div>
     </div><!-- /ar-page -->
 
     <footer class="ar-footer">
-      &copy; 2025 Vasil Grancharov / ArtRevolt
+      &copy; 2026 ArtRevolt · Vasil Grancharov
     </footer>
 
     <!-- PREV / NEXT -->
