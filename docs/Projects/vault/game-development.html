@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive — Game Development — ArtRevolt</title>
+  <meta name="description" content="Archived and older Game Development work — kept for reference." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/artrevolt-style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <div class="ar-nav-trigger" x-data @mouseenter="$dispatch('nav-open')"
+    @touchstart.passive="$dispatch('nav-toggle')"></div>
+
+  <nav class="ar-nav" x-data="{
+       open: false, atTop: true,
+       init() {
+         this.atTop = window.scrollY < window.innerHeight * 0.08;
+         window.addEventListener('scroll', () => { this.atTop = window.scrollY < window.innerHeight * 0.08; if (this.atTop) this.open = false; }, { passive: true });
+       }
+     }" :class="{ 'is-open': open || atTop }" @nav-open.window="if (!atTop) open = true"
+    @nav-toggle.window="open = !open" @mouseleave="if (!atTop) open = false" @keydown.escape.window="open = false">
+    <a href="/index.html" class="ar-logo">Art<span class="accent">Revolt</span></a>
+    <button class="ar-hamburger" @click="open = !open" :aria-expanded="open" aria-label="Toggle menu">
+      <div class="stripe stripe-1"></div>
+      <div class="stripe stripe-2"></div>
+      <div class="stripe stripe-3"></div>
+    </button>
+    <div class="ar-dropdown" x-show="open" x-transition:enter="transition duration-150 ease-out"
+      x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition duration-100 ease-in" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1" @click.outside="open = false">
+      <ul class="ar-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/index.html#industries">Work</a></li>
+        <li><a href="/Canvas.html">Canvas</a></li>
+        <li><a href="/CV_Vasil-Grancharov.html">CV</a></li>
+        <li><a href="/Contacts.html">Contact</a></li>
+      </ul>
+      <div class="ar-dropdown-divider"></div>
+      <div class="ar-dropdown-social">
+        <a href="https://linkedin.com/in/vasil-grancharov" target="_blank" rel="noopener">
+          <svg fill="currentColor" viewBox="0 0 448 512">
+            <path
+              d="M100.28 448H7.4V148.9h92.88zM53.82 108.1C24.39 108.1 0 83.44 0 53.89 0 24.33 24.39 0 53.82 0s53.82 24.33 53.82 53.89c0 29.55-24.39 54.21-53.82 54.21zM447.9 448h-92.68V302.4c0-34.7-.7-79.3-48.3-79.3-48.3 0-55.7 37.7-55.7 76.7V448H158.2V148.9h88.9v40.8h1.3c12.4-23.5 42.5-48.3 87.4-48.3 93.5 0 110.7 61.5 110.7 141.3V448z" />
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://x.com/Art_Revolt" target="_blank" rel="noopener">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          X / Twitter
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="ar-page" style="padding-top:6rem;">
+
+    <nav class="ar-breadcrumb">
+      <a href="/index.html#industries">Game Development</a>
+      <span class="sep">/</span>
+      <span class="current">Archive</span>
+    </nav>
+
+    <h1 class="ar-section-title" style="margin-top:0;">Archive — Game Development</h1>
+    <p class="ar-section-sub">// DEPRECATED &amp; OLDER WORK — KEPT FOR REFERENCE</p>
+
+    <div class="ar-media-input ar-reveal">
+      <div class="ar-media-input-icon-placeholder">🗄️</div>
+      <p class="ar-media-input-text">
+        Nothing archived here yet. Older or deprecated Game Development pieces — still interesting to browse but on their
+        way out — will be collected on this page. Tell me which works to move here and I'll add them as
+        <code>.ar-work-card</code> entries.
+      </p>
+    </div>
+
+    <!-- Archived works will go here as an .ar-works-grid -->
+
+  </div><!-- /ar-page -->
+
+  <footer class="ar-footer">
+    &copy; 2026 ArtRevolt · Vasil Grancharov &nbsp;·&nbsp; Enschede, Netherlands
+  </footer>
+
+</body>
+
+</html>
