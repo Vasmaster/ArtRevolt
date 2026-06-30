@@ -705,9 +705,120 @@
       .project-card:nth-child(1) { grid-column: span 2; grid-row: span 1; }
       .about-strip { flex-direction: column; gap: 1.5rem; }
     }
+    /* === LOADING INTRO === */
+    #ar-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg-void);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.7s ease;
+    }
+    #ar-intro.ar-intro-hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #ar-intro video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: var(--bg-void);
+    }
+    .ar-intro-skip {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 0.5rem 1.25rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+    .ar-intro-skip:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    html.ar-intro-active,
+    body.ar-intro-active {
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
+
+  <!-- LOADING INTRO -->
+  <div id="ar-intro" aria-hidden="true">
+    <video id="ar-intro-video" muted playsinline autoplay preload="auto">
+      <source src="icons/logo-animation.mp4" type="video/mp4" />
+    </video>
+    <button type="button" class="ar-intro-skip" id="ar-intro-skip">Skip &#9654;</button>
+  </div>
+  <script>
+    (function () {
+      var intro = document.getElementById('ar-intro');
+      if (!intro) return;
+      var video = document.getElementById('ar-intro-video');
+      var skip = document.getElementById('ar-intro-skip');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Plays on every load of the homepage. Only skip for reduced-motion users.
+      if (reduce) {
+        if (intro.parentNode) intro.parentNode.removeChild(intro);
+        return;
+      }
+
+      // Back/forward cache restores the page with the intro already removed, so
+      // force a fresh load when the user returns via the browser Back button.
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) location.reload();
+      });
+
+      var done = false;
+      function dismiss() {
+        if (done) return;
+        done = true;
+        clearTimeout(safety);
+        intro.classList.add('ar-intro-hide');
+        document.documentElement.classList.remove('ar-intro-active');
+        document.body.classList.remove('ar-intro-active');
+        setTimeout(function () {
+          if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+        }, 800);
+      }
+
+      document.documentElement.classList.add('ar-intro-active');
+      document.body.classList.add('ar-intro-active');
+
+      video.addEventListener('ended', dismiss);
+      skip.addEventListener('click', dismiss);
+
+      // Safety net: never trap the user if the video stalls or autoplay is blocked.
+      var safety = setTimeout(dismiss, 8000);
+      video.addEventListener('loadedmetadata', function () {
+        if (isFinite(video.duration) && video.duration > 0) {
+          clearTimeout(safety);
+          safety = setTimeout(dismiss, video.duration * 1000 + 1200);
+        }
+      });
+
+      var p = video.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () { dismiss(); });
+      }
+    })();
+  </script>
 
   <!-- NAVIGATION -->
   <!-- HOVER TRIGGER STRIP -->
