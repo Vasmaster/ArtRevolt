@@ -715,7 +715,7 @@
       align-items: center;
       justify-content: center;
       opacity: 1;
-      transition: opacity 0.7s ease;
+      transition: opacity 1.2s ease;
     }
     #ar-intro.ar-intro-hide {
       opacity: 0;
@@ -789,29 +789,27 @@
       function dismiss() {
         if (done) return;
         done = true;
+        clearTimeout(autoFade);
         clearTimeout(safety);
         intro.classList.add('ar-intro-hide');
         document.documentElement.classList.remove('ar-intro-active');
         document.body.classList.remove('ar-intro-active');
         setTimeout(function () {
           if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
-        }, 800);
+        }, 1300);
       }
 
       document.documentElement.classList.add('ar-intro-active');
       document.body.classList.add('ar-intro-active');
+
+      // Start the prolonged fade-out after a brief play, like pressing Skip.
+      var autoFade = setTimeout(dismiss, 2500);
 
       video.addEventListener('ended', dismiss);
       skip.addEventListener('click', dismiss);
 
       // Safety net: never trap the user if the video stalls or autoplay is blocked.
       var safety = setTimeout(dismiss, 8000);
-      video.addEventListener('loadedmetadata', function () {
-        if (isFinite(video.duration) && video.duration > 0) {
-          clearTimeout(safety);
-          safety = setTimeout(dismiss, video.duration * 1000 + 1200);
-        }
-      });
 
       var p = video.play();
       if (p && typeof p.catch === 'function') {
