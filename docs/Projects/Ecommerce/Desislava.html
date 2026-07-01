@@ -111,6 +111,73 @@
       border-radius: 3px;
       font-size: 0.9em;
     }
+
+    /* === STOREFRONT MEDIA === */
+    .ecom-demo {
+      margin: 1.75rem 0 0.5rem;
+      border: 1px solid var(--border-glow);
+      background: #000;
+      box-shadow: 0 0 45px rgba(0,229,255,0.08);
+      line-height: 0;
+    }
+    .ecom-demo video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* Phone-proportioned tiles (screens are 1179x2556 ≈ 9/19.5, so cover = no crop) */
+    .ar-mosaic-mobile {
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    }
+    .ar-mosaic-mobile .ar-mosaic-item {
+      aspect-ratio: 9 / 19.5;
+    }
+
+    /* === BRAND & PRINT === */
+    .ecom-banner {
+      margin: 1.5rem 0;
+      border: 1px solid var(--border-glow);
+      background: var(--bg-deep);
+      overflow: hidden;
+      line-height: 0;
+      box-shadow: 0 0 45px rgba(0,229,255,0.08);
+    }
+    .ecom-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+      transition: transform 0.6s ease;
+    }
+    .ecom-banner:hover img { transform: scale(1.03); }
+    .ecom-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .ecom-cards figure {
+      margin: 0;
+      border: 1px solid var(--border-dim);
+      background: var(--bg-deep);
+      overflow: hidden;
+    }
+    .ecom-cards img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+      transition: transform 0.4s ease;
+    }
+    .ecom-cards figure:hover img { transform: scale(1.04); }
+    .ecom-cards figcaption {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      padding: 0.5rem 0.75rem;
+      line-height: 1.4;
+    }
   </style>
 </head>
 
@@ -262,17 +329,138 @@
       </div>
     </div>
 
-    <!-- SCREENSHOTS PLACEHOLDER -->
-    <h3 class="ar-section-title ar-reveal">Storefront</h3>
-    <p class="ar-section-sub">// SCREENS &amp; CAPTURES</p>
-    <div class="ar-media-input ar-reveal">
-      <div class="ar-media-input-icon-placeholder">🛒</div>
-      <p class="ar-media-input-text">
-        Add storefront screenshots, the checkout flow, and the admin / Docker dashboard here. Drop images into
-        <strong>/docs/Projects/Ecommerce/</strong> and swap them into an <code>.ar-mosaic</code> grid (see the Speedboat
-        page for the pattern).
-      </p>
-    </div>
+    <!-- DEMO VIDEO -->
+    <h3 class="ar-section-title ar-reveal">The Full Journey</h3>
+    <p class="ar-section-sub">// HOMEPAGE → PURCHASE, IN ONE TAKE</p>
+    <figure class="ecom-demo ar-reveal">
+      <video controls muted loop playsinline preload="metadata" poster="Homepage_Desktop.webp">
+        <source src="From_Homepage_To_Purchase_V2.mp4" type="video/mp4" />
+        Your browser does not support embedded video.
+      </video>
+    </figure>
+
+    <!-- STOREFRONT GALLERIES (shared lightbox scope) -->
+    <div x-data="{
+      lightbox: null,
+      lightboxCaption: '',
+      lightboxGallery: [],
+      lightboxIndex: 0,
+      openLightbox(src, cap, gallery) {
+        this.lightboxGallery = gallery || [{ src, cap }];
+        this.lightboxIndex   = this.lightboxGallery.findIndex(s => s.src === src);
+        if (this.lightboxIndex === -1) this.lightboxIndex = 0;
+        this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+        this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+        document.body.style.overflow = 'hidden';
+      },
+      closeLightbox() {
+        this.lightbox = null;
+        this.lightboxGallery = [];
+        document.body.style.overflow = '';
+      },
+      nextImage() {
+        if (!this.lightboxGallery.length) return;
+        this.lightboxIndex   = (this.lightboxIndex + 1) % this.lightboxGallery.length;
+        this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+        this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+      },
+      prevImage() {
+        if (!this.lightboxGallery.length) return;
+        this.lightboxIndex   = (this.lightboxIndex - 1 + this.lightboxGallery.length) % this.lightboxGallery.length;
+        this.lightbox        = this.lightboxGallery[this.lightboxIndex].src;
+        this.lightboxCaption = this.lightboxGallery[this.lightboxIndex].cap || '';
+      }
+    }">
+
+      <!-- DESKTOP STOREFRONT -->
+      <h3 class="ar-section-title ar-reveal">Desktop Storefront</h3>
+      <p class="ar-section-sub">// SHOP → PRODUCT → CHECKOUT → PAYMENT</p>
+      <div class="ar-mosaic ar-mosaic-lg ar-reveal" x-data="{ slides: [
+           {id:1, src:'Homepage_Desktop.webp',       cap:'Homepage'},
+           {id:2, src:'HeaderMenuList_Desktop.webp', cap:'Mega-menu navigation'},
+           {id:3, src:'Sales_Desktop.webp',          cap:'Sales & promotions'},
+           {id:4, src:'ProductPage_Desktop.webp',    cap:'Product page'},
+           {id:5, src:'ProductPage_2_Desktop.webp',  cap:'Product — gallery'},
+           {id:6, src:'ProductPage_3_Desktop.webp',  cap:'Product — details'},
+           {id:7, src:'SignIn_Desktop.webp',         cap:'Sign in'},
+           {id:8, src:'Checkout_Desktop.webp',       cap:'Checkout'},
+           {id:9, src:'PaymentPage_Desktop.webp',    cap:'Payment · Stripe / iDEAL'}
+         ] }">
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" loading="lazy" style="cursor: zoom-in;"
+              @click="openLightbox(s.src, s.cap, slides)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- MOBILE EXPERIENCE -->
+      <h3 class="ar-section-title ar-reveal">Mobile Experience</h3>
+      <p class="ar-section-sub">// RESPONSIVE ON EVERY SCREEN</p>
+      <div class="ar-mosaic ar-mosaic-mobile ar-reveal" x-data="{ slides: [
+           {id:1, src:'Homepage_Grid_Mobile.webp',      cap:'Homepage'},
+           {id:2, src:'Woman_TopPage_Mobile.webp',      cap:'Women — category'},
+           {id:3, src:'Woman_GridProducts_Mobile.webp', cap:'Grid view'},
+           {id:4, src:'Woman_ListProducts_Mobile.webp', cap:'List view'},
+           {id:5, src:'Wishlist_Mobile.webp',           cap:'Wishlist'},
+           {id:6, src:'Contacts_Mobile.webp',           cap:'Contact'},
+           {id:7, src:'Footer_Mobile.webp',             cap:'Footer'}
+         ] }">
+        <template x-for="s in slides" :key="s.id">
+          <div class="ar-mosaic-item">
+            <img :src="s.src" :alt="s.cap" loading="lazy" style="cursor: zoom-in;"
+              @click="openLightbox(s.src, s.cap, slides)" />
+            <div class="caption" x-text="s.cap"></div>
+          </div>
+        </template>
+      </div>
+
+      <!-- BRAND & PRINT -->
+      <h3 class="ar-section-title ar-reveal">Brand &amp; Print</h3>
+      <p class="ar-section-sub">// IDENTITY · BANNER · BUSINESS CARD</p>
+      <div x-data="{ brand: [
+           {id:1, src:'Banner_Desislava.webp',    cap:'Brand banner'},
+           {id:2, src:'BusinessCard_Front.webp',  cap:'Business card — front'},
+           {id:3, src:'BusinessCard_Back.webp',   cap:'Business card — back'}
+         ] }">
+        <figure class="ecom-banner ar-reveal">
+          <img :src="brand[0].src" :alt="brand[0].cap" loading="lazy"
+            @click="openLightbox(brand[0].src, brand[0].cap, brand)" />
+        </figure>
+        <div class="ecom-cards ar-reveal">
+          <template x-for="s in brand.slice(1)" :key="s.id">
+            <figure>
+              <img :src="s.src" :alt="s.cap" loading="lazy"
+                @click="openLightbox(s.src, s.cap, brand)" />
+              <figcaption x-text="s.cap"></figcaption>
+            </figure>
+          </template>
+        </div>
+      </div>
+
+      <!-- LIGHTBOX OVERLAY -->
+      <template x-if="lightbox">
+        <div class="lightbox-backdrop" @click="closeLightbox()" @keydown.escape.window="closeLightbox()"
+          @keydown.arrowleft.window="prevImage()" @keydown.arrowright.window="nextImage()">
+          <button class="lightbox-close" @click="closeLightbox()">✕ Close</button>
+          <div style="position:relative; display:inline-flex;" @click.stop>
+            <img class="lightbox-img" :src="lightbox" :alt="lightboxCaption" />
+            <div style="position:absolute; inset:0; width:50%; cursor:w-resize; z-index:2;" @click="prevImage()"></div>
+            <div style="position:absolute; inset:0; left:50%; width:50%; cursor:e-resize; z-index:2;" @click="nextImage()">
+            </div>
+          </div>
+          <div class="lightbox-caption">
+            <span x-text="lightboxCaption"></span>
+            <template x-if="lightboxGallery.length > 1">
+              <span style="margin-left:1rem; opacity:0.4;"
+                x-text="(lightboxIndex + 1) + ' / ' + lightboxGallery.length"></span>
+            </template>
+          </div>
+        </div>
+      </template>
+
+    </div><!-- /lightbox scope -->
 
   </div><!-- /ar-page -->
 
