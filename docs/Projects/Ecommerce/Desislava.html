@@ -125,6 +125,24 @@
       height: auto;
       display: block;
     }
+    /* Portrait / mobile-recorded clips: keep them a phone-sized frame, not full-width.
+       Height-driven so the true 9:19.5 aspect is preserved regardless of the poster. */
+    .ecom-demo.portrait {
+      width: fit-content;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .ecom-demo.portrait video {
+      width: auto;
+      height: 80vh;
+      max-height: 760px;
+      max-width: 100%;
+      aspect-ratio: 1180 / 2556;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
     /* Phone-proportioned tiles (screens are 1179x2556 ≈ 9/19.5, so cover = no crop) */
     .ar-mosaic-mobile {
       grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
@@ -332,7 +350,7 @@
     <!-- DEMO VIDEO -->
     <h3 class="ar-section-title ar-reveal">The Full Journey</h3>
     <p class="ar-section-sub">// HOMEPAGE → PURCHASE, IN ONE TAKE</p>
-    <figure class="ecom-demo ar-reveal">
+    <figure class="ecom-demo portrait ar-reveal">
       <video controls muted loop playsinline preload="metadata" poster="Homepage_Desktop.webp">
         <source src="From_Homepage_To_Purchase_V2.mp4" type="video/mp4" />
         Your browser does not support embedded video.
